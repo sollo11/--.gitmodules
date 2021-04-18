@@ -1,0 +1,138 @@
+<tipSet version="1">
+  <tip id="SettingsPagePCSystemDisplay" condition="not(platform match 'surfaceHub')">
+    <title>Lepší spánek</title>
+    <content>
+      <p>Noční osvětlení používá v noci teplejší barvy, aby se vám lépe usínalo. Aktivujete ho prostřednictvím Nastavení nočního osvětlení.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageAppsNotifications">
+    <title>Zobrazování požadovaných oznámení</title>
+    <content>
+      <p>Pokud chcete, aby vám nějaká aplikace mohla začít posílat oznámení, přejděte do části Zobrazovat oznámení od těchto odesílatelů a pak tuto aplikaci zapněte.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageScreenPowerAndSleep">
+    <title>Snížení spotřeby energie a prodloužení výdrže baterie</title>
+    <content>
+      <p>Výdrž baterie se prodlouží, když vyberete kratší dobu pro vypnutí displeje a přechod do režimu spánku.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageStorageSenseStorageOverview" condition="not(platform match 'hololens')">
+    <title>Pořádek v počítači</title>
+    <content>
+      <p>Když je zapnutá funkce Inteligentní úložiště, uvolní v počítači místo, teprve až volné místo začne docházet. Pokud si chcete udělat pořádek v nepoužívaných souborech okamžitě, vyberte Nakonfigurovat Inteligentní úložiště nebo ho hned spustit &gt; Vyčistit nyní.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPagePCSystemShellMode">
+    <title>Co je režim tabletu?</title>
+    <content>
+      <p>Režim tabletu optimalizuje zařízení pro dotykové ovládání, takže nemusíte používat klávesnici a myš. Když je režim tabletu zapnutý, aplikace se otevírají na celou obrazovku a jsou zredukovány ikony na hlavním panelu a na ploše.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageBatterySaver">
+    <title>Větší výdrž baterie</title>
+    <content>
+      <p>Pokud chcete zjistit, které aplikace vybíjejí baterii, vyberte možnost Zjistěte, které aplikace mají vliv na výdrž baterie.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageMultiTasking">
+    <title>Uspořádání pracovního prostoru plochy</title>
+    <content>
+      <p>Když chcete přepnout mezi otevřenými aplikacemi, vyberte na hlavním panelu tlačítko Zobrazení úloh nebo stiskněte Alt + Tab.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageDevices" condition="not(platform match '(hololens)|(surfaceHub)')">
+    <title>Ještě rychlejší způsob, jak zapnout Bluetooth</title>
+    <content>
+      <p>Pokud chcete zapnout nebo vypnout Bluetooth bez otevírání aplikace Nastavení, otevřete centrum akcí a vyberte ikonu Bluetooth.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageDevicesPrinters">
+    <title>Poradce při potížích s tiskárnou</title>
+    <content>
+      <p>Pokud se vám nedaří zprovoznit tiskárnu, zkuste spustit poradce při potížích s tiskárnou.</p>
+    </content>
+    <cta href="ms-settings:troubleshoot">
+      <text>Otevřít nastavení Odstranit potíže</text>
+    </cta>
+  </tip>
+  <tip id="SettingsPageDevicesTouchpad">
+    <title>Rychlé ovládání dotykem</title>
+    <content>
+      <p>Potažením třemi prsty nahoru zobrazíte všechny otevřené aplikace. Klepnutí dvěma prsty na aplikaci zase odpovídá kliknutí pravým tlačítkem myši.</p>
+    </content>
+    <cta href="https://go.microsoft.com/fwlink/p/?linkid=2005515&amp;ocid=SettingsTips-BingIA">
+      <text>Naučit se další gesta</text>
+    </cta>
+  </tip>
+  <tip id="SettingsPageManagePhone">
+    <title>Zobrazení fotek a odesílání textovek</title>
+    <content>
+      <p>Můžete si prohlížet fotky z poslední doby nebo poslat textovku z telefonu s Androidem. Až to budete chtít nastavit, vyberte Přidat telefon.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageNetworkWiFi" condition="platform match 'desktop'">
+    <title>Připojení k bezdrátové síti</title>
+    <content>
+      <p>Pokud nevidíte požadovanou bezdrátovou síť, vyberte Zobrazit dostupné sítě, vyberte požadovanou síť a pak vyberte Připojit.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageThemes">
+    <title>Větší individualita ve Windows</title>
+    <content>
+      <p>Stáhněte si zdarma motivy z Microsoft Storu, které kombinují tapety, zvuky a barvy.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageAppsDefaults">
+    <title>Výběr výchozích aplikací</title>
+    <content>
+      <p>Vyberte, které aplikace chcete používat pro poslech hudby, prohlížení obrázků, kontrolu pošty, sledování videí a další operace.</p>
+      <p>Pokud se chcete vrátit k výchozím aplikacím, které doporučuje Microsoft, vyberte Obnovit.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageAccountsEmailApp" condition="not(platform match 'hololens')">
+    <title>Nastavení a správa účtů</title>
+    <content>
+      <p>Pokud chcete změnit název účtu, účet odstranit nebo ho synchronizovat s jiným zařízením, vyberte svůj účet a pak vyberte Spravovat.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageAccountsUsers" condition="sku match '(pro)|(home)'">
+    <title>Přeneste Zabezpečení rodiny do svého telefonu</title>
+    <content>
+      <p>Používejte všechny funkce digitální bezpečnosti, které už znáte, a navíc sdílení polohy pro celou rodinu.</p>
+    </content>
+    <cta href="https://aka.ms/FamilySafetyDownload" reportingName="Get the app">
+      <text>Získat aplikaci</text>
+    </cta>
+  </tip>
+  <tip id="SettingsPageEaseOfAccessNarrator">
+    <title>Rychlejší čtení v režimu procházení</title>
+    <content>
+      <p>Když je zapnutý program Předčítání, zapněte režim procházení stisknutím kláves Caps Lock+Mezerník. Stisknutím kláves Šipka nahoru a Šipka dolů si pak můžete nechat přečíst všechno, co se zobrazuje v aplikaci nebo na webové stránce.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageWindowsDefender">
+    <title>Zajištění ochrany počítače</title>
+    <content>
+      <p>Zabezpečení Windows nabízí možnosti, které pomáhají zajistit vaši ochranu online, udržovat vaše zařízení v dobrém stavu, pravidelně spouštět kontroly, řídit nastavení ochrany před internetovými útoky a ještě mnohem víc.</p>
+    </content>
+  </tip>
+  <tip id="SettingsPageRestoreOneBackup">
+    <title>Zvolte si vhodný způsob zálohování</title>
+    <content>
+      <p>Pokud chcete, aby systém Windows zálohoval vaše soubory na bezpečném místě, zvolte, kam se mají soubory ukládat – do cloudu, na externí paměťové zařízení nebo v síti.</p>
+    </content>
+    <cta href="https://support.microsoft.com/help/4521035/">
+      <text>Další informace o možnostech zálohování</text>
+    </cta>
+  </tip>
+  <tip id="SettingsPageActivate">
+    <title>Kde je můj kód Product Key?</title>
+    <content>
+      <p>V závislosti na tom, jak jste si Windows pořídili, se při aktivaci použije buď digitální licence, nebo kód Product Key.</p>
+    </content>
+    <cta href="https://support.microsoft.com/help/12440?ocid=ActivationTipinSettings">
+      <text>Získat další informace o aktivaci</text>
+    </cta>
+  </tip>
+</tipSet>

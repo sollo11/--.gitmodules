@@ -1,0 +1,35 @@
+CACHE MANIFEST
+# Version:ee8268c2
+CACHE:
+/AS/API/WindowsCortanaPane/V2/Init
+https://www.bing.com/rb/19/cir2,ortl,cc,nc/_ae0cB8fPDMkfSJUO5xUuczSt7E.css?bu=CdIFnwKHA58GpwWhBYUEbm4&or=w
+https://www.bing.com/rb/19/cir2,ortl,cc,nc/YFRiFdAq8JMFRbEqynlPcrVqvb4.css?bu=CG403QFPbm5u7gE&or=w
+https://www.bing.com/rb/46/ortl,cc,nc/pdDKwBCexH8cKQFyK4LcJkh-gFc.css?bu=A4gCjAKPAg&or=w
+https://www.bing.com/rb/6H/cir2,ortl,cc,nc/OAf9rJxKlGoJxpqXuqPCpRxUPLY.css?bu=FJEFjgWtBdUFnQWaBYgFzwWwBYgFswWIBcEFygXEBbkFiAWIBYgFiAU&or=w
+https://www.bing.com/rb/6H/ortl,cc,nc/QNBBNqWD9F_Blep-UqQSqnMp-FI.css?bu=AYgF&or=w
+https://www.bing.com/rp/317bfyW7JaOWTe3XDqhYjVU-1xE.br.js
+https://www.bing.com/rp/41Ctwd2X9VNGNHVpdti2vTFozWw.br.js
+https://www.bing.com/rp/8st9X-O-G24PD0e5-r0g18yVJEU.br.js
+https://www.bing.com/rp/98-tFzBbrLP3oaKdmZtyZ4BBBI4.br.js
+https://www.bing.com/rp/b7PYrtpXGXE_bvZ4M1MrlULeVLE.br.js
+https://www.bing.com/rp/BQR--Mi6Hdug9aUgfjMzORag63E.br.js
+https://www.bing.com/rp/Bw4G2zg51xjy7hYte3GZ-AFtRK0.br.js
+https://www.bing.com/rp/ec3nKaNCvlTkQMgg5bcqVUI-aY8.br.js
+https://www.bing.com/rp/hz0kah6_iEBr4mSbPxw3Mj4MKq4.br.js
+https://www.bing.com/rp/jz5JHWe_2WCod7u1RNWmByRezL4.br.js
+https://www.bing.com/rp/MAi8ZrMgFhG81tZ07Arc2JEjTY8.br.js
+https://www.bing.com/rp/MDqPc1m5c6NCOcjcf9QO_UfJAUI.br.js
+https://www.bing.com/rp/pdMGxFjFClpEbeOPeUzqa-YiIwc.br.js
+https://www.bing.com/rp/SPvn47byzq_Pc6BvdgiVxhmMz9E.br.js
+https://www.bing.com/rp/TJkyBfZhNVw9l2HAW3TbsZKbNwc.br.js
+https://www.bing.com/rp/x0Cvpg0MmmBx9EUGxLDfa2xcV-E.br.js
+https://www.bing.com/rp/Yi3Flkft8YS8nbd9qCHjIlXAHPg.br.js
+https://www.bing.com/rp/zEQqhwKoETyGdQapOnP2uL1FFF0.br.js
+https://www.bing.com/rp/zh8Gb8BdCdZddFgn7wQ6G86Jdok.br.js
+https://www.bing.com/rp/ZkAG-UZl4xeENnu1psdKTgHhS2A.br.js
+https://www.bing.com/rs/2z/3l/ortl,cc,nc/BBDBvk5AokRBwrox4FNOb3dTd1E.css?or=w
+https://www.bing.com/rs/6J/6/cj,nj/p_H40Ndq102p2Socno0_V88cqhw.js?or=w
+https://www.bing.com/rs/6J/a/cj,nj/Qwu9z8uyzfO6-jzaTDqt8bBRXUA.js?or=w
+https://www.bing.com/rs/6s/ZV/ortl,cc,nc/nEl6gm6izUrrDobE23TevZhe_fI.css?or=w
+NETWORK:
+*
