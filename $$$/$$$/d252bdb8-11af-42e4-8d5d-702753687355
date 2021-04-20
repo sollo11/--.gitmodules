@@ -1,0 +1,3627 @@
+if (typeof window.widgetRefs == 'undefined') {
+    window.widgetRefs = [];
+}
+if (document.documentElement.lang.length === 0) {
+    document.getElementsByTagName('html')[0].setAttribute('lang', 'en');
+}
+
+var _igvfcRXyVkHr = {};
+window.widgetRefs.push("_igvfcRXyVkHr");
+
+_igvfcRXyVkHr.ASSETS_PREFIX = 'https://default.salsalabs.org';
+
+_igvfcRXyVkHr.init_functions = [];
+_igvfcRXyVkHr.post_init_functions = [];
+
+_igvfcRXyVkHr.addInit = function addInit(func) {
+    _igvfcRXyVkHr.init_functions.push(func);
+}
+
+_igvfcRXyVkHr.addInitFirst = function addInitFirst(func) {
+    _igvfcRXyVkHr.init_functions.unshift(func);
+}
+
+_igvfcRXyVkHr.addInitFirst(function() {
+    try {
+        window['sliGoogInit'] = new Function();
+    } catch (e) {}
+});
+
+_igvfcRXyVkHr.addPostInit = function addPostInit(func) {
+    _igvfcRXyVkHr.post_init_functions.push(func);
+}
+
+_igvfcRXyVkHr.doInitialize = function doInitialize() {
+
+    for (var i = 0; i < _igvfcRXyVkHr.init_functions.length; i++) {
+        _igvfcRXyVkHr.init_functions[i]();
+    }
+    // load images
+    window.IGNITE.jquery('[ignite-image-src]').each(function(index, e) {
+        e = window.IGNITE.jquery(e);
+        var img = e.attr("ignite-image-src");
+        if (img.length > 0) {
+            e.attr('src', img);
+        }
+    });
+    for (var i = 0; i < _igvfcRXyVkHr.post_init_functions.length; i++) {
+        _igvfcRXyVkHr.post_init_functions[i]();
+    }
+
+    if (typeof window.salsaWidgetFinished === "function") {
+        try {
+            window.salsaWidgetFinished(_igvfcRXyVkHr.activityDefinitionId);
+        } catch (e) {
+            console.debug(e);
+            // do nothing if it errors, it isn't our code, but we don't want to prevent the page from loading
+        }
+    }
+
+}
+
+_igvfcRXyVkHr.hideLoading = function() {
+    _igvfcRXyVkHr.container.find(".sli-loading-message").hide();
+}
+
+_igvfcRXyVkHr.initializeOnLoad = function initializeOnLoad() {
+    window.IGNITE.jquery(window).load(function() {
+        _igvfcRXyVkHr.doInitialize();
+    });
+}
+
+_igvfcRXyVkHr.resetSharing = function() {
+    var shareDivs = window.IGNITE.jquery(".sli-socialShare");
+    if (shareDivs && shareDivs.length > 0) {
+        shareDivs.show();
+        if (typeof FB !== 'undefined') {
+            shareDivs.find("div.fb-share-button").attr("fb-xfbml-state", "reset").attr("fb-iframe-plugin-query", "").empty().each(function(index, element) {
+                FB.XFBML.parse(element.parentNode);
+            });
+        }
+        if (typeof twttr !== 'undefined') {
+            shareDivs.find("iframe.twitter-share-button").replaceWith("<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-count=\"none\"></a>");
+            twttr.widgets.load();
+        }
+    }
+
+}
+
+_igvfcRXyVkHr.addPostInit(_igvfcRXyVkHr.resetSharing);
+
+_igvfcRXyVkHr.initialize = function initialize() {
+
+    try {
+        // check to see if the document is already loaded and call doInitialize
+        if (document.readyState == 'complete') {
+            _igvfcRXyVkHr.doInitialize();
+        } else {
+            // set up the onLoad event handler since we're not loaded
+            _igvfcRXyVkHr.initializeOnLoad();
+        }
+    } catch (e) {//console.error("Cannot initialize widget '_igvfcRXyVkHr' (exception: "+e+")");
+    }
+}
+
+_igvfcRXyVkHr.alreadyIncludedJS = function isAlreadyIncluded(src) {
+    var scripts = document.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++)
+        if (scripts[i].getAttribute('src') == src)
+            return scripts[i];
+    return false;
+}
+_igvfcRXyVkHr.alreadyIncludedCSS = function isAlreadyIncluded(src) {
+    var scripts = document.getElementsByTagName("link");
+    for (var i = 0; i < scripts.length; i++)
+        if (scripts[i].getAttribute('href') == src)
+            return scripts[i];
+    return false;
+}
+
+_igvfcRXyVkHr.addJS = function addFile(src) {
+    if (!_igvfcRXyVkHr.alreadyIncludedJS(src)) {
+        var s = document.createElement('script');
+        s.setAttribute('src', src);
+        s.setAttribute('async', '');
+        s.setAttribute('type', 'text/javascript');
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+}
+_igvfcRXyVkHr.addCSS = function addFile(src) {
+    if (!_igvfcRXyVkHr.alreadyIncludedCSS(src)) {
+        var l = document.createElement('link');
+        l.setAttribute('rel', "stylesheet");
+        l.setAttribute('media', "none");
+        l.setAttribute('href', src);
+        l.setAttribute('onload', "this.media='all'");
+
+        document.getElementsByTagName('head')[0].appendChild(l);
+    }
+}
+
+_igvfcRXyVkHr.getNode = function getNode(id) {
+    try {
+        return window.IGNITE.jquery(id, '#id_d252bdb811af42e48d5d702753687355')[0];
+    } catch (e) {//console.error("failed to find widget div '#id_d252bdb811af42e48d5d702753687355'");
+    }
+}
+;
+
+_igvfcRXyVkHr.getUrlParam = function getUrlParam(param, defVal) {
+    var pageURL = window.location.search.substring(1);
+    var URLVariables = pageURL.split('&');
+    var retVal = defVal;
+    for (var i = 0; i < URLVariables.length; i++) {
+        var parameterName = URLVariables[i].split('=');
+        if (parameterName[0] == param) {
+            if (parameterName[0] == "sl_gr") {
+                retVal += parameterName[1] + ',';
+            } else {
+                retVal = parameterName[1];
+                break;
+            }
+        }
+    }
+    return retVal;
+}
+;
+
+_igvfcRXyVkHr.urldecode = function(str) {
+    return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+}
+
+_igvfcRXyVkHr.sort_by = function(field, reverse, primer) {
+
+    var key = primer ? function(x) {
+        return primer(x[field])
+    }
+    : function(x) {
+        return x[field]
+    }
+    ;
+
+    reverse = !reverse ? 1 : -1;
+
+    return function(a, b) {
+        return a = key(a),
+        b = key(b),
+        reverse * ((a > b) - (b > a));
+    }
+}
+;
+
+_igvfcRXyVkHr.numberWithCommas = function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+;
+
+// extra analytics functions
+
+// queue up sending page view
+_igvfcRXyVkHr.analyticsPostInit = function() {
+    _igvfcRXyVkHr.sendPageView();
+}
+
+_igvfcRXyVkHr.addPostInit(_igvfcRXyVkHr.analyticsPostInit);
+
+_igvfcRXyVkHr.sendPageView = function recordPageView() {
+    // this is done automatically by existing supported analytics methods
+    // leaving this as a placeholder for future integration
+    _igvfcRXyVkHr.siftPageView();
+}
+;
+
+_igvfcRXyVkHr.sendPageSubmission = function recordPageSubmission(activityType, name) {
+    _igvfcRXyVkHr.siftPageView();
+    _igvfcRXyVkHr.sendFacebookPageSubmission(name, activityType);
+    _igvfcRXyVkHr.sendGoogleGAPageSubmission(name);
+    _igvfcRXyVkHr.sendGoogleGTAGPageSubmission(name);
+}
+;
+
+_igvfcRXyVkHr.sendStepNavigation = function recordStepNav(activityType, name, oldStep, newStep) {
+    _igvfcRXyVkHr.siftPageView();
+    _igvfcRXyVkHr.sendFacebookStepNav(name, activityType, oldStep, newStep);
+    _igvfcRXyVkHr.sendGoogleGAStepNav(name, oldStep, newStep);
+    _igvfcRXyVkHr.sendGoogleGTAGStepNav(name, oldStep, newStep);
+}
+;
+
+_igvfcRXyVkHr.initiatePurchase = function initiatePurchase(activityType) {
+    _igvfcRXyVkHr.sendFacebookInitiatePurchase(activityType);
+    _igvfcRXyVkHr.sendGoogleGTAGInitiatePurchase(activityType);
+}
+;
+
+_igvfcRXyVkHr.sendPurchase = function recordPurchase(totalDollar, currency, activityType, name) {
+    _igvfcRXyVkHr.sendFacebookPurchase(totalDollar, currency, activityType, name);
+    _igvfcRXyVkHr.sendGoogleGAPurchase(_igvfcRXyVkHr.userInteractionId, totalDollar, currency, activityType, name);
+    _igvfcRXyVkHr.sendGoogleGTAGPurchase(_igvfcRXyVkHr.userInteractionId, totalDollar, currency, activityType, name);
+}
+;
+
+// send to facebook functions
+_igvfcRXyVkHr.sendFacebookInitiatePurchase = function sendFacebookInitiatePurchase(activityType) {
+    try {
+        fbq('track', 'InitiateCheckout', {
+            content_type: activityType,
+            content_ids: [_igvfcRXyVkHr.activityDefinitionId]
+        });
+    } catch (e) {
+        // attempt to fallback to less information
+        console.debug("unable to send InitiateCheckout to facebook pixel: " + e.message);
+    }
+}
+;
+_igvfcRXyVkHr.sendFacebookPurchase = function sendFacebookPurchase(totalDollar, currency, activityType, name) {
+    try {
+        fbq('track', 'Purchase', {
+            value: totalDollar,
+            currency: currency,
+            content_type: activityType,
+            content_name: name,
+            content_ids: [_igvfcRXyVkHr.activityDefinitionId]
+        });
+    } catch (e) {
+        // if we get an error, fall back to less informative capture
+        console.debug("unable to send purchase to facebook pixel: " + e.message);
+        try {
+            fbq('track', 'Purchase', {
+                value: totalDollar,
+                currency: currency
+            });
+        } catch (e) {
+            console.debug("unable send purchase minimual to facebook pixel: " + e.message);
+        }
+    }
+}
+;
+_igvfcRXyVkHr.sendFacebookStepNav = function sendFacebookStepNav(name, activityType, oldStep, newStep) {
+    try {
+        if (oldStep === null || oldStep < newStep) {
+            fbq('trackCustom', 'stepForward', {
+                oldStep: oldStep,
+                newStep: newStep,
+                content_type: activityType,
+                content_ids: [_igvfcRXyVkHr.activityDefinitionId],
+                fundraiser_name: name
+            });
+        } else {
+            fbq('trackCustom', 'stepBackward', {
+                oldStep: oldStep,
+                newStep: newStep,
+                content_type: activityType,
+                content_ids: [_igvfcRXyVkHr.activityDefinitionId],
+                fundraiser_name: name
+            });
+        }
+    } catch (e) {
+        // if we get an error, fall back to less informative capture
+        console.debug("unable to track facebook step navigation: " + e.message);
+    }
+}
+;
+_igvfcRXyVkHr.sendFacebookPageSubmission = function sendFacebookPageSubmission(name, activityType) {
+    try {
+        fbq('track', 'Lead', {
+            activityType: activityType,
+            content_ids: [_igvfcRXyVkHr.activityDefinitionId],
+            content_category: 'Page Submission',
+            content_name: _igvfcRXyVkHr.formName,
+            fundraiser_name: name
+        });
+    } catch (e) {
+        // if we get an error, fall back to less informative capture
+        console.debug("unable to track facebook lead: " + e.message);
+    }
+}
+;
+// send to google analytics (via analytics.js)
+_igvfcRXyVkHr.sendGoogleGAPurchase = function sendGooglePurchase(id, totalDollar, currency, activityType, name) {
+    try {
+        ga('ecommerce:addTransaction', {
+            'id': id,
+            //
+            'affiliation': name,
+            // use the provided name
+            'revenue': totalDollar,
+            // Grand Total.
+            'currency': currency
+        });
+
+        ga('ecommerce:addItem', {
+            'id': id,
+            'name': activityType,
+            'sku': _igvfcRXyVkHr.activityDefinitionId
+        });
+        ga('ecommerce:send');
+    } catch (e) {
+        console.debug("failed to send purchase with google analytics.js ecommerce: " + e.message);
+    }
+
+}
+;
+_igvfcRXyVkHr.sendGoogleGAStepNav = function sendGooglePurchase(name, oldStep, newStep) {
+    var action;
+    try {
+        if (oldStep === null || oldStep < newStep) {
+            action = 'forward to ' + newStep;
+        } else {
+            action = 'backward to ' + newStep;
+        }
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'step navigation',
+            eventAction: action,
+            eventLabel: name
+        });
+    } catch (e) {
+        console.debug("failed to send step navigation with google analytics.js: " + e.message);
+    }
+}
+;
+_igvfcRXyVkHr.sendGoogleGAPageSubmission = function(name) {
+    try {
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'step navigation',
+            eventAction: 'page submit',
+            eventLabel: name
+        });
+    } catch (e) {
+        console.debug("failed to send page submission with google analytics.js: " + e.message);
+    }
+}
+;
+
+// send to google analytics (via gtag.js)
+_igvfcRXyVkHr.sendGoogleGTAGInitiatePurchase = function sendGoogleInitPurchase(activityType) {
+    try {
+        gtag('event', 'view_promotion', {
+            'promotions': [{
+                'name': activityType,
+                'id': _igvfcRXyVkHr.activityDefinitionId
+            }]
+        });
+    } catch (e) {
+        console.debug("failed to send promotion with google analytics gtags ecommerce: " + e.message);
+    }
+}
+;
+_igvfcRXyVkHr.sendGoogleGTAGPurchase = function sendGooglePurchase(id, totalDollar, currency, activityType, name) {
+    try {
+        gtag('event', 'purchase', {
+            'transaction_id': id,
+            'affiliation': name,
+            // use the provided name
+            'value': totalDollar,
+            // Grand Total.
+            'currency': currency,
+            'items': [{
+                'name': activityType,
+                'id': _igvfcRXyVkHr.activityDefinitionId
+            }]
+        });
+    } catch (e) {
+        console.debug("failed to send purchase with google analytics gtags ecommerce: " + e.message);
+    }
+}
+;
+_igvfcRXyVkHr.sendGoogleGTAGStepNav = function sendGoogleStepNav(name, oldStep, newStep) {
+    var action;
+    try {
+        if (oldStep === null || oldStep < newStep) {
+            action = 'forward to ' + newStep;
+        } else {
+            action = 'backward to ' + newStep;
+        }
+        gtag('event', action, {
+            'event_category': 'step navigation',
+            'event_label': name
+        });
+    } catch (e) {
+        console.debug("failed to call google analytics gtags with step navigation: " + e.message);
+    }
+}
+;
+_igvfcRXyVkHr.sendGoogleGTAGPageSubmission = function(name) {
+    try {
+        gtag('event', 'page submit', {
+            'event_category': 'step navigation',
+            'event_label': name
+        });
+    } catch (e) {
+        console.debug("failed to call google analytics gtags for page submit: " + e.message);
+    }
+}
+;
+// SiftScience
+_igvfcRXyVkHr.addJS('https://cdn.siftscience.com/s.js');
+
+_igvfcRXyVkHr.siftPageView = function() {
+    var email = '';
+    if (_igvfcRXyVkHr.data['PersonContact@Email@Value']) {
+        email = _igvfcRXyVkHr.data['PersonContact@Email@Value'].value;
+    }
+    var _sift = window._sift = window._sift || [];
+    _sift.push(['_setAccount', '64d426901e']);
+    _sift.push(['_setUserId', email]);
+    _sift.push(['_setSessionId', '_igvfcRXyVkHr']);
+    _sift.push(['_trackPageview']);
+}
+
+_igvfcRXyVkHr.buildMsg = function() {
+    var msg = {
+        header: {},
+        payload: {
+            userInteractionId: _igvfcRXyVkHr.userInteractionId,
+            pid: _igvfcRXyVkHr.pid,
+            oid: _igvfcRXyVkHr.oid,
+            aid: _igvfcRXyVkHr.aid,
+            cid: _igvfcRXyVkHr.cid,
+            eid: _igvfcRXyVkHr.getUrlParam("eId", _igvfcRXyVkHr.eid),
+            eType: _igvfcRXyVkHr.getUrlParam("eType", _igvfcRXyVkHr.eType),
+            activityId: _igvfcRXyVkHr.activityId,
+            salsaTrack: _igvfcRXyVkHr.stc,
+            data: _igvfcRXyVkHr.data,
+            rawForm: _igvfcRXyVkHr.serializeFormInputs(_igvfcRXyVkHr.form),
+            siftSession: '_igvfcRXyVkHr'
+        }
+    };
+    var serializedData = JSON.stringify(msg);
+    return serializedData;
+}
+;
+
+_igvfcRXyVkHr.url = "https://darksky.salsalabs.org/api/activity/submission/general";
+
+_igvfcRXyVkHr.addInitFirst(function registerValidators() {
+    FormValidation.Validator.nohtml = {
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value === '') {
+                return true;
+            }
+            var regexp = /<\/?[^>]*>/gi;
+            return !regexp.test(value);
+        }
+    };
+});
+
+_igvfcRXyVkHr.addInit(function doInitialize() {
+    window.IGNITE.jquery('div[ignite-activity-id=d252bdb8-11af-42e4-8d5d-702753687355] > form').attr('id', 'form_igvfcRXyVkHr');
+    _igvfcRXyVkHr.container = window.IGNITE.jquery("#form_igvfcRXyVkHr").closest("formtemplate");
+    _igvfcRXyVkHr.addCSS(_igvfcRXyVkHr.ASSETS_PREFIX + "/public/styles/formValidation.min.css");
+    _igvfcRXyVkHr.container.find("a[data-ignite-button-step]").on("click keypress", function(event) {
+        var elem = this;
+        if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+            event.preventDefault();
+            _igvfcRXyVkHr.handleStep(event, elem);
+        }
+    });
+    _igvfcRXyVkHr.container.find("[data-ignite-for-step-id]").on("click keypress", function(event) {
+        var elem = this;
+        if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+            event.preventDefault();
+            _igvfcRXyVkHr.handleStepIndicator(event, elem);
+        }
+    });
+    _igvfcRXyVkHr.bindSubmit();
+    if (_igvfcRXyVkHr.useCaptcha) {
+        _igvfcRXyVkHr.data['captcha'] = {};
+        _igvfcRXyVkHr.data['captcha'].value = '';
+        _igvfcRXyVkHr.container.find("[data-ignite-submit-button]").parent().before("<div class='sli-element sli-vf-container'><div class='sli-vf-img-container'><img class='sli-vf-image' id='_igvfcRXyVkHrImgCaptcha' src='https://darksky.salsalabs.org/api/captcha/" + _igvfcRXyVkHr.userInteractionId + "'><input class='sli-vf-button sli-button sli-tiny' value='Refresh Image' type=\"button\" title=\"Having trouble reading the characters? Refresh for a different set.\"  id=\"_igvfcRXyVkHrrefreshImage\"></div><label class='sli-label'>Type the set of characters you see in the image above*</label><input  data-ignite-field-id='captcha' class='sli-vf-text-input sli-input' autocomplete='off' type='text' value='' name='captcha' id='_igvfcRXyVkHrCaptchaInput'></div>");
+        _igvfcRXyVkHr.container.find("#_igvfcRXyVkHrrefreshImage").click(function() {
+            _igvfcRXyVkHr.refreshCaptcha();
+        });
+        window.IGNITE.jquery("[data-ignite-field-id=captcha]:not(div)", "#form_igvfcRXyVkHr").blur(function() {
+            _igvfcRXyVkHr.data['captcha'].value = this.value;
+        });
+    }
+});
+
+_igvfcRXyVkHr.refreshCaptcha = function() {
+    _igvfcRXyVkHr.container.find("#_igvfcRXyVkHrImgCaptcha").attr("src", "https://darksky.salsalabs.org/api/captcha/" + _igvfcRXyVkHr.userInteractionId + "?refresh=" + Math.random().toString());
+}
+
+_igvfcRXyVkHr.bindSubmit = function() {
+    _igvfcRXyVkHr.container.find("[data-ignite-submit-button]").on("click keypress", function(event) {
+        if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+            event.preventDefault();
+            _igvfcRXyVkHr.submitFunc();
+        }
+    });
+}
+
+_igvfcRXyVkHr.unbindSubmit = function() {
+    _igvfcRXyVkHr.container.find("[data-ignite-submit-button]").off("click keypress");
+}
+
+_igvfcRXyVkHr.lastStepTarget = 99;
+_igvfcRXyVkHr.handleStepIndicator = function(event, element) {
+    var stepTarget = element.dataset["igniteForStepId"];
+    if (!window.IGNITE.jquery(element).hasClass("sli-completed")) {
+        return;
+    }
+    var next = parseInt(stepTarget);
+    var skipValidation = next <= _igvfcRXyVkHr.lastStepTarget;
+    _igvfcRXyVkHr.lastStepTarget = next;
+    _igvfcRXyVkHr.doStep(event, stepTarget, skipValidation.toString());
+}
+
+_igvfcRXyVkHr.handleStep = function(event, element) {
+    var stepTarget = element.dataset["igniteButtonStep"];
+    var skipValidation = element.dataset["igniteSkipValidation"];
+    // setup some local variables
+    _igvfcRXyVkHr.doStep(event, stepTarget, skipValidation);
+}
+
+_igvfcRXyVkHr.doStep = function(event, stepTarget, skipValidation) {
+
+    var form = window.IGNITE.jquery("#form_igvfcRXyVkHr");
+
+    // validate all visible fields before we switch
+    var fv = form.data('formValidation');
+    var isValid = true;
+    fv._submitIfValid = false;
+
+    if (skipValidation !== 'true') {
+        fv.validate();
+        isValid = fv.isValid();
+    }
+
+    if ((!isValid && !_igvfcRXyVkHr.isPreview) && (skipValidation != "true")) {
+        fv._onError(window.IGNITE.jquery.Event(event));
+        var errorFields = form.find(".sli-form-error");
+        if (errorFields && errorFields.length > 0) {
+            window.scrollTo(0, form.find(".sli-form-error").first().offset().top);
+        }
+        return false;
+    }
+
+    var currentStep = _igvfcRXyVkHr.container.find("div[data-ignite-container-type=elementStep]").filter(":visible");
+    var stepId = null;
+    if (currentStep) {
+        stepId = currentStep.data("ignite-step-id");
+        if (skipValidation != "true") {
+            _igvfcRXyVkHr.container.find("div[data-ignite-for-step-id=" + stepId + "]").addClass("sli-completed").removeClass("sli-selected");
+        }
+    }
+
+    _igvfcRXyVkHr.container.find("div[data-ignite-for-step-id=" + stepTarget + "]").addClass("sli-selected");
+    _igvfcRXyVkHr.container.find("div[data-ignite-container-type=elementStep]").each(function(index, div) {
+
+        if (div.dataset["igniteStepId"] == stepTarget) {
+            window.IGNITE.jquery(div).addClass("sli-selected").show();
+        } else {
+            window.IGNITE.jquery(div).removeClass("sli-selected").hide();
+        }
+    });
+    _igvfcRXyVkHr.sendStepNavigation(_igvfcRXyVkHr.activityType, (_igvfcRXyVkHr.p2p ? _igvfcRXyVkHr.p2p.name : null), stepId, stepTarget);
+}
+;
+
+_igvfcRXyVkHr.validationFunctions = [];
+_igvfcRXyVkHr.addValidation = function addValidation(f) {
+    _igvfcRXyVkHr.validationFunctions.push(f);
+}
+;
+
+_igvfcRXyVkHr.validationMessages = [];
+_igvfcRXyVkHr.addValidationMsg = function addValidation(f) {
+    _igvfcRXyVkHr.validationMessages.push(f);
+}
+;
+
+_igvfcRXyVkHr.success_functions = [];
+_igvfcRXyVkHr.addSuccessFunction = function addSuccessFunction(func) {
+    _igvfcRXyVkHr.success_functions.push(func);
+}
+;
+
+// Fix Function#name on browsers that do not support it (IE):
+// from https://stackoverflow.com/questions/6903762/function-name-not-supported-in-ie
+if (!(function f() {}
+).name) {
+    Object.defineProperty(Function.prototype, 'name', {
+        get: function() {
+            var name = (this.toString().match(/^function\s*([^\s(]+)/) || [])[1];
+            // For better performance only parse once, and then cache the
+            // result through a new accessor for repeated access.
+            Object.defineProperty(this, 'name', {
+                value: name
+            });
+            return name;
+        }
+    });
+}
+
+_igvfcRXyVkHr.addOrReplaceSuccessFunction = function addOrReplaceSuccessFunction(func) {
+    var insertFunc = true;
+    for (var i = 0; i < _igvfcRXyVkHr.success_functions.length; i++) {
+        if (_igvfcRXyVkHr.success_functions[i].name == func.name) {
+            _igvfcRXyVkHr.success_functions[i] = func;
+            insertFunc = false;
+        }
+    }
+    if (insertFunc) {
+        _igvfcRXyVkHr.success_functions.push(func);
+    }
+}
+;
+
+_igvfcRXyVkHr.addPostInit(function postInit() {
+
+    if (_igvfcRXyVkHr.getUrlParam("iu")) {
+        // set the single amount, but prepend before CC block in case form doesn't allow for donations currently
+        var dAmts = _igvfcRXyVkHr.container.find(".sli-donation-paymentblock");
+        var note = "Note: When adding a donation or registering an attendee, it's best to provide as much accurate information as possible. " + "Do not use a fictitious email or use the same email for different people, doing so may result in the the donation or registration being associated with the wrong person.";
+        dAmts.before("<div class='sli-iu-donation sli-element sli-columns-12'><div class='offline-check'><label class='sli-label'><input checked='checked' type='radio' name='iuType' value='off' onchange='_igvfcRXyVkHr.toggleIU(true,null,\"OFFLINE\")'>&nbsp;Pay Offline (Check or Cash)</label></div><div><label class='sli-label'><input type='radio' name='iuType' value='comp' onchange='_igvfcRXyVkHr.toggleIU(true,0.0,\"COMP\");'>&nbsp;Complimentary</label></div><div><label class='sli-label'><input type='radio' name='iuType' value='def' onchange='_igvfcRXyVkHr.toggleIU(false,null,\"CREDIT_CARD\")'>&nbsp;Pay Now with Credit Card</label></div></div>", "<div class='sli-element sli-columns-12'><div class='sli-iu-donation-amount'><label class='sli-oneTimeAmountLabel sli-amount-label sli-customAmount sli-small' for='iuAmt'>$</label><input class='sli-oneTimeAmountInput sli-customAmount sli-iu-amount sli-input' size='5' id='iuAmt' type='text' placeholder='Amount' onchange=\"_igvfcRXyVkHr.updateAmount(this.value,'oneTimeAmount')\" name='iuCustomOneTime' data-ignite-custom-onetime-input='data-ignite-custom-onetime-input' data-fv-row='.sli-iu-donation-amount'  data-fv-numeric='true' data-fv-numeric-message='Please enter a dollar amount' data-fv-notempty='true' data-fv-notempty-message='An amount is required' data-fv-greaterthan='true' data-fv-greaterthan-inclusive='false' data-fv-greaterthan-value='0.0' data-fv-greaterthan-message='Please enter a positive amount'></div>", "<div style='font-size:.8em;'>" + note + "</div></div>");
+        _igvfcRXyVkHr.container.find(".sli-iu-amount").blur(function() {
+            _igvfcRXyVkHr.updateAmount(this.value, 'oneTimeAmount');
+        });
+    }
+
+    var form = window.IGNITE.jquery("#form_igvfcRXyVkHr");
+    var fv = form.formValidation({
+        button: {
+            selector: '[type="none"]'
+        }
+    });
+    fv.on('err.validator.fv', function(e, data) {
+        // $(e.target)    --> The field element
+        // data.fv        --> The FormValidation instance
+        // data.field     --> The field name
+        // data.element   --> The field element
+        // data.validator --> The current validator name
+
+        data.element.data('fv.messages')// Hide all the messages
+        .find('.sli-field-error[data-fv-for="' + data.field + '"]').hide()// Show only message associated with current validator
+        .filter('[data-fv-validator="' + data.validator + '"]').show();
+    });
+    fv.on('success.validator.fv', function(e, data) {
+        // data.field     ---> The field name
+        // data.validator ---> The validator name
+        // data.fv        ---> The plugin instance
+        // invoke our own post success functions so we might do extra validation
+        for (var i = 0; i < _igvfcRXyVkHr.validationFunctions.length; i++) {
+            _igvfcRXyVkHr.validationFunctions[i](data);
+        }
+    });
+    try {
+        fv = form.data('formValidation');
+        fv.$hiddenButton.remove();
+    } catch (e) {// at least we don't break other init functions
+    }
+    if (_igvfcRXyVkHr.useTCDialog) {
+        var w = window.IGNITE.jquery(window).width() * .75;
+        var dialogId = _igvfcRXyVkHr.container.find("[data-ignite-termsandconditions-dialog]").attr("id");
+        var printId = _igvfcRXyVkHr.container.find("[data-ignite-print-link]").attr("id");
+        var printContentId = _igvfcRXyVkHr.container.find("[data-ignite-print-content]").attr("id");
+        // note: dialog() moves the element out of the form, hence capturing the id's above and using them below
+        _igvfcRXyVkHr.container.find("[data-ignite-termsandconditions-dialog]").dialog({
+            autoOpen: false,
+            dialogClass: "sli-termsAndConditionsDialog",
+            width: w
+        });
+        _igvfcRXyVkHr.container.find("[data-ignite-see-more-link]").on("click keypress", function(event) {
+            if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+                window.IGNITE.jquery("#" + dialogId).dialog("open");
+            }
+        });
+        window.IGNITE.jquery("#" + printId).on("click keypress", function(event) {
+            if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+                window.IGNITE.jquery("#" + printContentId).printThis();
+            }
+        });
+    }
+    for (var key in _igvfcRXyVkHr.mergeFields) {
+        if (_igvfcRXyVkHr.mergeFields.hasOwnProperty(key)) {
+            _igvfcRXyVkHr.container.find("[ignite-mergefield-id='" + key + "']").each(function() {
+
+                var el = window.IGNITE.jquery(this);
+                var format = window.IGNITE.jquery(this).attr('ignite-mergefield-option') || null;
+                var value = _igvfcRXyVkHr.mergeFields[key];
+
+                switch (format) {
+                case 'allCaps':
+                    value = value.toUpperCase();
+                    break;
+                case 'allLowerCase':
+                    value = value.toLowerCase();
+                    break;
+                case 'firstLetter':
+                    value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+                    break;
+                case 'firstUpperAllWords':
+                    value = value.toLowerCase();
+                    value = value.replace(/\b\w/g, function(l) {
+                        return l.toUpperCase()
+                    });
+                    break;
+                }
+
+                el.text(value);
+            });
+        }
+    }
+
+    _igvfcRXyVkHr.container.find("[ignite-mergefield-id]:empty").each(function(index, element) {
+        var el = window.IGNITE.jquery(element);
+        el.text(el.attr('ignite-mergefield-default'));
+    });
+
+    var country = _igvfcRXyVkHr.container.find("select[name='field-address-country']");
+    if (country.length > 0) {
+        country.change(_igvfcRXyVkHr.handleCountryChange);
+        _igvfcRXyVkHr.handleCountryChange();
+    } else {
+        var state = _igvfcRXyVkHr.container.find("select[name='field-address-state']");
+        var postal = _igvfcRXyVkHr.container.find("input[name='field-address-zip']");
+        if (state.length > 0 && postal.length > 0) {
+            state.change(_igvfcRXyVkHr.handleStateChange);
+            _igvfcRXyVkHr.handleStateChange();
+        }
+    }
+    _igvfcRXyVkHr.setupPhoneNumberMask();
+
+});
+_igvfcRXyVkHr.placeholderView = function placeholderView(ctrl, placeholderData) {
+    window.IGNITE.jquery(ctrl).on('focus', function() {
+        window.IGNITE.jquery(this).attr('custom_placeholder');
+        if (window.IGNITE.jquery(this).attr('custom_placeholder') == undefined && window.IGNITE.jquery(this).attr('custom_placeholder') == null) {
+            window.IGNITE.jquery(this).attr('custom_placeholder', window.IGNITE.jquery(this).attr('placeholder'));
+        }
+        window.IGNITE.jquery(this).data('placeholder', window.IGNITE.jquery(this).attr('placeholder'));
+        window.IGNITE.jquery(this).attr('placeholder', placeholderData);
+    }).on('blur', function() {
+        window.IGNITE.jquery(this).attr('placeholder', window.IGNITE.jquery(this).attr('custom_placeholder'));
+    });
+}
+;
+_igvfcRXyVkHr.setupPhoneNumberMask = function setupPhoneNumberMask() {
+    var ctrl = _igvfcRXyVkHr.container.find("[data-fv-field$=_phone]");
+    if (ctrl.length == 0) {
+        return;
+    }
+    var val = _igvfcRXyVkHr.data['Address@Home@Country'];
+    var min = 12;
+    var max = 12;
+    var msg = "Please provide a complete phone number with area code.";
+    if (typeof val == 'undefined' || typeof val.value == 'undefined' || val.value.length == 0 || val.value === 'US' || val.value == 'CA') {
+        ctrl.mask("000-000-0000", _igvfcRXyVkHr.placeholderView(ctrl, "___-___-____"));
+    } else {
+        ctrl.unmask();
+        ctrl.removeAttr('placeholder');
+        ctrl.mask('000-000-0000-0000', _igvfcRXyVkHr.placeholderView(ctrl, "___-___-____-____"), {
+            translation: {
+                'Z': {
+                    pattern: /[0-9]/,
+                    optional: true
+                }
+            }
+        });
+        msg = "Please provide a complete phone number with country code.";
+        min = 10;
+        max = 17;
+    }
+    var fv = window.IGNITE.jquery("#form_igvfcRXyVkHr").data('formValidation');
+    ctrl.each(function() {
+        var c = window.IGNITE.jquery(this);
+        fv.updateOption(c.attr('data-fv-field'), 'stringLength', 'min', min);
+        fv.updateOption(c.attr('data-fv-field'), 'stringLength', 'max', max);
+        fv.updateOption(c.attr('data-fv-field'), 'stringLength', 'message', msg);
+        fv.updateStatus(c.attr('data-fv-field'), 'NOT_VALIDATED');
+    });
+
+}
+
+_igvfcRXyVkHr.adjustForIUParam = function() {
+    var fv = window.IGNITE.jquery("#form_igvfcRXyVkHr");
+    if (_igvfcRXyVkHr.getUrlParam("iu")) {
+        _igvfcRXyVkHr.iu = _igvfcRXyVkHr.getUrlParam("iu");
+        _igvfcRXyVkHr.container.find(".sli-input").each(function() {
+            // make sure we dont unrequire payment information
+            if (window.IGNITE.jquery(this).closest(".sli-donation-paymentblock").length == 0) {
+                if (!this.name.match(/person-firstname$/) && !this.name.match(/person-lastname$/) && !this.name.match(/iuCustomOneTime$/)) {
+                    try {
+                        fv.formValidation('enableFieldValidators', this.name, false, 'notEmpty');
+                        _igvfcRXyVkHr.adjustOptionalLabelForField(this, false);
+                    } catch (e) {}
+                }
+            }
+        });
+
+        // check to see if we need to just show the donate page
+        if (_igvfcRXyVkHr.getUrlParam("view")) {
+            if ("donate" == _igvfcRXyVkHr.getUrlParam("view").toLowerCase()) {
+                _igvfcRXyVkHr.container.find("[ignite-transition='donate']").on('click keypress');
+                _igvfcRXyVkHr.container.find("[ignite-transition='donate']").click();
+            }
+        }
+        _igvfcRXyVkHr.toggleIU(true, null, "OFFLINE");
+        _igvfcRXyVkHr.container.find(".sli-donation-amountblock").hide();
+    }
+    // fix phone number masking
+    var ctrl = _igvfcRXyVkHr.container.find("[data-fv-field$=_phone]");
+    ctrl.each(function() {
+        var c = window.IGNITE.jquery(this);
+        c.val(c.masked(c.val().replace(/\D/g, '')));
+    });
+
+}
+;
+
+_igvfcRXyVkHr.adjustOptionalLabelForField = function(field, required) {
+    if (field.id && field.id.length > 0) {
+        var l = _igvfcRXyVkHr.container.find('label[for=' + field.id + ']');
+        if (l.length > 0 && l.css('display') != 'none') {
+            if (!required) {
+                l.text(l.text().replace("*", " (optional)"));
+            } else {
+                l.text(l.text().replace(" (optional)", "*"));
+            }
+        } else {
+            var ph = field.getAttribute("placeholder");
+            if (ph) {
+                ph = ph.trim();
+                if (ph.length > 0) {
+                    if (!required) {
+                        if (!ph.endsWith(' (optional)')) {
+                            field.setAttribute("placeholder", ph + " (optional)");
+                        }
+                    } else {
+                        field.setAttribute("placeholder", ph.replace(" (optional)", ""));
+                    }
+                }
+            }
+        }
+    }
+}
+;
+
+_igvfcRXyVkHr.preSelectedState = undefined;
+
+_igvfcRXyVkHr.CA_STATES = ['AB', 'BC', 'MB', 'NB', 'NL', 'NT', 'NS', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT'];
+_igvfcRXyVkHr.handleStateChange = function(event) {
+    var state = _igvfcRXyVkHr.container.find("select[name='field-address-state']").val();
+    if (state && window.IGNITE.jquery.inArray(state, _igvfcRXyVkHr.CA_STATES) > -1) {
+        _igvfcRXyVkHr.updateZipCodeValidation('CA');
+    } else {
+        _igvfcRXyVkHr.updateZipCodeValidation('US');
+    }
+}
+
+_igvfcRXyVkHr.updateZipCodeValidation = function(country) {
+    var postal = _igvfcRXyVkHr.container.find("input[name='field-address-zip']");
+    if (postal.length > 0) {
+        var fv = window.IGNITE.jquery("#form_igvfcRXyVkHr").data('formValidation');
+        fv.enableFieldValidators('field-address-zip', true, 'zipCode');
+        fv.enableFieldValidators('field-address-zip', true, 'regexp');
+        fv.updateOption('field-address-zip', 'zipCode', 'country', country);
+        switch (country) {
+        case 'CA':
+            fv.updateOption('field-address-zip', 'regexp', 'regexp', /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]\s[0-9][A-Z][0-9]$/);
+            fv.updateMessage('field-address-zip', 'regexp', 'Zip Code must be formatted as: A1A 0A1 and include a space between the first 3 and second 3 digits.');
+            fv.enableFieldValidators('field-address-zip', false, 'zipCode');
+            break;
+        case 'US':
+            fv.updateOption('field-address-zip', 'regexp', 'regexp', /^(\d{5}|\d{5}-\d{4})?$/);
+            fv.updateMessage('field-address-zip', 'regexp', 'Zip Code must be formatted as: "55555" or "55555-5555"');
+            fv.enableFieldValidators('field-address-zip', false, 'zipCode');
+            break;
+        default:
+            fv.enableFieldValidators('field-address-zip', false, 'regexp');
+            break;
+        }
+        fv.updateStatus('field-address-zip', 'NOT_VALIDATED');
+    }
+}
+
+_igvfcRXyVkHr.handleCountryChange = function(event) {
+
+    var stateSelect = _igvfcRXyVkHr.container.find("select[name='field-address-state']");
+    var fieldSelect = _igvfcRXyVkHr.container.find(".sli-field-address-state");
+    var country = _igvfcRXyVkHr.container.find("select[name='field-address-country']").val();
+    _igvfcRXyVkHr.data['Address@Home@Country'].value = country;
+    _igvfcRXyVkHr.setupPhoneNumberMask();
+    _igvfcRXyVkHr.updateZipCodeValidation(country);
+    window.IGNITE.jquery.getJSON(_igvfcRXyVkHr.ASSETS_PREFIX + "/api/widget/stateProvinces/" + country, function(data) {
+        stateSelect.children().remove();
+        stateSelect.append('<option value="">Choose one...</option>');
+        _igvfcRXyVkHr.preSelectedState = _igvfcRXyVkHr.data['Address@Home@State'].value;
+        window.IGNITE.jquery.each(data, function() {
+            stateSelect.append('<option value="' + this.value + '" ' + ((_igvfcRXyVkHr.preSelectedState && _igvfcRXyVkHr.preSelectedState === this.value) || _igvfcRXyVkHr.getUrlParameter('address-state') === this.value ? 'selected' : '') + '>' + this.label + '</option>');
+        });
+        if (data.length === 0) {
+            fieldSelect.hide();
+        } else {
+            fieldSelect.show();
+        }
+        _igvfcRXyVkHr.preSelectedState = undefined;
+    })
+}
+;
+
+_igvfcRXyVkHr.validate = function runValidations(form) {
+    scroll(0, window.IGNITE.jquery(".result", '#id_d252bdb811af42e48d5d702753687355').offset().top);
+
+}
+;
+
+_igvfcRXyVkHr.okToSubmit = function(event) {
+    return true;
+}
+;
+
+_igvfcRXyVkHr.getFieldValue = function(name) {
+    if (name === 'amount') {
+        return _igvfcRXyVkHr.data.enableRecuring.value ? _igvfcRXyVkHr.data.recurringAmount.value : _igvfcRXyVkHr.data.oneTimeAmount.value;
+    } else if (name === 'donationsummary-dedication_type') {
+        return _igvfcRXyVkHr.data.selectedDedicationType.value.replace(/([A-Z])/g, ' $1').trim();
+    } else if (name === 'makerecurringcb') {
+        return _igvfcRXyVkHr.data.enableRecuring.value ? 'yes' : 'no';
+    }
+    var fieldAttributeSelector = '[name=field-' + name + ']';
+    var field = window.IGNITE.jquery(fieldAttributeSelector);
+    if (field.length === 0) {
+        fieldAttributeSelector = '[salsa-reference-name=' + name + ']';
+        field = window.IGNITE.jquery(fieldAttributeSelector);
+    }
+    if (field.is(':radio')) {
+        field = window.IGNITE.jquery(fieldAttributeSelector + ':checked');
+    } else if (field.is(':checkbox')) {
+        return field.is(':checked');
+    }
+    return field.val();
+}
+;
+
+_igvfcRXyVkHr.handleRedirect = function() {
+    url = _igvfcRXyVkHr.resultURL;
+    if (typeof _igvfcRXyVkHr.redirectParameters != "undefined") {
+        if (typeof _igvfcRXyVkHr.redirectMethod != "undefined" && _igvfcRXyVkHr.redirectMethod.toUpperCase() == 'GET') {
+            var redirectParamsUrl = '';
+            for (var key in _igvfcRXyVkHr.redirectParameters) {
+                if (key) {
+                    var value = _igvfcRXyVkHr.getFieldValue(key);
+                    redirectParamsUrl += _igvfcRXyVkHr.redirectParameters[key] + '=' + value + '&';
+                }
+            }
+
+            redirectParamsUrl += 'sl_ai' + '=' + _igvfcRXyVkHr.activityId + '&';
+            redirectParamsUrl += 'sl_at' + '=' + _igvfcRXyVkHr.activityType;
+
+            url += url.indexOf("?") >= 0 ? "&" : "?";
+            url += redirectParamsUrl;
+        } else if (typeof _igvfcRXyVkHr.redirectMethod != "undefined" && _igvfcRXyVkHr.redirectMethod.toUpperCase() == 'POST') {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = url;
+
+            for (var key in _igvfcRXyVkHr.redirectParameters) {
+                if (key) {
+                    var value = _igvfcRXyVkHr.getFieldValue(key);
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = _igvfcRXyVkHr.redirectParameters[key];
+                    hiddenInput.value = value;
+                    form.appendChild(hiddenInput);
+                }
+            }
+
+            var hiddenActivityId = document.createElement('input');
+            hiddenActivityId.type = 'hidden';
+            hiddenActivityId.name = 'sl_ai';
+            hiddenActivityId.value = _igvfcRXyVkHr.activityId;
+            form.appendChild(hiddenActivityId);
+
+            var hiddenActivityType = document.createElement('input');
+            hiddenActivityType.type = 'hidden';
+            hiddenActivityType.name = 'sl_at';
+            hiddenActivityType.value = _igvfcRXyVkHr.activityType;
+            form.appendChild(hiddenActivityType);
+
+            document.body.appendChild(form);
+            form.submit();
+            return;
+        }
+    }
+    top.location.replace(url);
+}
+;
+
+_igvfcRXyVkHr.request = undefined;
+
+_igvfcRXyVkHr.serializeFormInputs = function(form) {
+    var inputs = _igvfcRXyVkHr.container.find("input, select, button, textarea, checkbox");
+    var jsonForm = {};
+    for (var x = 0; x < inputs.length; x++) {
+        var name = inputs[x].name;
+        if (["card_number", "bank_account", "bank_routing"].indexOf(name) === -1) {
+            jsonForm[name] = inputs[x].value;
+        }
+    }
+    return jsonForm;
+}
+
+_igvfcRXyVkHr.getValidSubmitInputValues = function(form) {
+    // let's select and cache all the fields
+    var inputs = form.find("input, select, button, textarea, checkbox");
+    for (var x = 0; x < inputs.length; x++) {
+        // make sure we don't blur the donationAmtOtherAmt - that causes the amount to be 0
+        if (inputs[x].name == 'customOneTime' || inputs[x].name == 'customRecurringAmount' || inputs[x].name == 'customMonthlyRecurringAmount' || inputs[x].name == 'customQuarterlyRecurringAmount' || inputs[x].name == 'customYearlyRecurringAmount' || inputs[x].type == 'radio') {
+            continue;
+        }
+        try {
+            window.IGNITE.jquery(inputs[x]).blur();
+        } catch (e) {/*ignore missing blur*/
+        }
+        if (inputs[x].disabled) {
+            inputs.splice(x, 1);
+        }
+    }
+    return inputs;
+}
+
+_igvfcRXyVkHr.validateSubmitInputValues = function(form, event) {
+
+    // call so that we invoke blur on the input valies
+    _igvfcRXyVkHr.getValidSubmitInputValues(form);
+    // validate all required fields are filled in
+    var fv = form.data('formValidation');
+    fv._submitIfValid = false;
+    fv.validate();
+    var isValid = fv.isValid();
+
+    if (!isValid) {
+        fv._onError(window.IGNITE.jquery.Event(event));
+        var errorFields = form.find(".sli-form-error");
+        if (errorFields && errorFields.length > 0) {
+            window.scrollTo(0, form.find(".sli-form-error").first().offset().top);
+        }
+        _igvfcRXyVkHr.bindSubmit();
+        return false;
+    }
+    return isValid;
+}
+;
+
+_igvfcRXyVkHr.form;
+_igvfcRXyVkHr.submitResultsId = '#id_d252bdb811af42e48d5d702753687355';
+_igvfcRXyVkHr.asyncSubmit = true;
+
+_igvfcRXyVkHr.addOrReplaceSuccessFunction(function sendFormSubmission() {
+    _igvfcRXyVkHr.sendPageSubmission(_igvfcRXyVkHr.activityType, _igvfcRXyVkHr.p2p ? _igvfcRXyVkHr.p2p.name : null);
+});
+
+_igvfcRXyVkHr.submitFunc = function submit(event, altform) {
+    // make sure we prevent default
+    if (event) {
+        event.preventDefault();
+    }
+    _igvfcRXyVkHr.unbindSubmit();
+    try {
+        // already have a submission in progress, just return
+        if (_igvfcRXyVkHr.request) {
+            return false;
+        }
+        // setup some local variables
+        _igvfcRXyVkHr.form = window.IGNITE.jquery("#form_igvfcRXyVkHr");
+        if (typeof altform != "undefined" && altform.length > 0) {
+            _igvfcRXyVkHr.form = altform;
+        }
+
+        var inputs = _igvfcRXyVkHr.getValidSubmitInputValues(_igvfcRXyVkHr.form);
+        if (!_igvfcRXyVkHr.validateSubmitInputValues(_igvfcRXyVkHr.form, event)) {
+            return false;
+        }
+        var processing = _igvfcRXyVkHr.form.find(".sli-processing");
+
+        // let's disable the inputs for the duration of the ajax request
+        // and prevent the default action now
+        inputs.prop("disabled", true);
+
+        //set captcha for the case, where the sign-up button out of the column with form
+        if (_igvfcRXyVkHr.useCaptcha) {
+            _igvfcRXyVkHr.data['captcha'].value = _igvfcRXyVkHr.container.find("input[data-ignite-field-id=captcha]").val();
+        }
+        // serialize the data in the form
+        var serializedData = _igvfcRXyVkHr.buildMsg();
+
+        // hide button, display processing block
+        var btn = _igvfcRXyVkHr.form.find("[data-ignite-submit-button]");
+        btn.addClass("sli-submit-processing").prop("disabled", true);
+        processing.show();
+
+        // fire off the request to /form.php
+        _igvfcRXyVkHr.request = window.IGNITE.jquery.ajax({
+            url: _igvfcRXyVkHr.url,
+            type: "post",
+            async: _igvfcRXyVkHr.asyncSubmit,
+            contentType: "application/json; charset=utf-8",
+            data: serializedData,
+            dataType: 'json'
+        });
+
+        // callback handler that will be called on success
+        _igvfcRXyVkHr.request.done(function(response, textStatus, jqXHR) {
+            var errors;
+            var btn = _igvfcRXyVkHr.form.find("[data-ignite-submit-button]");
+            var processing = _igvfcRXyVkHr.form.find(".sli-processing");
+
+            if (typeof response != 'undefined' && typeof response.payload != 'undefined') {
+                errors = response.payload.errors;
+            }
+            if (errors == undefined && typeof response != 'undefined') {
+                errors = response.errors;
+            }
+            if (typeof errors != 'undefined' && errors.length > 0) {
+                window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId).empty();
+                var items = [];
+                window.IGNITE.jquery.each(errors, function(i, item) {
+                    items.push('<li>' + item.message + "</li>");
+                });
+                var resDiv = window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId);
+                window.IGNITE.jquery("<ul>").appendTo(resDiv).append(items.join('')).addClass('sli-field-error');
+                window.scrollTo(0, resDiv.offset().top);
+                btn.removeClass("sli-submit-processing").prop("disabled", false);
+                processing.hide();
+                _igvfcRXyVkHr.bindSubmit();
+                if (_igvfcRXyVkHr.getGwDetails && !(errors.length == 1 && errors[0].message == "Please refresh the form")) {
+                    _igvfcRXyVkHr.getGwDetails();
+                }
+            } else {
+                if (typeof _igvfcRXyVkHr.submissionSuccessHandler != "undefined") {
+                    _igvfcRXyVkHr.submissionSuccessHandler(response);
+                    return;
+                }
+
+                if (typeof _igvfcRXyVkHr.resultURL != "undefined") {
+                    if (typeof response != 'undefined' && typeof response.payload != 'undefined') {
+                        if (typeof response.payload.subscriptionData != 'undefined') {
+                            _igvfcRXyVkHr.activityId = response.payload.subscriptionData.activityId;
+                        } else if (typeof response.payload.t != 'undefined') {
+                            _igvfcRXyVkHr.activityId = response.payload.t;
+                        }
+                    }
+                    _igvfcRXyVkHr.handleRedirect();
+                } else {
+                    processing.hide();
+                    _igvfcRXyVkHr.container.find(".sli-widget").hide();
+                    // initial lookup for legacy view id
+                    var confirmationDiv = _igvfcRXyVkHr.container.find("#f612bd3c-5c40-4108-8046-f4782492f255_confirmationView");
+                    // newer forms/preferred mechanism -- match style & token attribute
+                    if (confirmationDiv.length === 0) {
+                        confirmationDiv = _igvfcRXyVkHr.container.find(".sli-confirmation-pane[data-ignite-token=f612bd3c-5c40-4108-8046-f4782492f255]");
+                    }
+                    // fallback, to any match on style
+                    if (confirmationDiv.length === 0) {
+                        confirmationDiv = _igvfcRXyVkHr.container.find(".sli-confirmation-pane");
+                    }
+                    if (confirmationDiv && confirmationDiv.length > 0) {
+                        confirmationDiv.show();
+                        scroll(0, confirmationDiv.offset().top);
+                        _igvfcRXyVkHr.resetSharing();
+                    } else {
+                        if (_igvfcRXyVkHr.form.attr('keepVisible') !== 'true') {
+                            _igvfcRXyVkHr.form.hide();
+                        }
+                        _igvfcRXyVkHr.resetSharing();
+                        if (typeof _igvfcRXyVkHr.result != "undefined") {
+                            window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId).html(_igvfcRXyVkHr.result);
+                        } else {
+                            window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId).html('<hr/>Thank you for your submission.');
+                        }
+                    }
+                }
+                for (var i = 0; i < _igvfcRXyVkHr.success_functions.length; i++) {
+                    _igvfcRXyVkHr.success_functions[i](response);
+                }
+            }
+        })// callback handler that will be called on failure
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            var btn = _igvfcRXyVkHr.form.find("[data-ignite-submit-button]");
+            var processing = _igvfcRXyVkHr.form.find(".sli-processing");
+
+            if (jqXHR.status == 400) {
+                var response = JSON.parse(jqXHR.responseText);
+                var errors;
+                if (typeof response != 'undefined' && typeof response.payload != 'undefined') {
+                    errors = response.payload.errors;
+                }
+                if (errors == undefined && typeof response != 'undefined') {
+                    errors = response.errors;
+                }
+                if (typeof errors != 'undefined' && errors.length > 0) {
+                    window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId).empty();
+                    var items = [];
+                    window.IGNITE.jquery.each(response.errors, function(i, item) {
+                        items.push('<li>' + item.message + " : " + item.details + "</li>");
+                    });
+                    var resDiv = window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId);
+                    window.IGNITE.jquery("<ul>").appendTo(resDiv).append(items.join('')).addClass('sli-field-error');
+                    window.scrollTo(0, resDiv.offset().top);
+                }
+            } else {
+                // log the error to the console
+                //console.error("The following error occured: " + textStatus,	errorThrown);
+                window.IGNITE.jquery(".result", _igvfcRXyVkHr.submitResultsId).html("I'm sorry, there was a problem with your request(error code:" + jqXHR.status + "), please try again later.").addClass('sli-field-error').focus();
+            }
+            btn.removeClass("sli-submit-processing").prop("disabled", false);
+            processing.hide();
+            _igvfcRXyVkHr.bindSubmit();
+
+        })
+        // callback handler that will be called regardless
+        // if the request failed or succeeded
+        .always(function() {
+            // reenable the inputs
+            inputs.prop("disabled", false);
+            _igvfcRXyVkHr.refreshCaptcha();
+            _igvfcRXyVkHr.request = undefined;
+            // clear out the request when completed
+        });
+
+        // prevent default posting of form
+        if (event) {
+            event.preventDefault();
+        }
+    } catch (e) {
+        console.error(e, "error submitting widget form data");
+    }
+}
+;
+
+var validateCCName = function(value) {
+    if (value) {
+        if (_igvfcRXyVkHr.countWords(value) < 2)
+            return {
+                valid: false,
+                message: 'Cardholder name must have at least 2 parts'
+            }
+    } else {
+        return {
+            valid: false,
+            message: 'Please enter the name on your credit card'
+        }
+    }
+
+    return true;
+};
+
+_igvfcRXyVkHr.countWords = function(value) {
+    return value.split(' ').filter(function(w) {
+        return w != ''
+    }).length;
+}
+_igvfcRXyVkHr.buildMsg = function() {
+    _igvfcRXyVkHr.populateWidgetUrlParams();
+    var msg = {
+        header: {},
+        payload: {
+            userInteractionId: _igvfcRXyVkHr.userInteractionId,
+            pid: _igvfcRXyVkHr.pid,
+            oid: _igvfcRXyVkHr.oid,
+            aid: _igvfcRXyVkHr.aid,
+            cid: _igvfcRXyVkHr.cid,
+            eid: _igvfcRXyVkHr.getUrlParam("eId", _igvfcRXyVkHr.eid),
+            eType: _igvfcRXyVkHr.getUrlParam("eType", _igvfcRXyVkHr.eType),
+            data: _igvfcRXyVkHr.data,
+            contentChannels: _igvfcRXyVkHr.contentChannels,
+            contactMethods: _igvfcRXyVkHr.contactMethods,
+            mailingLists: _igvfcRXyVkHr.minifyMailingLists(_igvfcRXyVkHr.mailingLists),
+            urlMailingLists: _igvfcRXyVkHr.urlMailingLists + _igvfcRXyVkHr.getUrlParam("sl_gr", ''),
+            activityId: _igvfcRXyVkHr.activityId,
+            salsaTrack: _igvfcRXyVkHr.stc,
+            rawForm: _igvfcRXyVkHr.serializeFormInputs(_igvfcRXyVkHr.form),
+            siftSession: '_igvfcRXyVkHr',
+            showEmailConfirmation: _igvfcRXyVkHr.showEmailConfirmation
+        }
+    };
+    var serializedData = JSON.stringify(msg);
+    return serializedData;
+}
+;
+
+_igvfcRXyVkHr.populateWidgetUrlParams = function() {
+    if (typeof slurlmllists === 'undefined') {
+        _igvfcRXyVkHr.urlMailingLists = '';
+    } else {
+        _igvfcRXyVkHr.urlMailingLists = slurlmllists + ',';
+    }
+}
+
+_igvfcRXyVkHr.url = "https://darksky.salsalabs.org/api/activity/submission/subscription";
+
+_igvfcRXyVkHr.extraInit = function extraInit() {
+    _igvfcRXyVkHr.hideLoading();
+    if (_igvfcRXyVkHr.container.attr("ignite-show-content")) {
+        _igvfcRXyVkHr.container.find(".sli-content-pane").show();
+    }
+}
+;
+
+_igvfcRXyVkHr.addInit(function doInitialize() {
+    // TODO: how do we clean up widgets that are left hanging after navigating away?
+
+    // only initialize if we are loaded (all references are resolved/loaded)
+    if (document.readyState != 'complete') {
+        return;
+    }
+    window.IGNITE.jquery('#id_d252bdb811af42e48d5d702753687355').replaceWith(_igvfcRXyVkHr.html);
+
+    //this needs to remain here, the extra init function uses the _igvfcRXyVkHr.container variable
+    window.IGNITE.jquery('div[ignite-activity-id=d252bdb8-11af-42e4-8d5d-702753687355] > form').attr('id', 'form_igvfcRXyVkHr');
+    _igvfcRXyVkHr.container = window.IGNITE.jquery("#form_igvfcRXyVkHr").closest("formtemplate");
+
+    _igvfcRXyVkHr.extraInit();
+
+    _igvfcRXyVkHr.buildContactMethods();
+    _igvfcRXyVkHr.buildContentChannels();
+    _igvfcRXyVkHr.buildMailingLists();
+    //hide message topics title
+    window.IGNITE.jquery('.sli-message-topics').hide();
+    window.IGNITE.jquery("#form_igvfcRXyVkHr", '#id_d252bdb811af42e48d5d702753687355').submit(_igvfcRXyVkHr.submitFunc);
+    // default/legacy lookup
+    var contentDiv = window.IGNITE.jquery("#f612bd3c-5c40-4108-8046-f4782492f255_contentView");
+    // newer forms/preferred mechanism -- match style & token attribute
+    if (contentDiv.length === 0) {
+        contentDiv = window.IGNITE.jquery(".sli-content-pane[data-ignite-token=f612bd3c-5c40-4108-8046-f4782492f255]");
+    }
+    // fallback, to any match on style
+    if (contentDiv.length === 0) {
+        contentDiv = window.IGNITE.jquery(".sli-content-pane");
+    }
+    if (!(contentDiv && contentDiv.length > 0)) {
+        contentDiv = window.IGNITE.jquery("#contentView");
+    }
+    if (contentDiv && contentDiv.length > 0) {
+        contentDiv.parent().prepend("<!-- ORG ID: 2fdb9aa7-79a1-4074-8cc1-5b61c6c013af --> \n <!-- ORG NAME: International Dark-Sky Association --> \n <!-- ACTIVITY ID: 3e321e5a-51eb-4182-be7e-5e7f04747d30 -->");
+    }
+    if (_igvfcRXyVkHr.showEmailConfirmation === undefined) {
+        _igvfcRXyVkHr.showEmailConfirmation = false;
+    }
+    //alert("sub widget initialized");
+});
+
+_igvfcRXyVkHr.contactMethodClick = function contactClick(x, ctrl) {
+    _igvfcRXyVkHr.contactMethods[x].optedIn = ctrl.checked;
+}
+;
+
+_igvfcRXyVkHr.textOptInClick = function(x, ctrl) {
+    _igvfcRXyVkHr.contactMethods[x].smsStatus = ctrl.checked;
+    _igvfcRXyVkHr.toggleCellPhoneRequired();
+}
+;
+
+_igvfcRXyVkHr.cellPhoneRequiredByDefault = false;
+_igvfcRXyVkHr.toggleCellPhoneRequired = function() {
+    if (_igvfcRXyVkHr.cellPhoneRequiredByDefault === true)
+        return;
+
+    var form = _igvfcRXyVkHr.container.find('#form_igvfcRXyVkHr');
+    var element = _igvfcRXyVkHr.container.find('input[name=field-person-cell_phone]');
+    if (_igvfcRXyVkHr.contactMethods['CellPhone'].smsStatus === true) {
+        element.attr('required', 'required');
+        element.attr('data-fv-notempty', 'true');
+        element.attr('data-fv-notempty-message', 'This field requires a value');
+        form.formValidation('addField', element.attr('name'));
+    } else {
+        element.removeAttr('required');
+        element.removeAttr('data-fv-notempty');
+        element.removeAttr('data-fv-notempty-message');
+        _igvfcRXyVkHr.container.find('small[data-fv-for=field-person-cell_phone]').remove();
+        form.formValidation('removeField', element.attr('name'));
+    }
+}
+
+_igvfcRXyVkHr.buildContactMethods = function buildContactMethods() {
+    if (_igvfcRXyVkHr.contactMethods && Object.keys(_igvfcRXyVkHr.contactMethods).length > 0 && !_igvfcRXyVkHr.isBindOnly) {
+        var node = window.IGNITE.jquery('.sli-contact-types', '#id_d252bdb811af42e48d5d702753687355');
+        var parent = node.parent();
+        var txt = "Please keep me informed.";
+        if (node.length > 0) {
+            txt = node[0].nextSibling.nodeValue;
+        }
+        parent.empty();
+        // clear out existing DOM
+        for (var key in _igvfcRXyVkHr.contactMethods) {
+            if (key === 'Email') {
+                var checked = _igvfcRXyVkHr.contactMethods[key].optedIn === 'true' ? 'checked' : '';
+                var check = window.IGNITE.jquery("<div class='sli-contact-types sli-contact-type'><label class='sli-label'><input class='" + key + " sli-input sli-contact-type' type='checkbox' checked data-ignite-contact-value='" + key + "'/>" + txt + "</label></div>");
+                check.appendTo(parent);
+                //window.IGNITE.jquery("<label>"+value.label+"</label>").appendTo(div);
+            }
+        }
+    } else if (!_igvfcRXyVkHr.isBindOnly) {
+        // not bind only, and no contact methods, so empty it out
+        window.IGNITE.jquery('.sli-contact-types', '#id_d252bdb811af42e48d5d702753687355').each(function() {
+            window.IGNITE.jquery(this).empty();
+        });
+    }
+    _igvfcRXyVkHr.container.find("input.sli-contact-type").on("click keypress", function(event) {
+        if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+            _igvfcRXyVkHr.contactMethodClick(window.IGNITE.jquery(event.target).data("igniteContactValue"), this);
+        }
+    });
+    _igvfcRXyVkHr.container.find("input.sli-sms-status").on("click keypress", function(event) {
+        if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+            _igvfcRXyVkHr.textOptInClick(window.IGNITE.jquery(event.target).attr("sms-contact-value"), this);
+        }
+    });
+    if (_igvfcRXyVkHr.contactMethods && Object.keys(_igvfcRXyVkHr.contactMethods).length > 0) {
+        for (var key in _igvfcRXyVkHr.contactMethods) {
+            var cbox = _igvfcRXyVkHr.container.find('[data-ignite-contact-value=' + key + ']');
+            if (cbox.length === 0) {
+                _igvfcRXyVkHr.contactMethods[key].optedIn = true;
+            } else {
+                var curState = _igvfcRXyVkHr.contactMethods[key].optedIn;
+                if (typeof curState === 'undefined' || (curState !== 'true' && curState !== 'false')) {
+                    _igvfcRXyVkHr.contactMethods[key].optedIn = cbox.is(":checked");
+                } else {
+                    var checked = curState === true || curState === 'true';
+                    cbox.attr("checked", checked);
+                }
+            }
+
+            if (key !== 'CellPhone')
+                continue;
+
+            cbox = _igvfcRXyVkHr.container.find('input[name=smsStatus]');
+            if (cbox.length > 0 && cbox[0].checked) {
+                _igvfcRXyVkHr.contactMethods[key].smsStatus = true;
+                var cellPhoneField = _igvfcRXyVkHr.container.find('input[name=field-person-cell_phone]');
+                _igvfcRXyVkHr.cellPhoneRequiredByDefault = cellPhoneField.length > 0 && cellPhoneField[0].required;
+                _igvfcRXyVkHr.toggleCellPhoneRequired();
+            }
+        }
+    }
+}
+;
+
+_igvfcRXyVkHr.contentChannelClick = function contentChannelClick(x, ctrl) {
+    _igvfcRXyVkHr.contentChannels[x].optedIn = ctrl.checked;
+}
+;
+
+_igvfcRXyVkHr.mailingListClick = function mailingListClick(x, ctrl) {
+    _igvfcRXyVkHr.mailingLists[x].optedIn = ctrl.checked;
+}
+;
+
+_igvfcRXyVkHr.buildContentChannels = function buildContentChannels() {
+    if (_igvfcRXyVkHr.contentChannels && Object.keys(_igvfcRXyVkHr.contentChannels).length > 0 && _igvfcRXyVkHr.getNode('.sli-channel-types', '#id_d252bdb811af42e48d5d702753687355')) {
+        var channels = "";
+        for (var key in _igvfcRXyVkHr.contentChannels) {
+            var k = _igvfcRXyVkHr.contentChannels[key];
+            var checked = k.optedIn == 'true' ? 'checked' : '';
+            channels += "<div class='sli-channel-type'><input type='checkbox' " + checked + "  onclick='_igvfcRXyVkHr.contentChannelClick(\"" + key + "\",this)'>" + k.label + "</div>";
+        }
+        _igvfcRXyVkHr.getNode('.sli-channel-types', '#id_d252bdb811af42e48d5d702753687355').innerHTML = channels;
+    } else {
+        window.IGNITE.jquery('.sli-channel-types', '#id_d252bdb811af42e48d5d702753687355').each(function() {
+            window.IGNITE.jquery(this).empty();
+        });
+    }
+}
+;
+
+_igvfcRXyVkHr.buildMailingLists = function buildMailingLists() {
+    if (_igvfcRXyVkHr.mailingLists && Object.keys(_igvfcRXyVkHr.mailingLists).length > 0 && _igvfcRXyVkHr.container.find('.sli-mailing-lists') && _igvfcRXyVkHr.container.find('.sli-mailing-lists').length > 0) {
+        if (_igvfcRXyVkHr.container.find('.sli-mailing-lists ul.sli-input-list').length > 0) {
+            var checkboxList = _igvfcRXyVkHr.container.find('.sli-mailing-lists ul.sli-input-list');
+            checkboxList.html("");
+
+            for (var key in _igvfcRXyVkHr.mailingLists) {
+                var mailingList = _igvfcRXyVkHr.mailingLists[key];
+                if (mailingList && mailingList.name) {
+                    var listItem = window.IGNITE.jquery("<li>");
+                    var checked = mailingList.optedIn == 'true' ? 'checked' : '';
+                    if (typeof slurlmllists != 'undefined' && (slurlmllists.toLowerCase().indexOf(mailingList.paramName.toLowerCase()) > -1)) {
+                        checked = 'checked';
+                        mailingList.optedIn = 'true';
+                    }
+                    if (_igvfcRXyVkHr.getUrlParam("sl_gr", '').toLowerCase().indexOf(mailingList.paramName.toLowerCase()) > -1) {
+                        checked = 'checked';
+                        mailingList.optedIn = 'true';
+                    }
+                    var listItemHTML = "<label class=\"sli-label\"><input class=\"sli-input\" type=\"checkbox\" " + checked + " onclick='_igvfcRXyVkHr.mailingListClick(\"" + key + "\",this)'" + " name=\"" + key + "\">";
+                    listItemHTML += "<span class=\"sli-label-text\">" + mailingList.name;
+                    if (typeof mailingList.publicDescription != 'undefined' && mailingList.publicDescription !== "" && mailingList.publicDescription !== "null") {
+                        listItemHTML += " - " + "<small>" + mailingList.publicDescription + "</small>";
+                    }
+                    listItemHTML += "</span></label>";
+                    listItem.html(listItemHTML);
+                    checkboxList.append(listItem);
+                }
+            }
+        }
+    } else {
+        _igvfcRXyVkHr.container.find('.sli-mailing-lists').hide();
+    }
+}
+;
+
+_igvfcRXyVkHr.minifyMailingLists = function(mailingLists) {
+    var minified = {};
+    for (var uuid in mailingLists) {
+        minified[uuid] = {
+            "optedIn": mailingLists[uuid].optedIn
+        };
+    }
+
+    return minified;
+}
+;
+
+Number.isNaN = Number.isNaN || function(value) {
+    return typeof value === "number" && isNaN(value);
+}
+
+_igvfcRXyVkHr.addOrReplaceSuccessFunction(function sendDonationPurchase() {
+    var amount = _igvfcRXyVkHr.data.oneTimeAmount.value;
+    if (_igvfcRXyVkHr.data['enableRecuring'].value === true) {
+        amount = _igvfcRXyVkHr.data.recurringAmount.value;
+    }
+    if (_igvfcRXyVkHr.payFees === true) {
+        amount = amount + _igvfcRXyVkHr.data.fees;
+    }
+    _igvfcRXyVkHr.sendPurchase(amount, _igvfcRXyVkHr.currencyCode, 'Donation', null);
+});
+
+_igvfcRXyVkHr.addInitFirst(function registerValidators() {
+    FormValidation.Validator.recurringAmount = {
+        validate: function(validator, $field, options) {
+            var widget = window[$field.data('sli-widget')];
+            if (widget && widget.data['enableRecuring'].value) {
+                if (widget.data['recurringAmount'].value === '' || widget.data['recurringAmount'].value == 0 || Number.isNaN(widget.data['recurringAmount'].value)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    };
+    FormValidation.Validator.onetimeAmount = {
+        validate: function(validator, $field, options) {
+            var widget = window[$field.data('sli-widget')];
+            if (widget && !widget.data['enableRecuring'].value) {
+                if (widget.data['oneTimeAmount'].value === '' || widget.data['oneTimeAmount'].value == 0 || Number.isNaN(widget.data['oneTimeAmount'].value)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    };
+});
+
+// DoubleTheDonation
+_igvfcRXyVkHr.addJS('https://doublethedonation.com/api/js/ddplugin.js');
+_igvfcRXyVkHr.addCSS("https://doublethedonation.com/api/css/ddplugin.css");
+
+_igvfcRXyVkHr.getGwDetails = function() {
+    window.IGNITE.jquery.getJSON(_igvfcRXyVkHr.gwDetails + _igvfcRXyVkHr.payCfgId, function(data) {
+        if (!data || !data.payload) {
+            return;
+        }
+        _igvfcRXyVkHr.ccTokenizerURL = data.payload.tokenizationURL;
+        _igvfcRXyVkHr.setupCCValidation(data.payload.allowedCCs);
+        _igvfcRXyVkHr.cnn = data.payload.cnn;
+        _igvfcRXyVkHr.paymentProcessor = data.payload.paymentProcessor;
+        _igvfcRXyVkHr.wepayClientId = data.payload.wepayClientId;
+        _igvfcRXyVkHr.wepayProduction = data.payload.wepayProduction;
+        _igvfcRXyVkHr.allowECheck = data.payload.allowECheck;
+        _igvfcRXyVkHr.allowPayPal = !_igvfcRXyVkHr.iu && data.payload.allowPayPal;
+        _igvfcRXyVkHr.setupAltPayments();
+        _igvfcRXyVkHr.currencyCode = data.payload.currencyCode;
+    });
+}
+;
+_igvfcRXyVkHr.addInit(function doInitialize() {
+    _igvfcRXyVkHr.getGwDetails();
+    var base = new Date().getFullYear();
+    var options = '<option value="" selected>YYYY</option>';
+    for (var x = 0; x < 20; x++) {
+        var y = base + x;
+        options = options + '<option value="' + y.toString().substr(2, 2) + '">' + y + '</option>';
+    }
+    _igvfcRXyVkHr.container.find('select[name="expiry_year"]').html(options);
+    _igvfcRXyVkHr.container.find('select[name="expiry_year"]').val("").change(),
+    _igvfcRXyVkHr.container.find('select[name="expiry_month"]').val("").change(),
+    _igvfcRXyVkHr.container.find(".sli-checkout-summary").toggle(_igvfcRXyVkHr.showSummary);
+    _igvfcRXyVkHr.container.find(".sli-ticket-summary").toggle(_igvfcRXyVkHr.showTickets);
+    _igvfcRXyVkHr.container.find(".sli-purchase-summary").toggle(_igvfcRXyVkHr.showPurchases);
+    _igvfcRXyVkHr.container.find("[data-ignite-field-id='SelectRecurringInterval']").hide();
+});
+
+_igvfcRXyVkHr.replaceCalculatedAmount = function() {
+    if (_igvfcRXyVkHr.getUrlParameter('oAmounts'))
+        _igvfcRXyVkHr.calculatedOneTime = atob(_igvfcRXyVkHr.getUrlParameter('oAmounts'));
+    if (_igvfcRXyVkHr.getUrlParameter('rAmounts'))
+        _igvfcRXyVkHr.calculatedRecurring = atob(_igvfcRXyVkHr.getUrlParameter('rAmounts'));
+
+    var oneTimeContainer = _igvfcRXyVkHr.container.find("[data-ignite-onetime-amount]")[0];
+    var recurringContainer = _igvfcRXyVkHr.container.find("[data-ignite-recurring-amount]")[0];
+    var calculatedOneTime = null;
+    if (_igvfcRXyVkHr.calculatedOneTime)
+        calculatedOneTime = JSON.parse(_igvfcRXyVkHr.calculatedOneTime);
+    var calculatedRecurring = null;
+    if (_igvfcRXyVkHr.calculatedRecurring)
+        calculatedRecurring = JSON.parse(_igvfcRXyVkHr.calculatedRecurring);
+
+    if (oneTimeContainer && calculatedOneTime) {
+        applyDynamicAmounts(oneTimeContainer, calculatedOneTime, true, (_igvfcRXyVkHr.allowCustomOneTime && _igvfcRXyVkHr.allowCustomOneTime === 'true'));
+    }
+
+    if (recurringContainer && calculatedRecurring) {
+        applyDynamicAmounts(recurringContainer, calculatedRecurring, false, (_igvfcRXyVkHr.allowCustomRecurring && _igvfcRXyVkHr.allowCustomRecurring === 'true'));
+    }
+
+    if (_igvfcRXyVkHr.getUrlParameter('oSmart'))
+        _igvfcRXyVkHr.smartMetaOneTime = JSON.parse(atob(_igvfcRXyVkHr.getUrlParameter('oSmart')));
+    if (_igvfcRXyVkHr.getUrlParameter('rSmart'))
+        _igvfcRXyVkHr.smartMetaRecurring = JSON.parse(atob(_igvfcRXyVkHr.getUrlParameter('rSmart')));
+}
+;
+
+function applyDynamicAmounts(container, calculated, isOneTime, isAllowCustom) {
+    try {
+        var id = container.getAttribute('id');
+        var lis = document.getElementById(id).getElementsByTagName("li");
+        // don't count 'other' button as a part of static buttons
+        var countOfStaticButtons = lis ? lis.length - 1 : null;
+        if (countOfStaticButtons && countOfStaticButtons < calculated.length) {
+            // if count of static amounts is less than calculated dynamic ones
+            var ul = window.IGNITE.jquery(document.getElementById(id).getElementsByTagName("ul"));
+            var other = null;
+            if (ul) {
+                for (i = 0; i < calculated.length; i++) {
+                    if (lis[i]) {
+                        if (i !== lis.length - 1) {
+                            updateAmountButtonAttributes(lis[i], calculated[i], isOneTime);
+                            lis[i].style.display = 'block';
+                        } else {
+                            if (lis[i].getElementsByClassName(isOneTime === true ? 'sli-oneTimeCustomAmount' : 'sli-recurringCustomAmount')[0]) {
+                                other = lis[i];
+                                lis[i].remove();
+                                cloneAndAddAmountButton(ul, isOneTime, calculated[i]);
+                            }
+                        }
+                    } else {
+                        cloneAndAddAmountButton(ul, isOneTime, calculated[i]);
+                    }
+                }
+                if (isAllowCustom && other) {
+                    other.style.display = 'block';
+                    window.IGNITE.jquery(other).appendTo(ul);
+                }
+            }
+        } else {
+            // if count of static amounts is more or equal to the calculated dynamic ones
+            for (i = 0; i < lis.length; i++) {
+                if (calculated[i]) {
+                    updateAmountButtonAttributes(lis[i], calculated[i], isOneTime);
+                } else {
+                    var other = lis[i].getElementsByClassName(isOneTime === true ? 'sli-oneTimeCustomAmount' : 'sli-recurringCustomAmount')[0];
+                    if (!other || (isAllowCustom === false)) {
+                        lis[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
+;
+function updateAmountButtonAttributes(obj, value, isOneTime) {
+    var label = obj.getElementsByClassName(isOneTime === true ? 'sli-oneTimeAmountLabel' : 'sli-recurringAmountLabel')[0];
+    var radio = obj.getElementsByClassName(isOneTime === true ? 'sli-oneTimeAmountRadio' : 'sli-recurringAmountRadio')[0];
+    radio.checked = false;
+    var oldValue = radio.getAttribute('data-ignite-amount').replace(/.[0-9][0-9]$/, "");
+    var oldLabelId = label.getAttribute('id');
+    var newLabelId = oldLabelId.replace(oldValue + '_label', value + '_label');
+    if (oldLabelId !== newLabelId) {
+        copyStyles(oldLabelId, newLabelId);
+    }
+    var oldRadioId = radio.getAttribute('id');
+    var newRadioId = oldRadioId.replace('mt_' + oldValue, 'mt_' + value);
+    label.innerText = '$' + value;
+    label.setAttribute('id', newLabelId);
+    label.setAttribute('for', newRadioId);
+    radio.setAttribute('data-ignite-amount', value);
+    radio.setAttribute('id', newRadioId);
+}
+
+function copyStyles(fromId, forId) {
+    var SS = document.styleSheets;
+    var css = null;
+    for (var i = 0; i < SS.length; i++) {
+        try {
+            for (var j = 0; j < SS[i].cssRules.length; j++) {
+                if (SS[i].cssRules[j].selectorText == "#" + fromId) {
+                    result = SS[i].cssRules[j].style;
+                    styles = "#" + forId + " {";
+                    Array.from(result).forEach(function(key) {
+                        styles += key + ": " + result.getPropertyValue(key) + ";"
+                    });
+                    css = document.createElement('style');
+                    css.type = 'text/css';
+
+                    if (css.styleSheet) {
+                        css.styleSheet.cssText = styles;
+                    } else {
+                        css.appendChild(document.createTextNode(styles));
+                    }
+                }
+            }
+        } catch (e) {
+            console.debug(e)
+        }
+    }
+    if (css != null) {
+        document.getElementsByTagName("head")[0].appendChild(css);
+    }
+}
+
+function cloneAndAddAmountButton(ul, isOneTime, calculated) {
+    var first = ul.find('li:first');
+    if (first) {
+        var cloned = first.clone(true);
+        if (cloned && cloned[0]) {
+            updateAmountButtonAttributes(cloned[0], calculated, isOneTime);
+            cloned[0].style.display = 'block';
+            cloned.appendTo(ul);
+        }
+    }
+}
+;
+_igvfcRXyVkHr.setupCCValidation = function(allowedCCs) {
+    _igvfcRXyVkHr.container.find("input[name=card_number]").validateCreditCard(function(e) {
+
+        var cc = _igvfcRXyVkHr.container.find("input[name=card_number]");
+        var orig = cc.val();
+        var chk = orig.replace(/[^0-9]/g, '');
+        if (orig != chk) {
+            cc.val(chk);
+        }
+        if (e.card_type == null) {
+            _igvfcRXyVkHr.container.find(".sli-cards li").removeClass("off");
+            cc.removeClass("valid");
+            _igvfcRXyVkHr.cardType = '';
+            _igvfcRXyVkHr.updateSummaryTotal();
+            //return;
+        }
+        _igvfcRXyVkHr.container.find(".sli-cards li").addClass("off");
+        if (e.card_type) {
+            _igvfcRXyVkHr.container.find(".sli-cards .sli-" + e.card_type.name).removeClass("off");
+            _igvfcRXyVkHr.cardType = e.card_type.name;
+        }
+        if (e.length_valid && e.luhn_valid) {
+            _igvfcRXyVkHr.cardValid = true;
+        } else {
+            _igvfcRXyVkHr.cardValid = false;
+        }
+        var found = false;
+        for (var i = 0; i < allowedCCs.length; i++) {
+            if (e.card_type && e.card_type.name === allowedCCs[i]) {
+                found = true;
+            }
+        }
+
+        if (e.length_valid && e.luhn_valid) {
+            cc.addClass("valid");
+            _igvfcRXyVkHr.updateSummaryTotal();
+            _igvfcRXyVkHr.tokenizeCreditCard(cc.val(), 'CREDIT_CARD');
+            return true;
+        } else {
+            cc.removeClass("valid");
+            return false;
+        }
+    }, {
+        accept: allowedCCs
+    });
+
+    for (var i = 0; i < allowedCCs.length; i++) {
+        _igvfcRXyVkHr.container.find(".sli-" + allowedCCs[i]).show();
+    }
+}
+;
+
+_igvfcRXyVkHr.addInit(function initFundSelection() {
+    if (_igvfcRXyVkHr.fundSelection) {
+        var fundSelection = _igvfcRXyVkHr.fundSelection;
+        var select = window.IGNITE.jquery('#fund-selection-list');
+        var label = window.IGNITE.jquery('label[for=fund-selection-list]');
+
+        if (fundSelection.funds && fundSelection.funds.length) {
+            select.on('change', function() {
+                _igvfcRXyVkHr.selectedFundraiseFund = select.val();
+            });
+
+            if (fundSelection.label) {
+                label.html(fundSelection.label);
+            }
+
+            var option = null;
+            var fund = null;
+            for (i in fundSelection.funds) {
+                fund = fundSelection.funds[i];
+                option = window.IGNITE.jquery(document.createElement('option'));
+
+                option.val(fund.id);
+                option.text(fund.publicName);
+
+                select.append(option);
+
+                if (fund.selected) {
+                    select.val(fund.id);
+                }
+            }
+
+            _igvfcRXyVkHr.selectedFundraiseFund = select.val();
+            select.parent().removeClass('sli-hide');
+        }
+    }
+});
+
+_igvfcRXyVkHr.addValidation(function validateCardType(data) {
+    // data.field     ---> The field name
+    // data.validator ---> The validator name
+    // data.fv        ---> The plugin instance
+    // -- values from formvalidation.io plugin
+
+    if (data.field === 'card_number' && data.validator === 'creditCard' && !_igvfcRXyVkHr.cardValid) {
+        data.fv.updateStatus('card_number', data.fv.STATUS_INVALID, 'creditCard');
+    }
+});
+
+_igvfcRXyVkHr.addPostInit(function postInit() {
+    var form = window.IGNITE.jquery('#form_igvfcRXyVkHr');
+    var fv = form.data('formValidation');
+    if (fv && fv.options && fv.options.fields) {
+        var customFieldNames = ['customOneTime', 'customRecurringAmount', 'customMonthlyRecurringAmount', 'customQuarterlyRecurringAmount', 'customYearlyRecurringAmount', ];
+        customFieldNames.forEach(function(customFieldName) {
+            if (fv.options.fields[customFieldName]) {
+                fv.enableFieldValidators(customFieldName, false);
+            }
+        });
+    }
+});
+
+_igvfcRXyVkHr.addPostInit(function initThermometer() {
+    if (_igvfcRXyVkHr.activityType === 'FUNDRAISE' || _igvfcRXyVkHr.activityType === 'TICKETED_EVENT') {
+        var thermometer = _igvfcRXyVkHr.container.find(".sli-thermometer");
+        if (thermometer && thermometer.length > 0) {
+            _igvfcRXyVkHr.initThermometer(thermometer, _igvfcRXyVkHr.donat, _igvfcRXyVkHr.donatAmountRaisedUrl);
+        }
+    }
+});
+
+_igvfcRXyVkHr.addPostInit(function replaceAmounts() {
+    _igvfcRXyVkHr.replaceCalculatedAmount();
+
+    if (_igvfcRXyVkHr.getUrlParameter('oIndex'))
+        _igvfcRXyVkHr.preSelectedOneTimeAmountIndex = atob(_igvfcRXyVkHr.getUrlParameter('oIndex'));
+    if (_igvfcRXyVkHr.getUrlParameter('rIndex'))
+        _igvfcRXyVkHr.preSelectedRecurringIndex = atob(_igvfcRXyVkHr.getUrlParameter('rIndex'));
+
+    if (_igvfcRXyVkHr.preSelectedOneTimeAmountIndex) {
+        var radioButtons = window.IGNITE.jquery('input[name=donationAmtToggle]', '#form_igvfcRXyVkHr');
+        if (radioButtons) {
+            var selected = window.IGNITE.jquery(radioButtons[+_igvfcRXyVkHr.preSelectedOneTimeAmountIndex]);
+            if (selected && selected.attr('data-ignite-amount')) {
+                _igvfcRXyVkHr.setAmounts(radioButtons, false, parseFloat(selected.attr('data-ignite-amount')));
+                _igvfcRXyVkHr.data['oneTimeAmount'].value = Number(selected.attr('data-ignite-amount'));
+            }
+        }
+    }
+
+    var interval = _igvfcRXyVkHr.getSelectedRecurringInterval();
+    var selectedToggleName = _igvfcRXyVkHr.getToggleNameByInterval(interval);
+    _igvfcRXyVkHr.setRecurringPreSelected('donationAmtToggle2', _igvfcRXyVkHr.preSelectedRecurringIndex, selectedToggleName);
+    _igvfcRXyVkHr.setRecurringPreSelected('donationAmtToggleMonthly', _igvfcRXyVkHr.preSelectedRecurringMonthlyIndex, selectedToggleName);
+    _igvfcRXyVkHr.setRecurringPreSelected('donationAmtToggleQuarterly', _igvfcRXyVkHr.preSelectedRecurringQuarterlyIndex, selectedToggleName);
+    _igvfcRXyVkHr.setRecurringPreSelected('donationAmtToggleYearly', _igvfcRXyVkHr.preSelectedRecurringYearlyIndex, selectedToggleName);
+
+});
+
+_igvfcRXyVkHr.setRecurringPreSelected = function(toggle, preSelectedIndex, selectedToggle) {
+    if (preSelectedIndex) {
+        var radioButtons = window.IGNITE.jquery('input[name=' + toggle + ']', '#form_igvfcRXyVkHr');
+        if (radioButtons) {
+            var selected = window.IGNITE.jquery(radioButtons[+preSelectedIndex]);
+            if (selected && selected.attr('data-ignite-amount')) {
+                _igvfcRXyVkHr.setAmounts(radioButtons, true, parseFloat(selected.attr('data-ignite-amount')));
+                if (toggle === selectedToggle) {
+                    _igvfcRXyVkHr.data['recurringAmount'].value = Number(selected.attr('data-ignite-amount'));
+                }
+            }
+        }
+    }
+}
+
+_igvfcRXyVkHr.initThermometer = function(thermometer, thermObject, reqUrl) {
+    if (thermObject && thermObject.goal > 0 && !(thermObject.is_event_level && _igvfcRXyVkHr.p2p && (_igvfcRXyVkHr.p2p.teamUrl || _igvfcRXyVkHr.p2p && _igvfcRXyVkHr.p2p.personalUrl))) {
+        var orientation = thermObject.thermometer_orientation;
+        var color = thermObject.thermometer_color;
+        var style = thermObject.thermometer_style;
+        var size = thermObject.thermometer_size;
+        var decoration = thermObject.thermometer_decoration;
+        var borderRadius = thermObject.thermometer_borderRadius;
+        thermometer.append("<div class='sli-thermometer-text'></div>");
+        thermometer.append("<div class='sli-thermometer-wrapper sli-thermometer-" + orientation + " sli-thermometer-style-" + style + " sli-thermometer-size-" + size + " sli-thermometer-decoration-" + decoration + " sli-thermometer-borderRadius-" + borderRadius + "'><span class='sli-thermometer-glass'><span class='sli-thermometer-amount'></span></span><div class='sli-thermometer-amount-label'></div><div class='sli-thermometer-bulb'><span class='sli-thermometer-circle'></span></div></div>");
+        thermometer.append("<style class='sli-thermometer-style-block' type='text/css'>" + thermObject.thermometer_cssBlock + "</style>");
+
+        if (thermObject.is_event_level) {
+            _igvfcRXyVkHr.getThermometerData(thermObject, reqUrl);
+        }
+        thermometer.show();
+    } else {
+        thermometer.hide();
+    }
+}
+;
+
+_igvfcRXyVkHr.getThermometerData = function(thermObject, reqUrl) {
+    if (reqUrl) {
+        window.IGNITE.jquery.ajax({
+            url: reqUrl,
+            type: "GET",
+            dataType: 'json',
+            success: function(msg) {
+                if (msg.payload && msg.payload.amountRaised >= 0) {
+                    _igvfcRXyVkHr.updateThermometer(thermObject.goal, parseFloat(msg.payload.amountRaised), thermObject);
+                } else {
+                    _igvfcRXyVkHr.updateThermometer(thermObject.goal, 0.0, thermObject);
+                }
+            },
+            error: function(result) {
+                console.log("Failed to update thermometer", result, thermObject);
+            }
+        });
+    }
+}
+;
+
+_igvfcRXyVkHr.updateThermometer = function(goal, amount, thermObject) {
+    var thermometer = _igvfcRXyVkHr.container.find(".sli-thermometer");
+    var amountText = thermometer.find(".sli-thermometer-text");
+    var percentText = thermometer.find(".sli-thermometer-amount-label")
+
+    if (!goal || goal === 0) {
+        thermometer.hide();
+        return;
+    }
+
+    if (thermObject.startAmount) {
+        amount += thermObject.startAmount;
+    }
+
+    // calculate percentage
+    var pct = amount / goal * 100;
+    var displayString = pct.toFixed(0) + '%';
+    if (pct > 100)
+        pct = 100;
+    var cssString = pct.toFixed(0) + '%';
+
+    if (thermObject.thermometer_cssBlock) {
+        _igvfcRXyVkHr.container.find("style.sli-thermometer-style-block").replaceWith("<style class='sli-thermometer-style-block' type='text/css'>" + thermObject.thermometer_cssBlock.replace(/xxAmountxx/g, cssString) + "</style>");
+    }
+    // add text
+    percentText.text(displayString);
+    amountText.text("$" + _igvfcRXyVkHr.numberWithCommas(parseFloat(amount).toFixed(2)) + " of $" + _igvfcRXyVkHr.numberWithCommas(parseFloat(goal).toFixed(2)));
+    console.log("updated goal: " + goal.toFixed(2) + " and amount: " + amount.toFixed(2));
+}
+;
+
+_igvfcRXyVkHr.ccToken = null;
+_igvfcRXyVkHr.achToken = null;
+_igvfcRXyVkHr.ccTokenAcquired = false;
+_igvfcRXyVkHr.tokenizeCreditCard = function(ccNum, paymentType) {
+    if (_igvfcRXyVkHr.paymentType != paymentType || ccNum == "")
+        return;
+    if (!(typeof _igvfcRXyVkHr.ccTokenizerURL === "undefined")) {
+        _igvfcRXyVkHr.ccTokenAcquired = false;
+        request = window.IGNITE.jquery.ajax({
+            url: _igvfcRXyVkHr.ccTokenizerURL + ccNum,
+            jsonp: 'processToken',
+            async: false,
+            dataType: 'jsonp'
+        });
+        request.fail(function(jqXHR, textStatus, errorThrown) {
+            _igvfcRXyVkHr.addValidationMsg('An error has occurred while trying to process the credit card. Please check the card number and try again.');
+        });
+    } else {
+        _igvfcRXyVkHr.ccTokenAcquired = true;
+    }
+}
+;
+
+function processToken(json) {
+    if ('CE' === json.action) {
+        _igvfcRXyVkHr.ccTokenAcquired = true;
+        if (_igvfcRXyVkHr.paymentType == "CREDIT_CARD") {
+            _igvfcRXyVkHr.ccToken = json.data;
+        } else {
+            _igvfcRXyVkHr.achToken = json.data;
+        }
+    } else {
+        _igvfcRXyVkHr.addValidationMsg('An error has occurred while trying to process the credit card. Please check the card number and try again.');
+    }
+}
+;
+_igvfcRXyVkHr.buildMsg = function(noSerialize) {
+    _igvfcRXyVkHr.populateWidgetUrlParams();
+    var dedicationTyp = null;
+    if (!(typeof _igvfcRXyVkHr.data['selectedDedicationType'] === "undefined")) {
+        dedicationTyp = _igvfcRXyVkHr.data['selectedDedicationType'].value;
+    }
+
+    var dtdStatus = window.IGNITE.jquery('input[name=doublethedonation_status]').val() || null;
+    var dtdEnteredText = window.IGNITE.jquery('input[name=doublethedonation_entered_text]').val() || null;
+    var dtdCompanyId = window.IGNITE.jquery('input[name=doublethedonation_company_id]').val() || null;
+    var dtdCompanyName = window.IGNITE.jquery('input[name=doublethedonation_company_name]').val() || null;
+    var smartAmountsMeta = _igvfcRXyVkHr.smartMetaOneTime;
+
+    var msg = {
+        header: {},
+        payload: {
+            subscriptionData: {
+                userInteractionId: _igvfcRXyVkHr.userInteractionId,
+                pid: _igvfcRXyVkHr.pid,
+                oid: _igvfcRXyVkHr.oid,
+                aid: _igvfcRXyVkHr.aid,
+                cid: _igvfcRXyVkHr.cid,
+                eid: _igvfcRXyVkHr.getUrlParam("eId", _igvfcRXyVkHr.eid),
+                eType: _igvfcRXyVkHr.getUrlParam("eType", _igvfcRXyVkHr.eType),
+                data: _igvfcRXyVkHr.data,
+                contentChannels: _igvfcRXyVkHr.contentChannels,
+                contactMethods: _igvfcRXyVkHr.contactMethods,
+                mailingLists: _igvfcRXyVkHr.minifyMailingLists(_igvfcRXyVkHr.mailingLists),
+                urlMailingLists: _igvfcRXyVkHr.urlMailingLists + _igvfcRXyVkHr.getUrlParam("sl_gr", ''),
+                salsaTrack: _igvfcRXyVkHr.stc,
+                activityId: _igvfcRXyVkHr.activityId,
+                siftSession: '_igvfcRXyVkHr'
+            },
+            paymentConfigId: _igvfcRXyVkHr.payCfgId,
+            amountInfo: {
+                amountValue: _igvfcRXyVkHr.getOnetimeDonation() + (_igvfcRXyVkHr.payFees ? _igvfcRXyVkHr.transactionFees : 0)
+            },
+            fees: _igvfcRXyVkHr.payFees ? _igvfcRXyVkHr.transactionFees : 0.0,
+            transactionType: 'SALE',
+            additionalDonationInfo: {
+                designation: _igvfcRXyVkHr.container.find('select[name="designation"]').val(),
+                dedicationType: dedicationTyp,
+                dedication: _igvfcRXyVkHr.container.find('input[name="dedication"]').val(),
+                notify: _igvfcRXyVkHr.container.find('input[name="field-donationsummary-notify"]').val(),
+                displayName: _igvfcRXyVkHr.container.find('input[name="field-donationsummary-displayname"]').val(),
+                formName: _igvfcRXyVkHr.formName,
+                orgName: _igvfcRXyVkHr.orgName,
+                fundraiseFund: _igvfcRXyVkHr.selectedFundraiseFund
+            },
+            gatewayData: {
+                Email: _igvfcRXyVkHr.data['PersonContact@Email@Value'].value
+            },
+            cnn: _igvfcRXyVkHr.cnn,
+            formType: 'FUNDRAISING',
+            siftSession: '_igvfcRXyVkHr',
+            doubleTheDonationStatus: dtdStatus,
+            doubleTheDonationEnteredText: dtdEnteredText,
+            doubleTheDonationCompanyId: dtdCompanyId,
+            doubleTheDonationCompanyName: dtdCompanyName
+        }
+    };
+    if (_igvfcRXyVkHr.paymentType == 'ACH') {
+        msg.payload.paymentMethod = 'ACH';
+        if (_igvfcRXyVkHr.paymentProcessor == 'WE_PAY') {
+            msg.payload.echeckInfo = {
+                ccToken: _igvfcRXyVkHr.wepayBankInfo.bank_account_id,
+                accountNumber: new Array(5).join('*') + _igvfcRXyVkHr.wepayBankInfo.bank_account_last_four
+            };
+        } else {
+            msg.payload.echeckInfo = {
+                ccToken: _igvfcRXyVkHr.achToken,
+                accountNumber: _igvfcRXyVkHr.container.find('input[name="bank_account"]').val(),
+                routingNumber: _igvfcRXyVkHr.container.find('input[name="bank_routing"]').val(),
+                holderName: _igvfcRXyVkHr.container.find('input[name="holder_name"]').val()
+            };
+            if (_igvfcRXyVkHr.achToken && _igvfcRXyVkHr.achToken.length > 0) {
+                var cc = msg.payload.echeckInfo.accountNumber;
+                msg.payload.echeckInfo.accountNumber = new Array(cc.length - 3).join('*') + cc.substr(-4);
+            }
+        }
+    } else if (_igvfcRXyVkHr.paymentType == 'CREDIT_CARD') {
+        msg.payload.paymentMethod = 'CREDIT_CARD';
+        msg.payload.creditCardInfo = {
+            ccToken: _igvfcRXyVkHr.ccToken,
+            cardType: _igvfcRXyVkHr.cardType,
+            cardNumber: _igvfcRXyVkHr.container.find('input[name="card_number"]').val(),
+            expMonth: _igvfcRXyVkHr.container.find('select[name="expiry_month"]').val(),
+            expYear: _igvfcRXyVkHr.container.find('select[name="expiry_year"]').val(),
+            cvv2: _igvfcRXyVkHr.container.find('input[name="cvv"]').val(),
+            nameOnCard: _igvfcRXyVkHr.container.find('input[name="name_on_card"]').val(),
+            zipCode: _igvfcRXyVkHr.data['Address@Home@Zip'].value,
+            country: (_igvfcRXyVkHr.data['Address@Home@Country'] ? _igvfcRXyVkHr.data['Address@Home@Country'].value : '')
+        };
+        if (_igvfcRXyVkHr.ccToken && _igvfcRXyVkHr.ccToken.length > 0) {
+            var cc = msg.payload.creditCardInfo.cardNumber;
+            msg.payload.creditCardInfo.cardNumber = new Array(cc.length - 3).join('*') + cc.substr(-4);
+            msg.payload.creditCardInfo.bin = cc.substr(0, 6);
+        }
+    } else {
+        msg.payload.paymentMethod = 'PAYPAL';
+        msg.payload.paypalPaymentId = _igvfcRXyVkHr.paypalPaymentId;
+        msg.payload.paypalPayerId = _igvfcRXyVkHr.paypalPayerId;
+        msg.payload.paypalPaymentToken = _igvfcRXyVkHr.paypalPaymentToken;
+    }
+    if (_igvfcRXyVkHr.data['enableRecuring'].value === true) {
+        msg.payload.recurrenceInfo = {};
+        msg.payload.recurrenceInfo.frequency = _igvfcRXyVkHr.data['frequency'].value;
+        msg.payload.recurrenceInfo.amountInfo = {};
+        msg.payload.recurrenceInfo.amountInfo.amountValue = _igvfcRXyVkHr.data['recurringAmount'].value + (_igvfcRXyVkHr.payFees ? _igvfcRXyVkHr.transactionFees : 0);
+        msg.payload.amountInfo.amountValue = '';
+        smartAmountsMeta = _igvfcRXyVkHr.smartMetaRecurring;
+    }
+    msg.payload.rawForm = _igvfcRXyVkHr.serializeFormInputs(_igvfcRXyVkHr.form);
+    msg.payload.smartAmountsMeta = smartAmountsMeta;
+
+    if (!noSerialize) {
+        var serializedData = JSON.stringify(msg);
+        return serializedData;
+    } else {
+        return msg;
+    }
+}
+;
+
+_igvfcRXyVkHr.updateAmount = function(value, type) {
+    if (value) {
+        value = Number(value.replace(',', ''));
+        var customName = _igvfcRXyVkHr.getCustomNames(type);
+        var dataType = 'oneTimeAmount' === type ? 'oneTimeAmount' : 'recurringAmount';
+        var custom = _igvfcRXyVkHr.container.find('input[name=' + customName.input + ']')[0];
+        var customRadio = _igvfcRXyVkHr.container.find("input[name='" + customName.radio + "']")[0];
+        if (custom && custom.value) {
+            custom.value = value;
+            if (customRadio) {
+                customRadio.checked = true;
+            }
+        }
+        _igvfcRXyVkHr.data[dataType].value = value;
+        _igvfcRXyVkHr.updateSummaryTotal();
+    }
+}
+;
+
+_igvfcRXyVkHr.updateFees = function(amount) {
+    if (amount) {
+        var msg = {
+            gatewayConfigId: _igvfcRXyVkHr.payCfgId,
+            organizationId: _igvfcRXyVkHr.oid,
+            amount: amount,
+            cardType: (_igvfcRXyVkHr.cardType == '' ? 'AMEX' : _igvfcRXyVkHr.cardType),
+            paymentMethod: _igvfcRXyVkHr.paymentType,
+            formType: _igvfcRXyVkHr.formType
+        };
+        request = window.IGNITE.jquery.ajax({
+            url: _igvfcRXyVkHr.feeUrl,
+            type: "post",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(msg),
+            dataType: 'json',
+            success: function(result) {
+                _igvfcRXyVkHr.transactionFees = Number(result.fees);
+            },
+            error: function(result) {
+                _igvfcRXyVkHr.transactionFees = 0.0;
+            }
+        });
+    } else {
+        _igvfcRXyVkHr.transactionFees = 0.0;
+    }
+    return _igvfcRXyVkHr.transactionFees;
+}
+;
+
+_igvfcRXyVkHr.getOnetimeDonation = function() {
+    var amt = _igvfcRXyVkHr.data['oneTimeAmount'].value;
+    if (!amt) {
+        amt = 0;
+    }
+    return Number(amt);
+}
+;
+
+_igvfcRXyVkHr.getCurrentDonationAmountValue = function() {
+    var donationAmount = '';
+    var checkedOneTimeAmount = '';
+    var customOneTimeAmount = '';
+    var checkedRecurringAmount = '';
+    var customRecurringAmount = '';
+    var checkedOneTimeAmountElement = _igvfcRXyVkHr.container.find('input[name="donationAmtToggle"]:checked');
+    var inputCustomOneTimeAmountElement = _igvfcRXyVkHr.container.find('input[name="customOneTime"]');
+    var interval = _igvfcRXyVkHr.getSelectedRecurringInterval();
+    var toggleName = _igvfcRXyVkHr.getToggleNameByInterval(interval);
+    var customInputName = _igvfcRXyVkHr.getCustomNames(toggleName).input;
+    var checkedRecurringAmountElement = _igvfcRXyVkHr.container.find('input[name="' + toggleName + '"]:checked');
+    var inputCustomRecurringAmountElement = _igvfcRXyVkHr.container.find('input[name="' + customInputName + '"]');
+    // one time amount
+    if (checkedOneTimeAmountElement.length > 0) {
+        checkedOneTimeAmount = checkedOneTimeAmountElement.attr('data-ignite-amount') || '';
+    }
+    if (inputCustomOneTimeAmountElement.length > 0) {
+        customOneTimeAmount = inputCustomOneTimeAmountElement.val() || '';
+    }
+    // recurring amount
+    if (checkedRecurringAmountElement) {
+        checkedRecurringAmount = checkedRecurringAmountElement.attr('data-ignite-amount') || '';
+    }
+    if (inputCustomRecurringAmountElement) {
+        customRecurringAmount = inputCustomRecurringAmountElement.val() || '';
+    }
+    donationAmount = checkedOneTimeAmount || customOneTimeAmount;
+    if (_igvfcRXyVkHr.data.enableRecuring.value === true) {
+        donationAmount = checkedRecurringAmount || customRecurringAmount;
+    }
+    return parseFloat(donationAmount);
+}
+
+_igvfcRXyVkHr.updateDonationLine = function() {
+    var amt = _igvfcRXyVkHr.getCurrentDonationAmountValue();
+    if (!amt || _igvfcRXyVkHr.paymentType === 'COMP') {
+        amt = 0.0;
+    }
+    if (amt === 0.0) {
+        _igvfcRXyVkHr.container.find(".sli-donation-summary").hide();
+    } else {
+        _igvfcRXyVkHr.container.find(".sli-donation-summary").show();
+    }
+    amt = Number(amt);
+    _igvfcRXyVkHr.container.find(".sli-donation-summary > td").text("$" + amt.toFixed(2));
+    return amt;
+}
+;
+
+_igvfcRXyVkHr.updateTicketLine = function() {
+    var amt = 0.0;
+    if (typeof _igvfcRXyVkHr.getTicketTotal == 'function') {
+        amt = _igvfcRXyVkHr.getTicketTotal();
+    } else {
+        _igvfcRXyVkHr.container.find(".sli-ticket-summary").hide();
+    }
+    amt = Number(amt);
+    _igvfcRXyVkHr.container.find(".sli-ticket-summary > td").text("$" + amt.toFixed(2));
+    return amt;
+}
+;
+
+_igvfcRXyVkHr.updatePurchaseLine = function() {
+    var amt = 0.0;
+    if (typeof _igvfcRXyVkHr.getPurchaseTotal == 'function') {
+        amt = _igvfcRXyVkHr.getPurchaseTotal();
+    } else {
+        _igvfcRXyVkHr.container.find(".sli-purchase-summary").hide();
+    }
+    amt = Number(amt);
+    _igvfcRXyVkHr.container.find(".sli-purchase-summary > td").text("$" + amt.toFixed(2));
+    return amt;
+}
+;
+
+_igvfcRXyVkHr.updateSummary = function(summary, donationAmount) {}
+;
+
+_igvfcRXyVkHr.updateSummaryTotal = function() {
+    var donationAmt = _igvfcRXyVkHr.updateDonationLine();
+    var ticketAmt = _igvfcRXyVkHr.updateTicketLine();
+    var purchaseAmt = _igvfcRXyVkHr.updatePurchaseLine();
+    var fees = _igvfcRXyVkHr.updateFees(donationAmt + ticketAmt + purchaseAmt);
+    if (!_igvfcRXyVkHr.payFees) {
+        fees = 0.0;
+    }
+    var feeStr = (0 === fees) ? "NONE" : "$" + fees.toFixed(2);
+    var totalStr = (0 === (donationAmt + ticketAmt + purchaseAmt + fees)) ? "No Charge" : "$" + (donationAmt + ticketAmt + purchaseAmt + fees).toFixed(2);
+    _igvfcRXyVkHr.container.find(".sli-fee-summary > td").text(feeStr);
+    _igvfcRXyVkHr.container.find(".sli-summary-total > td").text(totalStr);
+    _igvfcRXyVkHr.updateSummary(_igvfcRXyVkHr.container.find("[ignite-ticket-summary]"), donationAmt, true, fees);
+
+}
+;
+
+_igvfcRXyVkHr.addPostInit(function handleRecurringToggle() {
+    window.IGNITE.jquery('input[name=makeRecurring]', '#form_igvfcRXyVkHr').change(function() {
+        window.setTimeout(function() {
+            _igvfcRXyVkHr.updateSummaryTotal();
+        });
+    });
+});
+
+_igvfcRXyVkHr.toggleFees = function() {
+    if (!_igvfcRXyVkHr.alwaysShowSummary) {
+        _igvfcRXyVkHr.container.find(".sli-checkout-summary").toggle();
+    }
+    _igvfcRXyVkHr.container.find(".sli-fee-summary").toggle();
+    _igvfcRXyVkHr.payFees = !_igvfcRXyVkHr.payFees;
+    _igvfcRXyVkHr.updateSummaryTotal();
+}
+;
+
+_igvfcRXyVkHr.gwDetails = "https://donate.salsalabs.org/api/transactions/gateway/";
+_igvfcRXyVkHr.payPalSetupURL = "https://donate.salsalabs.org/api/transactions/paypalPaymentSetup";
+_igvfcRXyVkHr.url = "https://donate.salsalabs.org/api/transactions";
+_igvfcRXyVkHr.feeUrl = "https://donate.salsalabs.org/api/transactions/fees";
+_igvfcRXyVkHr.paymentType = "CREDIT_CARD";
+
+_igvfcRXyVkHr.showHidePaymentType = function(radio) {
+
+    _igvfcRXyVkHr.container.find('[data-ignite-submit-button=data-ignite-submit-button]').show();
+    _igvfcRXyVkHr.container.find('[data-ignite-submit-button=pay-with-paypal]').hide();
+    _igvfcRXyVkHr.paymentType = radio.value;
+    if (radio.value == 'CREDIT_CARD') {
+        _igvfcRXyVkHr.container.find("div[data-ignite-cc]").show();
+        _igvfcRXyVkHr.container.find("div[data-ignite-echeck-wepay]").hide();
+        _igvfcRXyVkHr.container.find("div[data-ignite-echeck]").hide();
+    } else if (radio.value == 'ACH') {
+        _igvfcRXyVkHr.container.find("div[data-ignite-cc]").hide();
+        if (_igvfcRXyVkHr.paymentProcessor == "WE_PAY") {
+            _igvfcRXyVkHr.container.find("div[data-ignite-echeck-wepay]").show();
+        } else {
+            _igvfcRXyVkHr.container.find("div[data-ignite-echeck]").show();
+        }
+    } else {
+        _igvfcRXyVkHr.container.find("div[data-ignite-cc]").hide();
+        _igvfcRXyVkHr.container.find("div[data-ignite-echeck-wepay]").hide();
+        _igvfcRXyVkHr.container.find("div[data-ignite-echeck]").hide();
+        _igvfcRXyVkHr.setupForPayPal();
+        _igvfcRXyVkHr.container.find('[data-ignite-submit-button=data-ignite-submit-button]').hide();
+        _igvfcRXyVkHr.container.find('[data-ignite-submit-button=pay-with-paypal]').show();
+    }
+    _igvfcRXyVkHr.updateSummaryTotal();
+}
+;
+
+_igvfcRXyVkHr.addJS("https://static.wepay.com/js/tokenization.v2.js");
+
+_igvfcRXyVkHr.addWepayBank = function() {
+    if (_igvfcRXyVkHr.paymentProcessor == "WE_PAY") {
+        WePay.set_endpoint(_igvfcRXyVkHr.wepayProduction == true ? "production" : "stage");
+        // change this to "production" when live
+
+        var addEvent = function(e, v, f) {
+            if (!!window.attachEvent) {
+                e.attachEvent('on' + v, f);
+            } else {
+                e.addEventListener(v, f, false);
+            }
+        };
+        var popupId = _igvfcRXyVkHr.container.find("input[name=bank-popup").attr('id');
+        addEvent(document.getElementById(popupId), 'click', function() {
+            var email = _igvfcRXyVkHr.data['PersonContact@Email@Value'].value;
+            if (!email) {
+                _igvfcRXyVkHr.container.find(".sli-wepay-error").text("Please, specify Email Address value first");
+                _igvfcRXyVkHr.container.find(".sli-wepay-error").show();
+                window.IGNITE.jquery("#form_igvfcRXyVkHr").data('formValidation').updateStatus('PersonContact@Email@Value', 'NOT_VALIDATED').validateField('PersonContact@Email@Value');
+                return;
+            } else {
+                _igvfcRXyVkHr.container.find(".sli-wepay-error").hide();
+            }
+            _igvfcRXyVkHr.bankValidated = false;
+            response = WePay.bank_account.create({
+                'client_id': _igvfcRXyVkHr.wepayClientId,
+                // Your client_id goes here
+                'email': email
+            }, function(data) {
+                data = JSON.parse(data);
+                if (data.error) {
+                    _igvfcRXyVkHr.container.find(".sli-wepay-error").text(data.error_description);
+                    _igvfcRXyVkHr.container.find(".sli-wepay-error").show();
+                    _igvfcRXyVkHr.container.find("input[name=wepay_bank").val("");
+                    _igvfcRXyVkHr.wepayBankInfo = null;
+                } else {
+                    _igvfcRXyVkHr.container.find(".sli-wepay-error").hide();
+                    if (data.bank_account_id) {
+                        _igvfcRXyVkHr.container.find("input[name=wepay_bank]").val(data.bank_account_name + " " + data.bank_account_last_four);
+                        _igvfcRXyVkHr.wepayBankInfo = data;
+                    }
+                }
+            });
+        });
+    }
+}
+;
+
+_igvfcRXyVkHr.setupAltPayments = function() {
+    if (_igvfcRXyVkHr.paymentProcessor != "WE_PAY" && _igvfcRXyVkHr.allowECheck == true) {
+        _igvfcRXyVkHr.container.find(".sli-paymentType").show();
+        _igvfcRXyVkHr.container.find("[sli-payment-type=ACH]").show();
+    }
+    if (_igvfcRXyVkHr.allowPayPal == true) {
+        _igvfcRXyVkHr.container.find(".sli-paymentType").show();
+        _igvfcRXyVkHr.container.find("[sli-payment-type=PAYPAL]").show();
+    }
+}
+;
+
+_igvfcRXyVkHr.addValidation(function validateWepayBankAccount(data) {
+    if (_igvfcRXyVkHr.paymentProcessor == "WE_PAY" && _igvfcRXyVkHr.paymentType == 'ACH' && !_igvfcRXyVkHr.bankValidated) {
+        _igvfcRXyVkHr.bankValidated = true;
+        data.fv.updateStatus('wepay_bank', 'NOT_VALIDATED').validateField('wepay_bank');
+    }
+});
+
+_igvfcRXyVkHr.payPalSetup = false;
+_igvfcRXyVkHr.payPalActions = null;
+
+_igvfcRXyVkHr.validateForPayPal = function(event) {
+    if (_igvfcRXyVkHr.payPalActions != null) {
+        if (_igvfcRXyVkHr.isPreview) {
+            _igvfcRXyVkHr.payPalActions.disable();
+            return;
+        }
+        if (!_igvfcRXyVkHr.validateSubmitInputValues(window.IGNITE.jquery("#form_igvfcRXyVkHr"), event)) {
+            _igvfcRXyVkHr.payPalActions.disable();
+        } else {
+            _igvfcRXyVkHr.payPalActions.enable();
+        }
+    }
+}
+
+_igvfcRXyVkHr.setupForPayPal = function() {
+    if (!_igvfcRXyVkHr.payPalSetup) {
+        var btn = _igvfcRXyVkHr.container.find("[data-ignite-submit-button=data-ignite-submit-button]");
+        var id = Math.random();
+        btn.after("<div  data-ignite-submit-button='pay-with-paypal' data-paypal-control='" + id + "'></div>");
+        window.IGNITE.jquery.getScript("https://www.paypalobjects.com/api/checkout.js").done(function(script, textStatus) {
+            paypal.Button.render({
+                env: _igvfcRXyVkHr.payPalEnv,
+                // Or 'production'
+                validate: function(actions) {
+                    _igvfcRXyVkHr.payPalActions = actions;
+                },
+                style: {
+                    tagline: 'false',
+                    label: 'paypal',
+                    size: 'medium',
+                    // small | medium | large | responsive
+                    shape: 'rect',
+                    // pill | rect
+                    color: 'blue',
+                    // gold | blue | silver | black
+                    height: 45
+                },
+                commit: true,
+                payment: function(data, actions) {
+                    return actions.request.post(_igvfcRXyVkHr.payPalSetupURL, '', {
+                        json: _igvfcRXyVkHr.buildMsg(true)
+                    }).then(function(res) {
+                        return res.id;
+                    });
+                },
+                onAuthorize: function(data, actions) {
+                    _igvfcRXyVkHr.paypalPaymentId = data.paymentID;
+                    _igvfcRXyVkHr.paypalPayerId = data.payerID;
+                    _igvfcRXyVkHr.paypalPaymentToken = data.paymentToken;
+                    _igvfcRXyVkHr.asyncSubmit = false;
+                    _igvfcRXyVkHr.submitFunc();
+                }
+            }, '[data-paypal-control="' + id + '"]');
+            // we can't respond to the click event of the button due to it being iframed, so onmouse over with
+            // the iframe box is the best we can do
+            _igvfcRXyVkHr.container.find('[allowpaymentrequest=allowpaymentrequest]').mouseover(function(event) {
+                _igvfcRXyVkHr.validateForPayPal(event);
+            });
+
+            // _igvfcRXyVkHr.container.find('.xcomponent-outlet').mouseover(function(event){_igvfcRXyVkHr.validateForPayPal();});
+        });
+    }
+    _igvfcRXyVkHr.payPalSetup = true;
+}
+;
+
+// DoubleTheDonation
+_igvfcRXyVkHr.registerDTDDonation = function() {
+    if ((_igvfcRXyVkHr.activityType === 'FUNDRAISE' || _igvfcRXyVkHr.showDonationAmounts === true) && window.doublethedonation && window.IGNITE.jquery('#dd-container').length > 0) {
+        var donationAmount = _igvfcRXyVkHr.data.oneTimeAmount.value;
+        if (_igvfcRXyVkHr.data.enableRecuring.value == true) {
+            donationAmount = _igvfcRXyVkHr.data.recurringAmount.value
+        }
+
+        var dtdCompanyId = window.IGNITE.jquery('input[name=doublethedonation_company_id]').val() || null;
+        var dtdStatus = window.IGNITE.jquery('input[name=doublethedonation_status]').val() || null;
+        var dtdEnteredText = window.IGNITE.jquery('input[name=doublethedonation_entered_text]').val() || null;
+
+        // register donation in 360MatchPro
+        doublethedonation.integrations.core.register_donation({
+            "360matchpro_public_key": _igvfcRXyVkHr.dtdPublicKey,
+            "campaign": _igvfcRXyVkHr.formName,
+            "donation_identifier": _igvfcRXyVkHr.dtdDonationIdentifier,
+            "donation_amount": donationAmount,
+            "donor_first_name": _igvfcRXyVkHr.data["PersonCensus@FirstName"].value,
+            "donor_last_name": _igvfcRXyVkHr.data["PersonCensus@LastName"].value,
+            "donor_email": _igvfcRXyVkHr.data["PersonContact@Email@Value"].value,
+            "doublethedonation_company_id": dtdCompanyId,
+            "doublethedonation_status": dtdStatus,
+            "doublethedonation_entered_text": dtdEnteredText
+        });
+
+        // initialize DoubleTheDonation confirmation page plugin
+        var DDCONF = {
+            API_KEY: _igvfcRXyVkHr.dtdPublicKey,
+            COMPANY: dtdCompanyId
+        };
+        doublethedonation.plugin.load_config();
+        doublethedonation.plugin.set_donation_identifier(_igvfcRXyVkHr.dtdDonationIdentifier);
+        doublethedonation.plugin.set_donation_campaign(_igvfcRXyVkHr.formName);
+        if (dtdCompanyId) {
+            doublethedonation.plugin.set_company(dtdCompanyId);
+        } else {
+            var domain = doublethedonation.integrations.core.strip_domain(_igvfcRXyVkHr.data["PersonContact@Email@Value"].value);
+            doublethedonation.plugin.email_domain(domain);
+        }
+    }
+    ;
+}
+;
+
+_igvfcRXyVkHr.doubleTheDonationSubmissionHandler = function(data) {
+    _igvfcRXyVkHr.dtdDonationIdentifier = data.payload.donationIntentId;
+    _igvfcRXyVkHr.registerDTDDonation();
+}
+
+_igvfcRXyVkHr.showRecurringToggle = function(interval) {
+    interval = interval || _igvfcRXyVkHr.getSelectedRecurringInterval();
+    var toggleName = _igvfcRXyVkHr.getToggleNameByInterval(interval);
+    window.IGNITE.jquery('div[data-ignite-recurring-amount]', '#form_igvfcRXyVkHr').hide();
+
+    var toggleElement = window.IGNITE.jquery('div[data-ignite-recurring-amount=' + toggleName + ']', '#form_igvfcRXyVkHr');
+    var oldToggleElement = window.IGNITE.jquery('div[data-ignite-recurring-amount="data-ignite-recurring-amount"]', '#form_igvfcRXyVkHr');
+    if (toggleElement.length > 0) {
+        toggleElement.show();
+    } else {
+        oldToggleElement.show();
+    }
+
+}
+;
+_igvfcRXyVkHr.hideRecurringToggle = function() {
+    window.IGNITE.jquery('div[data-ignite-recurring-amount]', '#form_igvfcRXyVkHr').hide();
+}
+;
+_igvfcRXyVkHr.updateFrequencyData = function() {
+    var interval = _igvfcRXyVkHr.getSelectedRecurringInterval();
+    if (interval) {
+        _igvfcRXyVkHr.data['frequency'].value = interval;
+    }
+}
+
+_igvfcRXyVkHr.addSuccessFunction(_igvfcRXyVkHr.doubleTheDonationSubmissionHandler);
+
+_igvfcRXyVkHr.data = {};
+_igvfcRXyVkHr.isPreview = false;
+_igvfcRXyVkHr.isBindOnly = true;
+_igvfcRXyVkHr.orgInfo = {
+    "Organization@Organization Id": "2fdb9aa7-79a1-4074-8cc1-5b61c6c013af",
+    "Organization@BillingType": "Standard",
+    "Organization@Mailer Class": "IPPoolA",
+    "Organization@Email Blast Enabled": "true",
+    "Organization@Settings": "{\"ContactInfo\":{\"Addrline1\":\"5049 E Broadway Blvd\",\"Addrline2\":\"Suite 105\",\"City\":\"Tucson\",\"StateProvince\":{\"smallCode\":\"AZ\",\"bigCode\":\"US-AZ\",\"name\":\"Arizona\",\"country\":{\"alpha2\":\"US\",\"alpha3\":\"USA\",\"name\":\"United States\",\"isoNumeric\":\"840\",\"officialName\":\"United States of America\"},\"displayLabel\":\"AZ\",\"code\":\"AZ\"},\"PortalCode\":\"85711\",\"PhoneNumber\":\"520-293-3198\",\"EmailAddress\":\"support@darksky.org\",\"SocialContacts\":{}},\"assistLevel\":0,\"appSettings\":{\"emailUnsubscribeText\":\"We're sorry to see you go! And, we'd love you to reconsider. If you'd like to continue receiving our important messages about dark skies, you can re-join our network at any time.\",\"emailDefaultFromAddress\":\"support@darksky.org\",\"emailDefaultFromName\":\"International Dark-Sky Association\",\"emailDefaultReplyto\":\"support@darksky.org\"},\"rememberMeEnabled\":\"DefaultOn\",\"consentConfiguration\":{\"enabled\":false}}",
+    "Organization@CRM Op Id": "006A000000cFUxbIAG",
+    "Organization@CRM Id": "001A000001LDWCXIA5",
+    "Organization@Organization Status": "enabled",
+    "Organization@Status Reason": "signup",
+    "Organization@Classification": "external",
+    "Organization@CurrentProductType": "Fundraising Pro",
+    "Organization@TrialProductType": "Fundraising Pro",
+    "Organization@Donor Pro Flag": "true",
+    "Organization@DonorProURL": "https://darksky.crm.salsalabs.org",
+    "Organization@Allow Invoice": "false",
+    "Organization@Sales Assisted": "false",
+    "Organization@BillingId": "A00794910",
+    "Organization@DonorProId": "bb6b9d2f-d68f-11e8-8b34-0050568b5d30",
+    "Organization@Can Syndicate Content": "false",
+    "Organization@Public Syndication Organization": "false",
+    "Organization@Sift Science Flag": "false",
+    "Organization@High Priority Flag": "false",
+    "Organization@useCaptcha": "false",
+    "Organization@DefaultSubscriptionManagementPageId": "19d61a6e-9889-4f22-9ce8-98fcf9a39a88",
+    "Organization@Name": "International Dark-Sky Association",
+    "OrganizationDomain@Default@DomainType": "Default",
+    "OrganizationDomain@Default@Name": "org-2fdb9aa7-79a1-4074-8cc1-5b61c6c013af",
+    "OrganizationDomain@Vanity@DomainType": "Vanity",
+    "OrganizationDomain@Vanity@Name": "darksky",
+    "ContentChannel@ccbcea47-1aff-4031-8c78-122b0da00ea6@IdentityUuid": "ccbcea47-1aff-4031-8c78-122b0da00ea6",
+    "ContentChannel@ccbcea47-1aff-4031-8c78-122b0da00ea6@Status": "Disabled",
+    "ContentChannel@ccbcea47-1aff-4031-8c78-122b0da00ea6@Name": "Dark Sky Policies",
+    "ContentChannel@ccbcea47-1aff-4031-8c78-122b0da00ea6@Description": "Dark Sky Policies",
+    "ContentChannel@e83c85da-534e-4e3f-b412-f0614eccb9ba@IdentityUuid": "e83c85da-534e-4e3f-b412-f0614eccb9ba",
+    "ContentChannel@e83c85da-534e-4e3f-b412-f0614eccb9ba@Status": "Disabled",
+    "ContentChannel@e83c85da-534e-4e3f-b412-f0614eccb9ba@Name": "Success Stories",
+    "ContentChannel@e83c85da-534e-4e3f-b412-f0614eccb9ba@Description": "Success Stories",
+    "ContentChannel@4ef09047-5bf2-48ad-8cc2-eea242c84f4e@IdentityUuid": "4ef09047-5bf2-48ad-8cc2-eea242c84f4e",
+    "ContentChannel@4ef09047-5bf2-48ad-8cc2-eea242c84f4e@Status": "Disabled",
+    "ContentChannel@4ef09047-5bf2-48ad-8cc2-eea242c84f4e@Name": "International Dark Sky Places",
+    "ContentChannel@4ef09047-5bf2-48ad-8cc2-eea242c84f4e@Description": "International Dark Sky Places",
+    "ContentChannel@58e1ea9d-5599-4a96-b09a-86829576a7b9@IdentityUuid": "58e1ea9d-5599-4a96-b09a-86829576a7b9",
+    "ContentChannel@58e1ea9d-5599-4a96-b09a-86829576a7b9@Status": "Enabled",
+    "ContentChannel@58e1ea9d-5599-4a96-b09a-86829576a7b9@Name": "General",
+    "ContentChannel@58e1ea9d-5599-4a96-b09a-86829576a7b9@Description": "General -- communication that is about your organization and cause.",
+    "ContentChannel@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@IdentityUuid": "48d5db18-5d40-46ec-9cb4-09fbee5c95a0",
+    "ContentChannel@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@Status": "Disabled",
+    "ContentChannel@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@Name": "NIGHTWATCH Monthly Newsletter",
+    "ContentChannel@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@Description": "NIGHTWATCH Monthly Newsletter",
+    "ContentChannel@fdf64bac-7f4d-4360-8c93-d9e44bdc8286@IdentityUuid": "fdf64bac-7f4d-4360-8c93-d9e44bdc8286",
+    "ContentChannel@fdf64bac-7f4d-4360-8c93-d9e44bdc8286@Status": "Disabled",
+    "ContentChannel@fdf64bac-7f4d-4360-8c93-d9e44bdc8286@Name": "IDA Membership",
+    "ContentChannel@fdf64bac-7f4d-4360-8c93-d9e44bdc8286@Description": "IDA Membership",
+    "ContentChannel@682ab336-b280-4b2d-92f5-c02e654eda1b@IdentityUuid": "682ab336-b280-4b2d-92f5-c02e654eda1b",
+    "ContentChannel@682ab336-b280-4b2d-92f5-c02e654eda1b@Status": "Disabled",
+    "ContentChannel@682ab336-b280-4b2d-92f5-c02e654eda1b@Name": "Fundraising",
+    "ContentChannel@682ab336-b280-4b2d-92f5-c02e654eda1b@Description": "Fundraising",
+    "ContentChannel@8aacb64e-26bb-4c94-bf43-beb492dd957f@IdentityUuid": "8aacb64e-26bb-4c94-bf43-beb492dd957f",
+    "ContentChannel@8aacb64e-26bb-4c94-bf43-beb492dd957f@Status": "Disabled",
+    "ContentChannel@8aacb64e-26bb-4c94-bf43-beb492dd957f@Name": "Dark Sky Advocacy",
+    "ContentChannel@8aacb64e-26bb-4c94-bf43-beb492dd957f@Description": "Dark Sky Advocacy",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@ActivityType": "Fundraise",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@IdentityId": "54843cbd-1e7c-409d-8d26-7f4a3d94708c",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@FieldType": "Activity",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@ReferenceName": "fun_mgc_2019_card_choice",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@Name": "MGC 2019 Card Choice",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@Configuration": "{\"controlOrienation\":\"Vertical\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueOptions\":[{\"valueToStore\":\"\",\"labelToShow\":\"Yes, please\"},{\"valueToStore\":\"No, thank you\",\"labelToShow\":\"No, thank you\"}]}",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@Description": "Opportunity for supporter to opt in or out of Nordgren cards for MGC2019",
+    "OrganizationCustomField@54843cbd-1e7c-409d-8d26-7f4a3d94708c@ValueType": "Text",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@ActivityType": "Fundraise",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@IdentityId": "1f70ccfb-a895-42ee-8835-4920832b4b59",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@FieldType": "Activity",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@ReferenceName": "fun_match_2019_nordgren_cards_opt_out",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@Name": "Match 2019 Nordgren cards opt out",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@Configuration": "{\"controlOrienation\":\"Horizontal\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"true\",\"valueOptions\":[{\"valueToStore\":\"true\",\"labelToShow\":\"Yes\"},{\"valueToStore\":\"false\",\"labelToShow\":\"No\"}]}",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@Description": "Opportunity for supporters to opt out of receiving Nordgren cards for 2019 Matching Gift Campaign",
+    "OrganizationCustomField@1f70ccfb-a895-42ee-8835-4920832b4b59@ValueType": "Boolean",
+    "OrganizationCustomField@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@IdentityId": "05c5e3ec-3740-45fc-bebd-fb69c2461dbf",
+    "OrganizationCustomField@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@FieldType": "Person",
+    "OrganizationCustomField@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@ReferenceName": "scf_same_as_billing",
+    "OrganizationCustomField@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@Name": "Same as billing",
+    "OrganizationCustomField@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@Configuration": "{\"controlOrienation\":\"Vertical\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"true\",\"valueOptions\":[{\"valueToStore\":\"true\",\"labelToShow\":\"Yes\"},{\"valueToStore\":\"false\",\"labelToShow\":\"No\"}]}",
+    "OrganizationCustomField@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@ValueType": "Boolean",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@ActivityType": "Fundraise",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@IdentityId": "70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@FieldType": "Activity",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@ReferenceName": "fun_site_manager_governance_agency",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@Name": "Site Manager/Governance Agency",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@Configuration": "{\"minSize\":0.0,\"maxSize\":256.0,\"controlType\":\"Input\",\"ghostText\":\"Who will manage the site?\",\"defaultValue\":\"\",\"textRestriction\":\"AnyCharacter\",\"valueOptions\":[]}",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@Description": "The name of the person or agency that is in charge of managing the site.",
+    "OrganizationCustomField@70ebbd7e-ac2d-4f14-9f1d-a31ec01e1f36@ValueType": "Text",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@ActivityType": "Fundraise",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@IdentityId": "ff10c403-1129-4eec-82c6-d6cbde48198c",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@FieldType": "Activity",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@ReferenceName": "fun_mgc_2019_card_opt_out",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@Name": "MGC 2019 Card Opt out",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@Configuration": "{\"controlOrienation\":\"Vertical\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueOptions\":[{\"valueToStore\":\"\",\"labelToShow\":\"Opt In\"},{\"valueToStore\":\"Opt out\",\"labelToShow\":\"Opt out\"}]}",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@Description": "Opportunity​ for supporter to opt out of receiving Tyler Nordgren cards for Match 2019 Campaign",
+    "OrganizationCustomField@ff10c403-1129-4eec-82c6-d6cbde48198c@ValueType": "Text",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@ActivityType": "Fundraise",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@IdentityId": "3817a945-99e5-40e4-826a-c6fe1006bfc5",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@FieldType": "Activity",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@ReferenceName": "fun_idsp_certification_applying_for",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@Name": "IDSP Category Applying For",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@Configuration": "{\"controlOrienation\":\"Vertical\",\"controlType\":\"Select\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueOptions\":[{\"valueToStore\":\"\",\"labelToShow\":\"Choose one...\"},{\"valueToStore\":\"Park\",\"labelToShow\":\"Park\"},{\"valueToStore\":\"Reserve\",\"labelToShow\":\"Reserve\"},{\"valueToStore\":\"Sanctuary\",\"labelToShow\":\"Sanctuary\"},{\"valueToStore\":\"Community\",\"labelToShow\":\"Community\"},{\"valueToStore\":\"Urban Night Sky Place\",\"labelToShow\":\"Urban Night Sky Place\"},{\"valueToStore\":\"Not Sure\",\"labelToShow\":\"Not Sure\",\"hidden\":true}]}",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@Description": "Indicates which designation they are seeking.",
+    "OrganizationCustomField@3817a945-99e5-40e4-826a-c6fe1006bfc5@ValueType": "Text",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@ActivityType": "Fundraise",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@IdentityId": "a315e4b4-6cca-4843-adb8-c9ba0b38cb57",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@FieldType": "Activity",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@ReferenceName": "fun_membership_paper_opt_out",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@Name": "membership paper opt out",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@Configuration": "{\"controlOrienation\":\"Horizontal\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"false\",\"valueOptions\":[{\"valueToStore\":\"true\",\"labelToShow\":\"Yes\"},{\"valueToStore\":\"false\",\"labelToShow\":\"No\"}]}",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@Description": "Yes no checkbox for members to opt in or out of paper communications",
+    "OrganizationCustomField@a315e4b4-6cca-4843-adb8-c9ba0b38cb57@ValueType": "Boolean",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@IdentityId": "d1f35c01-6313-449e-b353-847a92c78da3",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@FieldType": "Person",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@ReferenceName": "scf_mailing_address",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@Name": "Mailing Address",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@Configuration": "{\"minSize\":0.0,\"maxSize\":2000.0,\"controlType\":\"TextArea\",\"ghostText\":\"\",\"defaultValue\":\"\",\"textRestriction\":\"AnyCharacter\",\"valueOptions\":[]}",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@Description": "mailing address",
+    "OrganizationCustomField@d1f35c01-6313-449e-b353-847a92c78da3@ValueType": "LargeText",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@ActivityType": "Fundraise",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@IdentityId": "386a0ac8-8d97-4c51-82f3-47a4ed0dff17",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@FieldType": "Activity",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@ReferenceName": "fun_2019_eoy_calendar",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@Name": "2019 EOY Calendar",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@Configuration": "{\"controlOrienation\":\"Horizontal\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"true\",\"valueOptions\":[{\"valueToStore\":\"true\",\"labelToShow\":\"Yes\"},{\"valueToStore\":\"false\",\"labelToShow\":\"No\"}]}",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@Description": "Opt in or out for 2019 EOY Calendar",
+    "OrganizationCustomField@386a0ac8-8d97-4c51-82f3-47a4ed0dff17@ValueType": "Boolean",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@IdentityId": "04c34541-bd9e-409a-be24-effc4edccb22",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@FieldType": "Person",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@ReferenceName": "scf_special_instructions_comments",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@Name": "Special Instructions / Comments",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@Configuration": "{\"minSize\":0.0,\"maxSize\":2000.0,\"controlType\":\"TextArea\",\"ghostText\":\"Is there anything we need to know regarding your payment?\",\"defaultValue\":\"\",\"textRestriction\":\"AnyCharacter\",\"valueOptions\":[]}",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@Description": "Special instructions and or comments for payment",
+    "OrganizationCustomField@04c34541-bd9e-409a-be24-effc4edccb22@ValueType": "LargeText",
+    "OrganizationCustomField@8bb7c33d-f4e7-42b8-a540-f94d45431a24@IdentityId": "8bb7c33d-f4e7-42b8-a540-f94d45431a24",
+    "OrganizationCustomField@8bb7c33d-f4e7-42b8-a540-f94d45431a24@FieldType": "Person",
+    "OrganizationCustomField@8bb7c33d-f4e7-42b8-a540-f94d45431a24@ReferenceName": "scf_order_print",
+    "OrganizationCustomField@8bb7c33d-f4e7-42b8-a540-f94d45431a24@Name": "Order print",
+    "OrganizationCustomField@8bb7c33d-f4e7-42b8-a540-f94d45431a24@Configuration": "{\"controlOrienation\":\"Horizontal\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"true\",\"valueOptions\":[{\"valueToStore\":\"true\",\"labelToShow\":\"Yes\"},{\"valueToStore\":\"false\",\"labelToShow\":\"No\"}]}",
+    "OrganizationCustomField@8bb7c33d-f4e7-42b8-a540-f94d45431a24@ValueType": "Boolean",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@ActivityType": "Fundraise",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@IdentityId": "98466643-5da9-46d8-9c07-eec396eb57e0",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@FieldType": "Activity",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@ReferenceName": "fun_member_paper_opt_out",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@Name": "Member paper opt out",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@Configuration": "{\"controlOrienation\":\"Vertical\",\"controlType\":\"Radio\",\"ghostText\":\"\",\"defaultValue\":\"I would like to receive paper communications\",\"valueOptions\":[{\"valueToStore\":\"I would like to receive paper communications\",\"labelToShow\":\"I would like to receive paper communications\"},{\"valueToStore\":\"Please opt me out of paper communications\",\"labelToShow\":\"Please opt me out of paper communications\"}]}",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@Description": "Member paper communications  opt out",
+    "OrganizationCustomField@98466643-5da9-46d8-9c07-eec396eb57e0@ValueType": "Text",
+    "OrganizationCustomField@07ad27a1-b610-49fb-a1d1-6c9ddf3036b0@IdentityId": "07ad27a1-b610-49fb-a1d1-6c9ddf3036b0",
+    "OrganizationCustomField@07ad27a1-b610-49fb-a1d1-6c9ddf3036b0@FieldType": "Person",
+    "OrganizationCustomField@07ad27a1-b610-49fb-a1d1-6c9ddf3036b0@ReferenceName": "scf_organization",
+    "OrganizationCustomField@07ad27a1-b610-49fb-a1d1-6c9ddf3036b0@Name": "Organization",
+    "OrganizationCustomField@07ad27a1-b610-49fb-a1d1-6c9ddf3036b0@Configuration": "{\"minSize\":0.0,\"maxSize\":256.0,\"controlType\":\"Input\",\"ghostText\":\"\",\"defaultValue\":\"\",\"textRestriction\":\"AnyCharacter\",\"valueOptions\":[]}",
+    "OrganizationCustomField@07ad27a1-b610-49fb-a1d1-6c9ddf3036b0@ValueType": "Text",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@IdentityId": "332ae871-efcb-4f0a-a5c5-063553b89a68",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@FieldType": "Person",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@ReferenceName": "scf_year",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@Name": "Year",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@Configuration": "{\"controlType\":\"Input\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueOptions\":[]}",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@Description": "Year joined IDA",
+    "OrganizationCustomField@332ae871-efcb-4f0a-a5c5-063553b89a68@ValueType": "Number",
+    "OrganizationCustomField@5a173704-5ac9-4438-b929-5cd905afbbd1@IdentityId": "5a173704-5ac9-4438-b929-5cd905afbbd1",
+    "OrganizationCustomField@5a173704-5ac9-4438-b929-5cd905afbbd1@FieldType": "Person",
+    "OrganizationCustomField@5a173704-5ac9-4438-b929-5cd905afbbd1@ReferenceName": "scf_amount",
+    "OrganizationCustomField@5a173704-5ac9-4438-b929-5cd905afbbd1@Name": "Amount",
+    "OrganizationCustomField@5a173704-5ac9-4438-b929-5cd905afbbd1@Configuration": "{\"controlType\":\"Input\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueOptions\":[]}",
+    "OrganizationCustomField@5a173704-5ac9-4438-b929-5cd905afbbd1@ValueType": "BigDecimal",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@ActivityType": "Fundraise",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@IdentityId": "0e25b862-4a82-4bd2-951d-21aa9b6cb66c",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@FieldType": "Activity",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@ReferenceName": "fun_site_name",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@Name": "Site Name",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@Configuration": "{\"minSize\":0.0,\"maxSize\":256.0,\"controlType\":\"Input\",\"ghostText\":\"name of the proposed IDSP site\",\"defaultValue\":\"\",\"textRestriction\":\"AnyCharacter\",\"valueOptions\":[]}",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@Description": "Name of the proposed IDSP site.",
+    "OrganizationCustomField@0e25b862-4a82-4bd2-951d-21aa9b6cb66c@ValueType": "Text",
+    "OrganizationCustomField@19b707e7-df1f-4f33-9a2f-18134fe93c6d@IdentityId": "19b707e7-df1f-4f33-9a2f-18134fe93c6d",
+    "OrganizationCustomField@19b707e7-df1f-4f33-9a2f-18134fe93c6d@FieldType": "Person",
+    "OrganizationCustomField@19b707e7-df1f-4f33-9a2f-18134fe93c6d@ReferenceName": "scf_received_date",
+    "OrganizationCustomField@19b707e7-df1f-4f33-9a2f-18134fe93c6d@Name": "Received Date",
+    "OrganizationCustomField@19b707e7-df1f-4f33-9a2f-18134fe93c6d@Configuration": "{\"minSize\":0.0,\"maxSize\":256.0,\"controlType\":\"Input\",\"ghostText\":\"\",\"defaultValue\":\"\",\"textRestriction\":\"AnyCharacter\",\"valueOptions\":[]}",
+    "OrganizationCustomField@19b707e7-df1f-4f33-9a2f-18134fe93c6d@ValueType": "Text",
+    "ContentStyle@ee797256-f0df-4c17-a112-febc97d0ffb0@IdentityUUID": "ee797256-f0df-4c17-a112-febc97d0ffb0",
+    "ContentStyle@ee797256-f0df-4c17-a112-febc97d0ffb0@UserData": "{\"contentMaxWidth\":\"100%\",\"contentDefaultPadding\":\"0em\",\"contentMargin\":\"0px auto\",\"contentBackgroundColor\":\"#ffffff\",\"contentDefaultFontSize\":\"14px\",\"contentDefaultFontFamily\":\"Open Sans, sans-serif\",\"contentEmailDefaultFontFamily\":\"Tahoma, Geneva, sans-serif\",\"contentDefaultFontColor\":\"rgb(0, 0, 0)\",\"contentDefaultLinkColor\":\"#0090aa\",\"contentDefaultButtonBackgroundColor\":\"rgb(154, 0, 100)\",\"contentDefaultButtonFontColor\":\"rgb(255, 255, 255)\",\"contentDefaultButtonFontSize\":\"14px\",\"contentDefaultButtonFontFamily\":\"\",\"contentDefaultButtonSize\":\"expand\",\"contentDefaultButtonBorderSize\":\"0px\",\"contentDefaultButtonBorderStyle\":\"solid\",\"contentDefaultButtonBorderColor\":\"#222222\",\"contentDefaultButtonBorderRadius\":\"8px\",\"contentDefaultButtonStyle\":\"floating\",\"contentCalloutBoxBackgroundColor\":\"rgb(118, 205, 217)\",\"contentCalloutBoxFontColor\":\"#222222\",\"contentCalloutBoxPadding\":\"1em\",\"contentCalloutBoxBorderSize\":\"1px\",\"contentCalloutBoxBorderColor\":\"rgb(0, 0, 0)\",\"contentCalloutBoxBorderStyle\":\"solid\",\"contentCalloutBoxBorderRadius\":\"8px\",\"contentFormBackgroundColor\":\"\",\"contentFormMaxWidth\":\"100%\",\"contentFormAlignment\":\"center\",\"contentFormInputPadding\":\".5em\",\"contentFormInputBorderColor\":\"#CCCCCC\",\"contentFormInputBorderSize\":\"1px\",\"contentFormInputBorderStyle\":\"solid\",\"contentFormInputBorderRadius\":\"8px\",\"contentFormInputBackgroundColor\":\"#ffffff\",\"contentFormInputFontColor\":\"#222222\",\"contentFormInputPlaceholderColor\":\"#CCCCCC\",\"contentFormLabelFontSize\":\"inherit\",\"contentFormLabelFontColor\":\"inherit\",\"contentFormLabelPlacement\":\"top\",\"contentSocialShareBackgroundColor\":\"\",\"contentSocialShareFontColor\":\"\",\"contentSocialShareFontFamily\":\"\",\"contentSocialShareFontSize\":\"\",\"contentSocialMediaBackgroundColor\":\"\",\"contentSocialMediaFontColor\":\"\",\"contentSocialMediaFontFamily\":\"\",\"contentSocialMediaFontSize\":\"\",\"contentPetitionGoalTrackerBarColor\":\"\",\"contentPetitionCommentsBackgroundColor\":\"\",\"contentPetitionCommentsFontColor\":\"\",\"contentPetitionCommentsFontFamily\":\"\",\"contentPetitionCommentsFontSize\":\"\",\"contentDividerColor\":\"rgb(22, 50, 92)\",\"contentPublicWidgetStylesheet\":\"sli-forms-styles_v02\",\"customCSS\":\"\",\"templateId\":\"\",\"templateType\":\"\"}",
+    "ContentStyle@ee797256-f0df-4c17-a112-febc97d0ffb0@Name": "Default Theme",
+    "ContentStyle@ee797256-f0df-4c17-a112-febc97d0ffb0@Description": "The default look & feel for your organization's content",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@GroupType": "Static",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@OrganizationUuid": "2fdb9aa7-79a1-4074-8cc1-5b61c6c013af",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@IdentityUuid": "da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@MailingList": "true",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@PublicName": "Events",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@PublicDescription": "Get updates on our conference and International Dark Sky Week.",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@PreSelected": "false",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@OrderNumber": "7",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@ParameterName": "grp_events",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@Name": "Events",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@Type": "Custom",
+    "OrganizationSegment@da32cde5-3f7d-4a41-a61e-4bad2d5ca7fb@Description": "Conference and IDSW Updates",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@GroupType": "Static",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@OrganizationUuid": "2fdb9aa7-79a1-4074-8cc1-5b61c6c013af",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@IdentityUuid": "58e1ea9d-5599-4a96-b09a-86829576a7b9",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@MailingList": "true",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@PublicName": "General",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@PreSelected": "false",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@OrderNumber": "1",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@ParameterName": "grp_general",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@Name": "General",
+    "OrganizationSegment@58e1ea9d-5599-4a96-b09a-86829576a7b9@Type": "Custom",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@GroupType": "Static",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@OrganizationUuid": "2fdb9aa7-79a1-4074-8cc1-5b61c6c013af",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@IdentityUuid": "48d5db18-5d40-46ec-9cb4-09fbee5c95a0",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@MailingList": "true",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@PublicName": "NIGHTWATCH E-News",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@PublicDescription": "A monthly newsletter with big news, small updates, and everything in between.",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@PreSelected": "false",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@OrderNumber": "2",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@ParameterName": "grp_nightwatchmonthlynewsletter",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@Name": "NIGHTWATCH E-News",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@Type": "Custom",
+    "OrganizationSegment@48d5db18-5d40-46ec-9cb4-09fbee5c95a0@Description": "A monthly newsletter with big news, small updates, and everything in between.",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@GroupType": "Static",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@OrganizationUuid": "2fdb9aa7-79a1-4074-8cc1-5b61c6c013af",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@IdentityUuid": "682ab336-b280-4b2d-92f5-c02e654eda1b",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@MailingList": "true",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@PublicName": "Fundraising",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@PreSelected": "false",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@OrderNumber": "5",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@ParameterName": "grp_fundraising",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@Name": "Fundraising",
+    "OrganizationSegment@682ab336-b280-4b2d-92f5-c02e654eda1b@Type": "Custom",
+    "etl.snapshot.effective": "2021-03-29T13:45:30.062Z"
+};
+_igvfcRXyVkHr.data['oneTimeAmount'] = {};
+_igvfcRXyVkHr.data['oneTimeAmount'].value = '';
+_igvfcRXyVkHr.data['recurringAmount'] = {};
+_igvfcRXyVkHr.data['recurringAmount'].value = '';
+_igvfcRXyVkHr.data['frequency'] = {};
+_igvfcRXyVkHr.data['frequency'].value = 'Yearly';
+_igvfcRXyVkHr.data['enableRecuring'] = {};
+_igvfcRXyVkHr.data['enableRecuring'].value = false;
+_igvfcRXyVkHr.data['PersonCensus@FirstName'] = {};
+_igvfcRXyVkHr.data['PersonCensus@FirstName'].value = '';
+_igvfcRXyVkHr.data['PersonCensus@FirstName'].label = 'First Name';
+_igvfcRXyVkHr.data['PersonCensus@FirstName'].required = true;
+_igvfcRXyVkHr.data['PersonCensus@LastName'] = {};
+_igvfcRXyVkHr.data['PersonCensus@LastName'].value = '';
+_igvfcRXyVkHr.data['PersonCensus@LastName'].label = 'Last Name';
+_igvfcRXyVkHr.data['PersonCensus@LastName'].required = true;
+_igvfcRXyVkHr.data['Address@Home@Line1'] = {};
+_igvfcRXyVkHr.data['Address@Home@Line1'].value = '';
+_igvfcRXyVkHr.data['Address@Home@Line1'].label = 'Address, line 1';
+_igvfcRXyVkHr.data['Address@Home@Line1'].required = true;
+_igvfcRXyVkHr.data['Address@Home@Line2'] = {};
+_igvfcRXyVkHr.data['Address@Home@Line2'].value = '';
+_igvfcRXyVkHr.data['Address@Home@Line2'].label = 'Address, line 2';
+_igvfcRXyVkHr.data['Address@Home@Line2'].required = false;
+_igvfcRXyVkHr.data['Address@Home@Country'] = {};
+_igvfcRXyVkHr.data['Address@Home@Country'].value = '';
+_igvfcRXyVkHr.data['Address@Home@Country'].label = 'Country';
+_igvfcRXyVkHr.data['Address@Home@Country'].required = true;
+_igvfcRXyVkHr.data['Address@Home@City'] = {};
+_igvfcRXyVkHr.data['Address@Home@City'].value = '';
+_igvfcRXyVkHr.data['Address@Home@City'].label = 'City';
+_igvfcRXyVkHr.data['Address@Home@City'].required = true;
+_igvfcRXyVkHr.data['Address@Home@State'] = {};
+_igvfcRXyVkHr.data['Address@Home@State'].value = '';
+_igvfcRXyVkHr.data['Address@Home@State'].label = 'State';
+_igvfcRXyVkHr.data['Address@Home@State'].required = true;
+_igvfcRXyVkHr.data['Address@Home@Zip'] = {};
+_igvfcRXyVkHr.data['Address@Home@Zip'].value = '';
+_igvfcRXyVkHr.data['Address@Home@Zip'].label = 'Zip Code';
+_igvfcRXyVkHr.data['Address@Home@Zip'].required = true;
+_igvfcRXyVkHr.data['PersonContact@Email@Value'] = {};
+_igvfcRXyVkHr.data['PersonContact@Email@Value'].value = '';
+_igvfcRXyVkHr.data['PersonContact@Email@Value'].label = 'Email Address';
+_igvfcRXyVkHr.data['PersonContact@Email@Value'].required = true;
+_igvfcRXyVkHr.data['PersonContact@HomePhone@Value'] = {};
+_igvfcRXyVkHr.data['PersonContact@HomePhone@Value'].value = '';
+_igvfcRXyVkHr.data['PersonContact@HomePhone@Value'].label = 'Phone';
+_igvfcRXyVkHr.data['PersonContact@HomePhone@Value'].required = false;
+_igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'] = {};
+_igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'].value = '';
+_igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'].label = 'Mailing Address same as billing';
+_igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'].required = true;
+_igvfcRXyVkHr.data['CustomFieldValue@d1f35c01-6313-449e-b353-847a92c78da3@VALUE'] = {};
+_igvfcRXyVkHr.data['CustomFieldValue@d1f35c01-6313-449e-b353-847a92c78da3@VALUE'].value = '';
+_igvfcRXyVkHr.data['CustomFieldValue@d1f35c01-6313-449e-b353-847a92c78da3@VALUE'].label = 'Enter Mailing Address';
+_igvfcRXyVkHr.data['CustomFieldValue@d1f35c01-6313-449e-b353-847a92c78da3@VALUE'].required = false;
+_igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'] = {};
+_igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'].value = '';
+_igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'].label = 'Member paper opt out';
+_igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'].required = false;
+_igvfcRXyVkHr.mergeFields = {
+    "ORG_NAME": "International Dark-Sky Association",
+    "ORG_ADDRESS_LINE2": "Suite 105",
+    "ORG_CONTACT_PHONE": "520-293-3198",
+    "ORG_CITY": "Tucson",
+    "ORG_STATE": "AZ",
+    "ORG_ADDRESS_LINE1": "5049 E Broadway Blvd",
+    "ORG_CONTACT_EMAIL": "support@darksky.org",
+    "ORG_ZIPCODE": "85711"
+};
+_igvfcRXyVkHr.contentChannels = {
+    'ccbcea47-1aff-4031-8c78-122b0da00ea6': {
+        'label': 'Dark Sky Policies',
+        'optedIn': 'true'
+    },
+    'e83c85da-534e-4e3f-b412-f0614eccb9ba': {
+        'label': 'Success Stories',
+        'optedIn': 'true'
+    },
+    '4ef09047-5bf2-48ad-8cc2-eea242c84f4e': {
+        'label': 'International Dark Sky Places',
+        'optedIn': 'true'
+    },
+    '58e1ea9d-5599-4a96-b09a-86829576a7b9': {
+        'label': 'General',
+        'optedIn': 'true'
+    },
+    '48d5db18-5d40-46ec-9cb4-09fbee5c95a0': {
+        'label': 'NIGHTWATCH Monthly Newsletter',
+        'optedIn': 'true'
+    },
+    'fdf64bac-7f4d-4360-8c93-d9e44bdc8286': {
+        'label': 'IDA Membership',
+        'optedIn': 'true'
+    },
+    '682ab336-b280-4b2d-92f5-c02e654eda1b': {
+        'label': 'Fundraising',
+        'optedIn': 'true'
+    },
+    '8aacb64e-26bb-4c94-bf43-beb492dd957f': {
+        'label': 'Dark Sky Advocacy',
+        'optedIn': 'true'
+    }
+};
+_igvfcRXyVkHr.mailingLists = {};
+_igvfcRXyVkHr.contactMethods = {
+    "Email": {
+        "label": "Email",
+        "optedIn": ""
+    },
+    "HomePhone": {
+        "label": "Home Phone",
+        "optedIn": ""
+    },
+};
+_igvfcRXyVkHr.activityId = '0f730943-9078-469c-b3d6-6411a493400a';
+_igvfcRXyVkHr.activityType = 'FUNDRAISE';
+_igvfcRXyVkHr.payPalEnv = 'production';
+_igvfcRXyVkHr.cardType = '';
+_igvfcRXyVkHr.payCfgId = 'a364e333-d876-4662-93be-997812a0247f';
+_igvfcRXyVkHr.ccTokenizerURL;
+_igvfcRXyVkHr.transactionFees = 0.0;
+_igvfcRXyVkHr.showSummary = false;
+_igvfcRXyVkHr.alwaysShowSummary = false;
+_igvfcRXyVkHr.showTickets = false;
+_igvfcRXyVkHr.payFees = false;
+_igvfcRXyVkHr.formType = 'FUNDRAISING';
+_igvfcRXyVkHr.orgName = 'International Dark-Sky Association';
+_igvfcRXyVkHr.preSelectedOneTimeAmountIndex = '-1';
+_igvfcRXyVkHr.preSelectedRecurringIndex = '-1';
+_igvfcRXyVkHr.donat = {};
+_igvfcRXyVkHr.donatAmountRaisedUrl = 'https://default.salsalabs.org/api/widget/fundraising/d252bdb8-11af-42e4-8d5d-702753687355/progress?includeTickets=false&includePurchases=false';
+_igvfcRXyVkHr.donat.donAmount = 120987.27000000009;
+_igvfcRXyVkHr.donat.tickAmount = 0.0;
+_igvfcRXyVkHr.donat.prodAmount = 0.0;
+_igvfcRXyVkHr.donat.goal = 0.0;
+_igvfcRXyVkHr.donat.startAmount = 0.0;
+_igvfcRXyVkHr.donat.is_event_level = true;
+_igvfcRXyVkHr.donat.thermometer_orientation = '';
+_igvfcRXyVkHr.donat.thermometer_color = '';
+_igvfcRXyVkHr.donat.thermometer_style = '';
+_igvfcRXyVkHr.donat.thermometer_size = '';
+_igvfcRXyVkHr.donat.thermometer_decoration = '';
+_igvfcRXyVkHr.donat.thermometer_borderRadius = '';
+_igvfcRXyVkHr.donat.thermometer_cssBlock = '';
+_igvfcRXyVkHr.personInfo = {
+    "PersonIdentity@AccountSettings": "",
+    "PersonIdentity@Recovery Email Address": "",
+    "PersonIdentity@Username": "",
+    "PersonIdentity@Person Id": "7e2f7ba7-ff37-43c1-8d24-cb1b972147d2",
+    "PersonIdentity@Password": ""
+};
+_igvfcRXyVkHr.tpid = '';
+_igvfcRXyVkHr.pid = '7e2f7ba7-ff37-43c1-8d24-cb1b972147d2';
+_igvfcRXyVkHr.useCaptcha = false;
+_igvfcRXyVkHr.oid = '2fdb9aa7-79a1-4074-8cc1-5b61c6c013af';
+_igvfcRXyVkHr.result = 'use json';
+_igvfcRXyVkHr.addPostInit(function bindWidgets() {
+    _igvfcRXyVkHr.container.find("[data-ignite-field='termsAndConditions']").blur(function() {
+        _igvfcRXyVkHr.data['termsAndConditions'].value = window.IGNITE.jquery(this).is(':checked');
+    });
+});
+_igvfcRXyVkHr.useTCDialog = true;
+_igvfcRXyVkHr.data['termsAndConditions'] = {};
+_igvfcRXyVkHr.addPostInit(function bindWidgets() {
+    _igvfcRXyVkHr.allowCustomOnetimeDonations = true;
+    _igvfcRXyVkHr.allowCustomRecurringDonations = true;
+    _igvfcRXyVkHr.allowExtraDonation = (window.IGNITE.jquery('input[name=optionalDonation]', '#form_igvfcRXyVkHr').filter(':checked').size() == 1);
+    _igvfcRXyVkHr.showDonationAmounts = _igvfcRXyVkHr.allowExtraDonation;
+    _igvfcRXyVkHr.donorPaysFees = window.IGNITE.jquery('input[name=donorPaysFees]', '#form_igvfcRXyVkHr').prop('checked');
+    _igvfcRXyVkHr.allowOnetimeDonations = window.IGNITE.jquery('[data-ignite-enable-onetime]', '#form_igvfcRXyVkHr').data('igniteEnableOnetime');
+    _igvfcRXyVkHr.allowRecurringDonations = window.IGNITE.jquery('[data-ignite-enable-recurring-amounts]', '#form_igvfcRXyVkHr').data('igniteEnableRecurringAmounts');
+    window.IGNITE.jquery('input[name=donationAmtToggle]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggle2]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleMonthly]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleQuarterly]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleYearly]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleOther]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggle2Other]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleMonthlyOther]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleQuarterlyOther]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    window.IGNITE.jquery('input[name=donationAmtToggleYearlyOther]', '#form_igvfcRXyVkHr').attr('data-sli-widget', '_igvfcRXyVkHr');
+    var r = window.IGNITE.jquery('.sli-recurringFrequency', '#form_igvfcRXyVkHr').data('igniteRecurrenceFrequency');
+    if (r) {
+        _igvfcRXyVkHr.data['frequency'].value = r;
+    } else {
+        if (window.IGNITE.jquery('.sli-recurringFrequency', '#form_igvfcRXyVkHr').length > 0) {
+            var freqWords = window.IGNITE.jquery('.sli-recurringFrequency', '#form_igvfcRXyVkHr').text().split(' ');
+            _igvfcRXyVkHr.data['frequency'].value = (freqWords[freqWords.length - 1].charAt(0).toUpperCase() + freqWords[freqWords.length - 1].slice(1)).replace(/\.$/, '');
+        }
+    }
+    ;window.IGNITE.jquery('input[name=optionalDonation]', '#form_igvfcRXyVkHr').change(function() {
+        _igvfcRXyVkHr.toggleDonation();
+    });
+    if (window.IGNITE.jquery('input[name=donorPaysFees]', '#form_igvfcRXyVkHr').prop('checked')) {
+        _igvfcRXyVkHr.toggleFees();
+    }
+    window.IGNITE.jquery('input[name=donorPaysFees]', '#form_igvfcRXyVkHr').change(function() {
+        _igvfcRXyVkHr.toggleFees();
+    });
+    window.IGNITE.jquery("[data-ignite-field-id=SelectRecurringInterval] [name='field-recurring-interval']", '#form_igvfcRXyVkHr').change(function() {
+        if (_igvfcRXyVkHr.data['enableRecuring'].value === true) {
+            _igvfcRXyVkHr.showRecurringToggle();
+            _igvfcRXyVkHr.updateFrequencyData();
+            _igvfcRXyVkHr.data['recurringAmount'].value = _igvfcRXyVkHr.getCurrentDonationAmountValue();
+            _igvfcRXyVkHr.updateSummaryTotal();
+        }
+    });
+    window.IGNITE.jquery('input[name=makeRecurring]', '#form_igvfcRXyVkHr').change(function() {
+        var mkRecurringChecked = window.IGNITE.jquery("input[name='makeRecurring']", '#form_igvfcRXyVkHr').prop('checked');
+        if (mkRecurringChecked) {
+            _igvfcRXyVkHr.showRecurringToggle();
+            _igvfcRXyVkHr.updateFrequencyData();
+            window.IGNITE.jquery('[data-ignite-field-id=SelectRecurringInterval]', '#form_igvfcRXyVkHr').show();
+            window.IGNITE.jquery('div[data-ignite-onetime-amount]', '#form_igvfcRXyVkHr').hide();
+        } else {
+            _igvfcRXyVkHr.hideRecurringToggle();
+            window.IGNITE.jquery('[data-ignite-field-id=SelectRecurringInterval]', '#form_igvfcRXyVkHr').hide();
+            window.IGNITE.jquery('div[data-ignite-onetime-amount]', '#form_igvfcRXyVkHr').show();
+        }
+        _igvfcRXyVkHr.data['enableRecuring'].value = mkRecurringChecked;
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle', 'NOT_VALIDATED', 'onetimeAmount');
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle2', 'NOT_VALIDATED', 'recurringAmount');
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'field-recurring-interval', 'NOT_VALIDATED', 'notempty');
+    });
+    if (!_igvfcRXyVkHr.allowRecurringDonations || !_igvfcRXyVkHr.allowOnetimeDonations) {
+        window.IGNITE.jquery('[data-ignite-field-id=MakeRecurring]', '#form_igvfcRXyVkHr').hide();
+    }
+    if (_igvfcRXyVkHr.allowRecurringDonations && !_igvfcRXyVkHr.allowOnetimeDonations) {
+        window.IGNITE.jquery("input[name='makeRecurring']", '#form_igvfcRXyVkHr').prop('checked', true);
+    }
+    if (!_igvfcRXyVkHr.allowRecurringDonations || !window.IGNITE.jquery("input[name='makeRecurring']", '#form_igvfcRXyVkHr').prop('checked')) {
+        window.IGNITE.jquery('[data-ignite-field-id=SelectRecurringInterval]', '#form_igvfcRXyVkHr').hide();
+    }
+    if ((_igvfcRXyVkHr.allowRecurringDonations && !_igvfcRXyVkHr.allowOnetimeDonations) || window.IGNITE.jquery("input[name='makeRecurring']", '#form_igvfcRXyVkHr').prop('checked')) {
+        window.IGNITE.jquery('div[data-ignite-onetime-amount]', '#form_igvfcRXyVkHr').hide();
+        window.IGNITE.jquery('[data-ignite-field-id=SelectRecurringInterval]', '#form_igvfcRXyVkHr').show();
+        _igvfcRXyVkHr.showRecurringToggle();
+        _igvfcRXyVkHr.updateFrequencyData();
+        _igvfcRXyVkHr.data['enableRecuring'].value = true;
+    }
+    window.IGNITE.jquery('input[name=donationAmtToggle]', '#form_igvfcRXyVkHr').change(function() {
+        if (window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr').length > 0) {
+            window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr').val('');
+            window.IGNITE.jquery('input[name=donationAmtToggleOther]', '#form_igvfcRXyVkHr').prop('checked', false);
+            window.IGNITE.jquery('span[class~=sli-oneTimeAmountLabel]', '#form_igvfcRXyVkHr').removeClass('sli-custom-amount-label-selected');
+            _igvfcRXyVkHr.updateAmount(0.0, 'oneTimeAmount');
+        }
+        _igvfcRXyVkHr.updateAmount(this.dataset['igniteAmount'], 'oneTimeAmount');
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle', 'NOT_VALIDATED', 'onetimeAmount');
+        if (window.IGNITE.jquery('input[data-ignite-custom-onetime]', '#form_igvfcRXyVkHr').length > 0) {
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'customOneTime', false);
+        }
+        return false;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-custom-onetime]', '#form_igvfcRXyVkHr').length > 0) {
+        _igvfcRXyVkHr.corid = '#' + window.IGNITE.jquery('input[data-ignite-custom-onetime]', '#form_igvfcRXyVkHr').attr('id');
+        _igvfcRXyVkHr.coiid = '#' + window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr').attr('id');
+        window.IGNITE.jquery('input[data-ignite-custom-onetime]', '#form_igvfcRXyVkHr').focus(function() {
+            window.IGNITE.jquery(_igvfcRXyVkHr.coiid).focus();
+            var radioButtons = window.IGNITE.jquery('input[name=donationAmtToggle]', '#form_igvfcRXyVkHr');
+            for (var i in radioButtons) {
+                radioButtons[i].checked = false
+            }
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle', 'NOT_VALIDATED', 'onetimeAmount');
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'customOneTime', true);
+        });
+        var tmp = window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr');
+        tmp.focus(function() {
+            window.IGNITE.jquery('input[data-ignite-custom-onetime]', '#form_igvfcRXyVkHr').prop('checked');
+            window.IGNITE.jquery('span[class~=sli-oneTimeAmountLabel]', '#form_igvfcRXyVkHr').addClass('sli-custom-amount-label-selected');
+            window.IGNITE.jquery(_igvfcRXyVkHr.corid).prop('checked', true);
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'customOneTime', true);
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle', 'NOT_VALIDATED', 'onetimeAmount');
+        });
+        var tmpCustomOneTimeLabel = window.IGNITE.jquery('span[class~=sli-oneTimeAmountLabel]', '#form_igvfcRXyVkHr');
+        tmpCustomOneTimeLabel.click(function() {
+            var tmpCustomOneTimeInput = window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr');
+            tmpCustomOneTimeInput.focus();
+            window.IGNITE.jquery('input[name=donationAmtToggle]', '#form_igvfcRXyVkHr').prop('checked', false);
+        });
+        tmp.blur(function() {
+            _igvfcRXyVkHr.updateAmount(this.value, 'oneTimeAmount');
+        });
+    }
+    if (window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr').length > 0) {
+        var tmpCustom = window.IGNITE.jquery('input[data-ignite-custom-onetime-input]', '#form_igvfcRXyVkHr');
+        tmpCustom.blur(function() {
+            _igvfcRXyVkHr.updateAmount(this.value, 'oneTimeAmount');
+        });
+        tmpCustom.click(function() {
+            window.IGNITE.jquery('input[name=donationAmtToggle]', '#form_igvfcRXyVkHr').prop('checked', false);
+        });
+    }
+    window.IGNITE.jquery('input[name="donationAmtToggle2"]', '#form_igvfcRXyVkHr').change(function() {
+        if (window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr').length > 0) {
+            window.IGNITE.jquery('div[data-ignite-recurring-amount="data-ignite-recurring-amount"] span[class~=sli-recurringAmountLabel]', '#form_igvfcRXyVkHr').removeClass('sli-custom-amount-label-selected');
+            window.IGNITE.jquery('input[name="donationAmtToggle2Other"]', '#form_igvfcRXyVkHr').prop('checked', false);
+            window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr').val('');
+            _igvfcRXyVkHr.updateAmount(0.0, 'donationAmtToggle2');
+        }
+        _igvfcRXyVkHr.updateAmount(this.dataset['igniteAmount'], 'donationAmtToggle2');
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle2', 'NOT_VALIDATED', 'recurringAmount');
+        if (window.IGNITE.jquery('input[name="donationAmtToggle2Other"]', '#form_igvfcRXyVkHr').length > 0) {
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'customRecurringAmount', false);
+        }
+        return false;
+    });
+    if (window.IGNITE.jquery('input[name="donationAmtToggle2Other"]', '#form_igvfcRXyVkHr').length > 0) {
+        _igvfcRXyVkHr.donationAmtToggle2OtherId = '#' + window.IGNITE.jquery('input[name="donationAmtToggle2Other"]', '#form_igvfcRXyVkHr').attr('id');
+        _igvfcRXyVkHr.customRecurringAmountId = '#' + window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr').attr('id');
+        window.IGNITE.jquery('input[name="donationAmtToggle2Other"]', '#form_igvfcRXyVkHr').focus(function() {
+            window.IGNITE.jquery(_igvfcRXyVkHr.customRecurringAmountId).focus();
+            var radioButtons = window.IGNITE.jquery('input[name="donationAmtToggle2"]', '#form_igvfcRXyVkHr');
+            for (var i in radioButtons) {
+                radioButtons[i].checked = false
+            }
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle2', 'NOT_VALIDATED', 'recurringAmount');
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'customRecurringAmount', true);
+        });
+        var tmp = window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr');
+        tmp.focus(function() {
+            window.IGNITE.jquery('input[name="donationAmtToggle2Other"]', '#form_igvfcRXyVkHr').prop('checked');
+            window.IGNITE.jquery('div[data-ignite-recurring-amount="data-ignite-recurring-amount"] span[class~=sli-recurringAmountLabel]', '#form_igvfcRXyVkHr').addClass('sli-custom-amount-label-selected');
+            window.IGNITE.jquery(_igvfcRXyVkHr.customRecurringAmountId).prop('checked', true);
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'customRecurringAmount', true);
+            window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'donationAmtToggle2', 'NOT_VALIDATED', 'recurringAmount');
+        });
+        var tmpCustomRecurringLabel = window.IGNITE.jquery('div[data-ignite-recurring-amount="data-ignite-recurring-amount"] span[class~=sli-recurringAmountLabel]', '#form_igvfcRXyVkHr');
+        tmpCustomRecurringLabel.click(function() {
+            var tmpCustomRecurringInput = window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr');
+            tmpCustomRecurringInput.focus();
+            window.IGNITE.jquery('input[name="donationAmtToggle2"]', '#form_igvfcRXyVkHr').prop('checked', false);
+        });
+        tmp.blur(function() {
+            _igvfcRXyVkHr.updateAmount(this.value, 'donationAmtToggle2');
+        });
+    }
+    if (window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr').length > 0) {
+        var tmpCustom = window.IGNITE.jquery('input[name="customRecurringAmount"]', '#form_igvfcRXyVkHr');
+        tmpCustom.blur(function() {
+            _igvfcRXyVkHr.updateAmount(this.value, 'donationAmtToggle2');
+        });
+        tmpCustom.click(function() {
+            window.IGNITE.jquery('input[name="donationAmtToggle2"]', '#form_igvfcRXyVkHr').prop('checked', false);
+        });
+    }
+    _igvfcRXyVkHr.baId = window.IGNITE.jquery('input[name=bank_account]', '#form_igvfcRXyVkHr').attr('id');
+    _igvfcRXyVkHr.brId = window.IGNITE.jquery('input[name=bank_routing]', '#form_igvfcRXyVkHr').attr('id');
+    window.IGNITE.jquery('input[name=payment_type]', '#form_igvfcRXyVkHr').change(function() {
+        _igvfcRXyVkHr.showHidePaymentType(this);
+    });
+    window.IGNITE.jquery('input[name=bank_routing]', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.tokenizeCreditCard(this.value + '/' + document.getElementById(_igvfcRXyVkHr.baId).value, 'ACH');
+    });
+    window.IGNITE.jquery('input[name=bank_account]', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.tokenizeCreditCard(document.getElementById(_igvfcRXyVkHr.brId).value + '/' + this.value, 'ACH');
+    });
+    window.IGNITE.jquery('input[name=card_number]', '#form_igvfcRXyVkHr').blur(function() {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('updateStatus', 'cvv', 'NOT_VALIDATED', 'cvv');
+    });
+    window.IGNITE.jquery('[data-ignite-field-id=5d5a2165-f19e-4371-851b-183a6b92402b]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['PersonCensus@FirstName'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=5d5a2165-f19e-4371-851b-183a6b92402b]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['PersonCensus@FirstName'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=5d5a2165-f19e-4371-851b-183a6b92402b]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-person-firstname', true);
+    }
+    window.IGNITE.jquery('[data-ignite-field-id=8d21a878-287a-491f-a362-b8ee2aa71819]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['PersonCensus@LastName'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=8d21a878-287a-491f-a362-b8ee2aa71819]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['PersonCensus@LastName'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=8d21a878-287a-491f-a362-b8ee2aa71819]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-person-lastname', true);
+    }
+    window.IGNITE.jquery('[data-ignite-field-id=f775c79a-df41-43fb-96de-ee2360254689]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['Address@Home@Line1'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=f775c79a-df41-43fb-96de-ee2360254689]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['Address@Home@Line1'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=f775c79a-df41-43fb-96de-ee2360254689]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-address-line1', true);
+    }
+    window.IGNITE.jquery('[data-ignite-field-id=1ddcfe7f-7201-4a70-aa73-f1c93b4ca5a3]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['Address@Home@Line2'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=1ddcfe7f-7201-4a70-aa73-f1c93b4ca5a3]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['Address@Home@Line2'].value = this.value;
+    });
+    if (_igvfcRXyVkHr.data['Address@Home@Country'].value) {
+        window.IGNITE.jquery('select[data-ignite-field-id=f71a3605-b3a8-4650-af21-47387674a8eb]', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['Address@Home@Country'].value);
+    } else {
+        _igvfcRXyVkHr.data['Address@Home@Country'].value = window.IGNITE.jquery('select[data-ignite-field-id=f71a3605-b3a8-4650-af21-47387674a8eb]', '#form_igvfcRXyVkHr').val();
+    }
+    window.IGNITE.jquery('select[data-ignite-field-id=f71a3605-b3a8-4650-af21-47387674a8eb]', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['Address@Home@Country'].value = this.value;
+    });
+    window.IGNITE.jquery('[data-ignite-field-id=a102d60f-f8ab-47eb-8ee0-864cfa1fc5b2]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['Address@Home@City'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=a102d60f-f8ab-47eb-8ee0-864cfa1fc5b2]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['Address@Home@City'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=a102d60f-f8ab-47eb-8ee0-864cfa1fc5b2]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-address-city', true);
+    }
+    if (_igvfcRXyVkHr.data['Address@Home@State'].value) {
+        window.IGNITE.jquery('select[data-ignite-field-id=3f8b9098-ff2d-4384-bb95-425f113028c0]', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['Address@Home@State'].value);
+    } else {
+        _igvfcRXyVkHr.data['Address@Home@State'].value = window.IGNITE.jquery('select[data-ignite-field-id=3f8b9098-ff2d-4384-bb95-425f113028c0]', '#form_igvfcRXyVkHr').val();
+    }
+    window.IGNITE.jquery('select[data-ignite-field-id=3f8b9098-ff2d-4384-bb95-425f113028c0]', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['Address@Home@State'].value = this.value;
+    });
+    window.IGNITE.jquery('[data-ignite-field-id=44e5ad15-1fdd-4ba8-bf38-f5cbaad023c2]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['Address@Home@Zip'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=44e5ad15-1fdd-4ba8-bf38-f5cbaad023c2]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['Address@Home@Zip'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=44e5ad15-1fdd-4ba8-bf38-f5cbaad023c2]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-address-zip', true);
+    }
+    window.IGNITE.jquery('[data-ignite-field-id=2851b463-606f-40c8-bb3d-d31f399e6896]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['PersonContact@Email@Value'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=2851b463-606f-40c8-bb3d-d31f399e6896]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['PersonContact@Email@Value'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=2851b463-606f-40c8-bb3d-d31f399e6896]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-contact-email', true);
+    }
+    window.IGNITE.jquery('[data-ignite-field-id=6e201e0b-8208-453f-b393-a5f0d9059726]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['PersonContact@HomePhone@Value'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=6e201e0b-8208-453f-b393-a5f0d9059726]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['PersonContact@HomePhone@Value'].value = this.value;
+    });
+    val = _igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'].value;
+    try {
+        window.IGNITE.jquery('input[data-ignite-field-id=05c5e3ec-3740-45fc-bebd-fb69c2461dbf][value=' + val + ']', '#form_igvfcRXyVkHr').click();
+    } catch (e) {}
+    ;_igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'].value = window.IGNITE.jquery('input[data-ignite-field-id=05c5e3ec-3740-45fc-bebd-fb69c2461dbf]', '#form_igvfcRXyVkHr').filter(':checked').val();
+    window.IGNITE.jquery('input[data-ignite-field-id=05c5e3ec-3740-45fc-bebd-fb69c2461dbf]', '#form_igvfcRXyVkHr').click(function() {
+        _igvfcRXyVkHr.data['CustomFieldValue@05c5e3ec-3740-45fc-bebd-fb69c2461dbf@VALUE'].value = this.value;
+    });
+    if (window.IGNITE.jquery('input[data-ignite-field-id=05c5e3ec-3740-45fc-bebd-fb69c2461dbf]', '#form_igvfcRXyVkHr').size() > 0) {
+        window.IGNITE.jquery('#form_igvfcRXyVkHr').formValidation('enableFieldValidators', 'field-05c5e3ec-3740-45fc-bebd-fb69c2461dbf', true);
+    }
+    window.IGNITE.jquery('[data-ignite-field-id=d1f35c01-6313-449e-b353-847a92c78da3]:not(div)', '#form_igvfcRXyVkHr').val(_igvfcRXyVkHr.data['CustomFieldValue@d1f35c01-6313-449e-b353-847a92c78da3@VALUE'].value);
+    window.IGNITE.jquery('[data-ignite-field-id=d1f35c01-6313-449e-b353-847a92c78da3]:not(div)', '#form_igvfcRXyVkHr').blur(function() {
+        _igvfcRXyVkHr.data['CustomFieldValue@d1f35c01-6313-449e-b353-847a92c78da3@VALUE'].value = this.value;
+    });
+    val = _igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'].value;
+    try {
+        window.IGNITE.jquery('input[data-ignite-field-id=98466643-5da9-46d8-9c07-eec396eb57e0][value=' + val + ']', '#form_igvfcRXyVkHr').click();
+    } catch (e) {}
+    ;_igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'].value = window.IGNITE.jquery('input[data-ignite-field-id=98466643-5da9-46d8-9c07-eec396eb57e0]', '#form_igvfcRXyVkHr').filter(':checked').val();
+    window.IGNITE.jquery('input[data-ignite-field-id=98466643-5da9-46d8-9c07-eec396eb57e0]', '#form_igvfcRXyVkHr').click(function() {
+        _igvfcRXyVkHr.data['CustomFieldValue@98466643-5da9-46d8-9c07-eec396eb57e0@VALUE'].value = this.value;
+    });
+    _igvfcRXyVkHr.adjustForIUParam();
+    _igvfcRXyVkHr.data['nonce'] = {};
+    _igvfcRXyVkHr.data['nonce'].value = 'FEnJuYYVCxgCD7O5Appd+OCoLZ1jWq6YDdeaDKREgl0uYog4Iig/cLylcQ7zaspIY0UUYMWE9szBoKi8QDAgJqWN7CE7oaUSJR+RFPzYv4a8mIIyI+ShfUfF095Vcaep++4cfY3OpEX4A0Me0QVdkfCCfBaC+JIymxSLVBHSdaB5fxmX37Uoti2GZmaGpI+4IqgNiEUberfAdbcIH3YqSJdpDn9JoV9ST0BvZO5XPs9JawaEgfmTJamKNg73y+pWqaQu0YovxlNcWMJlXCEJ/oaF+8VxF/cygR1XghxAaxu9iQfnB+1Y8L3oaeBkNPkin5K5s47yyE7hwG2UcQNJFA==';
+});
+_igvfcRXyVkHr.userInteractionId = 'e2a1e269-f242-4029-88d6-be328f1d9338';
+_igvfcRXyVkHr.cid = '';
+_igvfcRXyVkHr.eid = '80a35486-611d-436c-8899-28e580c2c964';
+_igvfcRXyVkHr.eType = 'Page';
+_igvfcRXyVkHr.aid = 'd252bdb8-11af-42e4-8d5d-702753687355';
+_igvfcRXyVkHr.stc = null;
+_igvfcRXyVkHr.activityDefinitionId = '3e321e5a-51eb-4182-be7e-5e7f04747d30';
+_igvfcRXyVkHr.activityInstanceId = 'd252bdb8-11af-42e4-8d5d-702753687355';
+_igvfcRXyVkHr.formName = 'IDA Membership Form';
+_igvfcRXyVkHr.html = '<div id="id_d252bdb811af42e48d5d702753687355"><div class="sli-section sli-instructions sli-required_false"><div id="_igvfcRXyVkHr-sli-formfields-start" style="display:none;"/><div id="_igvfcRXyVkHr-sli-formfields-end" style="display:none;"/></div><div class=\"sli-element sli-checkout-summary\" style=\"display:none;\">\n    <p class=\"sli-text-center\">Please review before submitting your payment.<\/p>\n    <table cellspacing=\"0\" class=\"sli-checkout-summary-table\" >\n        <thead>\n            <tr>\n                <th>Item<\/th>\n                <td>Charge<\/td>\n            <\/tr>\n        <\/thead>\n        <tbody>\n            <tr class=\"sli-ticket-summary\">\n                <th>Registrations<\/th>\n                <td><\/td>\n            <\/tr>\n            <tr class=\"sli-purchase-summary\">\n                <th>Purchases<\/th>\n                <td><\/td>\n            <\/tr>\n            <tr class=\"sli-donation-summary\">\n                <th>Donation<\/th>\n                <td><\/td>\n            <\/tr>\n            <tr class=\"sli-fee-summary\" style=\"display:none;\">\n                <th>Fees<\/th>\n                <td><\/td>\n            <\/tr>\n        <\/tbody>\n        <tfoot>\n            <tr class=\"sli-summary-total\">\n                <th>Total<\/th>\n                <td><\/td>\n            <\/tr>\n        <\/tfoot>\n    <\/table>\n\n<\/div><div class="result"></div><style type=\"text\/css\">.sli-donation-paymentblock input.valid {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/tick.png) !important;\n  background-position: right 10px center !important;\n  background-repeat: no-repeat !important;\n  \/* background: white url() right 10px center no-repeat !important; *\/\n}\n.sli-cards .sli-amex {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/american-express-curved-32px.png);\n}\n\n.sli-cards .sli-visa {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/visa-curved-32px.png);\n}\n\n.sli-cards .sli-mastercard {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/mastercard-curved-32px.png);\n}\n\n.sli-cards .sli-discover {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/discover-curved-32px.png);\n}\n\n.sli-cards .sli-amex.off {\n  background-image:\n    url(https:\/\/default.salsalabs.org\/public\/images\/american-express-curved-32px-off.png);\n}\n\n.sli-cards .sli-visa.off {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/visa-curved-32px-off.png);\n}\n\n.sli-cards .sli-mastercard.off {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/mastercard-curved-32px-off.png);\n}\n\n.sli-cards .sli-discover.off {\n  background-image: url(https:\/\/default.salsalabs.org\/public\/images\/discover-curved-32px-off.png);\n}\n<\/style></div>';
+// set up our IGNITE namespace and jquery
+if (typeof window.IGNITE == 'undefined' || typeof window.IGNITE.jquery == 'undefined') {
+    var src = _igvfcRXyVkHr.ASSETS_PREFIX + '/public/scripts/script.min.js';
+    var s = document.createElement('script');
+    s.setAttribute('src', src);
+    s.setAttribute('async', '');
+    s.setAttribute('type', 'text/javascript');
+
+    if (s.readyState) {
+        // IE
+        s.onreadystatechange = function() {
+            if (s.readyState == "loaded" || s.readyState == "complete") {
+                s.onreadystatechange = null;
+                window.IGNITE = {};
+                window.IGNITE.jquery = jQuery.noConflict(true);
+                _igvfcRXyVkHr.initialize();
+            }
+        }
+        ;
+    } else {
+        s.onload = function() {
+            window.IGNITE = {};
+            window.IGNITE.jquery = jQuery.noConflict(true);
+            _igvfcRXyVkHr.initialize();
+        }
+        ;
+    }
+
+    _igvfcRXyVkHr.addCSS("//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css");
+    document.getElementsByTagName('head')[0].appendChild(s);
+}
+
+// invoke the initialization after load
+// this is to catch case where onload already finished, so this should work directly
+try {
+    _igvfcRXyVkHr.initialize();
+} catch (e) {// intentionally eat any errors here as to not negatively affect client pages/sites
+}
+
+_igvfcRXyVkHr.addInit(function doInitialize() {
+    var cssStyle = "sli-forms-styles_v02.css";
+    var cssDiv = window.IGNITE.jquery("div[hidden='true'][layout-style-id]");
+    if (cssDiv && cssDiv.attr("layout-style-id") && cssDiv.attr("layout-style-id").length > 0) {
+        cssStyle = cssDiv.attr("layout-style-id") + ".css";
+    }
+    _igvfcRXyVkHr.addCSS(_igvfcRXyVkHr.ASSETS_PREFIX + "/public/styles/" + cssStyle);
+});
+
+_igvfcRXyVkHr.addInit(function() {
+    if (window.IGNITE.jquery('a[useDefaultNetworks]').length > 0) {
+        var sfcUrl = "https://default.salsalabs.org/public/SFC2fdb9aa7-79a1-4074-8cc1-5b61c6c013af";
+        try {
+            window.IGNITE.jquery.ajax({
+                url: sfcUrl,
+                cache: false
+            }).done(function(data) {
+                if (data) {
+                    window.IGNITE.jquery.each(data, function(key, value) {
+                        if (value) {
+                            window.IGNITE.jquery('a[useDefaultNetworks][social-network-id=' + key + ']').attr('href', value);
+                        } else {
+                            window.IGNITE.jquery('a[useDefaultNetworks][social-network-id=' + key + ']').closest('div.sli-social-icons-item').hide();
+                        }
+                    });
+                }
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    window.IGNITE.jquery("div.sli-social-icons-list").removeClass("sli-hide");
+});
+
+_igvfcRXyVkHr.urlParameters = {};
+_igvfcRXyVkHr.getUrlParameter = function(name, defaultValue) {
+    if (!defaultValue) {
+        defaultValue = '';
+    }
+    if (typeof name == 'undefined')
+        name = 'init';
+    if (!Object.keys(_igvfcRXyVkHr.urlParameters).length) {
+        var url = decodeURIComponent(window.location.search.substring(1));
+        params = url.split('&');
+
+        for (var i = 0; i < params.length; i++) {
+            param = params[i].split('=');
+            _igvfcRXyVkHr.urlParameters[param[0]] = param[1];
+        }
+
+        if (window.IGNITE.jquery('input[name=makeRecurring]').length == 0) {
+            delete _igvfcRXyVkHr.urlParameters['recurring'];
+            delete _igvfcRXyVkHr.urlParameters['makerecurringcb'];
+        }
+    }
+
+    return _igvfcRXyVkHr.urlParameters[name] || defaultValue;
+}
+;
+
+_igvfcRXyVkHr.handleRecurringCheckbox = function() {
+    if (_igvfcRXyVkHr.getUrlParameter('recurring') === 'yes') {
+        if (!window.IGNITE.jquery('input[name=makeRecurring]').prop('checked')) {
+            window.IGNITE.jquery('input[name=makeRecurring]').click().attr('checked', 'checked');
+        }
+        var intervalFromParam = _igvfcRXyVkHr.getIntervalFromUrlParameter();
+        _igvfcRXyVkHr.showRecurringToggle(intervalFromParam);
+        window.IGNITE.jquery('div[data-ignite-onetime-amount]', '#form_igvfcRXyVkHr').hide();
+    } else if (_igvfcRXyVkHr.getUrlParameter('recurring') === 'no') {
+        if (window.IGNITE.jquery('input[name=makeRecurring]').prop('checked')) {
+            window.IGNITE.jquery('input[name=makeRecurring]').click().removeAttr('checked');
+        }
+        _igvfcRXyVkHr.hideRecurringToggle();
+        window.IGNITE.jquery('div[data-ignite-onetime-amount]', '#form_igvfcRXyVkHr').show();
+    }
+}
+
+_igvfcRXyVkHr.handleDonationAmount = function(amount, isRecurring) {
+    if (!isNaN(amount)) {
+        var isRecurringSet = isRecurring !== undefined ? isRecurring : _igvfcRXyVkHr.getUrlParameter('recurring') === 'yes' || _igvfcRXyVkHr.getUrlParameter('makerecurringcb') === 'yes' || window.IGNITE.jquery('input[name=makeRecurring]').attr('checked');
+
+        var donAmt;
+        if (isRecurringSet) {
+            var intervalFromParam = _igvfcRXyVkHr.getIntervalFromUrlParameter();
+            if (intervalFromParam !== undefined) {
+                var recurringToggleName = _igvfcRXyVkHr.getToggleNameByInterval(intervalFromParam);
+                donAmt = window.IGNITE.jquery('input[name="' + recurringToggleName + '"]' + '[data-ignite-amount*="' + amount + '"]');
+                _igvfcRXyVkHr.setAmounts(donAmt, true, amount);
+            }
+        } else {
+            donAmt = window.IGNITE.jquery('.sli-oneTimeAmountRadio' + '[data-ignite-amount*="' + amount + '"]');
+            _igvfcRXyVkHr.setAmounts(donAmt, false, amount);
+        }
+    }
+}
+
+_igvfcRXyVkHr.setAmounts = function(donAmt, isRecurring, amount) {
+    var amountSet = false;
+    if (donAmt.length) {
+        donAmt.each(function(index, value) {
+            if (parseFloat(window.IGNITE.jquery(value, '#form_igvfcRXyVkHr').attr('data-ignite-amount')) == amount) {
+                window.IGNITE.jquery(value, '#form_igvfcRXyVkHr').click();
+                amountSet = true;
+            }
+        });
+    }
+    if (!amountSet) {
+        if (isRecurring) {
+            var interval = _igvfcRXyVkHr.getIntervalFromUrlParameter() || _igvfcRXyVkHr.getSelectedRecurringInterval();
+            var recurringToggleName = _igvfcRXyVkHr.getToggleNameByInterval(interval);
+            var customName = _igvfcRXyVkHr.getCustomNames(recurringToggleName);
+            var customInput = window.IGNITE.jquery("input[name='" + customName.input + "']", '#form_igvfcRXyVkHr');
+
+            var isAllowCustom = _igvfcRXyVkHr.getAvailableRecurringIntervals().length > 0 ? (_igvfcRXyVkHr.allowCustomRecurringDonationsForIntervals && _igvfcRXyVkHr.allowCustomRecurringDonationsForIntervals[interval]) : _igvfcRXyVkHr.allowCustomRecurringDonations;
+            if (isAllowCustom !== false) {
+                window.IGNITE.jquery("input[name='" + recurringToggleName + "']", '#form_igvfcRXyVkHr').prop('checked', false);
+                customInput.closest('div').find('.sli-amount-label').addClass('sli-custom-amount-label-selected');
+                // don't change this blur event, recurring amount has a listener on blur to update amounts
+                customInput.val(amount).blur();
+                // need to add this event to make selection for other button
+                customInput.val(amount).focus();
+            }
+        } else {
+            if (_igvfcRXyVkHr.allowCustomOnetimeDonations !== false) {
+                var onetimeInput = window.IGNITE.jquery("[data-ignite-custom-onetime-input]", '#form_igvfcRXyVkHr');
+                window.IGNITE.jquery("input[name='donationAmtToggle']", '#form_igvfcRXyVkHr').prop('checked', false);
+
+                onetimeInput.closest('div').find('.sli-amount-label').addClass('sli-custom-amount-label-selected');
+                // don't change this blur event, one time amount has a listener on blur to update amounts
+                onetimeInput.val(amount).blur();
+                // need to add this event to make selection for other button
+                onetimeInput.val(amount).focus();
+            }
+        }
+    }
+}
+
+_igvfcRXyVkHr.handleOther = function(key) {
+    var element = window.IGNITE.jquery('[salsa-reference-name=' + key + ']');
+    var value = _igvfcRXyVkHr.getUrlParameter(key);
+    if (element.is(':checkbox')) {
+        if (value == 'yes' && !element.prop('checked'))
+            element.click().attr('checked', 'checked');
+        else if (value == 'no' && element.prop('checked'))
+            element.click().removeAttr('checked');
+    } else if (element.hasClass('sli-select-radio')) {
+        element.find('input[value="' + value + '"]').click().attr('checked', 'checked');
+    } else {
+        element.val(value).change();
+    }
+
+    if (key == 'address-country') {
+        _igvfcRXyVkHr.handleCountryChange();
+    }
+}
+
+_igvfcRXyVkHr.handleParameter = function(key) {
+    if (key) {
+        if (key === 'recurring') {
+            _igvfcRXyVkHr.handleRecurringCheckbox();
+        } else if (key === 'amount') {
+            _igvfcRXyVkHr.handleDonationAmount(parseFloat(_igvfcRXyVkHr.getUrlParameter('amount')));
+        } else if (key === 'oneTimeAmount') {
+            var amount = parseFloat(_igvfcRXyVkHr.getUrlParameter('oneTimeAmount'));
+            var donAmt = window.IGNITE.jquery('.sli-oneTimeAmountRadio' + '[data-ignite-amount*="' + amount + '"]');
+            _igvfcRXyVkHr.setAmounts(donAmt, false, amount);
+        } else if (key === 'recurringAmount') {
+            _igvfcRXyVkHr.handleDonationAmount(parseFloat(_igvfcRXyVkHr.getUrlParameter('recurringAmount')), true);
+        } else if (key === 'recurringInterval') {
+            var interval = _igvfcRXyVkHr.getUrlParameter('recurringInterval');
+            if (_igvfcRXyVkHr.getAvailableRecurringIntervals().indexOf(interval) !== -1) {
+                var selectElement = window.IGNITE.jquery('[data-ignite-field-id="SelectRecurringInterval"] select[name="field-recurring-interval"]', '#form_igvfcRXyVkHr');
+                if (selectElement.length > 0) {
+                    selectElement.val(interval).change();
+                } else {
+                    var checkedRadioElement = window.IGNITE.jquery('[data-ignite-field-id="SelectRecurringInterval"] input[type="radio"][name="field-recurring-interval"]', '#form_igvfcRXyVkHr');
+                    checkedRadioElement.each(function(index, value) {
+                        if (window.IGNITE.jquery(value).val() === interval) {
+                            window.IGNITE.jquery(value).click();
+                        }
+                    });
+                }
+            }
+        } else {
+            try {
+                _igvfcRXyVkHr.handleOther(key);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+}
+
+_igvfcRXyVkHr.getToggleNameByInterval = function(interval) {
+    switch ((interval || '').toLowerCase()) {
+    case 'monthly':
+        return "donationAmtToggleMonthly";
+    case 'quarterly':
+        return "donationAmtToggleQuarterly";
+    case 'yearly':
+        return "donationAmtToggleYearly";
+    default:
+        return "donationAmtToggle2";
+    }
+}
+
+_igvfcRXyVkHr.getCustomNames = function(toggleName) {
+    var customInputName;
+    var customRadioName;
+    switch (toggleName) {
+    case 'donationAmtToggle2':
+        customInputName = 'customRecurringAmount';
+        customRadioName = 'donationAmtToggle2Other';
+        break;
+    case 'donationAmtToggleMonthly':
+        customInputName = 'customMonthlyRecurringAmount';
+        customRadioName = 'donationAmtToggleMonthlyOther';
+        break;
+    case 'donationAmtToggleQuarterly':
+        customInputName = 'customQuarterlyRecurringAmount';
+        customRadioName = 'donationAmtToggleQuarterlyOther';
+        break;
+    case 'donationAmtToggleYearly':
+        customInputName = 'customYearlyRecurringAmount';
+        customRadioName = 'donationAmtToggleYearlyOther';
+        break;
+    default:
+        customInputName = 'customOneTime';
+        customRadioName = 'donationAmtToggleOther';
+        break;
+    }
+    return {
+        input: customInputName,
+        radio: customRadioName
+    };
+}
+
+_igvfcRXyVkHr.getSelectedRecurringInterval = function() {
+    var selectElement = window.IGNITE.jquery('[data-ignite-field-id="SelectRecurringInterval"] select[name="field-recurring-interval"]', '#form_igvfcRXyVkHr');
+    var checkedRadioElement = window.IGNITE.jquery('[data-ignite-field-id="SelectRecurringInterval"] input[type="radio"][name="field-recurring-interval"]:checked', '#form_igvfcRXyVkHr');
+    return selectElement.length > 0 ? selectElement.val() : checkedRadioElement.val();
+}
+
+_igvfcRXyVkHr.getAvailableRecurringIntervals = function() {
+    var selectElement = window.IGNITE.jquery('[data-ignite-field-id="SelectRecurringInterval"] select[name="field-recurring-interval"]', '#form_igvfcRXyVkHr');
+    var radioElement = window.IGNITE.jquery('[data-ignite-field-id="SelectRecurringInterval"] input[type="radio"][name="field-recurring-interval"]', '#form_igvfcRXyVkHr');
+    var ddlArray = [];
+    if (selectElement.length > 0) {
+        for (var i = 0; i < selectElement[0].options.length; i++) {
+            ddlArray[i] = selectElement[0].options[i].value;
+        }
+    } else if (radioElement.length > 0) {
+        for (var i = 0; i < radioElement.length; i++) {
+            ddlArray[i] = radioElement[i].value;
+        }
+    }
+    return ddlArray;
+}
+
+_igvfcRXyVkHr.getIntervalFromUrlParameter = function() {
+    var resultInterval;
+    var interval = _igvfcRXyVkHr.getUrlParameter('recurringInterval') || _igvfcRXyVkHr.getUrlParameter('selectrecurringintervalb') || '';
+    if (_igvfcRXyVkHr.getAvailableRecurringIntervals().indexOf(interval) !== -1) {
+        resultInterval = interval;
+    } else if (_igvfcRXyVkHr.getAvailableRecurringIntervals().length > 0 && !interval) {
+        resultInterval = _igvfcRXyVkHr.getSelectedRecurringInterval();
+    } else if (!interval || interval.toLowerCase() === _igvfcRXyVkHr.data['frequency'].value.toLowerCase()) {
+        // when supporter can't choose interval on form or recurringInterval url parameter doesn't exist
+        resultInterval = '';
+    }
+
+    return resultInterval;
+}
+
+_igvfcRXyVkHr.addPostInit(function hiddenParams() {
+    // initialize
+    _igvfcRXyVkHr.getUrlParameter();
+
+    for (var key in _igvfcRXyVkHr.urlParameters) {
+        _igvfcRXyVkHr.handleParameter(key);
+    }
+});
+
+_igvfcRXyVkHr.addPostInit(function salsaTrack() {
+    _igvfcRXyVkHr.stc = _igvfcRXyVkHr.getUrlParameter('sl_tc', _igvfcRXyVkHr.stc);
+});
