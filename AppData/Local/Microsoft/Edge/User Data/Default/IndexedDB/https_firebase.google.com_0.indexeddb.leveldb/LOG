@@ -1,0 +1,6 @@
+2021/04/27-14:50:57.983 3f10 Creating DB C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_firebase.google.com_0.indexeddb.leveldb since it was missing.
+2021/04/27-14:50:58.004 3f10 Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_firebase.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/27-15:20:34.825 2550 Level-0 table #5: started
+2021/04/27-15:20:34.833 2550 Level-0 table #5: 1833 bytes OK
+2021/04/27-15:20:34.839 2550 Delete type=0 #3
+2021/04/27-15:20:34.840 2550 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

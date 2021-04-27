@@ -1,0 +1,2982 @@
+<!DOCTYPE HTML>
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"  prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+
+
+<head>
+
+    <meta charset="utf-8">
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues. More info: h5bp.com/i/378 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>curl command</title>      
+        <meta property="og:site_name" content="Aziz asked:" />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="http://community.apigee.com" />
+		<meta property="og:title" content="curl command" />
+		<meta property="og:description" content="where to run curl command for private cloud?is there any documentation for this?" />
+		<meta property="og:image" content="https://pbs.twimg.com/profile_images/378800000508262189/6f72b788786c25b956aac477099a23ed_400x400.png" />
+		<meta name="twitter:card" value="summary" />
+		<meta name="twitter:site" value="Apigee Community Site" />
+		<meta name="twitter:creator" value="Aziz" />
+		<meta name="twitter:url" value="http://community.apigee.com" />
+		<meta name="twitter:title" value="curl command" />
+		<meta name="twitter:description" value="where to run curl command for private cloud?is there any documentation for this?" />
+		<meta name="twitter:image" value="https://pbs.twimg.com/profile_images/378800000508262189/6f72b788786c25b956aac477099a23ed_400x400.png" />
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="canonical" href="/questions/41451/curl-command.html" />
+
+        
+                <meta name="google-site-verification" content="i2yiy-ZmhLJXLHP2uWLLRpVPmuFD74gx_d9C8JnjZhE" />
+<style style="text/css">
+.vote-widget .icon-chevron-up { color: #009F4D; }
+</style>
+<style style="text/css">
+    .answer-badges li a{max-width:none!important}
+    .answer-badges li a:first-child { max-width: 23px!important}
+</style>
+<style style="text/css">
+#main-navbar .navbar-inner .navbar-search {
+    float: none;
+}
+#main-navbar .navbar-inner .navbar-search:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear:both;
+}
+#main-navbar .alert-block.recent-notification {
+    max-width:  550px;
+    display: block;
+    margin: 20px auto;
+}
+.recaptcha_input_area.recaptcha_input_area {
+    height: initial !important;
+}
+</style>
+
+        
+
+
+<script type="text/javascript">
+    var askFormURL = '/questions/ask.html';
+    var logoutURL = '/users/logout.html';
+    var voteUpJsonURL = '/commands/0/voteup.json';
+    var voteDownJsonURL = '/commands/0/votedown.json';
+    var getVotesJsonUrl = '/%7Bnode%7D/getVotes.json';
+    var related_questions_url = '/search.json';
+    var emailCheckerURL = '/users/temporaryLogin/dupsUserEmailCheck.json';
+
+    var authorizedFileTypes = 'gif,png,jpg,jpeg,zip,tar.gz,pdf,txt,xml'.split(",");
+    var authorizedImageTypes = 'gif,png,jpg,jpeg'.split(",");
+
+    var flashMessages = [];
+
+    var pageContext = {
+        currentUser: {
+            id: '',
+            username: 'Anonymous',
+            url: '#',
+            avatar: '',
+            reputation: '',
+            follows: null,
+            canCreateTopics: false,
+            canViewUserProfile: false
+        },
+        i18n: {
+            confirm: "Are you sure?",
+            yes: "Yes",
+            no: "No",
+            save: "Save",
+            cancel: "Cancel",
+            close: "Close",
+            edit: "Edit",
+            insert: "Insert",
+            upload: "Upload",
+            download: "Download",
+            choose: "Choose",
+            deleted: "Deleted",
+            ok: "Ok",
+            by: "by",
+            word: "word",
+            words: "words",
+            character: "character",
+            characters: "characters",
+            login: "Sign in",
+            register: "Register",
+            timeAgo: "{0} ago",
+            timeAt: "at",
+            day: "day",
+            days: "days",
+            hour: "hour",
+            hours: "hours",
+            minute: "minute",
+            minutes: "minutes",
+            second: "sec",
+            seconds: "secs",
+            justNow: "just now",
+            retag: "retag",
+            comment: "Comment",
+            comments: "Comments",
+            showOneComment: "<i class='icon-comments'></i> Show 1",
+            hideOneComment: "<i class='icon-comments'></i> Hide 1",
+            showNComments: "<i class='icon-comments'></i> Show $n",
+            hideNComments: "<i class='icon-comments'></i> Hide $n",
+            question: "question",
+            questions: "Questions",
+            answer: "Answer",
+            answers: "Answers",
+            posts: "Posts",
+            wiki: "Wiki",
+            reputation: "Reputation",
+            unlike: "Unvote",
+            like: "Vote",
+            likes: "Likes",
+            follow: "Follow",
+            unfollow: "Unfollow",
+            following: "Following",
+            followers: "Followers",
+            awarded: "Awarded",
+            completedBy: "Recently completed by",
+            joined: "Joined",
+            authorizedTypes: "Allowed Upload Types",
+            uploadDialog: {
+                uploadFile: "Choose a file to upload",
+                doUpload: "Upload",
+                fileTooBig: "Your attachment must be $size or smaller.",
+                invalidAttachmentType: "Your attachment must be one of: gif,png,jpg,jpeg,zip,tar.gz,pdf,txt,xml",
+                invalidImageType: "Your image must be one of: gif,png,jpg,jpeg"
+            },
+            previewAndCropDialog: {
+                previewAndResize: "Preview and resize",
+                accept: "Accept"
+            },
+
+            closeQuestionTitle: "Close or Flag",
+            lockPostModalTitle: "Lock",
+            reportQuestionModalTitle: "Report",
+            confirmModalTitle: "Please confirm",
+            convertToAnswerText: "Are you sure you want to convert this comment to answer?",
+            unlockPostModalText: "Are you sure you want to allow comments on this post?",
+            cancelReportModalText: "Are you sure you want to undo reporting this post?",
+
+            reportSuccessText: "This post has been successfully reported.",
+            reportCancelText: "Your report on this post has been sucessfully canceled.",
+
+            commandsMoveToSpace: "Move",
+            commandsGiveReputation: "Reward user",
+            commandsGiveReputationSuccess: "Points awarded successfully",
+            commandsConvertToCommentTitle: "Select comment location",
+            uploadProfilePictureSelectButton: "Select photo from your computer",
+            changeAvatarSelectButton: "Select photo from your computer",
+            changeAvatarSelectNoPhoto: "No photo selected",
+            postControlsRedirectTitle: "Redirect",
+
+            WMDImageDialogText: "Enter image url",
+            WMDLinkDialogText: "Enter url",
+            WMDUploadImage: "upload image",
+            WMDBold: "Strong <strong> Ctrl+B",
+            WMDItalic: "Emphasis <em> Ctrl+I",
+            WMDLink: "Hyperlink <a> Ctrl+L",
+            WMDQuote: "Blockquote <blockquote> Ctrl+Q",
+            WMDCode: "Code Sample <pre><code> Ctrl+K",
+            WMDImage: "Image <img> Ctrl+G",
+            WMDAttachment: "Attachment Ctrl+U",
+            WMDOrderedList: "Numbered List <ol> Ctrl+O",
+            WMDUnorderedList: "Bulleted List <ul> Ctrl+U",
+            WMDHeading: "Heading <h1>/<h2> Ctrl+H",
+            WMDHorizontalRule: "Horizontal Rule <hr> Ctrl+R",
+            WMDUndo: "Undo - Ctrl+Z",
+            WMDRedoWin: "Redo - Ctrl+Y",
+            WMDRedoOther: "Redo - Ctrl+Shift+Z",
+            WMDHelp: "Markdown Help",
+
+            draftMessage: "We noticed that you were previously working on TYPO. What would you like to do now?",
+            draftSaveMessage: "Saving Draft...",
+            draftLoadButton: "Load Draft",
+            draftDeleteButton: "Delete Draft",
+
+            linkMenuInsertLink: "Insert link",
+            linkMenuEditLink: "Edit link",
+            linkMenuUnlink: "Remove link",
+            linkMenuAnchor: "Anchor",
+            linkMenuMailto: "Email",
+            inputTextPrompt: "Text",
+            inputWebPrompt: "URL",
+            inputLinkNewTab: "Open link in a new tab",
+            inputImageForm: "Update Image",
+            inputImageTitle: "Title",
+            inputImagePosition: "Position",
+            inputImagePositionNone: "None",
+            inputImagePositionLeft: "Left",
+            inputImagePositionRight: "Right",
+
+            formattingLabel: "Formatting",
+            formattingParagraph: "Normal Text",
+            formattingQuote: "Quote",
+            formattingCode: "Code",
+            formattingHeader: "Header",
+            formattingBold: "Bold",
+            formattingItalic: "Italic",
+            formattingUnderline: "Underline",
+            formattingFontColor: "Font Color",
+            formattingBackColor: "Back Color",
+            formattingIndent: "Indent",
+            formattingOutdent: "Outdent",
+            formattingAlignment: "Alignment",
+            formattingAlignLeft: "Align text to the left",
+            formattingAlignCenter: "Center text",
+            formattingAlignRight: "Align text to the right",
+            formattingAlignJustify: "Justify text",
+            formattingHorizontalRule: "Insert Horizontal Rule",
+
+            toolTipsInsertImage: "Insert Image",
+            toolTipsInsertFile: "Insert File",
+            toolTipsInsertCode: "Insert Code",
+            toolTipsInsertVideo: "Insert Video",
+            toolTipsInsertTable: "Insert Table",
+            toolTipsorderedList: "Ordered List",
+            toolTipsunorderedList: "Unordered List",
+            toolTipLink: "Link",
+
+            tableInsert: "Insert Table",
+            tableRows: "Rows",
+            tableColumns: "Columns",
+            tableInsertRowAbove: "Add Row Above",
+            tableInsertRowBelow: "Add Row Below",
+            tableInsertColumnLeft: "Add Column Left",
+            tableInsertColumnRight: "Add Column Right",
+            tableDelete: "Delete Table",
+            tableDeleteColumn: "Delete Column",
+            tableDeleteRow: "Delete Row",
+            tableAddHead: "Add Header",
+            tableDeleteHead: "Delete Header",
+
+            uploadOrChoose: "Or Choose",
+            uploadDropFileHere: "Drop file here",
+            uploadFilenameOptional: "Name (optional)",
+
+            emailValidationPrompt: "Resend validation email",
+            emailValidationPromptBody: "Do you want to resend email validation?",
+            invalidReputation: "Error: You must enter a valid Integer without commas."
+        },
+        url: {
+            login: "/users/login.html",
+            register: "/users/register.html",
+            getRevision: "/revisions/get-revision.json",
+            getComments: "/comments/%25ID%25/list.json",
+            uploadFile: "/uploadFile.html",
+            uploadProgress: "/uploadProgress.json",
+            uploadPreview: "/uploadPreview.html",
+            cropUpload: "/cropUpload.json",
+            cancelUpload: "/cancelUpload.json",
+            markdownHelp: "/static/markdown/help.html",
+            updateMarkdown: "/commands/updateMarkdown.json",
+            profile: "/users/{id}/{plug}.html",
+            extractKeywords: "/extract-keywords.json",
+            follow: "/follow/%7BobjId%7D/%7Btype%7D.json",
+            unfollow: "/unfollow/%7BobjId%7D/%7Btype%7D.json",
+            getUserFollows: "/%7Buser%7D/getUserFollows.json",
+            condensedProfileUrl: "/users/%7Buser%7D/condensedProfile.json",
+            viewTopicJSON: "/topics/%7Btopic%7D/view.json",
+            topicIcon: "/topics/%7Btopic%7D/icon.html",
+            topic: "/topics/%7Btopic%7D.html",
+            topicSearch: "/search/topics.json",
+            awardListUrl: "/badge/%7BawardType%7D/%7Bdesc%7D.json",
+            usersSearch: "/users/list.json",
+            usersLookup: "/users/lookup.json",
+            mentionsSearch: "/users/mentionsSearch.json",
+            searchJson: "/search.json",
+            trackJs: "/static/trackJs.json",
+            userAvatar: "/users/%7BuserId%7D/photo/view.html",
+            revisionView: "/revisions/{nodeId}.html",
+            authorizeAttachmentsUrl: "/authorizeAttachment.json"
+        },
+        extraScripts: {
+            jcrop: {
+                js: '/themes/thub/scripts/jcrop/js/jquery.Jcrop.js',
+                css: '/themes/thub/scripts/jcrop/css/jquery.Jcrop.css'
+            }
+        },
+        options: {
+        	maxTopics: '7',
+            gravatarEnabled: true,
+	       	attachments: {
+	               'kbentry': {
+	                   enabled: true,
+	                   maxSizeBytes: 5000000,
+	                   maxSizeBytesTotal: 25000000
+	               },
+	               'answer': {
+	                   enabled: true,
+	                   maxSizeBytes: 5000000,
+	                   maxSizeBytesTotal: 25000000
+	               },
+	               'question': {
+	                   enabled: true,
+	                   maxSizeBytes: 5000000,
+	                   maxSizeBytesTotal: 25000000
+	               },
+	               'idea': {
+	                   enabled: true,
+	                   maxSizeBytes: 5000000,
+	                   maxSizeBytesTotal: 25000000
+	               },
+	               'comment': {
+	                   enabled: true,
+	                   maxSizeBytes: 5000000,
+	                   maxSizeBytesTotal: 25000000
+	               },
+	               'idea-comment': {
+	                   enabled: true,
+	                   maxSizeBytes: 5000000,
+	                   maxSizeBytesTotal: 25000000
+	               },
+	       	}
+        },
+        additional: {"TH_CSRF":"a5780808926057477064"},
+        useRelativeTime: true,
+        userRealName: true
+    };
+    pageContext.i18n["delete"] = "Delete";
+</script>
+
+        <!--[if lte IE 10]>
+    <script src="/themes/base/scripts/compatibility/indexOf.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="/themes/base/scripts/compatibility/document.getSelection.js" type="text/javascript"></script>
+    <script src="/themes/base/scripts/compatibility/ierange-m2-packed.js" type="text/javascript"></script>
+    <style type="text/css">
+        input[type="password"] {
+            font-family: Arial;
+        }
+    </style>
+    <![endif]-->
+<script type="text/javascript" src="/themes/apigee/pack/combined.js.h-291136827.pack" charset="utf-8"></script>
+
+<script type="text/javascript">
+(function ($) {
+    "use strict";
+
+    $.extend($.fn.select2.defaults, {
+        formatNoMatches: function () {
+            return 'No matches found';
+        },
+        formatInputTooShort: function (input, min) {
+            var n = min - input.length;
+            if (n == 1) {
+                return 'Please enter 1 more character.';
+            }
+            else {
+                var return_str = "Please enter $n more characters.";
+                return return_str.replace("$n", n.toString());
+            }
+        },
+        formatInputTooLong: function (input, max) {
+            var n = input.length - max;
+            if (n == 1)
+                return 'Please delete 1 character.';
+            else {
+                var return_str = 'Please delete $n characters.';
+                return return_str.replace("$n", n.toString());
+            }
+        },
+        formatSelectionTooBig: function (limit) {
+            if (limit == 1)
+                return 'You can only select 1 item.';
+            else {
+                var return_str = 'You can only select $n items.';
+                return return_str.replace("$n", limit.toString());
+            }
+        },
+        formatLoadMore: function (pageNumber) {
+            return 'Loading more results...';
+        },
+        formatSearching: function () {
+            return 'Searching...';
+        }
+    });
+})(jQuery);
+</script>
+
+    <script src="/themes/apigee/scripts/jquery.tmpl.js" type="text/javascript"></script>
+    <link rel="shortcut icon" href="/themes/thub/images/favicon.ico"/>
+
+    <!-- Core Bootstrap css + Kickstrap styles -->
+<link rel="stylesheet" type="text/css" href="/themes/apigee/pack/combined.css.h-927785396.pack" charset="utf-8"/><link rel="stylesheet" type="text/css" href="/themes/apigee/pack/combined.css.h-855222172.pack" charset="utf-8"/>
+
+<style type="text/css">
+@font-face {
+  font-family: 'Apigee';
+  src: url('/themes/apigee/fonts/Apigee.eot');
+  src: url('/themes/apigee/fonts/Apigee.eot?#iefix') format('embedded-opentype'),
+       url('/themes/apigee/fonts/Apigee.woff') format('woff'),
+       url('/themes/apigee/fonts/Apigee.ttf')  format('truetype'),
+       url('/themes/apigee/fonts/Apigee.svg#3a426ca91b8ec4173fa7a5d79e33e97a') format('svg');
+  font-style: normal;
+  font-weight: 400;
+}
+</style>
+
+<script type="text/javascript" src="//use.typekit.net/ezw2jtl.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type='text/javascript'>
+(function (d, t) {
+  var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  bh.type = 'text/javascript';
+  bh.src = '//www.bugherd.com/sidebarv2.js?apikey=mhcwvbpmwczi14g4mpyrjg';
+  s.parentNode.insertBefore(bh, s);
+  })(document, 'script');
+</script>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N52333"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N52333');</script>
+<!-- End Google Tag Manager -->
+
+    <script type="text/javascript">
+        $(document).ready(function(){pageContext.options.commentsAttachmentsEnabled = true});
+    </script>
+
+
+        
+
+    
+
+    <script type="text/javascript">
+        $(function () {
+pageContext.i18n.modTalk = 'moderation talk';
+pageContext.i18n.replyToComment = 'Reply';
+pageContext.i18n.modTalkEmpty = 'moderation talk is empty';
+pageContext.url.getModTalk = "/comments/%25ID%25/listModTalk.json";
+pageContext.url.possibleCommentRecipients = "/comments/%ID%/possibleRecipients.json";
+pageContext.url.commentEdit = '/comments/%25ID%25/edit.html';
+pageContext.url.commentView = '/comments/%ID%/view.html';
+
+pageContext.i18n.commentVisibility = {
+'full': 'Viewable by all users',
+'op': 'Viewable by the original poster',
+'mod': 'Viewable by moderators',
+'opAndMod': 'Viewable by moderators and the original poster',
+'other': 'Advanced visibility',
+'dialogTitle': 'Comment visibility',
+'selectGroups': 'Visible to groups',
+'selectOther': 'Other recipients',
+'selectOriginalPoster': 'Original poster',
+'selectModerators': 'Moderators',
+'selectAssignees': 'Asked to answer users'
+};
+
+pageContext.i18n.commentMenuLabels = {
+'comment-edit': 'comments.menu.edit',
+'comment-delete': 'comments.menu.delete',
+'comment-convert': 'comments.menu.convert'
+};pageContext.i18n.answer= {
+	bestAnswer: 'Best Answer',
+	controlBar : {
+		accept: 'Accept',
+		unaccept: 'Unaccept',
+		acceptCommand: 'Accept this answer as correct',
+		cancelAcceptedCommand: 'Remove this answers accepted status'
+	}
+};
+    window.croles = {
+        u: false, op: false, m: false,
+        og: false, as: false, ag: false,
+        dc: false, doc: false, eo: false, ea: false
+    };
+
+    tools.init({
+        q: {
+            e: false, ew: false, eo: false,
+            r: false, ro: false,
+            d: false, dow: false, fv: false,
+            c: false, co: false,
+            p: false, tm: false
+            , ms: false, mos: false
+        },
+        n: {
+            f: false, vf: false, vfo: false,
+            vr: false, vro: false,
+            c: false, co: false,
+            vu: false, vd: false,
+            w: false, wo: false,
+            l: false
+        },
+        c: {
+            e: false, eo: false,
+            d: false, dow: false,
+            ta: false, tao: false,
+            l: false
+        },
+        a: {
+            e: false, ew: false, eo: false,
+            d: false, dow: false,
+            a: false, aoq: false, ao: false,
+            tc: false, tco: false,
+            p: false, tm: false
+        },
+        pc: croles
+    }, {
+        tc: true,
+        nsc: true
+    });
+
+            commandUtils.initializeLabels();
+        });
+    </script>
+
+</head>
+
+<body>
+<div id="not-footer">
+
+<script type="text/javascript">
+    $(document).ready(function () {
+		// var ie7 = $.browser.msie && $.browser.version <= 7;
+
+        var label = $('.navbar-search label[for=search_box]')
+        label.css({
+            position: 'absolute',
+            top: 4,
+            left: 17,
+            zindex: 10
+        });
+        $('#search_box')
+        .focus(function () {
+            label.hide()
+        })
+        .blur(function () {
+            this.value == "" ? label.show() : label.hide()
+        })
+
+        if(!/^(?:\/?index\.html|\/)$/i.test(location.pathname)){
+        	var searchBottomSpacing = parseFloat($('#main-navbar .navbar-inner .container').css('margin-bottom').replace(/[^\d\.\,]+/gi,''));
+        	$('.welcome-txt,.upcoming-txt').remove();
+        	$('#main-navbar .navbar-inner').first().css('margin-top',(searchBottomSpacing/2)+'px');
+        }
+    });
+</script>
+
+<div class="bs-example">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header navbar-header-apigee">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2-">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-brand-apigee" href="http://apigee.com">
+                    <img src="https://community.apigee.com/themes/apigee/images/teamhub-logo.png"/>
+                </a>
+            </div>
+            <div class="current-site">
+                <a href="http://community.apigee.com">
+                    <span class="title-brackets">{</span> Community <span class="title-brackets">}</span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">                    
+                    <li>
+                        <a href="http://academy.apigee.com/" title="Apigee Academy">Academy</a>
+                    </li>
+                    <li>
+                        <a href="http://apigee.com/docs/" title="Docs">Docs</a>
+                    </li>
+                    <li>
+                        <a href="http://apigee.com/about/developers" title="Developers">Developers</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Resources <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/content/kbentry/list.html" title="Community Articles">Community Articles</a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://github.com/apigee" title="Apigee">Apigee on GitHub</a>
+                            </li>
+                            <li>
+                                <a href="http://apigee.com/docs/api-services/samples/samples-reference">Code Samples</a>
+                            </li>
+                            
+                            <li>
+                                <a target="_blank" href="http://apigee.com/about/resources" title="Videos & eBooks">Videos &amp; eBooks</a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="/accelerator-methodology" title="Accelerator Methodology">Accelerator Methodology</a>
+                            </li>                            
+                        </ul>
+                    </li>
+                    <li ><a href="http://apigee.com/about/support/portal">Support</a></li>
+                </ul>
+
+
+                <ul class="nav navbar-nav nav-links navbar-right ">
+                    <li>
+
+
+
+                            <a id="create-button" class="btn-success btn-ask" href="/questions/ask.html?space=13">Ask a Question</a>
+                    </li>
+
+
+
+                                <li class="dropdown">
+                                        <a href="#" id="spaces-menu-dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                                            <!--Spaces -->
+Spaces                                            <i class="icon-caret-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            
+                                                                                <li >
+                                        <a class="main-nav"
+                                           href="/spaces/174/index.html">Product Announcements</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/8/index.html">General</a>
+                                    <li class="active">
+                                        <a class="main-nav"
+                                           href="/spaces/13/index.html">Edge/API Management</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/15/index.html">Developer Portal (Drupal-based)</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/175/index.html">Developer Portal (Integrated)</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/123/index.html">API Design</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/151/index.html">APIM on Istio</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/141/index.html">Extensions</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/91/index.html">Business of APIs</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/14/index.html">Academy/Certification</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/191/index.html">Adapter for Envoy</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/44/index.html">Analytics</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/124/index.html">Events</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/181/index.html">Hybrid</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/134/index.html">Integration (AWS, PCF, Etc.)</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/71/index.html">Microgateway</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/41/index.html">Monetization</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/81/index.html">Private Cloud Deployment</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/192/index.html">日本語コミュニティ</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/45/index.html">Insights</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/42/index.html">IoT Apigee Link</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/16/index.html">BaaS/Usergrid</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/152/index.html">BaaS Transition/Migration</a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/12/index.html">Apigee-127 </a>
+                                    <li >
+                                        <a class="main-nav"
+                                           href="/spaces/133/index.html">New Customers</a>
+
+                                        </ul>
+                                </li>
+                    <li class="dropdown">
+                        <a href="#" id="explore-menu-dropdown" class="dropdown-toggle" title="Explore"
+                           data-toggle="dropdown">
+                            <i class="icon-sitemap"></i>
+                            <i class="icon-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-rightt">
+                            <li>
+                                <a href="https://community.apigee.com/topics.html">Topics</a>
+                            </li>
+
+                                <li>
+                                    <a href="/questions/index.html">Questions</a>
+                                </li>
+                                <li>
+                                    <a href="/content/kbentry/list.html">Articles</a>
+                                </li>
+                                <li>
+                                    <a href="/content/idea/list.html">Ideas</a>
+                                </li>
+                                <li>
+                                    <a href="/content/kbentry/list.html">Articles</a>
+                                </li>
+                                <li>
+                                    <a href="/content/idea/list.html">Ideas</a>
+                                </li>
+
+                            <li>
+                                <a href="/users/index.html">Leaderboard</a>
+                            </li>
+
+                            <li>
+                                <a href="/badge/types.html">Badges</a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li>
+							<li><a id="signin-element" href="/users/login.html">Log in</a></li>
+						</li>
+						<li>
+							<a class="user-signup-button" href="https://login.apigee.com/oauth/authorize?client_id=community&response_type=code&redirect_uri=https%3A%2F%2Fcommunity%2Eapigee%2Ecom%2Fusers%2Fsocial%2Flogin%2Fapicopenidconnect%2Ehtml">Sign up</a>
+						</li>
+					
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+</div>
+
+    <div id="main-navbar" class="navbar row-fluid">
+        <div class="navbar-inner clearfix">
+    		<h2 class="search-hint">
+                    Get answers, ideas, and support from the Apigee Community
+            </h2>
+            <div class="container row-fluid">
+                <form action="/search.html" method="get" class="navbar-form navbar-search" role="search">
+                    <input type="hidden" id="search-filters" name="f" value=""/>
+                    <input type="hidden" id="search-types" name="type"
+                           value="question OR kbentry OR idea OR kbentry OR idea" />
+                    <input type="hidden" id="search-redirect" name="redirect"
+                           value="search/search"/>
+                    <input type="hidden" id="search-sort" name="sort"
+                           value="relevance"/>
+                    <div class="form-group span5 offset3">
+                    	<input type="text"
+                                            class="search-query"
+                                            value=""
+                                            name="q"
+                                            id="search-query"
+                                            data-provide="typeahead"
+                                            data-items="4"
+                                            autocomplete="off"
+                                            placeholder="Search the Apigee Community, Docs, and Blog... "
+                                            />
+						<div id="searchResultsAutoComplete"></div>
+                    </div>
+					<div class="span3 navbar-actions">
+	                    <button type="submit" class="btn btn-default btn-search">
+	                            Search
+	                    </button>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+
+<script>
+    function doCloseNotification(notifId) {
+        $("#id_notification_"+notifId).hide();
+
+        //$.get("/apigee/closeNotification.json",{'notificationId':notifId}); //Not Implimented. Might not be desired.
+    }
+</script>
+
+
+
+<div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a> <span class="divider">/</span>
+            </li>
+                        <li><a href="/spaces/13/edge.html">Edge/API Management</a> <span class="divider">/</span>
+                        </li>
+        </ul>
+</div>
+
+
+    <section id="middle">
+
+        <div class="main">
+
+            <div class="main-inner">
+
+                <div class="container">
+                    <div class="row">
+                                <div class="span8 mainContent">
+
+                                        
+
+
+
+
+<style type="text/css">
+    #userVotesUp {
+        display: none;
+        position: absolute;
+        border: solid 1px #eee;
+        background-color: #ffffdd;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+   #userVotes h3 {
+	text-transform: capitalize;
+   }
+    .post-controls {position: relative;}
+</style>
+<script>
+
+    var jsonTopicSearch = '/search/topics.json';
+
+    var retagUrl = '/commands/41451/editQuestionTopics.json';
+
+
+    function submit_retag() {
+        $.post(retagUrl, $("#topics_retag_container").serializeArray(), function (data) {
+            document.location.reload();
+        });
+    }
+    function setup_retag() {
+        $("#topics_retag_container").css("display", "inline");
+//        $("#topics_retag_container").show();
+
+        $("#id_tags_container").hide();
+        $("#topics_retag").select2({
+            placeholder: 'Enter topics...',
+            minimumInputLength: 1,
+            width: "250px",
+            ajax: {
+                url: jsonTopicSearch,
+                dataType: 'json',
+                data: function (term, page) {
+                    return {
+                        q: term
+                    };
+                },
+                results: function (data, page) {
+                    for (var i = 0; i < data.topics.length; i++) {
+                        data.topics[i].text = data.topics[i].name;
+                        data.topics[i].id = data.topics[i].name;
+                    }
+                    return {results: data.topics};
+                }
+            },
+            tokenSeparators: [","],
+            tags: true,
+            createSearchChoice: function (term) {
+                return {id: term, text: term};
+            },
+            formatResult: function (item, container, query, escapeMarkup){
+                return escapeMarkup(item.text);
+            },
+            formatSelection: function(item,container, escapeMarkup) {
+                return escapeMarkup(item.text);
+            },
+            initSelection: function (element, callback) {
+                var data = [];
+                $(element.val().split(",")).each(function () {
+                    data.push({id: this, text: this});
+                });
+                callback(data);
+            }
+        });
+
+
+    }
+    $(document).ready(function () {
+        $("#id_do_retag").click(function () {
+            setup_retag();
+            return false;
+        });
+
+        $("#topics_retag_cancel").click(function () {
+
+            $("#topics_retag_container").hide();
+            $("#id_tags_container").show();
+        });
+        $(".question-body a[href^='http://'], .answer-body a[href^='http://']").attr("target","_blank");
+
+    });
+</script>
+
+<div class="widget widget-nopad smallmargin" xmlns="http://www.w3.org/1999/html">
+    <div class="widget-content">
+
+
+        <div id="question-container-41451" class="post-container question-container" nodeid="41451">
+            <div id="question-41451" class="question post">
+
+<style type="text/css">
+    .question-body, .node-body {
+        min-height: 50px;
+    }
+
+    .answer-body, .reply-body {
+        min-height: 115px;
+    }
+</style>
+
+
+<div class="post-gravatar question-gravatar" nodeId="41451">
+<a href="/users/9406/azizsiddiqui.html"
+style="display: inline-block; max-width: 48px;"
+rel="user" nodeId="9406"> <img class="gravatar "
+width="48"
+src="//www.gravatar.com/avatar/ce426a2cc49d73237ec6c3f84500fe6d?s=48&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Aziz"
+/>
+</a>    <div class="vote-widget">
+        <a id="vote-up-button-41451" class="vote-up votes" href="#" command="voteUp"><i class="icon-chevron-up icon-2x"></i></i></a>
+        <span id="post-41451-score-wrapper" class="post-score-wrapper count votes" style="cursor:default">
+            <span id="post-41451-score" class="score">0</span>
+        </span>
+        <a id="vote-down-button-41451" class="vote-down votes" href="#" command="voteDown"><i class="icon-chevron-down icon-2x"></i></a>
+            <a id="favorite-mark-41451" class="ajax-command action-favorite ajax-command favorite-mark " href="#" command="markFavorite">
+                <i class="icon-star-empty"></i>
+            </a>
+    </div>
+</div>
+
+            <div class="muted author-info">
+<strong>Question</strong> by <a href="/users/9406/azizsiddiqui.html"
+rel="user" nodeId="9406">Aziz </a>                
+
+
+                &middot;
+            <a href="/questions/41451/curl-command.html">May 15, 2017 at 12:35 AM</a> &middot;
+                <span><span class="thousand">1.1k</span> Views</span>
+                <span class="tags" id="id_tags_container">
+<a href="/topics/certificates.html"
+class="tag"
+rel="topic" nodeId="2988">certificates</a><a href="/topics/command.html"
+class="tag"
+rel="topic" nodeId="7637">command</a>                </span>
+            </div>
+                <h1 class="question-title">curl command</h1>
+
+                <div class="question-body">
+                <p>where to run curl command for private cloud?</p> 
+<p>is there any documentation for this?</p>
+                </div>
+
+            <div class="comment-tools hidden"><span class="add-comment-link "><a href="#">Comment</a></span></div>
+<div class="control-bar" nodeid="41451">
+    <div class="post-controls" nodeid="41451">
+            <a id="reply-link-41451" href="#">Add comment</a>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#reply-link-41451').click(function() {
+                        commandUtils.showMessage('', "You must log in before you can post a comment.");
+                        return false;
+                    });
+                });
+            </script>
+
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('#commentVisibility li a').on("click", function(){
+            var form = $(this).closest("form");
+            form.attr("action", form.attr("action").replace("addApigeeksOnly.json", "add.json"));
+            if($(this).attr("id") === "apigeeksOnly"){
+                $('.comment-recipients-label').text("Viewable by Apigeeks Only")
+                form.attr("action", form.attr("action").replace("add.json","addApigeeksOnly.json"));
+            }
+        });
+    });
+</script>
+
+<div id="comment-41451-form-container" class="clearfix well comment-form-container">
+    <form id="comment-41451-form" action="/comments/41451/add.json" method="POST"
+          accept-charset="utf-8">
+        <div class="comment-form-widgets-container">
+        
+            <div class="comment-form-textarea-container">
+                <textarea name="body" class="commentBox" data-type="comment"></textarea>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count warn">10
+                        |5000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                    <span class="comments-chars-exceeded-msg">characters exceeded</span>
+                </span>
+
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="btn btn-primary comment-submit"
+                           value="Submit"/>
+                    <input type="submit" class="btn comment-cancel" value="Cancel"/>
+                </div>
+                <div class="dropdown comment-recipient-container">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">▼</a>
+                    <ul id="commentVisibility" class="dropdown-menu context-menu-dropdown-comments" role="menu" aria-labelledby="dLabel">
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="full">Viewable by all users</a></li>
+                        <li class="item"><a id="apigeeksOnly" href="#" class="comment-recipients-selector">Viewable by Apigeeks only</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="op">Viewable by the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="mod">Viewable by moderators</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="opAndMod">Viewable by moderators and the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector" value="recipient">Advanced visibility</a></li>
+                    </ul>
+                    <span class="comment-recipients-label">Viewable by all users</span>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="41451"/>
+        <input type="hidden" name="visibility" value="full"/>
+
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+	                <div class="comments-container" id="comments-container-41451" nodeid="41451" >
+	                </div>
+                <script type="text/javascript">$(function () {
+                    setupComments($('#question-container-41451'), true, false, croles, "full", true)
+                });</script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="userVotes" class="modal fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3></h3>
+    </div>
+    <div class="modal-body">
+        <div id="userVotesList"></div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn">Close</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $question = $("#question-container-41451");
+        var $replyLink = $question.find(".reply-link");
+        $replyLink.click(function (e) {
+            e.preventDefault();
+            $question.find(".add-comment-link").click();
+        });
+
+        $(".ajax-command").click(function () {
+            $('.dropdown-toggle').dropdown('toggle');
+        });
+
+    })
+</script>
+
+<div class="widget widget-nopad answer-list">
+    <div class="widget-header">
+        <h3><strong>3</strong> Answers</h3> 
+        <ul class="nav nav-pills sort">
+            <li class="sort-label">Sort:&nbsp;</li>
+            <li title="Votes"  class="active"><a href="/questions/41451/curl-command.html?sort=votes"><i class="icon-thumbs-up"></i></a></li>
+            <li title="Created" ><a href="/questions/41451/curl-command.html?sort=newest"><i class="icon-time"></i></a></li>
+            <li title="Oldest" ><a href="/questions/41451/curl-command.html?sort=oldest"><i class="icon-history"></i></a></li>
+        </ul>
+    </div>
+
+<div class="widget-content">
+                <div
+                id="answer-container-41472" class="post-container answer-container clearfix 
+            " nodeid="41472">
+            <div id="answer-41472" class="answer clearfix post">
+
+
+<div class="post-gravatar answer-gravatar" nodeId="41472">
+<a href="/users/213/sgilsonapigeecom.html"
+style="display: inline-block; max-width: 48px;"
+rel="user" nodeId="213"> <img class="gravatar "
+width="48"
+src="/users/213/photo/view.html?time=1427699829350" id=""
+alt="avatar image"
+title="sgilson"
+/>
+</a>    <div class="vote-widget">
+        <a id="vote-up-button-41472" class="vote-up votes" href="#" command="voteUp"><i class="icon-chevron-up icon-2x"></i></i></a>
+        <span id="post-41472-score-wrapper" class="post-score-wrapper count votes positive" style="cursor:default">
+            <span id="post-41472-score" class="score positive">1</span>
+        </span>
+        <a id="vote-down-button-41472" class="vote-down votes" href="#" command="voteDown"><i class="icon-chevron-down icon-2x"></i></a>
+    </div>
+</div>                <div class="labels">
+                    
+                    
+                </div>
+                <p class="muted author-info">
+<strong>Answer</strong> by <a href="/users/213/sgilsonapigeecom.html"
+rel="user" nodeId="213">sgilson</a>                    
+
+                    <span class="post-info muted">&middot;
+                    <a href="/answers/41472/view.html">May 15, 2017 at 02:47 PM</a>
+                    </span></p>
+
+                <div class="answer-body">
+                
+ 
+    
+  <p>The basic form of the curl commands for the Edge API is:</p> 
+  <pre>curl -x HTTP_METHOD -u uname:PWord http://localhost:8080/v1/PATH/TO/API</pre> 
+  <p>Use localhost if you are running it from the Management Server. If you are running from a remote node:</p> 
+  <pre>curl -x HTTP_METHOD -u uname:PWord http://MS_IP_OR_DNS:8080/v1/PATH/TO/API</pre> 
+  <p>And specify the IP address or DNS name of the Management Server machine.</p> 
+  <p>For example, to verify that the Management Server is in the central POD:</p> 
+  <pre>curl -x GET -u sysAdminEmail:password http://localhost:8080/v1/servers?pod=central</pre> 
+  <p>See <a href="http://docs.apigee.com/private-cloud/latest/test-install">http://docs.apigee.com/private-cloud/latest/test-install</a> for some more examples</p> 
+  <p>Stephen</p>  
+ 
+
+                </div>
+
+                <div class="comment-tools hidden"><span class="add-comment-link "><a
+                        href="#">Comment</a></span></div>
+<div class="control-bar" nodeid="41472">
+    <div class="post-controls" nodeid="41472">
+            <a id="reply-link-41472" href="#">Add comment</a>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#reply-link-41472').click(function() {
+                        commandUtils.showMessage('', "You must log in before you can post a comment.");
+                        return false;
+                    });
+                });
+            </script>
+
+    &middot;
+        <a href="#" class="ajax-command"
+           command="share">Link</a>
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('#commentVisibility li a').on("click", function(){
+            var form = $(this).closest("form");
+            form.attr("action", form.attr("action").replace("addApigeeksOnly.json", "add.json"));
+            if($(this).attr("id") === "apigeeksOnly"){
+                $('.comment-recipients-label').text("Viewable by Apigeeks Only")
+                form.attr("action", form.attr("action").replace("add.json","addApigeeksOnly.json"));
+            }
+        });
+    });
+</script>
+
+<div id="comment-41472-form-container" class="clearfix well comment-form-container">
+    <form id="comment-41472-form" action="/comments/41472/add.json" method="POST"
+          accept-charset="utf-8">
+        <div class="comment-form-widgets-container">
+        
+            <div class="comment-form-textarea-container">
+                <textarea name="body" class="commentBox" data-type="comment"></textarea>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count warn">10
+                        |5000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                    <span class="comments-chars-exceeded-msg">characters exceeded</span>
+                </span>
+
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="btn btn-primary comment-submit"
+                           value="Submit"/>
+                    <input type="submit" class="btn comment-cancel" value="Cancel"/>
+                </div>
+                <div class="dropdown comment-recipient-container">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">▼</a>
+                    <ul id="commentVisibility" class="dropdown-menu context-menu-dropdown-comments" role="menu" aria-labelledby="dLabel">
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="full">Viewable by all users</a></li>
+                        <li class="item"><a id="apigeeksOnly" href="#" class="comment-recipients-selector">Viewable by Apigeeks only</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="op">Viewable by the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="mod">Viewable by moderators</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="opAndMod">Viewable by moderators and the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector" value="recipient">Advanced visibility</a></li>
+                    </ul>
+                    <span class="comment-recipients-label">Viewable by all users</span>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="41472"/>
+        <input type="hidden" name="visibility" value="full"/>
+
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+                <div class="comments-container" id="comments-container-41472" nodeid="41472">
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        setupComments($('#answer-container-41472'), true, false, croles, "full", true)
+                    });
+                    $(document).ready(function () {
+                        var $answer = $("#answer-container-41472");
+                        var $replyLink = $answer.find(".reply-link");
+                        $replyLink.click(function (e) {
+                            e.preventDefault();
+                            $answer.find(".add-comment-link").click();
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+                <div
+                id="answer-container-41465" class="post-container answer-container clearfix 
+            " nodeid="41465">
+            <div id="answer-41465" class="answer clearfix post">
+
+
+<div class="post-gravatar answer-gravatar" nodeId="41465">
+<a href="/users/7210/karthikprabhu77.html"
+style="display: inline-block; max-width: 48px;"
+rel="user" nodeId="7210"> <img class="gravatar "
+width="48"
+src="/users/7210/photo/view.html?time=1504254001862" id=""
+alt="avatar image"
+title="Karthik Prabhu"
+/>
+</a>    <div class="vote-widget">
+        <a id="vote-up-button-41465" class="vote-up votes" href="#" command="voteUp"><i class="icon-chevron-up icon-2x"></i></i></a>
+        <span id="post-41465-score-wrapper" class="post-score-wrapper count votes" style="cursor:default">
+            <span id="post-41465-score" class="score">0</span>
+        </span>
+        <a id="vote-down-button-41465" class="vote-down votes" href="#" command="voteDown"><i class="icon-chevron-down icon-2x"></i></a>
+    </div>
+</div>                <div class="labels">
+                    
+                    
+                </div>
+                <p class="muted author-info">
+<strong>Answer</strong> by <a href="/users/7210/karthikprabhu77.html"
+rel="user" nodeId="7210">Karthik Prabhu</a>                    
+
+                    <span class="post-info muted">&middot;
+                    <a href="/answers/41465/view.html">May 15, 2017 at 11:57 AM</a>
+                    </span></p>
+
+                <div class="answer-body">
+                <p>@Aziz Could you please elobrate more about this.You could execute any of curl instruction from command line section.</p> 
+<p>Thanks,</p> 
+<p>Karthik</p>
+                </div>
+
+                <div class="comment-tools hidden"><span class="add-comment-link "><a
+                        href="#">Comment</a></span></div>
+<div class="control-bar" nodeid="41465">
+    <div class="post-controls" nodeid="41465">
+            <a id="reply-link-41465" href="#">Add comment</a>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#reply-link-41465').click(function() {
+                        commandUtils.showMessage('', "You must log in before you can post a comment.");
+                        return false;
+                    });
+                });
+            </script>
+
+    &middot;
+        <a href="#" class="ajax-command"
+           command="share">Link</a>
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('#commentVisibility li a').on("click", function(){
+            var form = $(this).closest("form");
+            form.attr("action", form.attr("action").replace("addApigeeksOnly.json", "add.json"));
+            if($(this).attr("id") === "apigeeksOnly"){
+                $('.comment-recipients-label').text("Viewable by Apigeeks Only")
+                form.attr("action", form.attr("action").replace("add.json","addApigeeksOnly.json"));
+            }
+        });
+    });
+</script>
+
+<div id="comment-41465-form-container" class="clearfix well comment-form-container">
+    <form id="comment-41465-form" action="/comments/41465/add.json" method="POST"
+          accept-charset="utf-8">
+        <div class="comment-form-widgets-container">
+        
+            <div class="comment-form-textarea-container">
+                <textarea name="body" class="commentBox" data-type="comment"></textarea>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count warn">10
+                        |5000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                    <span class="comments-chars-exceeded-msg">characters exceeded</span>
+                </span>
+
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="btn btn-primary comment-submit"
+                           value="Submit"/>
+                    <input type="submit" class="btn comment-cancel" value="Cancel"/>
+                </div>
+                <div class="dropdown comment-recipient-container">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">▼</a>
+                    <ul id="commentVisibility" class="dropdown-menu context-menu-dropdown-comments" role="menu" aria-labelledby="dLabel">
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="full">Viewable by all users</a></li>
+                        <li class="item"><a id="apigeeksOnly" href="#" class="comment-recipients-selector">Viewable by Apigeeks only</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="op">Viewable by the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="mod">Viewable by moderators</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="opAndMod">Viewable by moderators and the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector" value="recipient">Advanced visibility</a></li>
+                    </ul>
+                    <span class="comment-recipients-label">Viewable by all users</span>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="41465"/>
+        <input type="hidden" name="visibility" value="full"/>
+
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+                <div class="comments-container" id="comments-container-41465" nodeid="41465">
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        setupComments($('#answer-container-41465'), true, false, croles, "full", true)
+                    });
+                    $(document).ready(function () {
+                        var $answer = $("#answer-container-41465");
+                        var $replyLink = $answer.find(".reply-link");
+                        $replyLink.click(function (e) {
+                            e.preventDefault();
+                            $answer.find(".add-comment-link").click();
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+                <div
+                id="answer-container-41468" class="post-container answer-container clearfix 
+            " nodeid="41468">
+            <div id="answer-41468" class="answer clearfix post">
+
+
+<div class="post-gravatar answer-gravatar" nodeId="41468">
+<a href="/users/9406/azizsiddiqui.html"
+style="display: inline-block; max-width: 48px;"
+rel="user" nodeId="9406"> <img class="gravatar "
+width="48"
+src="//www.gravatar.com/avatar/ce426a2cc49d73237ec6c3f84500fe6d?s=48&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Aziz"
+/>
+</a>    <div class="vote-widget">
+        <a id="vote-up-button-41468" class="vote-up votes" href="#" command="voteUp"><i class="icon-chevron-up icon-2x"></i></i></a>
+        <span id="post-41468-score-wrapper" class="post-score-wrapper count votes" style="cursor:default">
+            <span id="post-41468-score" class="score">0</span>
+        </span>
+        <a id="vote-down-button-41468" class="vote-down votes" href="#" command="voteDown"><i class="icon-chevron-down icon-2x"></i></a>
+    </div>
+</div>                <div class="labels">
+                    
+                    
+                </div>
+                <p class="muted author-info">
+<strong>Answer</strong> by <a href="/users/9406/azizsiddiqui.html"
+rel="user" nodeId="9406">Aziz </a>                    
+
+                    <span class="post-info muted">&middot;
+                    <a href="/answers/41468/view.html">May 15, 2017 at 01:54 PM</a>
+                    </span></p>
+
+                <div class="answer-body">
+                <p>@Karthik, I mean to say, if I don't have access to the server command interface, then how to run the command?</p>
+                </div>
+
+                <div class="comment-tools hidden"><span class="add-comment-link "><a
+                        href="#">Comment</a></span></div>
+<div class="control-bar" nodeid="41468">
+    <div class="post-controls" nodeid="41468">
+            <a id="reply-link-41468" href="#">Add comment</a>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#reply-link-41468').click(function() {
+                        commandUtils.showMessage('', "You must log in before you can post a comment.");
+                        return false;
+                    });
+                });
+            </script>
+
+    &middot;
+        <a href="#" class="ajax-command"
+           command="share">Link</a>
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('#commentVisibility li a').on("click", function(){
+            var form = $(this).closest("form");
+            form.attr("action", form.attr("action").replace("addApigeeksOnly.json", "add.json"));
+            if($(this).attr("id") === "apigeeksOnly"){
+                $('.comment-recipients-label').text("Viewable by Apigeeks Only")
+                form.attr("action", form.attr("action").replace("add.json","addApigeeksOnly.json"));
+            }
+        });
+    });
+</script>
+
+<div id="comment-41468-form-container" class="clearfix well comment-form-container">
+    <form id="comment-41468-form" action="/comments/41468/add.json" method="POST"
+          accept-charset="utf-8">
+        <div class="comment-form-widgets-container">
+        
+            <div class="comment-form-textarea-container">
+                <textarea name="body" class="commentBox" data-type="comment"></textarea>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count warn">10
+                        |5000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                    <span class="comments-chars-exceeded-msg">characters exceeded</span>
+                </span>
+
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="btn btn-primary comment-submit"
+                           value="Submit"/>
+                    <input type="submit" class="btn comment-cancel" value="Cancel"/>
+                </div>
+                <div class="dropdown comment-recipient-container">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">▼</a>
+                    <ul id="commentVisibility" class="dropdown-menu context-menu-dropdown-comments" role="menu" aria-labelledby="dLabel">
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="full">Viewable by all users</a></li>
+                        <li class="item"><a id="apigeeksOnly" href="#" class="comment-recipients-selector">Viewable by Apigeeks only</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="op">Viewable by the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="mod">Viewable by moderators</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector"
+                                            value="opAndMod">Viewable by moderators and the original poster</a></li>
+                        <li class="item"><a href="#" class="comment-recipients-selector" value="recipient">Advanced visibility</a></li>
+                    </ul>
+                    <span class="comment-recipients-label">Viewable by all users</span>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="41468"/>
+        <input type="hidden" name="visibility" value="full"/>
+
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+                <div class="comments-container" id="comments-container-41468" nodeid="41468">
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        setupComments($('#answer-container-41468'), true, false, croles, "full", true)
+                    });
+                    $(document).ready(function () {
+                        var $answer = $("#answer-container-41468");
+                        var $replyLink = $answer.find(".reply-link");
+                        $replyLink.click(function (e) {
+                            e.preventDefault();
+                            $answer.find(".add-comment-link").click();
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" src="/themes/thub/scripts/teamhub.node.commands.js"></script>
+<script type="text/javascript" src="/themes/apigee/scripts/apigee.node.commands.js"></script>
+
+<script type="text/javascript">
+    commands.likeComment.setMsg('title.on', "click to cancel");
+    commands.likeComment.setMsg('title.off', "I like this comment");
+
+    commands.likeComment.setUrl('click.on', "/commands/%25ID%25/cancelvote.json");
+    commands.likeComment.setUrl('click.off', "/commands/%25ID%25/voteup.json");
+
+    commands.deleteComment.setUrl('click.off', "/commands/%25ID%25/delete.json");
+
+    commands.voteUp.urls = commands.likeComment.urls;
+
+    commands.voteUp.setMsg('title.on',  "Click to cancel vote");
+    commands.voteUp.setMsg('title.off',  "Click to up vote");
+
+    commands.voteDown.setUrl('click.on', commands.voteUp.urls['click.on']);
+    commands.voteDown.setUrl('click.off', "/commands/%25ID%25/votedown.json");
+
+    commands.voteDown.setMsg('title.on',  commands.voteUp.messages['title.on']);
+    commands.voteDown.setMsg('title.off', "Click to down vote");
+
+    commands.acceptAnswer.setMsg('title.on', "Remove this answers accepted status");
+    commands.acceptAnswer.setMsg('title.off', "Accept this answer as correct");
+
+    commands.acceptAnswer.setUrl('click.on', "/commands/%25ID%25/unaccept.json");
+    commands.acceptAnswer.setUrl('click.off', "/commands/%25ID%25/accept.json");
+
+    commands.markFavorite.setMsg('title.on', 'Remove your favorite mark from this question');
+    commands.markFavorite.setMsg('title.off', "Mark this question as favorite");
+
+    commands.markFavorite.setUrl('click.on', "/commands/%25ID%25/unmarkfavorite.json");
+    commands.markFavorite.setUrl('click.off', "/commands/%25ID%25/markfavorite.json");
+
+    commands.reportPost.setMsg('title.on', "Cancel your report");
+    commands.reportPost.setMsg('title.off', "Report as offensive (i.e containing spam, advertising, malicious text, etc.)");
+    commands.reportPost.setMsg('link.on', "Cancel Report");
+    commands.reportPost.setMsg('link.off', "Report");
+    commands.reportPost.setMsg('description', "Please select a reason below or use the text box to input your own reason.");
+
+    commands.reportPost.setMsg('reportHints', [
+        'Spam',
+        'Advertising',
+        'Offensive, Abusive, or Inappropriate',
+        'Content violates terms of use',
+        'Copyright Violation',
+        'Misleading',
+        'Someone is not being nice',
+        'Not relevant/off-topic',
+        'Other']);
+
+
+    commands.reportPost.setUrl('click.on', "/commands/%25ID%25/cancelReport.json");
+    commands.reportPost.setUrl('click.off', "/commands/%25ID%25/report.json");
+
+    commands.publishPost.setUrl('click', "/commands/%25ID%25/publish.json");
+    commands.publishPost.setMsg('linkText', "Publish");
+
+    commands.sendToMod.setUrl('click', "/commands/%25ID%25/sendToMod.json");
+    commands.sendToMod.setMsg('linkText', "Send to Moderation");
+
+    commands.redirectQuestion.setMsg('linkText.off', "Redirect");
+    commands.redirectQuestion.setMsg('linkText.on', "Cancel Redirect");
+    commands.redirectQuestion.setMsg('header', "Redirect Into An Existing Question");
+    commands.redirectQuestion.setMsg('search', "Search for a question:");
+    commands.redirectQuestion.setMsg('related', "Pick a related question:");
+
+    commands.redirectQuestion.setUrl('click.off', "/commands/%25ID%25/redirect.json");
+    commands.redirectQuestion.setUrl('click.on', "/commands/%25ID%25/unredirect.json");
+    commands.redirectQuestion.setUrl('search', "/search.json");
+
+    commands.deletePost.urls = commands.deleteComment.urls;
+    commands.deletePost.setUrl('click.on', "/commands/%25ID%25/undelete.json");
+
+    commands.deletePost.setMsg('linkText.off', "Delete");
+    commands.deletePost.setMsg('linkText.on', "Undelete");
+
+    commands.closeQuestion.setMsg('linkText.on', "Reopen");
+    commands.closeQuestion.setMsg('linkText.off', "Close");
+    commands.closeQuestion.setMsg('description', "Please select a reason below or use the text box to input your own reason.");
+    commands.closeQuestion.setMsg('lock', "also lock comments");
+
+    commands.closeQuestion.setMsg('reportHints', [
+        'Duplicate Question',
+        'Question is off-topic or not relevant',
+        'Too subjective and argumentative',
+        'The question is answered, right answer was accepted',
+        'Problem is not reproducible or outdated',
+        'Other']);
+
+    commands.closeQuestion.setUrl('click.on', "/commands/%25ID%25/reopen.json");
+    commands.closeQuestion.setUrl('click.off', "/commands/%25ID%25/close.json");
+
+    commands.lockPost.setMsg('linkText.on', "Unlock Comments");
+    commands.lockPost.setMsg('linkText.off', "Lock Comments");
+    commands.lockPost.setMsg('description', "Please select a reason below or use the text box to input your own reason.");
+
+    commands.lockPost.setMsg('reportHints', [
+        'Discussion has gone too far',
+        'No more thank you or +1 comments',
+        'Other']);
+
+    commands.lockPost.setUrl('click.on', "/commands/%25ID%25/unlock.json");
+    commands.lockPost.setUrl('click.off', "/commands/%25ID%25/lock.json");
+
+    commands.wikifyPost.setMsg('linkText.off', "Wikify");
+    commands.wikifyPost.setMsg('linkText.on', "Unwikify");
+
+    commands.wikifyPost.setUrl('click.on', "/commands/%25ID%25/cancelwiki.json");
+    commands.wikifyPost.setUrl('click.off', "/commands/%25ID%25/wikify.json");
+
+    commands.convertToComment.setUrl('click', "/commands/%25ID%25/convertToComment.json");
+    commands.convertToComment.setUrl('candidates', "/commands/%25ID%25/convertToComment/possibleParents.json");
+    commands.convertToComment.setMsg('linkText', "Convert to Comment");
+    commands.convertToComment.setMsg('description', "Place the comment under:");
+    commands.convertToComment.setMsg('question', "Question");
+    commands.convertToComment.setMsg('answer', "Answer");
+
+    commands.convertToAnswer.setUrl('click', "/commands/%25ID%25/convertToAnswer.json");
+
+    commands.moveComment.setUrl('click', "/commands/%25ID%25/moveComment.json");
+    commands.moveComment.setUrl('candidates', "/commands/%25ID%25/moveComment/possibleParents.json");
+    commands.moveComment.setMsg('linkText', "move comment");
+    commands.moveComment.setMsg('description', "Place the comment under:");
+    commands.moveComment.setMsg('question', "Question");
+    commands.moveComment.setMsg('answer', "Answer");
+
+    commands.moveToSpace.setUrl('click', "/commands/%25ID%25/moveToSpace.json");
+    commands.moveToSpace.setUrl('candidates', "/spaces/%25ID%25/moveToCandidates.json");
+    commands.moveToSpace.setMsg('linkText', "Move");
+    commands.moveToSpace.setMsg('description', "Select the space to move the question to");
+
+    commands.switchPrivacy.setMsg('linkText.off', "Make private");
+    commands.switchPrivacy.setMsg('linkText.on', "Make public");
+
+    commands.switchPrivacy.setUrl('click.on', "/commands/%25ID%25/makePublic.json");
+    commands.switchPrivacy.setUrl('click.off', "/commands/%25ID%25/makePrivate.json");
+
+    commands.giveReputation.setUrl('click', "/commands/giveReputation.json");
+    commands.giveReputation.setMsg('answerIntro', "If you like this answer you can reward the user with reputation points.");
+    commands.giveReputation.setMsg('questionIntro', "If you like this question you can reward the user with reputation points.");
+    commands.giveReputation.setMsg('description', "Use the input field to choose the number of points you would like to give.");
+    commands.giveReputation.setMsg('points', "Points:");
+
+	commands.share.setUrl("answer-url", "https://community.apigee.com/answers/%25ID%25/view.html");
+	commands.share.setUrl("comment-url", "https://community.apigee.com/comments/%25ID%25/view.html");
+	commands.share.setMsg("description", "Copy and paste the URL below to share a direct link to this answer.");
+	commands.share.setMsg("comment-description", "Copy and paste the URL below to share a direct link to this comment.");
+	commands.share.setMsg("title", "Share a link to this answer");
+	commands.share.setMsg("comment-title", "Share a link to this comment");
+
+    pageContext.i18n.seeRevisions = 'see revisions';
+    pageContext.url.seeRevisions = '/revisions/%25ID%25.html';
+    pageContext.url.questionEdit = '/questions/%25ID%25/edit.html';
+    pageContext.url.answerEdit = '/answers/%25ID%25/edit.html';
+    pageContext.url.commentEdit = '/comments/%25ID%25/edit.html';
+</script>
+<script type="text/x-jquery-tmpl" id="flag-or-close-post-dialog">
+    <center>
+        <p style="max-width: 250px;">${description}</p>
+        <form style="with: 250px;">
+            <select name="sample" class="prompt-examples" style="width: 100%;">
+                {{each(i, hint) reportHints }}
+                <option value="${hint}">${hint}</option>
+                {{/each}}
+            </select><br />
+            <textarea name="prompt" style="width: 100%"></textarea>
+            {{if canLock }}
+                <input type="checkbox" name="lock" value="true" /> ${lock}
+            {{/if}}
+        </form>
+    </center>
+</script>
+<script type="text/x-jquery-tmpl" id="convert-to-comment-dialog">
+    ${description}
+    <form>
+        <select name="targetParent" class="prompt-examples">
+            {{each(p, target) parentCandidates }}
+            <option value="${target.id}">${target.summary}</option>
+            {{/each}}
+        </select>
+    </form>
+</script>
+
+<script type="text/x-jquery-tmpl" id="move-comment-dialog">
+    ${description}
+    <form>
+        <select name="targetParent" class="prompt-examples">
+            {{each(p, target) parentCandidates }}
+            <option value="${target.id}">${target.summary}</option>
+            {{/each}}
+        </select>
+    </form>
+</script>
+
+
+<script type="text/x-jquery-tmpl" id="move-to-space-dialog">
+    ${description}
+    <form>
+        <select name="targetSpace" class="prompt-examples">
+            {{each(p, target) spaces }}
+            <option value="${target.id}">${target.name}</option>
+            {{/each}}
+        </select>
+    </form>
+</script>
+
+
+<script type="text/x-jquery-tmpl" id="advanced-visibility-dialog">
+    <form>
+        <div>
+            {{if (perm.ag || perm.og) }}
+                <h4>${msg.selectGroups}</h4>
+                {{if groupsCheck }}
+                    {{each(i, group) groups }}
+                        {{if group.id != 5 && group.id != 6}}
+                        <p><input type="checkbox" name="recipients" value="${group.id}" /> ${group.name}</p>
+                        {{/if}}
+                    {{/each}}
+                {{else}}
+                    <input type="text" class="comment-recipients-groups-autocomplete" />
+                    <div class="comment-recipients-groups-container" ></div>
+                {{/if}}
+            {{/if}}
+            {{if (perm.op || perm.mod || perm.as) }}
+                <h4>${msg.selectOther}</h4>
+                {{if perm.op }}
+                    <input type="checkbox" name="specialRecipients" value="op" /> ${msg.selectOriginalPoster}<br />
+                {{/if}}
+                {{if perm.m }}
+                    <!--<input type="checkbox" name="specialRecipients" value="mod" /> ${msg.selectModerators}<br />-->
+                {{/if}}
+                {{if perm.as }}
+                    <input type="checkbox" name="specialRecipients" value="asg" /> ${msg.selectAssignees}<br />
+                {{/if}}
+                    <input id="apigeeksOnly" type="checkbox" name="apigeeksOnly" value="apigeeksOnly" /> Apigeeks Only<br />
+            {{/if}}
+        </div>
+    </form>
+</script>
+
+<script type="text/x-jquery-tmpl" id="share-dialog">
+    <p>${description}</p>
+    <input type="text" class="input-block-level" value="${shareURL}"/>
+</script>
+
+<script type="text/x-jquery-tmpl" id="give-reputation-dialog">
+        <p style="font-size:14px;">{{if isAnswer }} ${answerIntro} {{/if}} {{if !isAnswer }} ${questionIntro} {{/if}}</p>
+        <p style="font-size:14px;">${description}</p>
+        <form >
+            <div style="font-size:14px;">
+                ${points} <input class="input-mini" style="margin-top: 10px;" type="text" name="points" /> (${currentUserPoints} ${currentPointsLabel})
+            </div>
+        </form>
+        <p style="color:red" id="invaliderror"></p>
+</script>
+<script type="text/x-jquery-tmpl" id="new-comment-skeleton">
+<div class="comment nsc" id="comment-${comment.id}" activerev="${comment.activeRevisionId}" nodeid="${comment.id}"
+     authorid="${comment.author.id}">
+<div class="comment-content" nodeid="${comment.id}">
+<div class="comment-header">
+    <a class="comment-user-gravatar" nodeId="${author.id}" rel="user" href="${author.url}"><img class="gravatar"
+                                                                                                src="${author.avatar}"
+                                                                                                style="width:${comment.depth > 0 ? 24 : 36};"></a>
+    <a class="comment-user userinfo" nodeId="${author.id}" rel="user" href="${author.url}">${(pageContext.userRealName && comment.author.realname)? comment.author.realname : comment.author.username}</a>
+    {{if comment.parentId != comment.originalParentId}}<span class="comment-parent"><i class="icon-share-alt"></i> ${(pageContext.userRealName && comment.parentAuthor.realname)?comment.parentAuthor.realname : comment.parentAuthor.username}</span>
+    {{/if}}
+    <span class="comment-age friendly-date" title="${creationDateFormatted}">
+                &middot; ${commentDateFriendly}
+            </span>
+<div class="comment-info btn-broup" id="comment-${comment.id}-info">
+    <span id="post-${comment.id}-score" class="comment-score">${comment.score}</span>
+        <a id="vote-up-button-${comment.id}" command="voteUp"  href="#" class="make-tooltip"
+           title="Vote comment up">Vote </a>
+        <a id="vote-down-button-${comment.id}" command="voteDown" href="#" class="make-tooltip"
+         title="Vote comment up"><i class=" icon-chevron-down"></i></a>
+
+        {{if crel.canComment }}
+            <a id="comment-${comment.id}-reply" href="#" class="comment-reply"><i
+                class="icon-reply"></i> Reply</a>
+        {{/if}}
+
+        <a href="#" class="ajax-command"
+                           command="share">Link</a>
+
+        {{if (crel.canReport || crel.canCancelReport) || crel.canEdit || crel.canDelete || crel.canConvertToAnswer }}
+
+        <div class="dropdown" style="display:inline">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class=" icon-cog"></i> More...</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                {{if crel.canReport || crel.canCancelReport }}
+                    <li><a rel="nofollow" class="ajax-coxmmand {{if crel.reported }} on{{/if}}" href="#"
+                           command="reportPost">
+
+
+                        {{if !crel.reported }}123· Report{{else}}· Cancel Report{{/if}}
+                        {{if crel.canViewReports }}(${comment.reportCount}){{/if}}
+                    </a></li>
+                {{/if}}
+                {{if crel.canViewRevisions }}
+                    <li class="item">
+                        <a rel="nofollow" class="node-tools-revisions-link"
+                           href="${revisionUrl}">See revisions</a>
+                    </li>
+
+                {{/if}}
+                {{if crel.canEdit }}
+                    <li><a id="comment-${comment.id}-edit" href="#"
+                           class="comment-edit">Edit</a>
+                    </li>
+                {{/if}}
+                {{if crel.canDelete }}
+                    <li><a id="comment-${comment.id}-delete" href="#" class="comment-delete"
+                           command="deleteComment">Delete </a>
+                    </li>
+                {{/if}}
+                {{if crel.canConvertToAnswer }}
+                    <li><a href="#" class="convert-to-answer"
+                           command="convertToAnswer">Convert to answer</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+
+        {{/if}}
+
+</div>
+</div>
+    <div id="comment-${comment.id}-left" class="comment-left">
+        <div id="post-${comment.id}-score" class="comment-score"></div>
+    </div>
+    <div class="comment-text">{{html comment.bodyAsHTML}}</div>
+</div>
+</div>
+</script>
+<script type="text/x-jquery-tmpl" id="flag-or-close-post-dialog">
+    ${description}
+    <select name="sample" class="prompt-examples">
+        {{each(i, hint) reportHints }}
+        <option value="${hint}">${hint}</option>
+        {{/each}}
+    </select>
+    <textarea name="prompt">${reportHints[0]}</textarea>
+</script><script type="text/x-jquery-tmpl" id="redirect-question-dialog">
+    <h4>curl command</h4>
+    <label class="control-label" style="margin: 18px 0 22px;" for="searchQuestion">into:</label>
+    <div class="controls">
+        <div class="SearchAnswers">
+            <input type="text" style="background-image: none;" class="textInput input-block-level" id="searchQuestion" placeholder="Search for a question" onclick="if(this.value=='Find Question'){this.value = ''}" />
+            <div id="results"></div>
+            <form class="hidden">
+                <input type="hidden" name="to" />
+            </form>
+        </div>
+    </div>
+</script><script type="text/x-jquery-tmpl" id="switch-privacy-dialog">
+Are you sure you want to make this post private? Only you and users with special permissions will be able to see it.</script><script type="text/x-jquery-tmpl" id="post-wiki-mark">
+    <div class="community-wiki">
+        <div class="wiki-icon">&nbsp;</div>
+        <div class="wiki-text">
+            {{if isAnswer }}
+        This answer is marked "community wiki".
+            {{else}}
+        This question is marked "community wiki".
+            {{/if}}
+
+            {{if canEdit }}
+            <br />Feel free to <a href="${editUrl}">edit it</a>.
+            {{/if}}
+        </div>
+    </div>
+</script><script type="text/x-jquery-tmpl" id="user-with-follow">
+    <li class="userWithFollow">
+        <a class="gravatar-link" href="${user.profileUrl}"><img class="gravatar" src="${user.avatarUrl}"></a>
+        <div class="info">
+            <a href="${user.profileUrl}" class="username">${user.displayName}</a>
+        </div>
+        {{if user.id != currentUser.id}}
+        {{if $.grep(follows, function(follow){ return follow.followed.id == user.id }).length < 1}}
+        <a class="followLink btn" command="follow" data-node-type="user" nodeId="${user.id}"></a>
+        {{else}}
+        <a class="followLink on btn" command="follow" data-node-type="user" nodeId="${user.id}" ></a>
+        {{/if}}
+        {{/if}}
+    </li>
+</script>
+
+
+
+                                </div>
+                                <div class="span4 sidebarTwo">
+        <div>
+            
+
+<div class="widget question-follow-widget">
+    <div class="widget-header">
+        <i class="icon-arrow-right"></i>
+        <h3>Follow this Question</h3>
+    </div>
+    <div class="widget-content">
+        <p>
+            <a class="btn btn-small" title="Subscribe to Answers"
+               href="/feed/41451/answers.rss">
+                <i class="icon-rss"></i>
+
+                Answers </a>
+
+
+            <a class="btn btn-small" title="Subscribe to Comments and Answers"
+               href="/feed/41451/comments-and-answers.rss">
+                <i class="icon-rss"></i>
+Answers and Comments            </a>
+        </p>
+
+        <p>
+<strong>47</strong> People are following this question.
+        <div class="followers">
+
+<a href="/users/9406/azizsiddiqui.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="9406"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/ce426a2cc49d73237ec6c3f84500fe6d?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Aziz"
+/>
+</a><a href="/users/213/sgilsonapigeecom.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="213"> <img class="gravatar "
+width="24"
+src="/users/213/photo/view.html?time=1427699829350" id=""
+alt="avatar image"
+title="sgilson"
+/>
+</a><a href="/users/749/bhatikuldeep.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="749"> <img class="gravatar "
+width="24"
+src="/users/749/photo/view.html?time=1488796251628" id=""
+alt="avatar image"
+title="Kuldeep Bhati"
+/>
+</a><a href="/users/752/birute.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="752"> <img class="gravatar "
+width="24"
+src="/users/752/photo/view.html?time=1423104224223" id=""
+alt="avatar image"
+title="birute&#64;google.com"
+/>
+</a><a href="/users/1141/radhasurapaneni.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1141"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/2d405418269a4eaada88c3b7e05ea586?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Radha Krishna Surapaneni"
+/>
+</a><a href="/users/1147/arvinds.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1147"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/59b4a6a6b48d47964b63422f3432717c?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Arvind S"
+/>
+</a><a href="/users/1128/gaurav-joshi.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1128"> <img class="gravatar "
+width="24"
+src="/users/1128/photo/view.html?time=1428387701977" id=""
+alt="avatar image"
+title="Gaurav Vishwas Joshi"
+/>
+</a><a href="/users/1076/kairuppalaprashanthi.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1076"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/dca81783c88050918341df1019310018?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Prashanthi"
+/>
+</a><a href="/users/9155/anilsr.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="9155"> <img class="gravatar "
+width="24"
+src="/users/9155/photo/view.html?time=1530872652372" id=""
+alt="avatar image"
+title="Anil Sagar &#64; Google"
+/>
+</a><a href="/users/10847/akashtp.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="10847"> <img class="gravatar "
+width="24"
+src="/users/10847/photo/view.html?time=1550253887964" id=""
+alt="avatar image"
+title="Akash Prabhashankar"
+/>
+</a><a href="/users/1419/rovyas.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1419"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/9ab5595675926bcec33b1731b1f95412?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="rovyas"
+/>
+</a><a href="/users/2303/umannggoel.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="2303"> <img class="gravatar "
+width="24"
+src="/users/2303/photo/view.html?time=1467913361285" id=""
+alt="avatar image"
+title="Umanng Goel"
+/>
+</a><a href="/users/2300/amitkrjha.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="2300"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/48fb77144fa85c4a8882a4ecbc62e883?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Amit Jha"
+/>
+</a><a href="/users/125/abhisheksubramanyacognizantcom.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="125"> <img class="gravatar "
+width="24"
+src="/users/125/photo/view.html?time=1455310175641" id=""
+alt="avatar image"
+title="Abhishek Subramanya"
+/>
+</a><a href="/users/188/kklevallbeancom.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="188"> <img class="gravatar "
+width="24"
+src="/users/188/photo/view.html?time=1414106680759" id=""
+alt="avatar image"
+title="Kristopher Kleva"
+/>
+</a><a href="/users/5096/shajeenahmed.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="5096"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/e6e63ecf55997323e8ab12fe84929ff5?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Sheik S Shajeen Ahamed"
+/>
+</a><a href="/users/4098/adamstricklandosu.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="4098"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/ef7d09621c6d79f2a0dda1802f45c1a5?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Adam Strickland"
+/>
+</a><a href="/users/6835/alikarim.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="6835"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/6f596afdd6f8e6e987cd6a7288cc818d?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Ali Karim"
+/>
+</a><a href="/users/7053/nmallesh.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="7053"> <img class="gravatar "
+width="24"
+src="/users/7053/photo/view.html?time=1477480225215" id=""
+alt="avatar image"
+title="Nisha Mallesh"
+/>
+</a><a href="/users/1364/vagrawal.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1364"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/f969c3e4db5037c3c42042c747a20d15?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Vishal Agrawal"
+/>
+</a><a href="/users/6789/figtony.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="6789"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/b81c31ddf01a564aaea137563b3ee181?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Antonio Figueiredo"
+/>
+</a><a href="/users/8063/richardkuodis.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="8063"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/a77550c43e5a2fb79faeb3cd2f5e257f?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Richard Kuodis"
+/>
+</a><a href="/users/1920/nikunj-sanghavi.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1920"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/282cfd28c51918a2cd1963f94c27d130?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Nikunj K Sanghavi"
+/>
+</a><a href="/users/8888/umanggoel24.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="8888"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/cfe1c7c1027c52dcb799667e3479261c?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Umanng"
+/>
+</a><a href="/users/7210/karthikprabhu77.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="7210"> <img class="gravatar "
+width="24"
+src="/users/7210/photo/view.html?time=1504254001862" id=""
+alt="avatar image"
+title="Karthik Prabhu"
+/>
+</a><a href="/users/7137/meghanatr.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="7137"> <img class="gravatar "
+width="24"
+src="/users/7137/photo/view.html?time=1480333318599" id=""
+alt="avatar image"
+title="Meghana T R"
+/>
+</a><a href="/users/7911/eduardoandrade.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="7911"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/54e081dc69bb82c98a769e8423819010?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Eduardo Andrade"
+/>
+</a><a href="/users/589/ahhhamrengmailcom.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="589"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/8208236261f6038f3476147924d9dcf2?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Any Hope"
+/>
+</a><a href="/users/660/hsnbilgen.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="660"> <img class="gravatar "
+width="24"
+src="/users/660/photo/view.html?time=1558603090947" id=""
+alt="avatar image"
+title="HS Bilgen"
+/>
+</a><a href="/users/9178/jonesfloyd.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="9178"> <img class="gravatar "
+width="24"
+src="/users/9178/photo/view.html?time=1529084644210" id=""
+alt="avatar image"
+title="jonesfloyd"
+/>
+</a><a href="/users/581/stautuaaapigeecom.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="581"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/df66e14f4b1a835b9b9c2e6d529577c8?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="salofi Tautuaa"
+/>
+</a><a href="/users/1111/guyhagemans.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1111"> <img class="gravatar "
+width="24"
+src="/users/1111/photo/view.html?time=1426667762582" id=""
+alt="avatar image"
+title="GuyH"
+/>
+</a><a href="/users/11498/rajeshmi.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="11498"> <img class="gravatar "
+width="24"
+src="/users/11498/photo/view.html?time=1591904167720" id=""
+alt="avatar image"
+title="RajeshMishra&#64;Google"
+/>
+</a><a href="/users/1678/sunnypav-1.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1678"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/5507a6b2cc9308048d40d31defec69ef?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Venkata Pavan Kumar Sannisetty"
+/>
+</a><a href="/users/1043/yakatou.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1043"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/d8555abab1b511caee720eea68c5747a?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Katou Yasuhide"
+/>
+</a><a href="/users/966/jhans.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="966"> <img class="gravatar "
+width="24"
+src="/users/966/photo/view.html?time=1448080329901" id=""
+alt="avatar image"
+title="jagjyot"
+/>
+</a><a href="/users/454/asribalajiapigeecom.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="454"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/a95ae8400fe23367deffc186a1efa75c?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="sribalaji"
+/>
+</a><a href="/users/3416/hdas.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="3416"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/d44a7ad3ea703ba5bddd02f9c031df35?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Harika"
+/>
+</a><a href="/users/4008/nitoincog2014.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="4008"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/305eeb815a2a5aad1d2da2dac5d3214c?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Nito Incog"
+/>
+</a><a href="/users/1365/parna.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="1365"> <img class="gravatar "
+width="24"
+src="/users/1365/photo/view.html?time=1461127347253" id=""
+alt="avatar image"
+title="parna&#64;apigee.com"
+/>
+</a><a href="/users/2985/marcrobida.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="2985"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/34d2e3df0b7328b2a2046b0d0202d9a2?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Marc Robida"
+/>
+</a><a href="/users/2730/ravinomula.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="2730"> <img class="gravatar "
+width="24"
+src="/users/2730/photo/view.html?time=1461266869547" id=""
+alt="avatar image"
+title="ravi.nomula"
+/>
+</a><a href="/users/618/sabthar.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="618"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/b9de271540d6cf8a92afe29c1ccfdf05?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Sabthar"
+/>
+</a><a href="/users/6536/benrodriguez.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="6536"> <img class="gravatar "
+width="24"
+src="/users/6536/photo/view.html?time=1470875559468" id=""
+alt="avatar image"
+title="Ben Rodriguez"
+/>
+</a><a href="/users/6265/ashwanijain.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="6265"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/d5a8ce12d2853a306e6ca64e3b7ec011?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Virgo"
+/>
+</a><a href="/users/5875/purushothamhallasinahallinarayanswamy.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="5875"> <img class="gravatar "
+width="24"
+src="//www.gravatar.com/avatar/1dbee61316a0a2e34a0fb60d26edfa89?s=24&amp;d=https://community.apigee.com/themes/apigee/images/anonymous.png&amp;r=PG" id=""
+alt="avatar image"
+title="Purushotham H Narayanswamy"
+/>
+</a><a href="/users/2533/ferozmahammad.html"
+style="display: inline-block; max-width: 24px;"
+rel="user" nodeId="2533"> <img class="gravatar "
+width="24"
+src="/users/2533/photo/view.html?time=1460668443531" id=""
+alt="avatar image"
+title="Mahammad Feroz"
+/>
+</a>        </div>
+        </p>
+    </div>
+
+</div>
+
+
+
+
+
+        </div>
+        <div>
+            
+
+
+<div class="widget">
+    <div class="widget-header">
+        <i class="icon-list-alt"></i>
+        <h3>Related Questions</h3>
+    </div>
+    <div class="widget-content">
+                <p><a href="/questions/2989/is-it-possible-to-use-a-self-signed-client-certifi.html">Is it possible to use a self signed client certificate for Apigee mutual SSL configuration?</a>
+                4
+Answers
+                </p>
+
+                <p><a href="/questions/35171/http-401-error-when-trying-to-upload-cert-to-trust.html">Http 401 error when trying to upload cert to truststore</a>
+                1
+Answer
+                </p>
+
+                <p><a href="/questions/69006/clientcertificate-apigee-to-soap.html">ClientCertificate apigee to Soap</a>
+                1
+Answer
+                </p>
+
+                <p><a href="/questions/6081/how-do-you-use-client-certificates-when-making-an.html">How do you use client certificates when making an HTTPS call from node.js with Apigee Edge</a>
+                2
+Answers
+                </p>
+
+                <p><a href="/questions/35767/platform-certificates-for-mutual-auth.html">Platform Certificates for mutual auth</a>
+                1
+Answer
+                </p>
+
+    </div>
+</div>
+
+
+        </div>
+        <div>
+            
+        </div>
+
+                                </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <div class="push"></div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="container">
+           <div class="footer-main col-sm-12">
+        <div class="region region-footer">
+    <section id="block-menu-menu-footer" class="block block-menu clearfix">
+
+
+  <ul class="menu nav"><li class="first expanded  col-md-3"><span data-target="#" class="dropdown-toggle nolink" data-toggle="dropdown">Products </span><ul class=""><li class="first leaf"><a href="http://apigee.com/about/products/api-management">Edge - APIs</a></li>
+<li class="leaf"><a href="http://apigee.com/about/products/big-data-and-insights">Insights - Big Data</a></li>
+<li class="last leaf"><a href="http://apigee.com/about/plans">Plans</a></li>
+</ul></li>
+<li class="expanded  col-md-3"><span data-target="#" class="dropdown-toggle nolink" data-toggle="dropdown">Developers </span><ul class=""><li class="first leaf"><a href="http://developers.apigee.com">Overview</a></li>
+<li class="last leaf"><a href="http://apigee.com/docs">Documentation</a></li>
+</ul></li>
+<li class="expanded  col-md-3"><span data-target="#" class="dropdown-toggle nolink" data-toggle="dropdown">Resources </span><ul class=""><li class="first leaf"><a href="http://apigee.com/about/resources">Overview</a></li>
+<li class="leaf"><a href="http://blog.apigee.com">Blog</a></li>
+<li class="leaf"><a href="http://apigee.com/about/apigee-institute">Apigee Institute</a></li>
+<li class="leaf"><a href="http://academy.apigee.com">Academy</a></li>
+<li class="last leaf"><a href="http://apigee.com/docs">Documentation</a></li>
+</ul></li>
+<li class="expanded  col-md-3"><span data-target="#" class="dropdown-toggle nolink" data-toggle="dropdown">Company </span><ul class=""><li class="first leaf"><a href="http://apigee.com/about/apigee">Overview</a></li>
+<li class="leaf"><a href="http://apigee.com/about/press-releases">Press</a></li>
+<li class="leaf"><a href="http://apigee.com/about/customers">Customers</a></li>
+<li class="leaf"><a href="http://apigee.com/about/partners">Partners</a></li>
+<li class="leaf"><a href="http://apigee.com/about/apigee#block-bean-about-apigee-team-header">Team</a></li>
+<li class="leaf"><a href="http://apigee.com/about/events">Events</a></li>
+<li class="leaf"><a href="http://apigee.com/about/careers">Careers</a></li>
+<li class="last leaf"><a href="http://apigee.com/about/apigee#block-bean-about-apigee-contact-us-header">Contact Us</a></li>
+</ul></li>
+<li class="last expanded  col-md-3"><span data-target="#" class="dropdown-toggle nolink" data-toggle="dropdown">Support </span><ul class=""><li class="first leaf"><a href="http://support.apigee.com">Support Overview</a></li>
+<li class="leaf"><a href="http://apigee.com/docs">Documentation</a></li>
+<li class="leaf"><a href="http://status.apigee.com">Status</a></li>
+<li class="leaf"><a href="http://apigee.com/about/support/portal">Edge Support Portal</a></li>
+<li class="leaf"><a href="http://apigee.com/about/privacy">Privacy Policy</a></li>
+<li class="last leaf"><a href="http://apigee.com/about/terms">Terms &amp; Conditions</a></li>
+</ul></li>
+</ul>
+</section> <!-- /.block -->
+  </div>
+    </div>
+    </div>
+  <div class="copyright">
+    © 2021 Apigee Corp. All rights reserved. - <a href="http://community.apigee.com/page/terms-of-use">Apigee Community Terms of Use</a> - Powered by <a href="http://answerhub.com">AnswerHub</a>
+  </div>
+</footer>
+
+
+<a class="dummy-navbar-link hidden"></a>
+<div class="off-canvas-nav" id="sidr" style="display:none;">
+<ul class="nav nav-list">
+    <li class="nav-header">
+Anonymous    </li>
+    <li>
+        <a href="/users/login.html">Sign in</a>
+    </li>
+    <li class="nav-header">Create</li>
+    <li>
+        <a href="/questions/ask.html?space=13">Ask a question</a>
+    </li>
+    <li>
+        <a href="/articles/create.html?space=13">Create an article</a>
+    </li>
+    <li>
+        <a href="/content/idea/post.html?space=13">Post an idea</a>
+    </li>
+    <li>
+        <a href="/articles/create.html?space=13">Create an article</a>
+    </li>
+    <li>
+        <a href="/content/idea/post.html?space=13">Post an idea</a>
+    </li>
+
+
+    <li class="nav-header">Spaces</li>
+
+
+
+            
+                        <li >
+                <a class="main-nav"
+                   href="/spaces/174/index.html">Product Announcements</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/8/index.html">General</a>
+            <li class="active">
+                <a class="main-nav"
+                   href="/spaces/13/index.html">Edge/API Management</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/15/index.html">Developer Portal (Drupal-based)</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/175/index.html">Developer Portal (Integrated)</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/123/index.html">API Design</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/151/index.html">APIM on Istio</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/141/index.html">Extensions</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/91/index.html">Business of APIs</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/14/index.html">Academy/Certification</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/191/index.html">Adapter for Envoy</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/44/index.html">Analytics</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/124/index.html">Events</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/181/index.html">Hybrid</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/134/index.html">Integration (AWS, PCF, Etc.)</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/71/index.html">Microgateway</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/41/index.html">Monetization</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/81/index.html">Private Cloud Deployment</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/192/index.html">日本語コミュニティ</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/45/index.html">Insights</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/42/index.html">IoT Apigee Link</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/16/index.html">BaaS/Usergrid</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/152/index.html">BaaS Transition/Migration</a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/12/index.html">Apigee-127 </a>
+            <li >
+                <a class="main-nav"
+                   href="/spaces/133/index.html">New Customers</a>
+
+
+
+        <li class="nav-header">Explore</li>
+        <li>
+            <a href="https://community.apigee.com/topics.html">Topics</a>
+        </li>
+                <li>
+                    <a href="/questions/index.html">Questions</a>
+                </li>
+                <li>
+                    <a href="/content/kbentry/list.html">Articles</a>
+                </li>
+                <li>
+                    <a href="/content/idea/list.html">Ideas</a>
+                </li>
+                <li>
+                    <a href="/content/kbentry/list.html">Articles</a>
+                </li>
+                <li>
+                    <a href="/content/idea/list.html">Ideas</a>
+                </li>
+
+        
+
+            <li>
+                <a href="/badge/types.html">Badges</a>
+            </li>
+</ul>
+</div><script type="text/x-jquery-tmpl" id="user-popover">
+    <div class="user-popover ahub-popover">
+        <div class="ahub-popover-content">
+            <div class="header">
+				<!--
+
+				Commented out as a temporary workaround until we can properly
+				handle this avatar for issue 154. This workaround is acompanied
+				by a modification in the less/custom.less file.
+
+                <div class="popover-gravatar"> 
+						<a href="${profileUser.profileUrl}">
+                        	<img id="" class="gravatar " height="84" width="84" title="${profileUser.displayName}" alt="avatar image"  src="${pageContext.url.userAvatar.replace("%7BuserId%7D",profileUser.id)}?s=84">
+                    	</a>
+                </div>
+				-->
+                <p class="nameAndTagline">
+                    <a href="${profileUser.profileUrl}" class="username">${profileUser.displayName}</a><br>
+                    {{if profileUser.tagline}}<span class="tagline">${profileUser.tagline}</span>{{else}}{{if profileUser.location}}<span class="location">${profileUser.location}</span>{{/if}}{{/if}}
+                    {{if profileUser.company}}<i class="icon-briefcase"></i>&nbsp${profileUser.company}{{/if}}
+                </p>
+                {{if currentUser.id != profileUser.id}}<a class="btn btn-follow {{if currentUserFollowing}}on btn-info{{/if}}" command="follow" data-node-type="user" nodeId="${profileUser.id}"></a>{{/if}}
+            </div>
+            <div class="body">
+                <div class="stats-wrapper">
+                    <ul class="stats unstyled">
+                        <li><a href="${profileUser.profileUrl}"><span class="count">${profileUser.reputation}</span><br>${i18n.reputation}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count">${profileUser.postCount}</span><br>${i18n.posts}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count">${profileUser.userFollowCount}</span><br>${i18n.following}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count">${profileUser.followerCount}</span><br>${i18n.followers}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count">${profileUser.creationDateObj.getMonth() + 1 + "/" + profileUser.creationDateObj.getFullYear().toString().substring(2,4)}</span><br>${i18n.joined}</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-jquery-tmpl" id="topic-popover">
+    <div class="topic-popover ahub-popover">
+        <div class="ahub-popover-content">
+            <div class="header">
+                <div class="popover-icon">
+                    <a href="${topic.url}">
+                        <img id="" class="gravatar " height="84" width="84" title="${topic.name}" alt="${topic.name} icon" src="${topic.icon}">
+                    </a>
+                </div>
+                <p class="name"><a href="${topic.url}">${topic.name}</a></p>
+                <a class="btn btn-follow {{if currentUserFollowing}}on btn-info{{/if}}" command="follow" data-node-type="topic" nodeId="${topic.name}"></a>
+            </div>
+            <div class="body">
+                <div class="stats-wrapper">
+                    <ul class="stats unstyled">
+                        <li><a href="${topic.url}"><span class="count">${followerCount}</span><br>${i18n.followers}</a></li>
+                        <li><a href="${topic.url}"><span class="count">${questionCount}</span><br>${i18n.questions}</a></li>
+                        <li><a href="${topic.url}"><span class="count">${answerCount}</span><br>${i18n.answers}</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                {{if description}}<div class="description">{{html description}}</div>{{/if}}
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-jquery-tmpl" id="badge-popover">
+    <div class="badge-popover ahub-popover">
+        <div class="ahub-popover-content">
+            <div class="header">
+                <div class="pull-left">
+                    <img class="gravatar award-icon" height="84" width="84" title="${awardType.name}" alt="avatar image" src="${awardType.awardIconSrc}">
+                </div>
+                <p class="nameAndTagline">
+                    <a href="${awardType.awardUrl}" class="name">${awardType.name}</a><br>
+                    <span class="tagline">${awardType.description}</span>
+                </p>   
+            </div>
+            <div class="body">
+                	<div class="stats-wrapper">
+	                	<ul class="stats unstyled">
+							<li><a href="${awardType.awardUrl}"><span class="count">${awardPager.totalCount}</span><br>${i18n.awarded}</a></li>
+	                		<li>
+	                			<ul class="users unstyled">
+	                				<li><span class="user-list-title">${i18n.completedBy}:</span></li>
+			                		{{each awardPager.list}}
+				                		<li>
+					                		<a href="${$value.user.profileUrl}" title="${$value.user.username}">
+					                			<img class="gravatar " width="32" height="32" src="${$value.user.avatar}?s=32">
+					                		</a>
+					                	</li>
+				                	{{/each}}
+				                	<div class="clearfix"></div>
+		                		</ul>
+	                		</li>
+	                		<div class="clearfix"></div>
+	                	</ul>
+	                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    var searchItemMouseDown = false;
+    var $searchAuto = $("#search-query").autocomplete({
+        open: function () {
+            $searchAuto.addClass("open");
+            $("#searchResultsAutoComplete").find("a").mousedown(function (e) {
+                searchItemMouseDown = true;
+            });
+        },
+        close: function (e) {
+            $searchAuto.removeClass("open");
+        },
+        appendTo: '#searchResultsAutoComplete',
+        autoFocus: false,
+        highlight: function (match, keywords) {
+            keywords = keywords.split(' ').join('|');
+            return match.replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>');
+        },
+        source: function (request, response) {
+            var query = request.term;
+            var labelText = $('<div/>').text(request.term).html();
+
+            if (!/\s$/.test(query)) {
+                query += "*";
+            }
+
+            $.ajax({
+                url: '/search.json',
+                dataType: 'json',
+                minLength: 0,
+                delay: 30,
+                data: { q: query, page: 1, pageSize: 7, type: "object", compact: 'false' },
+                success: function (data) {
+                    try {
+                        externalResults = data.externalSearchResults instanceof Array ? data.externalSearchResults[0].results : data.externalSearchResults.results;
+                        mixedResults = $.merge(data.searchResults.results, externalResults);
+                    } catch(e) {
+                        mixedResults = data.searchResults.results
+                    }
+                    var $results = $.map(mixedResults, function (item, index) {
+                        if (item != null) {
+                        	if (item.object){
+                                return {
+                                        label: item.object.title.replace(
+                                                new RegExp(
+                                                        "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                $.ui.autocomplete.escapeRegex(request.term) +
+                                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                ), "<strong>$1</strong>"),
+                                        url: item.object.link,
+                                        value: item.object.title,
+                               };
+                            }
+                            if (item.username){
+                                var name = item.username;
+                                if(item.realname){
+                                    name = item.realname;
+                                }
+                                return {
+
+                                    label: name.replace(
+                                            new RegExp(
+                                                            "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                            $.ui.autocomplete.escapeRegex(request.term) +
+                                                            ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                            ), "<strong>$1</strong>"),
+                                    url: "/users/%7Bid%7D/%7Bplug%7D.html", //item.id
+                                    value: name,
+                                    id: item.id,
+                                    plug: item.plug,
+                                    type: "User",
+                                    emailHash: item.emailHash
+                                };
+                            }
+                            if (typeof item.title !== 'undefined')
+                            {
+                                switch (item.type) {
+                                    case 'topic':
+                                        return {
+                                            label: item.name.replace(
+                                                    new RegExp(
+                                                            "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                    $.ui.autocomplete.escapeRegex(request.term) +
+                                                                    ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                    ), "<strong>$1</strong>"),
+                                            url: "/topics/%7Bid%7D.html", //item.id
+                                            value: item.name,
+                                            id: item.name,
+                                            plug: item.plug,
+                                            type: "Topic"
+                                        };
+                                    case 'user':
+                                        var name = item.username;
+                                        if(item.realname){
+                                            name += " | " + item.realname;
+                                        }
+                                        return {
+
+                                            label: name.replace(
+                                                    new RegExp(
+                                                            "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                    $.ui.autocomplete.escapeRegex(request.term) +
+                                                                    ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                    ), "<strong>$1</strong>"),
+                                            url: "/users/%7Bid%7D/%7Bplug%7D.html", //item.id
+                                            value: name,
+                                            id: item.id,
+                                            plug: item.plug,
+                                            type: "User",
+                                            emailHash: item.emailHash
+                                        };
+                                    case 'question':
+                                        return {
+                                            label: item.title.replace(
+                                                    new RegExp(
+                                                            "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                    $.ui.autocomplete.escapeRegex(request.term) +
+                                                                    ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                    ), "<strong>$1</strong>"),
+                                            url: "/questions/%7Bid%7D/%7Bplug%7D.html", //item.id
+                                            value: item.title,
+                                            id: item.id,
+                                            plug: item.plug,
+                                            type: item.type
+                                        };
+                                    default:
+                                        return {
+                                            label: item.title.replace(
+                                                    new RegExp(
+                                                            "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                    $.ui.autocomplete.escapeRegex(request.term) +
+                                                                    ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                    ), "<strong>$1</strong>"),
+                                            url: "/content/%7Btype%7D/%7Bid%7D/%7Bplug%7D.html", //item.id
+                                            value: item.title,
+                                            id: item.id,
+                                            plug: item.plug,
+                                            type: item.type
+                                        };
+                                }
+                            }
+                        }
+                    });
+                    $results.push({
+                        label: "Search: " + "\"" + $.trim(labelText) + "\"",
+                        url: "/search.html?q={query}",
+                        query: request.term,
+                        value: request.term
+                    });
+                    $results.push({
+                        label: "Add Question: <strong>\"$q\"<\/strong>".replace("$q", $.trim(labelText)),
+                        url: "/questions/ask.html?a=true&q={query}&space=13",
+                        query: request.term,
+                        value: request.term
+                    });
+
+                    response($results);
+                }
+            });
+        },
+        select: function (event, ui) {
+            var url = ui.item.url.replace("%7Bid%7D", ui.item.id);
+            url = url.replace("%7Bplug%7D", ui.item.plug);
+            url = url.replace("{query}", ui.item.query);
+            url = url.replace("%7Btype%7D", ui.item.type);
+            window.location = url;
+            return false;
+        }
+    }).keydown(function () {
+                $(this).css('color', '#000');
+            });
+
+    if ($searchAuto.length) {
+        $searchAuto.data("uiAutocomplete")._renderItem = function (ul, item) {
+            var type_str = "";
+            if (item.type == "Topic")
+                    type_str = "<span class='autocomplete-type'>" + "Topic" + "</span>";
+            return $("<li></li>")
+                    .data("item.autocomplete", item)
+                    .append("<a>" + (item.type == 'User' ? '<img class="gravatar" align="left" width="16" height="16" style="margin-right: 5px;" src="//www.gravatar.com/avatar/'
+                            + item.emailHash + '?s=16&amp;d=identicon&amp;r=PG"/>' : '') + " " + item.label + " " + type_str + "</a>")
+                    .appendTo(ul);
+        };
+    }
+</script><script type="text/javascript">
+
+    $(document).ready(function () {
+        $bottom = $("#bottom");
+        $notFooter = $("#not-footer");
+        $push = $(".push");
+        $push.css("height", $bottom.outerHeight() + "px");
+        $notFooter.css("margin-bottom", "-" + $bottom.outerHeight() + "px");
+
+        $(".dummy-navbar-link").sidr();
+
+        $(".navbar-toggle").on("click", function(){
+            $.sidr(
+                "open",
+                "sidr",
+                function(){
+                    $(document.body).prepend("<div class='cover'></div>");
+                    $(".cover").fadeIn().on("click", function(){
+                        $.sidr('close', 'sidr');
+                        $(this).remove();
+                    });
+                }
+            );
+        });
+        
+        $('.kbentry-container .show-comments-container').click();
+    });
+
+
+    $(".answer-body pre").addClass("prettyprint");
+    $(".node-body pre").addClass("prettyprint");
+    $(".question-body pre").addClass("prettyprint");
+    prettyPrint();
+
+    $(document).ajaxComplete(function( event, xhr, settings ) {
+        if (settings.url.indexOf("condensedProfile.json") >= 0) {
+            var uid = settings.url.split("/")[2];
+            $.get('/questions/isApigeek.json', {user: uid}, function( data ) {
+                if (data.result.isApigeek == true) {
+                    $('#qtip-' + settings.context.id + '-content').find('.nameAndTagline').append('<span class="apigeek">Apigeek</span>');
+                    $('#qtip-' + settings.context.id + '-content').find('.location').hide();
+                }
+            });
+            $.get('/academyAward/hasAcademyAward.json', {user: uid}, function( data ) {
+                if (data.result.data == true) {
+                    $('#qtip-' + settings.context.id + '-content').find('ul.stats').append('<li><a href="http://academy.apigee.com/courses/certification" target="_blank"><img src="/plugins/resources/apigee/images/badges/com.teamhub.plugins.apigee.awards.academy.name.png" alt="" /></a></li>');
+                }
+            });
+        }
+
+        if (settings.url.indexOf("add.json") >= 0) {
+            var json = JSON.parse(xhr.responseText);
+            $.get('/academyAward/hasAcademyAward.json', {user: json.comment.author.id}, function( data ) {
+                if (data.result.data == true) {
+                    $('#comment-' + json.comment.id).find('a.comment-user').append('&nbsp;<a href="http://academy.apigee.com/courses/certification" target="_blank"><img src="/plugins/resources/apigee/images/badges/com.teamhub.plugins.apigee.awards.academy.name.png" height="15px" width="15px" alt="" /></a>');
+                }
+            });
+        }
+
+        if (settings.url.indexOf("list.json") >= 0) {
+            var json = JSON.parse(xhr.responseText);
+            json = json.result.replies;
+            $.each(json.comments, function(i, item) {
+                $.get('/academyAward/hasAcademyAward.json', {user: item.author.id}, function( data ) {
+                    if (data.result.data == true) {
+                        $('#comment-' + item.id).find('a.comment-user').append('&nbsp;<a href="http://academy.apigee.com/courses/certification" target="_blank"><img src="/plugins/resources/apigee/images/badges/com.teamhub.plugins.apigee.awards.academy.name.png" height="15px" width="15px" alt="" /></a>');
+                    }
+                });
+            })
+        }
+    });
+
+</script>
+</body>

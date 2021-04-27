@@ -1,0 +1,8 @@
+2021/04/27-15:20:02.919 3290 Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_developers.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/27-15:20:02.920 3290 Recovering log #20
+2021/04/27-15:20:02.920 3290 Reusing old log C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_developers.google.com_0.indexeddb.leveldb/000020.log 
+2021/04/27-15:20:34.952 2550 Level-0 table #24: started
+2021/04/27-15:20:34.953 2550 Level-0 table #24: 0 bytes OK
+2021/04/27-15:20:34.960 2550 Delete type=0 #20
+2021/04/27-15:20:34.961 2550 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2021/04/27-15:20:34.961 2550 Manual compaction at level-1 from (begin) .. (end); will stop at (end)

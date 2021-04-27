@@ -1,0 +1,450 @@
+## ********* React Reader - start ********* ##
+##---- labels---###
+react.common.viewmore.message=View More
+react.common.viewless.message=View Less
+
+##---- React Reader Document Metadata START ---###
+react.reader.metadata.kidisplay=Initiatives:
+react.reader.metadata.kidisplay.displaymore=and {0} more
+react.reader.metadata.kidisplay.research.board=Part of:
+react.reader.metadata.bylineanalysts=By
+react.reader.metadata.recomendationauthor=Recommended by the Author
+react.reader.metadata.whattoread=Recommended for You
+react.reader.metadata.more=View More
+react.reader.metadata.less=View Less
+react.reader.metadata.exploretitle=Explore Key Initiatives
+react.reader.metadata.peerconnect=Join The Conversation
+react.reader.metadata.gartnerrecommendation=Recommended For You
+react.reader.metadata.analystrecommendation=Recommended by the Author
+react.reader.metadata.multianalystrecommendation=Recommended by the Authors
+react.reader.metadata.oneclicktrack.left.title=Related Initiatives
+react.reader.metadata.oneclicktrack.center.title=Supporting Initiatives
+react.reader.metadata.doc.relationship.section.title=Get the full story
+react.reader.metadata.doc.relationship.section.text=This content is part of a larger body of research on this topic.
+react.reader.metadata.mq=Magic Quadrant
+react.reader.metadata.cc=Critical Capabilities
+react.reader.metadata.document=document
+
+##---- React Reader Document Body START ---###
+react.reader.body.table.action=Enlarge Table
+react.reader.body.image.action=Drag and drop this image to save.
+react.reader.body.doc.revision=Document Revision History
+
+##---- CEB Metadata START ---###
+react.reader.metadata.ceb.pill=CEB RESEARCH
+react.reader.metadata.ceb.message=This content was originally published by CEB and is available to you without modification. Learn more about
+react.reader.ceb.modal.title=More About CEB Research
+react.reader.ceb.modal.contentorder=head1,desc1,desc2,desc3,head2,desc4,desc5,desc6,desc7
+react.reader.ceb.modal.message.head1=CEB Research and Advisory solutions equip leaders and teams to:
+react.reader.ceb.modal.message.head2=CEB research is member-based with real world insights so you have even more resources to drive smarter and faster implementations through:
+react.reader.ceb.modal.message.desc1=Turn insights into actions that deliver the right outcomes
+react.reader.ceb.modal.message.desc2=Upgrade processes and adapt culture to succeed in the new work environment
+react.reader.ceb.modal.message.desc3=Apply precision to talent decisions for competitive advantage.
+react.reader.ceb.modal.message.desc4=Best practice and decision support content
+react.reader.ceb.modal.message.desc5=Tools and Templates
+react.reader.ceb.modal.message.desc6=Functional Diagnostics
+react.reader.ceb.modal.message.desc7=Peer Benchmarks and Case Studies
+##---- CEB Metadata END ---###
+
+##---- L2 Metadata -----##
+react.reader.metadata.l2.message= This content was created by the Gartner L2 Research team. Learn more about
+react.reader.l2.modal.title=More about L2 Research
+react.reader.l2.modal.contentorder=head1,desc1,desc2,desc3
+react.reader.l2.modal.message.head1=L2 research provides sector-specific rankings and analysis on brands’ digital performance. L2 Research and Advisory solutions equip leaders and teams to:
+react.reader.l2.modal.message.desc1=Benchmark their digital performance against competitors
+react.reader.l2.modal.message.desc2=Identify and prioritize opportunities to maximize the business impact of their digital investments
+react.reader.l2.modal.message.desc3=Keep up with the pace of change in digital marketing to stay ahead
+
+##-----------##
+
+##---- Icono Metadata-----##
+react.reader.metadata.icono.message= This content was created by the Gartner Iconoculture Research team. Learn more about
+react.reader.icono.modal.title=More about Iconoculture Research
+react.reader.icono.modal.contentorder=head1,desc1,desc2,desc3,head2
+react.reader.icono.modal.message.head1=Iconoculture Research and Advisory solutions equip leaders and teams to:
+react.reader.icono.modal.message.desc1=Turn consumer insights into actions that deliver the right outcomes
+react.reader.icono.modal.message.desc2=Keep up with the pace of change across sectors and society to stay ahead
+react.reader.icono.modal.message.desc3=Challenge and adapt thinking to prepare for future scenarios
+react.reader.icono.modal.message.head2=Iconoculture research is consumer insights and advice so you know what is happening and why it is happening with your target across sectors.
+
+##-----------##
+
+##---- Peer Connect Metadata START ---###
+react.reader.metadata.peerconnect.pill=PEERS
+react.reader.peerconnect.disclaimer=This report is based on input from enterprise end users and does not represent the views of Gartner or its affiliates. Peer-based reports may summarize the opinions and points of view expressed by <a href="https://www.gartner.com/reviews/home">Gartner Peer Insights</a> reviewers or <a href="https://community.gartner.com/">Gartner Peer Connect</a> community members. Refer to <a href="https://www.gartner.com/reviews/faq">Gartner Peer Insights FAQs</a> and the <a href="https://www.gartner.com/assets/pdf/Peer_Connect_Guidelines.pdf">Gartner Peer Connect Guidelines</a> for more information.
+react.reader.peerconnect.secondary.disclaimer=This content, which provides opinions and points of view expressed by users, does not represent the views of Gartner. Gartner neither endorses it nor makes any warranties about its accuracy or completeness.
+##---- Peer Connect Metadata END ---###
+
+cc.updated.date.message=This research has been updated to include recent changes in capability.
+mq.updated.date.message=This Magic Quadrant now includes links to relevant Corporate Transaction Notification research.
+reader.additional.doc.relations=Additional Perspectives
+reader.significant.doc.relations=Significant Events
+
+react.reader.metadata.publised=Published
+react.reader.metadata.id=ID
+react.reader.metadata.minread=min read
+react.reader.metadata.updated=Updated
+react.reader.metadata.refreshed=Refreshed
+
+##---- Foundational Metadata START ---###
+react.reader.metadata.foundational.pill=Foundational
+react.reader.metadata.foundational.disclaimer.message=This research is reviewed periodically for accuracy.
+##---- Foundational Metadata END ---###
+
+##---- Archived Metadata START ---###
+react.reader.metadata.archived.pill=ARCHIVED
+react.reader.metadata.archived.disclaimer.message=This research is provided for historical perspective; portions may not reflect current conditions.
+react.reader.metadata.archived.revised.document=Newer version of this document
+##---- Archived Metadata END ---###
+
+##---- Reprint START ---###
+react.reader.metadata.reprint.internal=Internal Use Only
+##---- Reprint END ---###
+
+##---- Must Have Research START ----##
+rr.inquiry.heading=Speak With a Gartner Expert
+##---- Must Have Research END ----##
+##---- Left Rail Action ToolBar Labels Text ----##
+lr.actionButton.label.save=Save
+lr.actionButton.label.share=Share
+lr.actionButton.label.Download=Download
+lr.actionButton.label.Print=Print
+lr.actionButton.label.Index=Index
+lr.actionButton.label.Notes=Notes
+lr.actionButton.label.Anlytics=Analytics
+lr.actionButton.label.Information=Info
+lr.actionButton.label.Inquiry=Inquiry
+lr.actionButton.label.Listen=Listen
+lr.Listen.popup.heading=Coming soon on desktop!
+lr.Listen.popup.subheading=For now enjoy listening on Gartner Mobile
+##---- Left Rail Action ToolBar Labels START ----##
+rr.popOver.label.share=Share
+rr.popOver.label.reprint=Reprint
+rr.popOver.label.library.added=Saved
+rr.popOver.addToLibrary.message.added=This document is already saved to the
+rr.popOver.addToLibrary.message.added.reader=Document saved in
+##---- Left Rail Action ToolBar Labels END ----##
+
+##---- Left Rail Action ToolBar Aria Labels START ----##
+rr.popOver.arialabel.share.document=Share
+rr.popOver.arialabel.share.document.reprints=Share or Request Reprints
+##---- Left Rail Action ToolBar Aria Labels END ----##
+
+##---- Right Rail Peer Connect START ----##
+rr.peerconnect.title=Gartner Peer Connect
+rr.peerconnect.subtitle=Facilitated, real-world advice from your peers
+##---- Right Rail Peer Connect END ----##
+
+##---- Share Modal START ----##
+rr.share.heading=Share this document:
+rr.share.ki=Share Key Insights from up to {0} documents.
+rr.share.standard=Share document link and brief summary.
+rr.share.ki.not.available.message=A Key Insights view of this document is not available.
+rr.share.ki.almost.over.message=You are almost out of shares.
+rr.share.ki.more.than.halfway.message=You are more than halfway to your sharing limit for Key Insights.
+rr.share.ki.reached.maximum.message=You have reached your limit of shares.
+rr.share.email.placeholder.text=Separate recipient email addresses with ; or ,
+rr.share.email.default.message=I thought you might be interested in this Gartner research.
+rr.share.deepLink.text=DeepLink URL (copy to forward internally)
+##---- Share Modal END ----##
+
+##---- Share Modal Aria Labels START ----##
+rr.share.arialabel.document=Share Document
+rr.share.arialabel.document.reprints=Share Document or Request Reprints
+##---- Share Modal Aria Labels END ----##
+
+##---- Interactive Callout Box START ----##
+rr.interactive.toggle.view.mq.cc.heading=Explore the Interactive Version
+rr.interactive.toggle.view.ki.heading=View Key Insights
+##---- Ineractive Callout Box END ----##
+
+##---- Interactive Hype Cycle START ----##
+rr.interactive.hypecycle.glossary=For definitions of technical terms related to this article, visit the <a href = "/it-glossary">IT Glossary</a>
+##---- Interactive Hype Cycle END ----##
+
+##---- Interactive Critical Capabilities START ----##
+rr.interactive.cc.scores.chart.title=FIT TO USE CASE (Scale 1-5)
+rr.interactive.cc.download.data=Download Data For All Use Cases
+rr.interactive.cc.dialog.delete.title=Delete Custom Use Case?
+rr.interactive.cc.dialog.delete.content=Choosing DELETE will remove your custom use case from this Critical Capability.
+rr.interactive.cc.dialog.replace.title=Replace Existing Customization?
+rr.interactive.cc.dialog.replace.content=Choosing SAVE will replace any previous customization of this use case.
+rr.interactive.cc.dialog.save.title=Save Customization?
+rr.interactive.cc.dialog.save.content=Do you want to <strong>save the customizations</strong> you made to this use case?
+rr.interactive.cc.scores.updated.since=<span>*</span> Product analysis updated since
+rr.interactive.cc.scores.notes.ratings=<span>*</span> Ratings are updated continually to reflect new capabilities. Hover over directional indicators to view changes.
+rr.interactive.cc.scores.notes.weightings=<span>**</span> Weightings vary by use case.
+rr.interactive.cc.scores.notes.zero=<span>Note:</span> Zero ratings indicate use case is not applicable.
+rr.interactive.cc.arialabel.delete=Delete custom use case
+rr.interactive.cc.arialabel.edit=Edit custom use case
+rr.interactive.cc.arialabel.usecase.title=Use case title
+rr.interactive.cc.arialabel.usecase.description=Use case description
+rr.interactive.cc.dialog.button.cancel=Cancel
+rr.interactive.cc.dialog.button.continue=Continue without saving
+rr.interactive.cc.dialog.button.save=Save
+rr.interactive.cc.dialog.button.customize=Customize
+##---- Interactive Critical Capabilities END ----##
+
+##---- Doc to Doc Relationship START ----##
+rr.doctodoc.txt.this=This
+rr.doctodoc.related.to.research=is related to other research:
+rr.doctodoc.pi.reviews=Peer Insights reviews for
+rr.doctodoc.view.all.mq.cc=View All Magic Quadrants and Critical Capabilities
+rr.doctodoc.about.cc=About Critical Capabilities Methodology
+rr.doctodoc.about.forecast=About Forecast Methodology
+rr.doctodoc.about.market.share=About Market Share Methodology
+rr.doctodoc.about.index.qmi=Index of Quantified Market Insight
+rr.doctodoc.about.qmi=About Quantified Market Insight
+##---- Doc to Doc Relationship END ----##
+
+##---- Metered Activity START ---###
+react.reader.meteredactivity.tokenreduct.reverse.purchase=You have the option to reverse this purchase at any point during the remainder of your service contract.
+react.reader.meteredactivity.tokenreduct.reverse.onetime=Reversal decision can only be made when reading a document for the first time.
+react.reader.meteredactivity.tokenreduct.exceed.allocation=You have reached your allocation limit. Please contact your Gartner representative for assistance.
+react.reader.meteredactivity.notentitlement.notentitled=Our records show that you do not own this document. This document is not available for individual purchase.
+react.reader.meteredactivity.notentitlement.notentitledpurchasable=Our records show that you do not own this document. Please contact your Gartner representative if you would like to purchase it individually.
+##---- Metered Activity END ---###
+
+##---- Reader Disclaimer ---###
+react.reader.disclaimer.default= Gartner, Inc. and/or its affiliates. All rights reserved. Gartner is a registered trademark of Gartner, Inc. and its affiliates. This publication may not be reproduced or distributed in any form without Gartner's prior written permission. It consists of the opinions of Gartner's research organization, which should not be construed as statements of fact. While the information contained in this publication has been obtained from sources believed to be reliable, Gartner disclaims all warranties as to the accuracy, completeness or adequacy of such information. Although Gartner research may address legal and financial issues, Gartner does not provide legal or investment advice and its research should not be construed or used as such. Your access and use of this publication are governed by <a href="/technology/about/policies/usage_policy.jsp" target="_0">Gartner’s Usage Policy</a>. Gartner prides itself on its reputation for independence and objectivity. Its research is produced independently by its research organization without input or influence from any third party. For further information, see "<a href="/technology/about/ombudsman/omb_guide2.jsp" target="_0">Guiding Principles on Independence and Objectivity</a>."
+rr.printing.license=Licensed for Distribution
+rr.printing.disclaimer=This research note is restricted to the personal use of
+scm.document.disclaimer.migrate=This document was originally published by SCM World and is available to you without modification or review by Gartner.
+scm.document.disclaimer.goforward=Supply Chain Community content provides opinions and points of view expressed by Supply Chain Community members. This content, which has been contributed directly by members or synthesized from community discussions, does not represent the views of Gartner. Gartner neither endorses it nor makes any warranties about its accuracy or completeness.
+rb.document.disclaimer.meeting_materials=This content, which includes materials contributed by third parties, does not represent the views of Gartner; Gartner neither endorses it nor makes any warranties about its accuracy or completeness.
+rb.document.disclaimer.consult_board_summaries=This content, which provides opinions and points of view expressed by community members, does not represent the views of Gartner; Gartner neither endorses it nor makes any warranties about its accuracy or completeness.
+##---- Reader Disclaimer End ---###
+
+##---- React Reader Errors START ---###
+react.reader.errors.accessratelimit.exceeded.dpv=To protect the security of your gartner.com account, Gartner has limited the number of Gartner Research documents that may be viewed or downloaded in a given period of time.  Your account has reached this limit, and a temporary hold has been placed on your account.  You may resume the viewing or downloading of documents after {0}:{1} hours.   Thank you for your cooperation as we work to safeguard the privacy and security of your account.  If you have an urgent need to view or download a document, please contact your dedicated Client Service Associate or Gartner's Interactive Client Support team at client.response@gartner.com
+react.reader.errors.dailyaccesslimit.execeeded.dpv=Sorry, you have reached the daily download limit. Documents can still be viewed in the browser. Downloading will be available again in 24 hours.
+##---- React Reader Errors FINISH ---###
+
+##---- Gartner for Business Associate START ---###
+react.reader.sharedaccess.admin.title=Gartner for Business Associates
+react.reader.sharedaccess.admin.remaining=Remaining postings for
+react.reader.sharedaccess.admin.prepost.subtitle=Post this document to the Gartner for Business Associates portal?
+react.reader.sharedaccess.admin.prepost=Posting is final. This document will be available on your company's Gartner for Business Associates portal until your service agreement ends. Once a document is posted, it cannot be changed.
+react.reader.sharedaccess.admin.prepost.zeroallocation=You do not have any document allocation remaining. Please contact your Account Executive.
+react.reader.sharedaccess.admin.prepost.modal.title=Post This Document
+react.reader.sharedaccess.admin.prepost.modal.text=Are you sure you want to post the following document to your Gartner Business Associates portal?
+react.reader.sharedaccess.admin.post.success=This document has been successfully posted to your company's Gartner Business Associates portal!
+react.reader.sharedaccess.admin.post.error=There was an error processing your request. Please try again later.
+react.reader.sharedaccess.user.title=Our records show you do not own this document.
+react.reader.sharedaccess.user.prepost.subtitle=This document is unavailable for individual purchase.
+react.reader.sharedaccess.user.bottom.title=Request access to this document for Gartner for Business Associates
+react.reader.sharedaccess.user.bottom.description=You may send a request to your Gartner for Business Associates administrator to have this document posted. If this document is posted to your Gartner for Business Associates portal, you will have access to its full content. This is only a request and does not gaurantee that this document will be selected.
+react.reader.sharedaccess.user.prepost.zeroallocation=Your company does not have any document allocation remaining. Please contact your Membership Administrator.
+react.reader.sharedaccess.user.prepost.modal.title=Request This Document
+react.reader.sharedaccess.user.prepost.modal.text=Please consider posting the following research document to the Gartner Business Associated portal:
+react.reader.sharedaccess.user.bottom.requested.title=You requested access to this document on
+react.reader.sharedaccess.user.bottom.requested.description=If your Gartner for Business Associates administrator grants access to this document, it will be posted to the Gartner for Business Associates portal, and you will have access to its full content. Your request does not guarantee that this document will be selected.
+##---- Gartner for Business Associate Activity END ---###
+
+##---- Reprint Footer Menu START ---###
+react.reader.footer.about=About
+react.reader.footer.careers=Careers
+react.reader.footer.newsroom=Newsroom
+react.reader.footer.policies=Policies
+react.reader.footer.siteindex=Site Index
+react.reader.footer.itglossary=IT Glossary
+react.reader.footer.blognetwork=Gartner Blog Network
+react.reader.footer.contact=Contact
+react.reader.footer.sendfeedback=Send Feedback
+react.reader.footer.copyright=Gartner, Inc. and/or its Affiliates. All Rights Reserved.
+##---- Reprint Footer Menu END ---###
+
+react.reader.footer.rate=Rate
+
+##---- Gartner for Dollar Consumption START ---###
+react.reader.metadata.metered.reverse.error=Sorry! You can not reverse the charges at this moment.
+react.reader.metadata.metered.btn.text1=Review Access Details
+react.reader.metadata.metered.btn.text2=Reverse Charge
+react.reader.metadata.metered.price.label=Price:
+react.reader.metadata.metered.balance.label=Remaining Balance:
+react.reader.metadata.metered.purchase.text=You purchased this document on
+react.reader.metadata.metered.noaccess.text=NO ACCESS
+react.reader.metadata.metered.entitled.label=You are entitled to view this research for 90 days
+react.reader.metadata.metered.entitled.label2=You are entitled to view this research for 24 hours
+react.reader.metadata.metered.entitled.text=After clicking Access Document, you will be entitled to view this research for 90 days without encountering this summary page.
+##---- Gartner for Dollar Consumption END ---###
+
+##---- Inquiry an Expert START ---###
+react.reader.rr.inquiry.title=Expert Advice
+react.reader.rr.inquiry.button.text = Schedule an inquiry
+react.reader.rr.inquiry.tooltip.text = Have questions related to this document?
+##---- Inquiry an Expert END ---###
+
+##---- Reader Unentitled Link Modal START ----###
+react.reader.links.unentitled.modaltitle=We're sorry
+react.reader.links.unentitled.modalbody=This document is not available as part of your current Gartner service.  Please contact your Gartner representative if you would like to purchase it.
+##---- Reader Unentitled Link Modal END ----###
+
+##---- React Webinar Status Bar START ---###
+react.webinar.details.label.date=Date
+react.webinar.details.label.time=Time
+react.webinar.details.label.credits=Credits
+react.webinar.status.label.concluded=Concluded
+react.webinar.status.button.attend=Attend
+react.webinar.status.button.register=Register
+react.webinar.status.button.replay=Replay
+react.webinar.status.button.registered=Registered
+react.webinarseries.viewMore=View {0} More
+
+react.webinarseries.status.button.registeredforallseries=Registered for this series
+react.webinarseries.status.button.registerforallseries=Register for this series
+react.webinarseries.heading.message=Other webinars in this series:
+react.webinarseries.allregistration.heading=Webinar Series Registration Confirmation
+react.webinarseries.allregistration.message=Upon confirmation, you will receive separate emails with the required details for all upcoming webinars in this series. Please note that it may take some time to process and reflect your registration status for the entire series.
+
+
+react.webinar.status.message.registered.title=You are registered.
+react.webinar.status.message.registered.message=You will receive an email with log in details and any associated materials. If you do not receive this email, please contact us at <a href="mailto:GartnerVirtualEvents@gartner.com">GartnerVirtualEvents@gartner.com</a>.
+
+react.webinar.status.message.waitlist.title=You have been added to the waitlist.
+react.webinar.status.message.waitlist.message=We will notify you via email if a space becomes available.
+
+react.webinar.status.message.full.title=This webinar is full.
+react.webinar.status.message.full.message=To be added to the waitlist, please contact our Events department at +1-571-303-3033.
+
+react.webinar.status.message.concluded.title=This webinar has concluded.
+react.webinar.status.message.concluded.message=A replay, if available, will be posted shortly.
+
+react.webinar.status.message.error.title=Sorry, you are unable to register.
+react.webinar.status.message.error.message=If you think this is an error, please <a href="mailto:GartnerVirtualEvents@gartner.com">contact us</a>.
+
+react.webinar.status.message.noaccess.title=No Access
+react.webinar.status.message.noaccess.message=Our records show that you are not entitled to view this webinar. Please contact your Gartner representative if you would like to purchase it individually.
+
+react.webinar.rr.cpecredits.title=Continuing Professional Education Credits (CPEs)
+react.webinar.rr.clecredits.title=Continuing Legal Education Credits (CLEs)
+react.webinar.rr.hrcredits.title=HR Credits
+react.webinar.rr.pducredits.title=Professional Development Units (PDUs)
+
+react.webinar.rr.cpecredits.disclaimer.policy.title=CPE Refund/Cancellation Policy
+react.webinar.rr.cpecredits.disclaimer.policy.message=Due to these programs being provided free of charge (as part of membership with no incremental cost), there will be no refunds issued.
+
+react.webinar.rr.cpecredits.disclaimer.additional.title=Additional Information
+react.webinar.rr.cpecredits.disclaimer.additional.message=<p>As a client, you may be eligible to earn Continuing Professional Education (CPE) for attending and participating in select CPE eligible webinars. Gartner is registered with the National Association of State Boards of Accountancy (NASBA) as a sponsor of continuing professional education on the National Registry of CPE Sponsors. State boards of accountancy have final authority on the acceptance of individual courses for CPE credit. Complaints regarding registered sponsors may be submitted to the National Registry of CPE Sponsors through its website: <a href="https://www.nasbaregistry.org/" target="_blank">www.nasbaregistry.org.</a></p>
+
+react.webinar.rr.cisocredits.disclaimer.additional.title=CPE for Information Security Professionals
+react.webinar.rr.credits.disclaimer.additional.title=Additional Information
+
+react.webinar.rr.credits.cpe.standard.disclaimer.additional.message=<p>As a client, you may be eligible to earn Continuing Professional Education (CPE) for attending and participating in select CPE eligible webinars. Gartner is registered with the National Association of State Boards of Accountancy (NASBA) as a sponsor of continuing professional education on the National Registry of CPE Sponsors. State boards of accountancy have final authority on the acceptance of individual courses for CPE credit. Complaints regarding registered sponsors may be submitted to the National Registry of CPE Sponsors through its website: <a href="https://www.nasbaregistry.org/" target="_blank">www.nasbaregistry.org.</a></p>
+react.webinar.rr.credits.ciso.standard.disclaimer.additional.message=<p>As a client, you may be eligible to earn Continuing Professional Education (CPE) credit after attending our virtual events. CPE credits are necessary for every individual in the information security profession to maintain their CISSP, CISA, CISM, and other information security professional certifications. The information included in the webinar presentation materials (e.g., speaker bio and certificate of attendance) will allow you to contact your Certifying Body to apply for CPE credit. For virtual events, Gartner clients should only apply for CPE credit if he or she attended the live broadcast of the event.</p><p>Note: In most cases, individuals can apply for credit directly. A 60-minute webinar is typically eligible for one credit. The number of hours approved for any session, however, is at the discretion of the Certifying Body.</p>
+react.webinar.rr.credits.cle.standard.disclaimer.additional.message=<p>As a client, you may be eligible to earn Continuing Legal Education (CLE) credit after attending our virtual events. For many jurisdictions, the information included in the webinar presentation materials (e.g., speaker bio and certificate of attendance) will allow you to contact your state bar to apply for CLE credit. For virtual events, Gartner clients should only apply for CLE credit if he or she attended the live broadcast of the event.</p><p>Please access this <a href="https://www.cebglobal.com/member/legal-int/events/earning-continuing-legal-education-credit.html" target="_blank">resource</a> for CLE materials for virtual events with a completion date of May 15<sup>th</sup> 2020 or earlier.</p><p>In most cases, individuals can apply for credit directly. However, certain states require the sponsoring organization to apply on behalf of attendees. Please contact us at <a href="mailto:LegalCLEquestions@gartner.com">LegalCLEquestions@gartner.com</a> if you are seeking CLE credit in one of the following states so we can provide more information: New York, Illinois, Texas, California, Pennsylvania, Louisiana, and Kansas.</p><p>Note: As CLE requirements vary across jurisdictions, we cannot guarantee any event will meet a given jurisdiction’s requirements. A 60-minute webinar is typically eligible for one credit. The number of hours approved for any session, however, is at the discretion of each individual state bar. Receiving credit can take up to 3 months, depending on each state's approval process. We do not present material that counts toward Legal Ethics credits.</p>
+react.webinar.rr.credits.hr.upcoming.disclaimer.additional.message=<p>This webinar is eligible for Continuing Education Credit through the HR Certification Institute and the Society for Human Resource Management.</p>
+react.webinar.rr.credits.hr.ondemand.disclaimer.additional.message=<p>This webinar is eligible for Continuing Education Credit through the HR Certification Institute and the Society for Human Resource Management.</p>
+react.webinar.rr.credits.pdu.standard.disclaimer.additional.message=<p>As a client, you may be eligible to earn PDU credits through Gartner after attending a webinar, Annual Executive Retreat for PMO Leaders, Gartner Program & Portfolio Management Summit, or by viewing an OnDemand webinar. If you have already attended or viewed one of these events or videos, you are not eligible to receive an additional PDU credit for the same session.</p><p><strong>Additional Information</strong></p><p>Project Management Institute (PMI) credential holders are required to participate in professional development activities to maintain their certification. Every certification requires a specific amount of professional development units (PDUs) per three-year certification cycle.</p><p><strong>PMI Certifications We Accept:</strong> PMP® (Project Management Professional) / PgMP® (Program Management Professional)</p><hr /><p><strong>Important Upcoming PDU Changes in July 2020*As per the information available on the *Project Management Institute website,</strong> the current R.E.P program is being retired and a New PMI Authorized Training Partner Program will be instituted in its place effective July 1, 2020 (<i>due to the disruption of COVID-19, this launch date has been indefinitely delayed</i>). All PDU eligible virtual events and On Demand videos will be updated accordingly.</p>
+
+react.webinar.rr.download.attach.title=Download Attachments
+
+react.webinar.related.title=Related Webinars
+react.webinar.related.viewall=View all Webinars
+
+react.webinar.retracted.title=This webinar no longer available
+react.webinar.retracted.message=The webinar you are attempting to acces has been retracted.
+##---- React Webinar END ---###
+
+##---- React Event Status Bar START ---##
+react.event.page.title.live.meeting=Meeting
+react.event.page.right.addon.title=Additional Dates and Locations
+react.event.page.right.addon.subtext=This meeting is also available at the following dates and locations:
+react.event.page.right.addon.view.all.meetings.button=View all meetings
+
+react.event.details.label.date=Date
+react.event.details.label.time=Time
+react.event.details.label.credits=Credits
+react.event.details.label.location=Location
+react.event.status.button.attend=Attend
+react.event.status.button.register=Register
+react.event.status.button.replay=Replay
+
+react.event.status.message.registered.title=You are registered.
+react.event.status.message.registered.message=You will receive a confirmation email shortly. If you do not receive this email or if you need to cancel your registration, please contact
+event.status.registered.registration.support=<a href="mailto:gartnermeetings@gartner.com">Gartner Registration Support.</a>
+
+event.registration.support.title=Gartner Registration Support
+event.registration.support.subheading.na=North America
+event.registration.support.na.phone=<strong>Phone:</strong> &nbsp; +1 571.303.3030
+event.registration.support.na.email=<strong>Email:</strong> &nbsp; <a href="mailto:gartnermeetings@gartner.com">Gartner Meetings @gartner.com</a>
+event.registration.support.na.hours=<strong>Hours:</strong> &nbsp; Monday - Friday 8:30 AM to 5:30 PM ET
+event.registration.support.subheading.europe=Europe
+event.registration.support.europe.phone=<strong>Phone:</strong> &nbsp; +44 (0) 20.7632.6600
+event.registration.support.europe.email=<strong>Email:</strong> &nbsp; <a href="mailto:gartnermeetings@gartner.com">Gartner Meetings @gartner.com</a>
+event.registration.support.europe.hours=<strong>Hours:</strong> &nbsp; Monday - Friday 8:30 AM to 5:00 PM BT
+event.registration.support.subheading.pacific=Pacific
+event.registration.support.pacific.phone=<strong>Phone:</strong> &nbsp; +61 (02) 9321.7630
+event.registration.support.pacific.email=<strong>Email:</strong> &nbsp; <a href="mailto:gartnermeetings@gartner.com">Gartner Meetings @gartner.com</a>
+event.registration.support.pacific.hours=<strong>Hours:</strong> &nbsp; Monday - Friday 8:30 AM to 5:00 PM AET
+event.registration.support.button.close=Close
+
+event.registration.associated.dialog.heading=Are you sure you want to register for this meeting?
+event.registration.associated.dialog.text=You are already registered to attend a meeting on the same topic on
+
+react.event.status.message.virtual.title=Interested in participating?
+react.event.status.message.virtual.message=
+
+react.event.status.message.waitlist.title=This meeting is full.
+react.event.status.message.waitlist.message=To be added to the waitlist, please email
+
+react.event.status.message.full.title=This meeting is full.
+react.event.status.message.full.message=To be added to the waitlist, please contact our Events department at +1-571-303-3033.
+
+react.event.status.message.concluded.title=This meeting concluded.
+react.event.status.message.concluded.message=
+
+react.event.status.message.error.title=Sorry, you are not able to register.
+react.event.status.message.error.message=If you think this is an error, please <a href="mailto:#">contact us</a>.
+
+react.event.status.message.no-access.title=No Access
+react.event.status.message.no-access.message=Our records show that you are not entitled to attend this meeting. Please contact your Gartner representative if you would like to attend.
+
+## cancelled events have two possible messages
+react.event.status.message.cancelled-no-alternatives.title=This meeting is cancelled.
+react.event.status.message.cancelled-no-alternatives.message=If you have any questions, please contact
+event.status.cancelled-no-alternatives.registration.support= <a href="mailto:gartnermeetings@gartner.com">Gartner Registration Support.</a>
+event.title.cancelled.prefix=*Cancelled*
+
+react.event.status.message.cancelled-with-alternatives.title=This meeting is cancelled.
+react.event.status.message.cancelled-with-alternatives.message=To register for another meeting, please visit our <a href="/search/event?ft=eventType:"Meeting"&st=dateStart%20asc&ref=qlinks">Meetings</a> page. If you have any questions, please contact
+event.status.cancelled-with-alternatives.registration.support= <a href="mailto:gartnermeetings@gartner.com">Gartner Registration Support.</a>
+
+react.event.rr.cpecredits.title=Continuing Professional Education Credits (CPEs)
+
+##---- React Event Status Bar END ---##
+
+
+##---- React Reader Document Metadata END ---###
+
+reader.recommended.disclaimer.key=Some recommended content may not be available as part of your current Gartner subscription.
+
+##---- React Token Based Reader START ---##
+reader.tokenbased.form.title=Enter Business Email:
+reader.tokenbased.form.desc=Verify to access this document.
+reader.tokenbased.form.error=<p>We apologize for the inconvenience. Please verify the link or click <a href="/account/signin">here</a> to login.</p>
+##---- React Token Based Reader END ---##
+
+##---- magic quadrants AB test labels START ----##
+magic.quad.ab.dd.test.modal.message=We are in the early stages of testing this feature. While the functionality is not yet build, we hope to offer it (or something similar) in the near future.
+magic.quad.ab.dd.test.modal.title=Drag and Drop Not Yet Available
+magic.quad.ab.dd.test.modal.link=Click here to drag and drop image
+magic.quad.ab.ppt.test.modal.message=We are in the early stages of testing this feature. While the functionality is not yet build, we hope to offer it (or something similar) in the near future.
+magic.quad.ab.ppt.test.modal.title=Download PPT Not Yet Available
+magic.quad.ab.ppt.test.modal.link=Click to download ppt version
+##---- magic quadrants AB test labels END ----##
+
+##---- error message ----#
+error.message.default.line.one= The meeting page you are trying to access no longer exists.
+error.message.default.line.two= If you still have any questions, please contact <a href="/en/contact/technical-support?ref=ki">Gartner Technical Support</a>.
+
+##---- feedback ----#
+feedback.heading=Is this content helpful to you?
+feedback.yes=Yes
+feedback.no=No
+feedback.thanksmsg=Thank you for your feedback!
+
+##---- Table of Contents ----#
+toc.documentHeaders.title=Table of Contents
+toc.tableInfo.title=Tables
+toc.imageInfo.title=Figures

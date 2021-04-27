@@ -1,0 +1,448 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><script type="text/javascript" src="/SMART/ruxitagentjs_ICA2SVfqru_10151180821210004.js" data-dtconfig="rid=RID_1588706989|rpid=436064602|domain=cebglobal.com|reportUrl=/SMART/rb_bf86031rhm|app=5705fe9d0ff770ea|rcdec=1209600000|featureHash=ICA2SVfqru|rdnt=1|uxrgce=1|srcss=1|srmcrv=10|cuc=kvyy0m6v|mel=100000|dpvc=1|lastModification=1617236774572|dtVersion=10151180821210004|srmcrl=1|tp=500,50,0,1|uxdcw=1500|vs=2|agentUri=/SMART/ruxitagentjs_ICA2SVfqru_10151180821210004.js"></script><link href="App_Themes/Default/Default.css" type="text/css" rel="stylesheet" /><title>
+	Gartner Consumer and Culture Insights | Login
+</title><link type="text/css" rel="stylesheet" href="/SMART/includes/css/V2ModeEnabled.css?v=0121202041" /><link type="text/css" rel="stylesheet" href="https://iconoculture.cebglobal.com/Styles/reset.css?v=0121202041" /><link type="text/css" rel="stylesheet" href="https://iconoculture.cebglobal.com/Styles/site2.css?v=0121202041" /><script type="text/javascript" src="/SMART/includes/javascript/jquery/jquery-1.6.1.min.js?v=0121202041">
+
+</script>
+    <style type="text/css">
+        Body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 900px;
+            font-family: Verdana;
+            color: #686A6C;
+        }
+
+        .LoginHeader {
+            width: 780px;
+            height: 46px;
+            background-color: white;
+            display: block;
+            border-bottom: thin solid #216bb2;
+        }
+
+        .LoginHeaderLogo {
+            background-color: White;
+            display: block;
+            float: left;
+            width: 160px;
+            height: 100%;
+        }
+
+        .LoginHeaderLinks {
+            float: left;
+            padding-top: 15px;
+            padding-right: 20px;
+            width: 600px;
+            text-align: right;
+            color: #686A6C;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+            .LoginHeaderLinks a {
+                color: #686A6C;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+        .v2Mode .LoginHeaderLinks a {
+            color: #404650;
+            font-family: Arial;
+        }
+
+        .LoginBody {
+            padding: 20px 50px 20px 50px;
+            overflow: auto;
+            vertical-align: middle;
+            font-family: Verdana;
+            color: #686A6C;
+            font-size: 12px;
+        }
+
+        .v2Mode .LoginBody {
+            color: #404650;
+            font-family: Arial;
+        }
+
+        .LoginFooter {
+            text-align: center;
+            padding-top: 10px;
+            border-top-style: dashed;
+            border-top-width: thin;
+            line-height: 20px;
+            font-size: 10px;
+        }
+
+        .v2Mode .LoginFooter {
+            color: #404650;
+        }
+
+        .LoginFooter a {
+            color: #686A6C;
+            text-decoration: none;
+        }
+
+        .v2Mode .LoginFooter a {
+            color: #404650;
+            text-decoration: none;
+        }
+
+        .text {
+            font-family: Verdana;
+            color: #686A6C;
+            font-size: 11px;
+            line-height: 16px;
+        }
+
+        .v2Mode .text {
+            color: #404650;
+            font-family: Arial;
+            font-size: 12px;
+            line-height: 17px;
+        }
+
+        border {
+            ;
+        }
+
+        div.header {
+            width: 960px;
+            padding: 0 0 0 20px;
+            border: none;
+        }
+
+            div.header #logo {
+                float: left;
+                margin: 8px;
+                width: 366px;
+                height: 23px;
+                background-image: url(/SMART/images/Gartner_Icono_logo_2.png);
+                background-repeat: no-repeat;
+            }
+
+        #banner_pub {
+            position: relative;
+            height: 40px;
+        }
+
+        div.footer {
+            padding: 10px 0 0 20px;
+        }
+
+        section.mainContent_pub {
+            min-height: 400px;
+            height: auto !important;
+            height: 800px;
+            padding: 0 0 0 20px;
+        }
+
+        .copyright {
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 15px;
+            color: #404650;
+        }
+
+        h2 {
+            color: #404650;
+            font-weight: normal;
+        }
+
+        .contentSummary-title {
+            font-weight: bold;
+        }
+
+        a.Button_pub {
+            display: inline-block;
+            color: #2F6EB6;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 5px 7px;
+            text-decoration: none;
+        }
+
+        a.Button_pub_highlighted {
+            background-color: #2F6EB6;
+            color: #ffffff;
+        }
+
+        a.Button_pub_highlighted {
+            background-color: #2F6EB6;
+            color: #ffffff;
+        }
+
+        div.footer {
+            border-top: #858c92 thin solid;
+            height: 80px;
+        }
+
+        .colFullBlue {
+            height: 20px;
+            background-color: #2f6eb1;
+        }
+
+        .colFullBlueBorder {
+            height: 3px;
+            background-color: #ffffff;
+            border-bottom: thin solid #2F6EB1;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body id="body" class="v2Mode">
+    <div style="width: 996px; border: solid thin #858c92; font-size: 12px; line-height: 18px">
+        <form name="form1" method="post" action="./Login.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEwMjUzMDk4NjEPZBYEAgEPZBYGAgIPFgIeBFBhdGgFJS9TTUFSVC9pbmNsdWRlcy9jc3MvVjJNb2RlRW5hYmxlZC5jc3NkAgMPFgIfAAUzaHR0cHM6Ly9pY29ub2N1bHR1cmUuY2ViZ2xvYmFsLmNvbS9TdHlsZXMvcmVzZXQuY3NzZAIEDxYCHwAFM2h0dHBzOi8vaWNvbm9jdWx0dXJlLmNlYmdsb2JhbC5jb20vU3R5bGVzL3NpdGUyLmNzc2QCAw8WAh4FY2xhc3MFBnYyTW9kZRYCAgEPZBYEZg88KwAKAQAPFgYeC0ZhaWx1cmVUZXh0ZR4IVXNlck5hbWUFASQeDVJlbWVtYmVyTWVTZXRnZBYCZg9kFgQCAQ8PFgIeBFRleHQFASRkZAIJDxAPFgIeB0NoZWNrZWRnZGRkZAICD2QWAmYPZBYCAgcPDxYCHwUFOFRoZSB1c2VybmFtZSBjb3VsZCBub3QgYmUgZm91bmQuIFBsZWFzZSB0cnkgYWdhaW4uPGJyIC8+ZGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgMFEnVjTG9naW4kUmVtZW1iZXJNZQUTdWNMb2dpbiRMb2dpbkJ1dHRvbgUhdWNSZXNldFBhc3N3b3JkUHVibGljJGJ0blJlc2V0UHdkuJ8EyaYiAW+Y77H6xA66RlO5tdQ=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/SMART/WebResource.axd?d=D8GYnCxKTnrtxg1S-k_qFS2FmfRxXksIrco4rgz09XXit990TQJ9IKbEmHmSsVH5dnjxAgk44WliNt9wthxlNIkbyco1&amp;t=637453888754849868" type="text/javascript"></script>
+
+
+<script src="/SMART/WebResource.axd?d=vmnFshdPH4ojT-kJI8ddI5yVbvs2CKKsK1BG_rJiR2iF6adaONwjgRRTZ0cen2qFnLWKsdiSIP79Yy8kOk4WiAze6zQ1&amp;t=637453888754849868" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="6A50DFBA" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAfl3SrE0Zmvt1WdWO5sWV2BTZjweQOQKukT8ixi0s1cvTeKWYpx4dkuctwzLiMkXdt+mypa3mQvFe+H3+0eCb259GYeAKzjTpg4itDlvZiVVCiNheHfOrBENq1gY8k6dmEXyKMrP9L/pGlxRt+yjd/1kyhEYBwpSI/4yA0YcQAvQiIp75w=" />
+</div>
+            <div class="colFullBlue"></div>
+            <div class="colFullBlueBorder"></div>
+            <div class="header">
+                <div id="banner_pub">
+                    <a id="logo" href="~"></a>
+                </div>
+            </div>
+            <div class="LoginBody">
+                <h1>Welcome to Gartner Consumer and Culture Insights (formerly Iconoculture)</h1>
+                <br />
+                <h3>Please sign in to access your account</h3>
+                <table id="ucLogin" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
+	<tr>
+		<td>
+                        <table cellpadding="1" cellspacing="0" style="border-collapse: collapse;">
+                            <tr>
+                                <td>
+                                    <table cellpadding="0">
+                                        <tr>
+                                            <td align="right" style="padding-right: 10px;">
+                                                <a href="#" onclick="javascript:showHelp();return false;">
+                                                    <img alt="" src="/SMART/images/HEADER_name_pass.gif" style="border-style: none;" /></a>
+                                            </td>
+                                            <td>
+                                                <input name="ucLogin$UserName" type="text" value="$" id="ucLogin_UserName" class="text" autocomplete="off" style="width:175px;" />
+                                                <span id="ucLogin_UserNameRequired" title="User Name is required." style="color:Red;visibility:hidden;">*</span>
+                                            </td>
+                                            <td>
+                                                <input name="ucLogin$Password" type="password" id="ucLogin_Password" class="text" autocomplete="off" style="width:175px;" />
+                                                <span id="ucLogin_PasswordRequired" title="Password is required." style="color:Red;visibility:hidden;">*</span>
+                                            </td>
+                                            <td class="text">
+                                                <span style="display:inline-block;width:170px;"><input id="ucLogin_RememberMe" type="checkbox" name="ucLogin$RememberMe" checked="checked" /><label for="ucLogin_RememberMe">REMEMBER MY INFO</label></span>
+                                            </td>
+                                            <td align="right">
+                                                <input type="image" name="ucLogin$LoginButton" id="ucLogin_LoginButton" src="/SMART/images/header_login.gif" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ucLogin$LoginButton&quot;, &quot;&quot;, true, &quot;Login1&quot;, &quot;&quot;, false, false))" style="border-width:0px;" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" style="color: Red;">
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+	</tr>
+</table>
+                <br />
+                <span id="lblMessage" style="color:Red;"></span>
+                <a href="#" onclick="javascript:showHelp();return false;">
+                    <strong>Get Help</strong></a>
+                <div id="divHelp" style="display: none; padding-top: 10px; padding-bottom: 10px;"
+                    class="text">
+                    Gartner Consumer and Culture Insights utilizes a small data file, called a cookie, in your web browser to
+            help make your Gartner Consumer and Culture Insights website login process as simple as possible. This file
+            contains information about you only to track login, authentication information and
+            profile settings; it does not track any other personal information about the user.
+            Information related to login, authentication and profile settings is confidential
+            and not shared with any other users or any third parties.
+            <br />
+                    <br />
+                    <strong>Security</strong> If you are in an environment where more than one person
+            has access to your computer and need to restrict access to the Gartner Consumer and Culture Insights website,
+            then make sure to remove the checkmark next to Remember My Info. Every time you
+            close your web browser your session on our website will end and you will be prompted
+            for your password each time you open our website.
+            <br />
+                    <br />
+                    <strong>Convenience</strong> If you are in an environment where you are the sole
+            computer user or all other users are covered under the Gartner Consumer and Culture Insights license agreement,
+            then select the checkmark next to Remember My Info. You will then stay logged in
+            to the Gartner Consumer and Culture Insights website for at least two weeks (even after you restart your
+            web browser or computer) or until you sign out. If you want to reverse this decision
+            or login with a different username then simply logout, remove the checkmark next
+            to Remember My Info and login again.<br />
+                    <br />
+                    <hr />
+                </div>
+                <div style="padding-top: 20px; padding-bottom: 20px;" class="text">
+                    <div id="ucResetPasswordPublic_divPwdRequest" class="menunav_padtopbottom" style="width:100%;">
+	<p>
+		<strong>Forgot your password?</strong><br/>
+		Type your username into the box below and click Send.<br /> A new password will be sent to the email address associated 
+		with this username.
+	</p>
+	<p>
+		<input name="ucResetPasswordPublic$txtUsernameForLookup" type="text" value="$$" id="ucResetPasswordPublic_txtUsernameForLookup" class="formfield" style="width:250px;vertical-align:top; margin-right:5px;" />
+		<input type="image" name="ucResetPasswordPublic$btnResetPwd" id="ucResetPasswordPublic_btnResetPwd" src="/SMART/images/login/send.gif" alt="Send" style="border-width:0px;" />
+	</p>
+	<span id="ucResetPasswordPublic_rqfUsername" style="color:Red;display:none;">Please enter your username<br/></span>
+	<span id="ucResetPasswordPublic_lblResetError" style="color:Red;">The username could not be found. Please try again.<br /></span>
+	<span id="ucResetPasswordPublic_lblMsg"></span>
+	<p>
+		For further assistance, contact your Account Manager or 1-763-489-0386 to be directed to an Account Manager.
+	</p>
+</div>
+
+                </div>
+                <div style="height: 50px;">
+
+                </div>
+            </div>
+            <div class="footer" id="ftr">
+                <div class="l-colLarge l-vSpace-default">
+                    <ul class="l-grid-5col">
+                        <li><a href="https://www.gartner.com/technology/about/policies/terms_of_use.jsp" class="popUpLink" target="_blank">Terms of service</a></li>
+                        <li><a href="/Popups/PrivacyStatement/index.aspx" class="popUpLink" target="_blank">Privacy Statement</a></li>
+                    </ul>
+                    <div class="l-colLarge copyright">
+                        &copy;2021 Gartner, Inc. and/or its affiliates. All rights reserved. Gartner is a registered trademark of Gartner, Inc. or its affiliates.
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+
+                function showHelp() {
+                    var divHelp = document.getElementById("divHelp");
+                    divHelp.style.display = "";
+                }
+
+                function redirect(url) {
+                    var safeUrl = url;
+
+                    //We must all redirects on the public site to stay with /Europe 
+                    //If redirecting into SMART, we must NOT add /Europe as /Europe does not contain a SMART virtual directory
+                    if (parent.location.href.toLowerCase().indexOf("/europe/") > -1 && url.toLowerCase().indexOf("/smart") === -1) {
+                        safeUrl = "/Europe" + safeUrl;
+                    }
+
+                    //We must all redirects on the public site to stay with /India 
+                    //If redirecting into SMART, we must NOT add /India as /India does not contain a SMART virtual directory
+                    if (parent.location.href.toLowerCase().indexOf("/india/") > -1 && url.toLowerCase().indexOf("/smart") === -1) {
+                        safeUrl = "/India" + safeUrl;
+                    }
+
+                    if (parent.parentExists) {
+                        parent.redirect(safeUrl);
+                    }
+                    else {
+                        window.top.location = safeUrl;
+                    }
+                }
+                function openWindow(path) {
+                    Window_Open = window.open(path, 'OpenWindow', 'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,copyhistory=0,width=850,height=715,top=25,left=300');
+                    Window_Open.focus();
+                }
+                $('#ftr .popUpLink').click(function (e) {
+                    e.preventDefault();
+                    openWindow(this.href);
+                    return false;
+                });
+            </script>
+        
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ucLogin_UserNameRequired"), document.getElementById("ucLogin_PasswordRequired"), document.getElementById("ucResetPasswordPublic_rqfUsername"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ucLogin_UserNameRequired = document.all ? document.all["ucLogin_UserNameRequired"] : document.getElementById("ucLogin_UserNameRequired");
+ucLogin_UserNameRequired.controltovalidate = "ucLogin_UserName";
+ucLogin_UserNameRequired.errormessage = "User Name is required.";
+ucLogin_UserNameRequired.validationGroup = "Login1";
+ucLogin_UserNameRequired.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ucLogin_UserNameRequired.initialvalue = "";
+var ucLogin_PasswordRequired = document.all ? document.all["ucLogin_PasswordRequired"] : document.getElementById("ucLogin_PasswordRequired");
+ucLogin_PasswordRequired.controltovalidate = "ucLogin_Password";
+ucLogin_PasswordRequired.errormessage = "Password is required.";
+ucLogin_PasswordRequired.validationGroup = "Login1";
+ucLogin_PasswordRequired.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ucLogin_PasswordRequired.initialvalue = "";
+var ucResetPasswordPublic_rqfUsername = document.all ? document.all["ucResetPasswordPublic_rqfUsername"] : document.getElementById("ucResetPasswordPublic_rqfUsername");
+ucResetPasswordPublic_rqfUsername.controltovalidate = "ucResetPasswordPublic_txtUsernameForLookup";
+ucResetPasswordPublic_rqfUsername.errormessage = "Please enter your username<br/>";
+ucResetPasswordPublic_rqfUsername.display = "Dynamic";
+ucResetPasswordPublic_rqfUsername.validationGroup = "vgResetPwd";
+ucResetPasswordPublic_rqfUsername.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ucResetPasswordPublic_rqfUsername.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+    </div>
+</body>
+</html>

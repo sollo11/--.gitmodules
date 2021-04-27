@@ -1,0 +1,15 @@
+2021/04/27-15:50:10.812 1068 Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_cloud.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/27-15:50:10.813 1068 Recovering log #4
+2021/04/27-15:50:10.813 1068 Reusing old log C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_cloud.google.com_0.indexeddb.leveldb/000004.log 
+2021/04/27-15:50:34.597 1068 Level-0 table #8: started
+2021/04/27-15:50:34.602 1068 Level-0 table #8: 1229 bytes OK
+2021/04/27-15:50:34.608 1068 Delete type=0 #4
+2021/04/27-15:50:34.608 1068 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2021/04/27-15:50:34.608 1068 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x01 \x01\x02\x00e\x00n\x00\x01\x13\x00l\x00a\x00n\x00g\x00u\x00a\x00g\x00e\x00_\x00p\x00r\x00e\x00f\x00e\x00r\x00e\x00n\x00c\x00e' @ 381 : 1
+2021/04/27-15:50:34.608 1068 Compacting 1@1 + 1@2 files
+2021/04/27-15:50:34.613 1068 Generated table #9@1: 30 keys, 811 bytes
+2021/04/27-15:50:34.613 1068 Compacted 1@1 + 1@2 files => 811 bytes
+2021/04/27-15:50:34.618 1068 compacted to: files[ 0 0 1 0 0 0 0 ]
+2021/04/27-15:50:34.619 1068 Delete type=2 #5
+2021/04/27-15:50:34.619 1068 Delete type=2 #8
+2021/04/27-15:50:34.620 1068 Manual compaction at level-1 from '\x00\x01\x01 \x01\x02\x00e\x00n\x00\x01\x13\x00l\x00a\x00n\x00g\x00u\x00a\x00g\x00e\x00_\x00p\x00r\x00e\x00f\x00e\x00r\x00e\x00n\x00c\x00e' @ 381 : 1 .. (end); will stop at (end)
