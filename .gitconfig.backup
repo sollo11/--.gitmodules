@@ -6,3 +6,9 @@
 [user]
 	name = sollo11
 	email = 78496768+sollo11@users.noreply.github.com
+[merge]
+	tool = kdiff3
+[diff]
+	guitool = kdiff3
+[core]
+	editor = \"C:/Program Files (x86)/GitExtensions/GitExtensions.exe\" fileeditor

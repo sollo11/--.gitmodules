@@ -1,8 +1,15 @@
-2021/04/27-15:50:14.329 36d8 Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_developers.google.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/04/27-15:50:14.329 36d8 Recovering log #23
-2021/04/27-15:50:14.330 36d8 Reusing old log C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_developers.google.com_0.indexeddb.leveldb/000023.log 
-2021/04/27-15:50:58.018 36d8 Level-0 table #27: started
-2021/04/27-15:50:58.018 36d8 Level-0 table #27: 0 bytes OK
-2021/04/27-15:50:58.088 36d8 Delete type=0 #23
-2021/04/27-15:50:58.089 36d8 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
-2021/04/27-15:50:58.089 36d8 Manual compaction at level-1 from (begin) .. (end); will stop at (end)
+2021/04/27-20:07:43.709 2c04 Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_developers.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/27-20:07:43.710 2c04 Recovering log #26
+2021/04/27-20:07:43.710 2c04 Reusing old log C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_developers.google.com_0.indexeddb.leveldb/000026.log 
+2021/04/27-20:08:20.470 26f4 Level-0 table #30: started
+2021/04/27-20:08:20.474 26f4 Level-0 table #30: 833 bytes OK
+2021/04/27-20:08:20.479 26f4 Delete type=0 #26
+2021/04/27-20:08:20.480 26f4 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2021/04/27-20:08:20.480 26f4 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x01 \x01\x02\x00e\x00n\x00\x01\x13\x00l\x00a\x00n\x00g\x00u\x00a\x00g\x00e\x00_\x00p\x00r\x00e\x00f\x00e\x00r\x00e\x00n\x00c\x00e' @ 154 : 1
+2021/04/27-20:08:20.481 26f4 Compacting 1@1 + 1@2 files
+2021/04/27-20:08:20.485 26f4 Generated table #31@1: 30 keys, 808 bytes
+2021/04/27-20:08:20.486 26f4 Compacted 1@1 + 1@2 files => 808 bytes
+2021/04/27-20:08:20.488 26f4 compacted to: files[ 0 0 1 0 0 0 0 ]
+2021/04/27-20:08:20.488 26f4 Delete type=2 #9
+2021/04/27-20:08:20.488 26f4 Delete type=2 #30
+2021/04/27-20:08:20.489 26f4 Manual compaction at level-1 from '\x00\x01\x01 \x01\x02\x00e\x00n\x00\x01\x13\x00l\x00a\x00n\x00g\x00u\x00a\x00g\x00e\x00_\x00p\x00r\x00e\x00f\x00e\x00r\x00e\x00n\x00c\x00e' @ 154 : 1 .. (end); will stop at (end)
