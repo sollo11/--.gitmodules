@@ -1,0 +1,3430 @@
+var gtTimeInfo = {
+    'fetchStart': 1619079011855,
+    'fetchEnd': 1619079011880
+};
+// Copyright (C) Microsoft Corporation. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// This code is used in conjunction with the Google Translate Element script.
+// It is executed in an isolated world of a page to translate it from one
+// language to another.
+// It should be included in the page before the Translate Element script.
+
+// eslint-disable-next-line no-var
+var cr = cr || {};
+
+/**
+ * An object to provide functions to interact with the Translate library.
+ * @type {object}
+ */
+cr.googleTranslate = (function() {
+    /**
+   * Error definitions for |errorCode|. See chrome/common/translate_errors.h
+   * to modify the definition.
+   * @const
+   */
+    const ERROR = {
+        'NONE': 0,
+        'INITIALIZATION_ERROR': 2,
+        'UNSUPPORTED_LANGUAGE': 4,
+        'TRANSLATION_ERROR': 6,
+        'TRANSLATION_TIMEOUT': 7,
+        'UNEXPECTED_SCRIPT_ERROR': 8,
+        'BAD_ORIGIN': 9,
+        'SCRIPT_LOAD_ERROR': 10
+    };
+
+    /**
+    * Error code map from te.dom.DomTranslator.Error to |errorCode|.
+    * See also go/dom_translator.js in google3.
+    * @const
+    */
+    const TRANSLATE_ERROR_TO_ERROR_CODE_MAP = {
+        0: ERROR['NONE'],
+        1: ERROR['TRANSLATION_ERROR'],
+        2: ERROR['UNSUPPORTED_LANGUAGE']
+    };
+
+    /**
+   * Result definition for edgeScriptResult.
+   * See component/translate/core/common/edge_translate_script_results.h
+   * @const
+   */
+    const EDGE_SCRIPT_RESULT = {
+        'SUCCESSFUL': 0,
+        'TIMEOUT': 1,
+        'BAD_REQUEST': 2,
+        'SERVICE_UNAVAILABLE': 3,
+        'SERVICE_ERROR': 4,
+        'NETWORK': 5,
+        'UNKNOWN': 6,
+    };
+
+    /**
+   * Result definition for badRequestError.
+   * See component/translate/core/common/edge_translate_script_results.h
+   * @const
+   */
+    const BAD_REQUEST_ERROR = {
+        'OTHERS': 0,
+        'INVALID_INPUT': 1,
+        'INVALID_CREDENTIALS': 2,
+        'TOO_MANY_REQUESTS': 3,
+    };
+
+    /**
+    * An error code happened in translate.js and the Translate Element library.
+    */
+    let errorCode = ERROR['NONE'];
+
+    /**
+   * The result for translation script run.
+   */
+    let edgeScriptResult = EDGE_SCRIPT_RESULT['SUCCESSFUL'];
+
+    /**
+   * The bad request error code.
+   */
+    let badRequestError = BAD_REQUEST_ERROR['OTHERS'];
+
+    /**
+    * A flag representing if the Translate Element has finished a translation.
+    * @type {boolean}
+    */
+    let finished = false;
+
+    /**
+    * Counts how many times the checkLibReady function is called. The function
+    * is called in every 100 msec and counted up to 6.
+    * @type {number}
+    */
+    const checkReadyCount = 0;
+
+    /**
+    * Time in msec when this script is injected.
+    * @type {number}
+    */
+    const injectedTime = performance.now();
+
+    /**
+    * Time in msec when the Translate Element library is loaded completely.
+    * @type {number}
+    */
+    const loadedTime = 0.0;
+
+    /**
+    * Time in msec when the Translate Element library is initialized and ready
+    * for performing translation.
+    * @type {number}
+    */
+    const readyTime = 0.0;
+
+    /**
+    * Time in msec when the Translate Element library starts a translation.
+    * @type {number}
+    */
+    let startTime = 0.0;
+
+    /**
+    * Time in msec when the Translate Element library ends a translation.
+    * @type {number}
+    */
+    let endTime = 0.0;
+
+    /**
+   * Count of characters translated so far.
+   * @type {number}
+   */
+    let totalTranslatedCharactersSoFar = 0;
+
+    /**
+   * Count of characters translated due to retries.
+   */
+    let totalCharactersTranslatedByRetry = 0;
+
+    /**
+   * Count of number of translate calls made to bing.
+   */
+    let translateCallCount = 0;
+
+    // map to chrome system language code to the edge translate
+    //
+    const kChromeCodeToEdgeCode = {
+        "zh-CN": "zh-CHS",
+        "zh-TW": "zh-CHT",
+    };
+
+    // This is needed as some language codes are different between edge translate API
+    // and chrome. So, when the source language is auto detected by API then to map
+    // the detected language code back to chrome language code.
+    const kEdgeCodeToChromeCode = {
+        // translate V2 api language Code
+        "zh-chs": "zh-CN",
+        "zh-cht": "zh-TW",
+
+        // translate V3 api language Code
+        "pt": "pt-BR",
+        "pt-pt": "pt-PT",
+        "sr-Latn": "sr-Latn-RS",
+        "zh-hans": "zh-CN",
+        "zh-hant": "zh-TW",
+    };
+
+    // This is returned when source language is not detected. Empty string
+    // is chosen as value, so that we don't have any merge conflict in translate_helper.
+    const kLanguageNotDetectedCode = '';
+
+    // Functions to classify HTTP response codes to appropriate error buckets.
+    function isBadRequest(errorData) {
+        return errorData.status != null && errorData.status >= 400 && errorData.status < 500;
+    }
+
+    function classifyBadRequestError(statusCode) {
+        switch (statusCode) {
+        case 400:
+            return BAD_REQUEST_ERROR['INVALID_INPUT'];
+        case 401:
+            return BAD_REQUEST_ERROR['INVALID_CREDENTIALS'];
+        case 429:
+            return BAD_REQUEST_ERROR['TOO_MANY_REQUESTS'];
+        default:
+            return BAD_REQUEST_ERROR['OTHERS'];
+        }
+    }
+
+    function isServiceUnavailable(errorData) {
+        return errorData.status != null && errorData.status === 503;
+    }
+
+    function isServerError(errorData) {
+        return errorData.status != null && errorData.status >= 500 && errorData.status < 600;
+    }
+
+    /**
+  * This will map language code which azure translator understands
+  * @type {string}
+  */
+    function GetEdgeLanguageCode(language) {
+        if (language in kChromeCodeToEdgeCode) {
+            return kChromeCodeToEdgeCode[language];
+        } else {
+            return language;
+        }
+    }
+
+    /**
+  * This will map translate language code to chrome system language code
+  * @type {string}
+  */
+    function GetChromeLanguageCode(language) {
+        if (language in kEdgeCodeToChromeCode) {
+            return kEdgeCodeToChromeCode[language];
+        } else {
+            return language;
+        }
+    }
+
+    function invokeResultCallback() {
+        if (cr.googleTranslate.resultCallback) {
+            cr.googleTranslate.resultCallback();
+            cr.googleTranslate.resultCallback = null;
+        }
+    }
+
+    // Success callback called when the translation is done successfully and
+    // completely by edge.
+    function onSuccessCallback() {
+        finished = true;
+        endTime = performance.now();
+        invokeResultCallback();
+    }
+
+    // Callback called when bing api to translate is called.
+    function onTranslateApiCalled(translatedCharactersCount, isRetry) {
+        if (isRetry) {
+            totalCharactersTranslatedByRetry += translatedCharactersCount;
+        }
+        totalTranslatedCharactersSoFar += translatedCharactersCount;
+        translateCallCount++;
+    }
+
+    // Error callback called when the translation results in error by edge.
+    function onErrorCallback(error) {
+        errorCode = ERROR['TRANSLATION_ERROR'];
+        try {
+            const errorData = JSON.parse(error);
+            if (errorData.status === -1) {
+                edgeScriptResult = EDGE_SCRIPT_RESULT['TIMEOUT'];
+            } else if (isBadRequest(errorData)) {
+                edgeScriptResult = EDGE_SCRIPT_RESULT['BAD_REQUEST'];
+                badRequestError = classifyBadRequestError(errorData.status);
+            } else if (isServiceUnavailable(errorData)) {
+                edgeScriptResult = EDGE_SCRIPT_RESULT['SERVICE_UNAVAILABLE'];
+            } else if (isServerError(errorData)) {
+                edgeScriptResult = EDGE_SCRIPT_RESULT['SERVICE_ERROR'];
+            } else if (errorData.status === 0) {
+                edgeScriptResult = EDGE_SCRIPT_RESULT['NETWORK'];
+            }
+        } catch (e) {
+            edgeScriptResult = EDGE_SCRIPT_RESULT['UNKNOWN'];
+        }
+        finished = false;
+        invokeResultCallback();
+    }
+
+    function translateInternal(originalLang, targetLang, shouldTranslateFullPageInOneGo) {
+        resetDataBeforeTranslateCall();
+        try {
+            originalLang = GetEdgeLanguageCode(originalLang);
+            targetLang = GetEdgeLanguageCode(targetLang);
+            /**
+           * This will call the startPageTranslation function of edge script
+           */
+            Microsoft.JS.startPageTranslation(originalLang, targetLang, shouldTranslateFullPageInOneGo, ""/*domTranslatorSessionId*/
+            , ""/*token*/
+            , onSuccessCallback, onTranslateApiCalled, onErrorCallback);
+            console.error("edge Translation started");
+        } catch (err) {
+            console.error("Translate: " + err);
+            errorCode = ERROR["UNEXPECTED_SCRIPT_ERROR"];
+            return false;
+        }
+        return true;
+    }
+
+    function resetDataBeforeTranslateCall() {
+        finished = false;
+        errorCode = ERROR["NONE"];
+        startTime = performance.now();
+        totalTranslatedCharactersSoFar = 0;
+        totalCharactersTranslatedByRetry = 0;
+        translateCallCount = 0;
+    }
+
+    // Public API.
+    return {
+
+        /**
+      * Whether the current translate has finished successfully.
+      * @type {boolean}
+      */
+        get finished() {
+            return finished;
+        },
+
+        /**
+      * Whether an error occured initializing the library of translating the
+      * page.
+      * @type {boolean}
+      */
+        get error() {
+            return errorCode !== ERROR['NONE'];
+        },
+
+        /**
+      * Returns a number to represent error type.
+      * @type {number}
+      */
+        get errorCode() {
+            return errorCode;
+        },
+
+        /**
+   * In case of auto detect page language, it returns the language code
+   * determined by translate API.
+   * @type {string}
+   */
+        get sourceLang() {
+            if (Microsoft.instance && Microsoft.instance.detectedLanguage && errorCode == ERROR['NONE']) {
+                return GetChromeLanguageCode(Microsoft.instance.detectedLanguage);
+            } else {
+                return kLanguageNotDetectedCode;
+            }
+        },
+
+        /**
+     * Returns result of Edge translation script run.
+     */
+        get edgeScriptResult() {
+            return edgeScriptResult;
+        },
+
+        /**
+     * Returns the client side error status.
+     */
+        get badRequestError() {
+            return badRequestError;
+        },
+
+        /**
+      * Time in msec from this script being injected to all server side scripts
+      * being loaded.
+      * @type {number}
+      */
+        get loadTime() {
+            if (loadedTime === 0) {
+                return 0;
+            }
+            return loadedTime - injectedTime;
+        },
+
+        /**
+      * Time in msec from this script being injected to the Translate Element
+      * library being ready.
+      * @type {number}
+      */
+        get readyTime() {
+            return readyTime - injectedTime;
+        },
+
+        /**
+      * Time in msec to perform translation.
+      * @type {number}
+      */
+        get translationTime() {
+            if (!finished) {
+                return 0;
+            }
+            return endTime - startTime;
+        },
+
+        /**
+     * Characters sent for translation.
+     * @type {number}
+     */
+        get totalTranslatedCharactersSoFar() {
+            return totalTranslatedCharactersSoFar;
+        },
+
+        /**
+     * Characters translated due to retries.
+     * @type {number}
+     */
+        get totalCharactersTranslatedByRetry() {
+            return totalCharactersTranslatedByRetry;
+        },
+
+        /**
+     * Returns count of bing translate calls made.
+     */
+        get translateCallCount() {
+            return translateCallCount;
+        },
+
+        /**
+      * Translate the page contents.  Note that the translation is asynchronous.
+      * You need to regularly check the state of |finished| and |errorCode| to
+      * know if the translation finished or if there was an error.
+      * @param {string} originalLang The language the page is in.
+      * @param {string} targetLang The language the page should be translated to.
+      * @return {boolean} False if the translate library was not ready, in which
+      *                   case the translation is not started.  True otherwise.
+      */
+        translate(originalLang, targetLang) {
+            return translateInternal(originalLang, targetLang, false /*shouldTranslateFullPageInOneGo*/
+            );
+        },
+
+        translateFullPageInOneGo(originalLang, targetLang) {
+            return translateInternal(originalLang, targetLang, true /*shouldTranslateFullPageInOneGo*/
+            );
+        },
+
+        /**
+     * Translates a selected text on a page.
+     * @param {string} targetLang is language in which selected text will get
+     *                            translated into.
+     */
+        translateSelection(targetLang) {
+            resetDataBeforeTranslateCall();
+            try {
+                targetLang = GetEdgeLanguageCode(targetLang);
+                /**
+         * This will call the startSelectionTranslation function of edge script
+         */
+                Microsoft.JS.startSelectionTranslation(targetLang, ""/*domTranslatorSessionId*/
+                , ""/*token*/
+                , onSuccessCallback, onTranslateApiCalled, onErrorCallback);
+            } catch (err) {
+                console.error("Translate Selection: " + err);
+                errorCode = ERROR["UNEXPECTED_SCRIPT_ERROR"];
+                return false;
+            }
+            return true;
+        },
+
+        /**
+      * Reverts the page contents to its original value, effectively reverting
+      * any performed translation.  Does nothing if the page was not translated.
+      */
+        revert() {
+            Microsoft.JS.stopPageTranslation().then(()=>{
+                console.error("edge revert page translation.");
+            }
+            );
+        },
+
+        /**
+      * Called when an error is caught while executing script fetched in
+      * translate_script.cc.
+      */
+        onTranslateElementError(error) {
+            errorCode = ERROR['UNEXPECTED_SCRIPT_ERROR'];
+        },
+
+        /**
+      * Entry point called by the Translate Element when it want to load an
+      * external CSS resource into the page.
+      * @param {string} url URL of an external CSS resource to load.
+      */
+        onLoadCSS(url) {
+            const element = document.createElement('link');
+            element.type = 'text/css';
+            element.rel = 'stylesheet';
+            element.charset = 'UTF-8';
+            element.href = url;
+            document.head.appendChild(element);
+        },
+
+        /**
+      * Entry point called by the Translate Element when it want to load and run
+      * an external JavaScript on the page.
+      * @param {string} url URL of an external JavaScript to load.
+      */
+        onLoadJavascript(url) {
+            // securityOrigin is predefined by translate_script.cc.
+            if (!url.startsWith(securityOrigin)) {
+                console.error('Translate: ' + url + ' is not allowed to load.');
+                errorCode = ERROR['BAD_ORIGIN'];
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                if (this.readyState !== this.DONE) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    errorCode = ERROR['SCRIPT_LOAD_ERROR'];
+                    return;
+                }
+                eval(this.responseText);
+            }
+            ;
+            xhr.send();
+        }
+    };
+}
+)();
+try {
+    ;var DomUtils;
+    (function(a) {
+        function b(a, b, c, d) {
+            var e = function(b) {
+                return c(a, d, b)
+            };
+            return a.addEventListener(b, e, !1),
+            e
+        }
+        function c(a, b, c) {
+            a.removeEventListener(b, c, !1)
+        }
+        function d(a, b) {
+            var c = window.getComputedStyle(a);
+            return c ? (b = b.replace(/([A-Z])/g, "-$1").toLowerCase(),
+            c[b] || "") : ""
+        }
+        function e(a) {
+            return encodeURIComponent(a).replace(/%\w\w/g, " ").length
+        }
+        function f(a) {
+            var b = a._display = a._display || this.getStyleValue(a, "display")
+              , c = a._position = a._position || this.getStyleValue(a, "position");
+            return b && b.toLowerCase() == "inline" && c.toLowerCase() == "static" && a.parentNode && a.parentNode.nodeType == 1 ? this.getBlockParent(a.parentNode) : a
+        }
+        function g(a, b, c) {
+            if (!c || c.isCompleted)
+                c = {
+                    timeout: null,
+                    isCompleted: !1
+                };
+            return c.timeout !== null && clearTimeout(c.timeout),
+            c.timeout = setTimeout(function() {
+                typeof a == "function" && a(),
+                c.completed = !0
+            }, b),
+            c
+        }
+        function h(a) {
+            var b = a.innerHTML;
+            return b ? b.length : 0
+        }
+        function i(a, b) {
+            try {
+                return a.getAttribute(b) || a[b]
+            } catch (c) {
+                return null
+            }
+        }
+        function j(b) {
+            if (!b || Object.prototype.toString.call(b) !== "[object Function]")
+                return;
+            var c, d = function(d) {
+                return a.addEvent(d, "scroll", function(a) {
+                    d.clearTimeout(c),
+                    c = setTimeout(function() {
+                        b()
+                    }, 66)
+                })
+            }, e = window, f = IframeUtils.getReadingViewIFrameWindow();
+            return f && (e = f),
+            d(e)
+        }
+        a.addEvent = b,
+        a.removeEvent = c,
+        a.getStyleValue = d,
+        a.getStringByteCount = e,
+        a.getBlockParent = f,
+        a.deferTask = g,
+        a.getInnerHtmlLength = h,
+        a.getAttributeValue = i,
+        a.scrollStop = j
+    }
+    )(DomUtils || (DomUtils = {}));
+    var IframeUtils;
+    (function(a) {
+        function c(a) {
+            try {
+                var c = 0
+                  , d = a.contentWindow;
+                while (d != top)
+                    c++,
+                    d = d.parent;
+                return c
+            } catch (e) {
+                return b + 1
+            }
+        }
+        function d(a) {
+            try {
+                return a.contentWindow && a.contentWindow.document && a.contentWindow.document.documentElement && a.contentWindow.document.body && c(a) <= b
+            } catch (d) {}
+            return !1
+        }
+        function e(a) {
+            try {
+                return a.contentWindow && a.contentWindow.document
+            } catch (b) {}
+            return !1
+        }
+        function f() {
+            var a;
+            try {
+                a = new URL(window.location.href)
+            } catch (b) {
+                return null
+            }
+            if (a.protocol === "read:") {
+                var c = document.getElementById("__rv_dataSource");
+                if (c)
+                    return c.contentWindow
+            }
+            return null
+        }
+        var b = 10;
+        a.getIframeNodeDepth = c,
+        a.isFrame = d,
+        a.isIframeElement = e,
+        a.getReadingViewIFrameWindow = f
+    }
+    )(IframeUtils || (IframeUtils = {}));
+    var DomTranslationUtils;
+    (function(a) {
+        function l(a) {
+            var b = [];
+            if (!a || typeof a.nodeName != "string")
+                return b;
+            var c, d = TranslatorConstants.TranslatableAttributes[a.nodeName];
+            for (var e = 0; d && e < d.length; e++)
+                if (d[e].predicate(a) === !0)
+                    for (var f = 0; f < d[e].attributes.length; f++)
+                        c = a.getAttribute(d[e].attributes[f]),
+                        typeof c == "string" && c.length > 0 && b.push(d[e].attributes[f]);
+            return a.nodeType === 1 && a.hasAttribute("aria-label") && (c = a.getAttribute("aria-label"),
+            typeof c == "string" && c.length > 0 && b.push("aria-label")),
+            b
+        }
+        function m(a) {
+            if (a.nodeType == 3)
+                return !0;
+            if (a.nodeType != 1)
+                return !1;
+            if (IframeUtils.isFrame(a))
+                return !0;
+            if (!a.hasChildNodes() && !TranslatorConstants.TranslatableAttributes.hasOwnProperty(a.nodeName))
+                return !1;
+            if (TranslatorConstants.UntranslatableElements[a.nodeName.toLowerCase()])
+                return !1;
+            var b;
+            try {
+                b = n(a)
+            } catch (c) {}
+            return b == TranslatorConstants.TranslateMode.Off || b == TranslatorConstants.TranslateMode.Skip ? !1 : A(a, 5)
+        }
+        function n(a) {
+            var b = TranslatorConstants.TranslateMode.Inherit;
+            if (!a.getAttribute)
+                return b;
+            for (var c in TranslatorConstants.TranslationAttributes) {
+                var d = DomUtils.getAttributeValue(a, c);
+                if (d != null) {
+                    var e = TranslatorConstants.TranslationAttributes[c]
+                      , f = e[d.toString().toLowerCase()];
+                    b = f || b;
+                    if (b == TranslatorConstants.TranslateMode.Off || b == TranslatorConstants.TranslateMode.Skip)
+                        return b
+                }
+            }
+            var g = DomUtils.getAttributeValue(a, "class") || DomUtils.getAttributeValue(a, "className");
+            if (g != null) {
+                var h = g.toString().split(" ");
+                for (var i = 0; i < h.length; i++) {
+                    var j = h[i]
+                      , f = TranslatorConstants.TranslationClassNames[j.toLowerCase()];
+                    b = f || b;
+                    if (b == TranslatorConstants.TranslateMode.Off)
+                        return b
+                }
+            }
+            return b
+        }
+        function o(a) {
+            var b = new RegExp("[a-zA-Z0-9\\?!" + String.fromCodePoint(191) + String.fromCodePoint(161) + ".,:\\|" + String.fromCodePoint(192) + "-" + String.fromCodePoint(65535) + "]");
+            return b.test(a)
+        }
+        function p() {
+            return document.getElementsByClassName(TranslatorConstants.MsNoTranslateClass)
+        }
+        function q(a) {
+            if (a.nodeType == 3)
+                return !0;
+            if (a.nodeName && TranslatorConstants.TerminalElements[a.nodeName.toLowerCase()])
+                return !0;
+            if (a.nodeType != 1 || a._mstChunk || DomUtils.getStyleValue(a, "display").toLowerCase() != "inline" || DomUtils.getStyleValue(a, "position").toLowerCase() != "static")
+                return !1;
+            for (var b = 0; b < a.childNodes.length; ++b)
+                if (!q(a.childNodes[b]))
+                    return !1;
+            return !0
+        }
+        function r(a) {
+            return Microsoft.JS.TextLanguage.isRtl(a) ? {
+                direction: "rtl",
+                textAlign: "right"
+            } : {
+                direction: "ltr",
+                textAlign: "left"
+            }
+        }
+        function s(a) {
+            a = a.replace(b, "");
+            var c = 0;
+            for (var d = 0; d < a.length; ++d)
+                c += a.charCodeAt(d) * 13 * (d + 7);
+            return c
+        }
+        function t(a, b, c) {
+            var d = s(a);
+            while (b[d])
+                d += 1;
+            return b[d] = c,
+            d
+        }
+        function u(a, b, c) {
+            c = c ? c : 1;
+            if (c > TranslatorConstants.MaxDepthToCheck)
+                throw new Error("Element too deep");
+            var d = []
+              , e = 0;
+            for (var f = 0; f < a.childNodes.length; ++f)
+                switch (a.childNodes[f].nodeType) {
+                case 1:
+                    var g = b + c.toString() + e.toString(), h;
+                    try {
+                        h = n(a.childNodes[f])
+                    } catch (i) {}
+                    h == TranslatorConstants.TranslateMode.Skip && a.childNodes[f].previousSibling && a.childNodes[f].previousSibling.nodeType == 1 ? a.childNodes[f].previousSibling._mstSkipNext = e : h == TranslatorConstants.TranslateMode.Skip && a.childNodes[f].nextSibling && a.childNodes[f].nextSibling.nodeType == 1 ? a.childNodes[f].nextSibling._mstSkipPrev = e : (d.push("<"),
+                    d.push(g),
+                    d.push(">"),
+                    h != TranslatorConstants.TranslateMode.Skip && d.push(u(a.childNodes[f], b, c + 1)),
+                    d.push("</"),
+                    d.push(g),
+                    d.push(">")),
+                    ++e;
+                    break;
+                case 3:
+                    a.childNodes[f].nodeValue && d.push(v(a.childNodes[f].nodeValue))
+                }
+            return d.join("")
+        }
+        function v(a) {
+            return a.replace(d, "&amp;").replace(e, "&lt;").replace(f, "&gt;").replace(c, " ")
+        }
+        function w(a) {
+            return a.replace(k, "").replace(j, ">").replace(i, "<").replace(h, "&")
+        }
+        function x(a) {
+            return a.replace(g, "<$1$2$3>")
+        }
+        function y(a, b) {
+            return Microsoft.JS.TextLanguage.isRtl(a) === Microsoft.JS.TextLanguage.isRtl(b) ? null : r(b)
+        }
+        function z(a, b, c, d, e) {
+            window.Microsoft.Translator.APIResponses++;
+            var f = {
+                charsPerEntry: [],
+                timeTaken: performance.now() - b,
+                offsetFromStart: b - window.Microsoft.Translator.translationStartTime,
+                translationTrigger: a
+            };
+            if (typeOf(c) === "array")
+                for (var g = 0; g < c.length; g++)
+                    f.charsPerEntry.push(c[g].length);
+            d !== null && d !== undefined && (f.errorType = d,
+            String.isNullOrWhiteSpace(e) || (f.errorDetails = e)),
+            window.Microsoft.Translator.requests.push(f)
+        }
+        function A(a, b) {
+            if (!a || !a.children)
+                return !1;
+            var c = [0]
+              , d = 0;
+            while (c.length > 0 && a) {
+                if (c.length >= b)
+                    return !0;
+                var e = c.length - 1;
+                if (!a.children || c[e] >= a.children.length) {
+                    c.pop();
+                    if (c.length === 0)
+                        break;
+                    a = a.parentNode
+                } else {
+                    if (IframeUtils.isFrame(a.children[c[e]]))
+                        return !0;
+                    if (l(a.children[c[e]]).length > 0)
+                        return !0;
+                    a = a.children[c[e]],
+                    c[e] = c[e] + 1,
+                    c.push(0),
+                    d = Math.max(d, c.length)
+                }
+            }
+            return a ? o(a.textContent) : !1
+        }
+        function B(a) {
+            if (a.nodeName.toLowerCase() == "frame" || a.nodeName.toLowerCase() == "iframe")
+                try {
+                    B(a.contentWindow.document.documentElement)
+                } catch (b) {}
+            else {
+                if (a._mstStyle)
+                    for (var c in a._mstStyle)
+                        try {
+                            a.style[c] = a._mstStyle[c]
+                        } catch (b) {}
+                a._mstStyle = null;
+                if (a._mstSrcAttribute)
+                    for (var d in a._mstSrcAttribute)
+                        a.setAttribute(d, a._mstSrcAttribute[d]);
+                for (var e = 0; e < TranslatorConstants.MstAttributes.length; e++)
+                    a.hasAttribute(TranslatorConstants.MstAttributes[e]) && a.removeAttribute(TranslatorConstants.MstAttributes[e]);
+                if (a._mstSrcHtml && a._mstSrcHtml.childNodes.length > 0) {
+                    while (a.childNodes.length > 0)
+                        a.removeChild(a.firstChild);
+                    while (a._mstSrcHtml.childNodes.length > 0)
+                        a.appendChild(a._mstSrcHtml.firstChild);
+                    a._mstSrcHtml = undefined,
+                    a._mstTooltip && a._mstTooltip.detach()
+                } else
+                    for (var f = 0; f < a.childNodes.length; ++f)
+                        try {
+                            B(a.childNodes[f])
+                        } catch (b) {}
+            }
+        }
+        function C(a, b) {
+            var c = [];
+            for (var d = a.length - 2; d >= 0; --d) {
+                if (a[d].id) {
+                    c.unshift(a[d].id.toString());
+                    break
+                }
+                c.unshift((a[d].nodeName && a[d].nodeName.toLowerCase ? a[d].nodeName.toLowerCase() : "") + "-" + b[d].toString())
+            }
+            return c.join("_")
+        }
+        function D(b, c, d) {
+            try {
+                if (c)
+                    return;
+                var e = !1;
+                b && b.hasOwnProperty("x-mst-element") && (b = b["x-mst-element"],
+                e = !0);
+                if (!d || !b || !b.getAttribute)
+                    return;
+                b.adjustAlign = b.getAttribute("adjustalign") && b.getAttribute("adjustalign").toLowerCase() != "false",
+                b.adjustAlign == null && b.parentNode && (b.adjustAlign = b.parentNode.adjustAlign);
+                if (b.adjustAlign == undefined || b.adjustAlign == null)
+                    b.adjustAlign = !0;
+                if (b.style && (e || a.isTranslatable(b)) && b.adjustAlign) {
+                    while (!e && DomUtils.getStyleValue(b, "display") === "inline")
+                        b = b.parentNode;
+                    for (var f in d)
+                        try {
+                            var g = DomUtils.getStyleValue(b, f);
+                            if (g != d[f]) {
+                                if (f == "textAlign" && (g && g.toLowerCase().indexOf("center") != -1 || b.tagName && b.tagName.toLowerCase() == "center"))
+                                    continue;
+                                b._mstStyle || (b._mstStyle = {}),
+                                b.style && b.style[f] ? b._mstStyle[f] = b.style[f] : b._mstStyle[f] = g,
+                                b.style && (b.style[f] = d[f])
+                            }
+                        } catch (h) {
+                            Logger.error(h)
+                        }
+                }
+            } catch (i) {
+                Logger.error(i)
+            }
+        }
+        var b = /[\s\xA0]/g
+          , c = /[\s\xA0]+/g
+          , d = /&/g
+          , e = /</g
+          , f = />/g
+          , g = /<\s*(\/)?\s*(\w+)\s*(\d*)\s*>/g
+          , h = /&amp;/gi
+          , i = /&lt;/gi
+          , j = /&gt;/gi
+          , k = /<\/?\w+>/g;
+        a.checkForTranslatableAttributes = l,
+        a.isTranslatable = m,
+        a.getTranslateMode = n,
+        a.isTranslatableText = o,
+        a.getNoTranslateElements = p,
+        a.isTerminal = q,
+        a.getDirStyle = r,
+        a.hash = s,
+        a.generateUniqueHash = t,
+        a.normalizeElement = u,
+        a.normalizeText = v,
+        a.denormalizeText = w,
+        a.sanitizeHtml = x,
+        a.getStylesToApply = y,
+        a.trackTranslateCall = z,
+        a.untranslate = B,
+        a.getDomPos = C,
+        a.ApplyStyle = D
+    }
+    )(DomTranslationUtils || (DomTranslationUtils = {}));
+    var VisibilityUtils;
+    (function(a) {
+        function b(b) {
+            try {
+                var c = b.nodeType === 1 ? b : b.parentElement, d;
+                if (c && (d = c.getBoundingClientRect())) {
+                    if (d.height === 0 || d.width === 0)
+                        return a.ElementVisibility.hidden;
+                    var e = window.innerHeight || document.documentElement.clientHeight
+                      , f = d.top >= 0 && d.top <= e + 1e3 || d.bottom >= 0 && d.bottom <= e + 1e3;
+                    return f ? a.ElementVisibility.insideView : a.ElementVisibility.outsideView
+                }
+                return a.ElementVisibility.insideView
+            } catch (g) {
+                return a.ElementVisibility.insideView
+            }
+        }
+        function c(b, c, d) {
+            b & a.ElementVisibility.unknown || (d[d.length - 1]++,
+            b & a.ElementVisibility.hidden && c[c.length - 1]++)
+        }
+        function d(a, b, c) {
+            b.top() > 0 && b.top() === c.top() && a.length > 0 && a.top().setAttribute(TranslatorConstants.HiddenElementMarker, b.top().toString());
+            var d = b.pop();
+            b.length > 0 && (b[b.length - 1] += d),
+            d = c.pop(),
+            c.length > 0 && (c[c.length - 1] += d)
+        }
+        function e(a) {
+            var b = !0
+              , c = performance.now();
+            try {
+                var d = a.nodeType === 1 ? a : a.parentElement, e;
+                if (d && (e = d.getBoundingClientRect()))
+                    if (e.height === 0 || e.width === 0)
+                        b = !0,
+                        d._mstScrolledData = !0,
+                        d._mstScrolledTime = c;
+                    else {
+                        var f = window.innerHeight || document.documentElement.clientHeight;
+                        b = e.top <= f || e.bottom <= f
+                    }
+            } catch (g) {}
+            return b
+        }
+        function f(a, b, c, d, e) {
+            if (typeof c != "function")
+                throw Error("There was no handler assigned for processing nodes.");
+            var f = [{
+                node: a,
+                depth: 0
+            }];
+            f.isEmpty = function() {
+                return this.length === 0
+            }
+            ;
+            var g = 0
+              , h = typeof b == "function";
+            while (!f.isEmpty()) {
+                var i = f.pop()
+                  , j = i.node.getAttribute("_msthash")
+                  , k = i.node.getAttribute(TranslatorConstants.HiddenAttributeMarker)
+                  , l = i.node.hasAttribute(TranslatorConstants.VisibleElementMarker);
+                if (l) {
+                    console.log("Element id " + j + " should already be visible.");
+                    continue
+                }
+                i.node.setAttribute(TranslatorConstants.VisibleElementMarker, i.depth.toString()),
+                i.node.removeAttribute(TranslatorConstants.HiddenElementMarker);
+                if (k && h && e.hasOwnProperty(k)) {
+                    var m = e[k];
+                    for (var n = 0; n < m.attributes.length; n++) {
+                        var o = m.attributes[n];
+                        b(m.element, o.attribute, o.text)
+                    }
+                    delete e[k],
+                    i.node.removeAttribute(TranslatorConstants.HiddenAttributeMarker),
+                    g++
+                }
+                if (j && d.hasOwnProperty(j)) {
+                    var p = d[j];
+                    c(p.element, p.stringValue),
+                    delete d[j],
+                    g++
+                } else
+                    for (var q = 0; q < i.node.children.length; q++) {
+                        var r = i.depth + 1;
+                        r > 5 && console.warn("Element contains children deeper than threshold while marking visible. Depth: " + r),
+                        f.push({
+                            node: i.node.children[q],
+                            depth: r
+                        })
+                    }
+            }
+            return g
+        }
+        a.ElementVisibility = Object.freeze({
+            outsideView: 1,
+            insideView: 2,
+            hidden: 4,
+            cached: 8,
+            unknown: 64
+        }),
+        a.isInViewport = b,
+        a.updateHiddenElementCount = c,
+        a.updateParentHiddenAttribute = d,
+        a.isScrolledContent = e,
+        a.processHiddenNodes = f
+    }
+    )(VisibilityUtils || (VisibilityUtils = {}));
+    function typeOf(a) {
+        var b = typeof a;
+        return b === "object" && (a ? Object.prototype.toString.call(a) == "[object Array]" && (b = "array") : b = "null"),
+        b
+    }
+    var __extends = this && this.__extends || function(a, b) {
+        function d() {
+            this.constructor = a
+        }
+        for (var c in b)
+            b.hasOwnProperty(c) && (a[c] = b[c]);
+        a.prototype = b === null ? Object.create(b) : (d.prototype = b.prototype,
+        new d)
+    }
+      , __decorate = this && this.__decorate || function(a, b, c, d) {
+        var e = arguments.length, f = e < 3 ? b : d === null ? d = Object.getOwnPropertyDescriptor(b, c) : d, g;
+        if (typeof Reflect == "object" && typeof Reflect.decorate == "function")
+            f = Reflect.decorate(a, b, c, d);
+        else
+            for (var h = a.length - 1; h >= 0; h--)
+                if (g = a[h])
+                    f = (e < 3 ? g(f) : e > 3 ? g(b, c, f) : g(b, c)) || f;
+        return e > 3 && f && Object.defineProperty(b, c, f),
+        f
+    }
+    ;
+    String.isNullOrWhiteSpace = String.isNullOrWhiteSpace || function(a) {
+        return a === undefined || a === null || typeof a != "string" || a.trim().length === 0
+    }
+    ,
+    String.htmlEscape = String.htmlEscape || function(a) {
+        if (!a)
+            return "";
+        var b = document.createElement("span");
+        return b.innerText = a,
+        b.innerHTML
+    }
+    ;
+    var Logger = function() {
+        return "use strict",
+        {
+            info: function() {
+                var a = [];
+                for (var b = 0; b < arguments.length; b++)
+                    a[b - 0] = arguments[b];
+                console && typeOf(console.info) === "function" && Microsoft.JS.config.logLevel & Microsoft.JS.LogLevel.Info && console.info.apply(console, a)
+            },
+            warning: function() {
+                var a = [];
+                for (var b = 0; b < arguments.length; b++)
+                    a[b - 0] = arguments[b];
+                console && typeOf(console.warn) === "function" && Microsoft.JS.config.logLevel & Microsoft.JS.LogLevel.Warning && console.warn.apply(console, a)
+            },
+            error: function() {
+                var a = [];
+                for (var b = 0; b < arguments.length; b++)
+                    a[b - 0] = arguments[b];
+                console && typeOf(console.error) === "function" && Microsoft.JS.config.logLevel & Microsoft.JS.LogLevel.Error && console.error.apply(console, a)
+            },
+            assert: function(a) {
+                var b = [];
+                for (var c = 1; c < arguments.length; c++)
+                    b[c - 1] = arguments[c];
+                console && typeOf(console.assert) === "function" && Microsoft.JS.config.logLevel & Microsoft.JS.LogLevel.Debug && (b.unshift(a),
+                console.assert.apply(console, b))
+            },
+            debug: function() {
+                var a = [];
+                for (var b = 0; b < arguments.length; b++)
+                    a[b - 0] = arguments[b];
+                typeOf(console.debug) === "function" && Microsoft.JS.config.logLevel & Microsoft.JS.LogLevel.Debug && console.debug.apply(console, a)
+            }
+        }
+    }(), Microsoft;
+    (function(a) {
+        var b;
+        (function(b) {
+            function c(a) {
+                switch (document.readyState) {
+                case "interactive":
+                case "complete":
+                    a();
+                    break;
+                default:
+                    addEventListener("DOMContentLoaded", a)
+                }
+            }
+            function d(a) {
+                return new Promise(function(b, c) {
+                    chrome.storage.local.get(a, function(a) {
+                        chrome.runtime.lastError ? c(chrome.runtime.lastError) : b(a)
+                    })
+                }
+                )
+            }
+            function e(a) {
+                return new Promise(function(b, c) {
+                    chrome.storage.local.set(a, function() {
+                        chrome.runtime.lastError ? c(chrome.runtime.lastError) : b()
+                    })
+                }
+                )
+            }
+            function g(a) {
+                switch (typeOf(a)) {
+                case "object":
+                    return JSON.stringify(a);
+                case "null":
+                    return "null";
+                case "undefined":
+                    return "undefined";
+                case "array":
+                    return JSON.stringify(a);
+                default:
+                    return a.toString()
+                }
+            }
+            function h(a, b) {
+                delete a[b] && Object.defineProperty(a, b, {
+                    enumerable: !1,
+                    configurable: !1,
+                    get: function() {
+                        return this.hasOwnProperty(b) ? this[b] : undefined
+                    },
+                    set: function(a) {
+                        this.hasOwnProperty(b) ? this[b] = a : Object.defineProperty(this, b, {
+                            value: a
+                        })
+                    }
+                })
+            }
+            function i(a) {
+                var b = "";
+                return String.isNullOrWhiteSpace(a) || (b = a.replace("http://", "").replace("https://", "").split(/[/?#]/)[0]),
+                b.toLowerCase()
+            }
+            function n(a) {
+                var b = ""
+                  , c = 0;
+                if (a)
+                    for (var d in a)
+                        a.hasOwnProperty(d) && (c++ && (b += "&"),
+                        b += encodeURIComponent(d),
+                        a[d] != null && (b += "=" + encodeURIComponent(a[d])));
+                return b
+            }
+            function o(a, b, c, d) {
+                if (d.query) {
+                    var e = n(d.query);
+                    e.length > 0 && (b += (b.indexOf("?") < 0 ? "?" : "&") + e)
+                }
+                typeOf(d.timeoutInMs) === "number" && (a.timeout = d.timeoutInMs),
+                a.open(l[c], b, !0);
+                if (d.headers)
+                    for (var f in d.headers)
+                        d.headers.hasOwnProperty(f) && a.setRequestHeader(f, d.headers[f]);
+                d.contentType && a.setRequestHeader("Content-Type", d.contentType)
+            }
+            function p(a, b, c) {
+                c = c || {};
+                if (a == null || b == null)
+                    return Promise.reject(new m("HTTP method or URL are not set"));
+                if (c.timeoutInMs != null && c.timeoutInMs < 0)
+                    return Promise.reject(new m("Cannot have a negative timeout. Set to 0 to have no timeout"));
+                var d = new Promise(function(d, e) {
+                    var f = new XMLHttpRequest;
+                    o(f, b, a, c);
+                    var g = null;
+                    a != l.GET && a != l.HEAD && (g = c.body),
+                    f.send(g),
+                    f.onload = function() {
+                        if (f.status >= 200 && f.status < 300) {
+                            var a = f.response;
+                            if (c.parser)
+                                try {
+                                    a = c.parser(f)
+                                } catch (b) {
+                                    e(b);
+                                    return
+                                }
+                            d(a)
+                        } else
+                            e(new m(f.statusText,f.status,f))
+                    }
+                    ,
+                    f.onerror = function() {
+                        var a = f.statusText || "Failed to send the request";
+                        e(new m(a,f.status,f))
+                    }
+                    ,
+                    f.ontimeout = function() {
+                        e(new m("Timed out",-1,f))
+                    }
+                    ,
+                    c.token && c.token.addListener && c.token.addListener(f.abort.bind(f))
+                }
+                );
+                return d
+            }
+            function q(a, b) {
+                return Logger.debug("Injecting '" + b + "' into tab " + a),
+                new Promise(function(c, d) {
+                    chrome.tabs.executeScript(a, {
+                        code: b
+                    }, function(a) {
+                        chrome.runtime.lastError ? d(chrome.runtime.lastError) : c(a)
+                    })
+                }
+                )
+            }
+            function r(a, b) {
+                return Logger.debug("Injecting '" + b + "' into tab " + a),
+                new Promise(function(c, d) {
+                    chrome.tabs.executeScript(a, {
+                        file: b
+                    }, function(a) {
+                        chrome.runtime.lastError ? d(chrome.runtime.lastError) : c(a)
+                    })
+                }
+                )
+            }
+            function s(b) {
+                var c = a.JS.config.scriptsToInject
+                  , d = function(a, b, c) {
+                    return r(b, c)
+                }
+                  , e = Promise.resolve([]);
+                for (var f = 0; f < c.length; f++)
+                    e = e.then(d.bind(null, null, b, c[f]));
+                return e.catch(function(a) {
+                    throw Logger.error("Failed to inject one or more of the scripts into the page", a),
+                    a
+                })
+            }
+            function t(a, b, c, d, e, f) {
+                var g;
+                return f = String.isNullOrWhiteSpace(f) ? "" : f,
+                d === !0 ? g = 'Microsoft.JS.startSelectionTranslation("' + c + '", "' + e + '", "' + f + '")' : g = 'Microsoft.JS.startPageTranslation("' + b + '", "' + c + '", "' + e + '", "' + f + '")',
+                q(a, g)
+            }
+            function u(a) {
+                return q(a, "window.location.reload();")
+            }
+            function v(b, c) {
+                var d = a.JS.config.notificationScripts
+                  , e = function(a, b, c) {
+                    return r(b, c)
+                }
+                  , f = Promise.resolve([]);
+                for (var g = 0; g < d.length; g++)
+                    f = f.then(e.bind(null, null, b, d[g]));
+                var h = "Microsoft.JS.Notifications.pushNotification(" + JSON.stringify(c) + ");";
+                return f.then(q.bind(null, b, h)),
+                f.catch(function(a) {
+                    throw Logger.error("Failed to inject notification scripts into the page", a),
+                    a
+                })
+            }
+            function w(a) {
+                var b = "\nif ('Microsoft' in window && Microsoft.Translator && Microsoft.Translator.translationStartTime) {\n    window.location.reload();\n}";
+                return q(a, b)
+            }
+            function x(a) {
+                var b = 'window.addEventListener("message", function(event) {\n    var chrome = window.browser !== undefined ? window.browser : window.chrome;\n    if (!event || event.source !== window || !event.data || !event.data.message) return;\n    if (event.data.message == "HipDone")\n        chrome.runtime.sendMessage({ command: "HipDone", context: event.data }, function(_) { window.history.back(); });\n    else if (event.data.message == "HipAttemptFailed")\n        chrome.runtime.sendMessage({ command: "HipAttemptFailed", context: event.data }, function(_) { });\n}, false);';
+                return q(a, b)
+            }
+            function y(b) {
+                var c = 'window.postMessage({ "edgeExtension": "' + a.JS.config.version + '" }, "*");';
+                return q(b, c)
+            }
+            function z(b, c, d, e, f, g, h, i) {
+                window.onerror = function(a, b, c, d, e) {
+                    return i(e),
+                    Promise.resolve()
+                }
+                ,
+                console.log("Beginning page translation...");
+                if (a.instance)
+                    B().then(function(a) {
+                        return console.log("Successfully completed revert translate."),
+                        A(b, c, d, e, f, g, h, i)
+                    }).catch(function(a) {
+                        return console.log("Failed to translate page."),
+                        Promise.resolve()
+                    });
+                else
+                    return A(b, c, d, e, f, g, h, i)
+            }
+            function A(c, d, e, f, g, h, i, j) {
+                var k = h ? function(a) {
+                    console.log("Intermidiate complete called with " + a),
+                    h()
+                }
+                : null
+                  , l = function(b) {
+                    console.log("Error occurred while translating. Details: " + b),
+                    a.instance = null,
+                    typeof j == "function" && j(b)
+                };
+                return a.JS.config.translatorClient.sessionTokenCookie = g,
+                a.Translator.translationStartTime = performance.now(),
+                (new Promise(function(b, g) {
+                    a.instance = new a.DomTranslator(document.body,c,d,f,function(a) {
+                        b()
+                    }
+                    ,l,3e5,!1,e,k,i)
+                }
+                )).then(function(b) {
+                    a.onTranslationComplete(),
+                    console.log("Successfully completed translation.")
+                }).catch(function(a) {
+                    b.MessageClient && b.MessageClient.error(b.Telemetry.ErrorLocation.BackgroundScript, b.Telemetry.ErrorType.Unknown, "Failed to translate page. " + (a && typeof a.toString == "function" ? a.toString() : a || "Unknown")),
+                    Logger.error("Failed to translate the page", a),
+                    console.log("Failed to translate page."),
+                    j && j(a)
+                })
+            }
+            function B() {
+                return a.instance === undefined || a.instance === null ? Promise.resolve() : new Promise(function(b, c) {
+                    a.instance.cancel(),
+                    a.instance = null,
+                    console.log("Successfully completed untranslation."),
+                    b()
+                }
+                )
+            }
+            function C(a) {
+                var b = a.getSelection(), c, d = a.document.activeElement;
+                if (d && d.nodeType === 1 && d.nodeName === "A" && !b.containsNode(d, !0))
+                    return c = a.document.createRange(),
+                    c.selectNode(d),
+                    b.removeAllRanges(),
+                    b.addRange(c),
+                    d;
+                if (b.isCollapsed || b.rangeCount < 1)
+                    return null;
+                c = b.getRangeAt(0);
+                var e = c.startContainer
+                  , f = c.endContainer
+                  , g = c.startOffset
+                  , h = c.endOffset;
+                return e.nodeType === 3 && g !== 0 && (e.parentNode.insertBefore(document.createTextNode(e.nodeValue.substring(0, g)), e),
+                e.nodeValue = e.nodeValue.substring(g),
+                c.setStart(e, 0),
+                e === f && (h -= g)),
+                f.nodeType === 3 && h !== f.nodeValue.length && (f.parentNode.insertBefore(document.createTextNode(f.nodeValue.substring(h)), f.nextSibling),
+                f.nodeValue = f.nodeValue.substring(0, h),
+                c.setEnd(f, f.nodeValue.length)),
+                b.removeAllRanges(),
+                b.addRange(c),
+                c.commonAncestorContainer.nodeType === 3 ? c.commonAncestorContainer.parentNode : c.commonAncestorContainer
+            }
+            function D(c, d, e, f, g, h) {
+                function o(b, e) {
+                    return new Promise(function(b, h) {
+                        a.instance = new a.DomTranslator(e,"",c,d,function(a) {
+                            b(a)
+                        }
+                        ,function(a) {
+                            n(a),
+                            h(a)
+                        }
+                        ,3e5,!0,!1,f,g)
+                    }
+                    )
+                }
+                a.JS.config.translatorClient.sessionTokenCookie = e,
+                a.Translator.translationStartTime = performance.now();
+                var i = []
+                  , j = C(window);
+                j && i.push(j);
+                var k = document.querySelectorAll("iframe");
+                for (var l = 0; l < k.length; l++)
+                    try {
+                        j = C(k[l].contentWindow),
+                        j && i.push(j)
+                    } catch (m) {}
+                var n = function(b) {
+                    console.log("Error occurred while translating selection. Details: " + b),
+                    a.instance = null,
+                    typeof h == "function" && h(b)
+                }
+                  , p = Promise.resolve(null);
+                for (var l = 0; l < i.length; l++)
+                    p = p.then(o.bind(null, null, i[l]));
+                return p.then(function() {
+                    a.onTranslationComplete()
+                }).catch(function(a) {
+                    b.MessageClient && b.MessageClient.error(b.Telemetry.ErrorLocation.BackgroundScript, b.Telemetry.ErrorType.Unknown, "Failed to translate text selection(s). " + (a && typeof a.toString == "function" ? a.toString() : a || "Unknown")),
+                    Logger.error("Failed to translate the text selection(s)", a),
+                    n(a),
+                    Promise.reject(a)
+                })
+            }
+            function F(a, b) {
+                if (!a || !b || !b.length)
+                    return;
+                var c = new E
+                  , d = 0;
+                c.push(0);
+                while (d < b.length && c.length && a) {
+                    var e = b.indexOf(a);
+                    if (e >= 0) {
+                        var f = b[d];
+                        b[d] = b[e],
+                        b[e] = f,
+                        d++,
+                        a = a.parentNode,
+                        c.pop()
+                    } else
+                        c.top < a.childNodes.length ? (a = a.childNodes[c.top],
+                        c.top++,
+                        c.push(0)) : (a = a.parentNode,
+                        c.pop())
+                }
+                while (d < b.length)
+                    b.pop()
+            }
+            "use strict",
+            b.onContentLoaded = c,
+            b.getFromLocalStore = d,
+            b.setToLocalStore = e,
+            function(a) {
+                a[a.Off = 0] = "Off",
+                a[a.Error = 1] = "Error",
+                a[a.Warning = 2] = "Warning",
+                a[a.Info = 4] = "Info",
+                a[a.Debug = 8] = "Debug",
+                a[a.Assert = 16] = "Assert",
+                a[a.All = 4294967295] = "All"
+            }(b.LogLevel || (b.LogLevel = {}));
+            var f = b.LogLevel;
+            b.serialize = g,
+            b.noSerialize = h,
+            b.getDomain = i;
+            var j = function() {
+                function a() {
+                    this._listeners = []
+                }
+                return a.prototype.addListener = function(a) {
+                    this._listeners.push(a)
+                }
+                ,
+                a.prototype.removeListener = function(a) {
+                    var b = this._listeners.indexOf(a);
+                    b >= 0 && this._listeners.splice(b)
+                }
+                ,
+                a.prototype.raise = function(a, b) {
+                    for (var c = 0; c < this._listeners.length; c++)
+                        this._listeners[c] && this._listeners[c].call(a, b)
+                }
+                ,
+                __decorate([h], a.prototype, "_listeners", void 0),
+                a
+            }();
+            b.Event = j;
+            var k = function() {
+                function a(a) {
+                    var b = this;
+                    this._listeners = [],
+                    this._canceled = !1,
+                    typeof a == "number" && a > 0 && setTimeout(function() {
+                        b.cancel()
+                    }, a)
+                }
+                return Object.defineProperty(a.prototype, "isCanceled", {
+                    get: function() {
+                        return this._canceled
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                a.prototype.throwIfCanceled = function() {
+                    if (this._canceled === !0)
+                        throw new Error("Operation was canceled")
+                }
+                ,
+                a.prototype.addListener = function(a) {
+                    if (typeOf(a) !== "function")
+                        return;
+                    this._listeners.push(a),
+                    this._canceled && setTimeout(a, 0)
+                }
+                ,
+                a.prototype.cancel = function() {
+                    if (this._canceled === !0)
+                        return;
+                    this._canceled = !0;
+                    for (var a = 0; a < this._listeners.length; a++)
+                        try {
+                            this._listeners[a]()
+                        } catch (b) {
+                            Logger.warning("Failed during cancellation callback", b)
+                        }
+                }
+                ,
+                a
+            }();
+            b.CancellationTokenSource = k,
+            function(a) {
+                a[a.GET = 0] = "GET",
+                a[a.POST = 1] = "POST",
+                a[a.HEAD = 2] = "HEAD",
+                a[a.PUT = 3] = "PUT",
+                a[a.DELETE = 4] = "DELETE"
+            }(b.HttpMethod || (b.HttpMethod = {}));
+            var l = b.HttpMethod
+              , m = function() {
+                function a(a, b, c) {
+                    b === void 0 && (b = 0),
+                    c === void 0 && (c = null),
+                    this.message = a,
+                    this.status = b,
+                    this.details = c
+                }
+                return Object.defineProperty(a.prototype, "isHttpError", {
+                    get: function() {
+                        return !0
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                Object.defineProperty(a.prototype, "isBadRequest", {
+                    get: function() {
+                        return this.status != null && this.status >= 400 && this.status < 500
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                Object.defineProperty(a.prototype, "isServerError", {
+                    get: function() {
+                        return this.status != null && this.status >= 500 && this.status < 600
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                Object.defineProperty(a.prototype, "isServiceUnavailable", {
+                    get: function() {
+                        return this.status === 503
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                Object.defineProperty(a.prototype, "isOverQuota", {
+                    get: function() {
+                        return this.status === 429
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                a
+            }();
+            b.HttpError = m,
+            b.toQueryString = n,
+            b.AjaxPromise = p,
+            b.injectTranslatorScripts = s,
+            b.injectStartTranslationScripts = t,
+            b.injectRefreshPageScripts = u,
+            b.injectNotificationScripts = v,
+            b.injectUndoTranslationScripts = w,
+            b.injectHipPageContentScripts = x,
+            b.injectLandingPageContentScripts = y,
+            b.startPageTranslation = z,
+            b.stopPageTranslation = B,
+            b.startSelectionTranslation = D;
+            var E = function(a) {
+                function b() {
+                    a.apply(this, arguments)
+                }
+                return __extends(b, a),
+                Object.defineProperty(b.prototype, "top", {
+                    get: function() {
+                        return this[this.length - 1]
+                    },
+                    set: function(a) {
+                        this[this.length - 1] = a
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                b
+            }(Array);
+            b.orderByDomOrder = F
+        }
+        )(b = a.JS || (a.JS = {}))
+    }
+    )(Microsoft || (Microsoft = {}));
+    var LoggingUtils;
+    (function(a) {
+        function b(a, b, c, d) {
+            var e = {
+                domTranslatorSessionId: a,
+                detectedLang: b,
+                toLang: c,
+                uri: window.location.href,
+                translationTime: performance.now() - window.Microsoft.Translator.translationStartTime,
+                requests: window.Microsoft.Translator.requests.sort(function(a, b) {
+                    return a.offsetFromStart - b.offsetFromStart
+                })
+            };
+            Logger.debug("Took " + e.translationTime + " ms to translate"),
+            Microsoft.JS.MessageClient && (d ? Microsoft.JS.MessageClient.selectionTranslated(e) : Microsoft.JS.MessageClient.pageTranslated(e))
+        }
+        a.logTranslationTelemetry = b
+    }
+    )(LoggingUtils || (LoggingUtils = {}));
+    function getUiTextLang() {
+        return Microsoft.JS.TextLanguage.normalizeCode(window.navigator.language) || "en"
+    }
+    var Microsoft;
+    (function(a) {
+        var b;
+        (function(a) {
+            function g() {
+                if (c == null || d == 0)
+                    return !1;
+                var a = (new Date).getTime()
+                  , b = (a - d) / f;
+                return Math.round(b) <= e ? !0 : !1
+            }
+            function i(b, c) {
+                var d;
+                try {
+                    d = JSON.parse(b.responseText)
+                } catch (e) {
+                    throw new a.HttpError(b.responseText)
+                }
+                if (typeOf(d) !== c)
+                    throw new a.HttpError(a.serialize(d));
+                return d
+            }
+            function j(a) {
+                if (String.isNullOrWhiteSpace(a))
+                    return null;
+                var b = a.split("; ").map(function(a) {
+                    return a.split("=")
+                });
+                return b.length >= 2 && b[0] && !String.isNullOrWhiteSpace(b[0][1]) && b[1] && b[1][0] === "expires" && new Date <= new Date(b[1][1]) ? {
+                    "X-API-Session": decodeURI(b[0][1])
+                } : null
+            }
+            "use strict";
+            var b = {
+                ar: !0,
+                he: !0,
+                fa: !0,
+                ur: !0
+            }
+              , c = null
+              , d = 0
+              , e = 8
+              , f = 6e4
+              , h = function() {
+                function a(b, c) {
+                    this.name = c,
+                    this.code = a.normalizeCode(b)
+                }
+                return Object.defineProperty(a.prototype, "isRtl", {
+                    get: function() {
+                        return this.code && b.hasOwnProperty(this.code)
+                    },
+                    enumerable: !0,
+                    configurable: !0
+                }),
+                a.prototype.toString = function() {
+                    return this.code + ": " + this.name
+                }
+                ,
+                a.isRtl = function(c) {
+                    return c = a.normalizeCode(c),
+                    c && b.hasOwnProperty(c.toLowerCase())
+                }
+                ,
+                a.equals = function(a, b) {
+                    return a != null && b != null && a.code === b.code
+                }
+                ,
+                a.normalizeCode = function(a) {
+                    var b = ""
+                      , c = ""
+                      , d = "";
+                    if (typeOf(a) === "string") {
+                        var e = a.split("-");
+                        b = e[0].toLowerCase();
+                        for (var f = 1; f < e.length && !d && !c; f++)
+                            e[f].length === 2 ? (c = e[f].toUpperCase(),
+                            b === "zh" && c === "CN" ? d = "Hans" : b == "zh" && c === "TW" && (d = "Hant")) : e[f].length === 3 && !c ? e[f].toUpperCase() === "CHS" ? d = "Hans" : e[f] === "CHT" && (d = "Hant") : e[f].length === 4 && !c && (d = e[f][0].toUpperCase() + e[f].substring(1).toLowerCase())
+                    }
+                    b === "nb" ? b = "no" : b === "und" && (b = "");
+                    var g = b;
+                    return d && (g += "-" + d),
+                    g
+                }
+                ,
+                a
+            }();
+            a.TextLanguage = h;
+            var k = function() {
+                function b(b, c) {
+                    this._baseUrl = b,
+                    this._ref = c;
+                    if (b == null || b.length === 0)
+                        throw new Error("The application ID cannot be null or empty");
+                    this._baseQuery = "";
+                    var d = b.indexOf("?");
+                    d >= 0 && (this._baseUrl = b.substring(0, d),
+                    this._baseQuery = b.substring(d)),
+                    this._baseUrl.charAt(this._baseUrl.length - 1) !== "/" && (this._baseUrl += "/");
+                    var e = a.toQueryString({
+                        ref: c
+                    });
+                    this._baseQuery += (this._baseQuery.length === 0 ? "?" : "&") + e
+                }
+                return b.prototype.getTextLanguagesAsync = function(b) {
+                    return a.AjaxPromise(a.HttpMethod.GET, this._baseUrl + "languages/text" + this._baseQuery, {
+                        parser: function(a) {
+                            return i(a, "object")
+                        },
+                        headers: j(this.sessionTokenCookie),
+                        token: b
+                    }).then(function(a) {
+                        var b = [];
+                        for (var c in a)
+                            a.hasOwnProperty(c) && b.push(new h(c,a[c]));
+                        return b
+                    })
+                }
+                ,
+                b.prototype.translateAsync = function(b, c, d, e, f, g, h) {
+                    if (c == null || c.length === 0)
+                        return Promise.reject(new a.HttpError("toLang cannot be null or empty"));
+                    if (d == null)
+                        return Promise.reject(new a.HttpError("Must specify an array of text items to translate"));
+                    var k = {
+                        from: b || "",
+                        to: c
+                    };
+                    return e && (k.options = JSON.stringify(e)),
+                    a.AjaxPromise(a.HttpMethod.POST, this._baseUrl + "translate" + this._baseQuery, {
+                        query: k,
+                        contentType: "application/json",
+                        body: JSON.stringify(d),
+                        timeoutInMs: f,
+                        headers: j(this.sessionTokenCookie),
+                        parser: function(a) {
+                            var b = i(a, "object")
+                              , c = [];
+                            for (var d = 0; b.items && d < b.items.length; d++)
+                                c.push({
+                                    From: b.from,
+                                    TranslatedText: b.items[d].text,
+                                    OriginalTextSentenceLengths: b.items[d].originalSentenceLengths,
+                                    TranslatedTextSentenceLengths: b.items[d].translatedSentenceLengths
+                                });
+                            return c
+                        },
+                        token: g
+                    })
+                }
+                ,
+                b.TEXT_CONTENT = "text/plain",
+                b.XML_CONTENT = "text/xml",
+                b.HTML_CONTENT = "text/html",
+                b
+            }();
+            a.AjaxTranslatorClientV2 = k;
+            var l = function() {
+                function b(b, c, d, e) {
+                    this.languageUrl = b,
+                    this.translationUrl = c,
+                    this._ref = d;
+                    if (b == null || b.length === 0 || c === null || c === undefined || c.length === 0)
+                        throw new Error("The base URL can not be empty");
+                    if (!e || e.length === 0)
+                        throw new Error("App id can not be null");
+                    this._baseQuery = "";
+                    var f = b.indexOf("?");
+                    f >= 0 && (this.languageUrl = b.substring(0, f),
+                    this._baseQuery = b.substring(f)),
+                    this.languageUrl.charAt(this.languageUrl.length - 1) !== "/" && (this.languageUrl += "/");
+                    var g = a.toQueryString({
+                        ref: d
+                    });
+                    this._baseQuery += (this._baseQuery.length === 0 ? "?" : "&") + g,
+                    this._translationUrl = c,
+                    this._appId = e
+                }
+                return b.prototype.getTextLanguagesAsync = function(b) {
+                    return a.AjaxPromise(a.HttpMethod.GET, this._langaugeUrl + "languages/text" + this._baseQuery, {
+                        parser: function(a) {
+                            return i(a, "object")
+                        },
+                        headers: j(this.sessionTokenCookie),
+                        token: b
+                    }).then(function(a) {
+                        var b = [];
+                        for (var c in a)
+                            a.hasOwnProperty(c) && b.push(new h(c,a[c]));
+                        return b
+                    })
+                }
+                ,
+                b.prototype.translateAsync = function(b, c, d, e, f, g, h) {
+                    if (c == null || c.length === 0)
+                        return Promise.reject(new a.HttpError("toLang cannot be null or empty"));
+                    if (d == null)
+                        return Promise.reject(new a.HttpError("Must specify an array of text items to translate"));
+                    for (var j = 0; j < d.length; j++)
+                        ;
+                    var k = {
+                        from: b || "",
+                        to: c,
+                        appId: this._appId,
+                        texts: JSON.stringify(d)
+                    };
+                    return e && (k.options = JSON.stringify(e)),
+                    a.AjaxPromise(a.HttpMethod.GET, this.translationUrl, {
+                        query: k,
+                        timeoutInMs: f,
+                        parser: function(a) {
+                            var b = i(a, "array")
+                              , c = [];
+                            for (var d = 0; b.length && d < b.length; d++)
+                                c.push(b[d]);
+                            return c
+                        },
+                        token: g
+                    })
+                }
+                ,
+                b.TEXT_CONTENT = "text/plain",
+                b.XML_CONTENT = "text/xml",
+                b.HTML_CONTENT = "text/html",
+                b
+            }();
+            a.AjaxS2STranslatorClientV2 = l;
+            var m = function() {
+                function b(a, b) {
+                    this.authorizationUrl = a,
+                    this.translationUrl = b;
+                    if (a == null || a.length === 0 || b === null || b === undefined || b.length === 0)
+                        throw new Error("The URL can not be empty");
+                    this._authorizationUrl = a,
+                    this._translationUrl = b
+                }
+                return b.prototype.getAuthorizationTokenAsync = function() {
+                    return g() ? Promise.resolve(c) : (d = (new Date).getTime(),
+                    a.AjaxPromise(a.HttpMethod.GET, this.authorizationUrl, {}))
+                }
+                ,
+                b.prototype.getTextLanguagesAsync = function(a) {
+                    return null
+                }
+                ,
+                b.prototype.asyncFetchHelper = function(b, d, e, f, g, h, j, k, l) {
+                    if (d == null || d.length === 0)
+                        return Promise.reject(new a.HttpError("toLang cannot be null or empty"));
+                    if (e == null)
+                        return Promise.reject(new a.HttpError("Must specify an array of text items to translate"));
+                    c = f;
+                    var m = {
+                        from: b || "",
+                        to: d
+                    };
+                    m["api-version"] = "3.0",
+                    m.includeSentenceLength = "true",
+                    g && (m.options = JSON.stringify(g));
+                    var n, o = 0, p = [];
+                    for (n = 0; n < e.length; ++n)
+                        p.push({
+                            Text: e[n]
+                        }),
+                        o += e[n].length;
+                    k(o, l);
+                    var q = "Bearer " + f;
+                    return a.AjaxPromise(a.HttpMethod.POST, this.translationUrl, {
+                        query: m,
+                        contentType: "application/json",
+                        body: JSON.stringify(p),
+                        headers: {
+                            Authorization: q
+                        },
+                        parser: function(a) {
+                            var c = i(a, "array")
+                              , d = [];
+                            for (var e = 0; c.length && e < c.length; e++)
+                                d.push({
+                                    From: b || c[e].detectedLanguage.language,
+                                    TranslatedText: c[e].translations[0].text,
+                                    OriginalTextSentenceLengths: c[e].translations[0].sentLen.srcSentLen,
+                                    TranslatedTextSentenceLengths: c[e].translations[0].sentLen.transSentLen
+                                });
+                            return d
+                        },
+                        token: j
+                    })
+                }
+                ,
+                b.prototype.translateAsync = function(a, c, d, e, f, g, h) {
+                    var i = this;
+                    return this.getAuthorizationTokenAsync().then(function(j) {
+                        return i.translateAsyncHelper(a, c, d, j, b.NETWORK_ATTEMPTS, e, f, g, h, !1)
+                    }).catch(function(a) {
+                        return Promise.reject(a)
+                    })
+                }
+                ,
+                b.prototype.translateAsyncHelper = function(a, b, c, d, e, f, g, h, i, j) {
+                    var k = this;
+                    return this.asyncFetchHelper(a, b, c, d, f, g, h, i, j).then(function(a) {
+                        return a
+                    }).catch(function(j) {
+                        return e === 1 || j.status !== 0 ? Promise.reject(j) : k.translateAsyncHelper(a, b, c, d, e - 1, f, g, h, i, !0)
+                    })
+                }
+                ,
+                b.NETWORK_ATTEMPTS = 5,
+                b.TEXT_CONTENT = "text/plain",
+                b.XML_CONTENT = "text/xml",
+                b.HTML_CONTENT = "text/html",
+                b
+            }();
+            a.AjaxEdgeTranslatorClientV3 = m;
+            var n = function() {
+                function b(a) {
+                    this.translationUrl = a;
+                    if (a === null || a === undefined || a.length === 0)
+                        throw new Error("The URL can not be empty");
+                    this._translationUrl = a
+                }
+                return b.prototype.getTextLanguagesAsync = function(a) {
+                    return null
+                }
+                ,
+                b.prototype.translateAsync = function(b, c, d, e, f, g, h) {
+                    if (c == null || c.length === 0)
+                        return Promise.reject(new a.HttpError("toLang cannot be null or empty"));
+                    if (d == null)
+                        return Promise.reject(new a.HttpError("Must specify an array of text items to translate"));
+                    var j = {
+                        from: b || "",
+                        to: c
+                    };
+                    j["api-version"] = "3.0",
+                    j.includeSentenceLength = "true",
+                    e && (j.options = JSON.stringify(e));
+                    var k = 0;
+                    return d.forEach(function(a) {
+                        k += a.length
+                    }),
+                    h(k, !1),
+                    a.AjaxPromise(a.HttpMethod.POST, this.translationUrl, {
+                        query: j,
+                        contentType: "application/json",
+                        body: JSON.stringify(d),
+                        parser: function(a) {
+                            var c = i(a, "array")
+                              , d = [];
+                            for (var e = 0; c.length && e < c.length; e++)
+                                d.push({
+                                    From: b || c[e].detectedLanguage.language,
+                                    TranslatedText: c[e].translations[0].text,
+                                    OriginalTextSentenceLengths: c[e].translations[0].sentLen.srcSentLen,
+                                    TranslatedTextSentenceLengths: c[e].translations[0].sentLen.transSentLen
+                                });
+                            return d
+                        },
+                        token: g
+                    })
+                }
+                ,
+                b
+            }();
+            a.AjaxEdgeTranslatorAPIClient = n;
+            var o = function() {
+                function b() {}
+                return b.prototype.getAuthorizationTokenAsync = function() {
+                    return Promise.resolve("null")
+                }
+                ,
+                b.prototype.getTextLanguagesAsync = function(a) {
+                    return null
+                }
+                ,
+                b.prototype.translateAsync = function(b, c, d, e, f, g, h) {
+                    if (c == null || c.length === 0)
+                        return Promise.reject(new a.HttpError("toLang cannot be null or empty"));
+                    if (d == null)
+                        return Promise.reject(new a.HttpError("Must specify an array of text items to translate"));
+                    b == "" && (b = c);
+                    var i = 0;
+                    d.forEach(function(a) {
+                        i += a.length
+                    }),
+                    h(i, !1);
+                    var j = [];
+                    for (var k = 0, l = d; k < l.length; k++) {
+                        var m = l[k];
+                        if (window.mockApiMap[m] && window.mockApiMap[m][c]) {
+                            var n = window.mockApiMap[m][c];
+                            j.push({
+                                TranslatedText: n,
+                                From: b,
+                                OriginalTextSentenceLengths: m.split(".").map(function(a) {
+                                    return a.length
+                                }),
+                                TranslatedTextSentenceLengths: n.split(".").map(function(a) {
+                                    return a.length
+                                })
+                            })
+                        } else
+                            console.log("Could not translate: " + m + " from " + b + " to " + c),
+                            j.push({
+                                From: b,
+                                Error: "MockAPI does not has a translation for " + m + " to convert in " + c,
+                                OriginalTextSentenceLengths: m.split(".").map(function(a) {
+                                    return a.length
+                                }),
+                                TranslatedTextSentenceLengths: [0],
+                                TranslatedText: null
+                            })
+                    }
+                    return Promise.resolve(j)
+                }
+                ,
+                b
+            }();
+            a.TranslateTestClient = o
+        }
+        )(b = a.JS || (a.JS = {}))
+    }
+    )(Microsoft || (Microsoft = {}));
+    var Microsoft;
+    (function(a) {
+        var b;
+        (function(a) {
+            function d(b, c) {
+                var d;
+                try {
+                    d = JSON.parse(b.responseText)
+                } catch (e) {
+                    throw new a.HttpError(b.responseText)
+                }
+                if (typeOf(d) !== c)
+                    throw new a.HttpError(a.serialize(d));
+                return d
+            }
+            function e(a) {
+                return String.isNullOrWhiteSpace(a) ? null : {
+                    "X-User-ID": a,
+                    "Cache-Control": "no-cache"
+                }
+            }
+            "use strict";
+            var b = function() {
+                function a() {}
+                return a
+            }();
+            a.WebsiteOverrideList = b;
+            var c = function() {
+                function a() {}
+                return a
+            }()
+              , f = function() {
+                function c(a, b) {
+                    this.updateApiUri = a,
+                    this.userID = b;
+                    if (a == null || a.length === 0)
+                        throw new Error("The Update URI cannot be empty");
+                    this._updateApiUri = a,
+                    this.userId = b
+                }
+                return c.prototype.getWebsiteList = function(c) {
+                    return a.AjaxPromise(a.HttpMethod.GET, this._updateApiUri, {
+                        parser: function(a) {
+                            return d(a, "object")
+                        },
+                        headers: e(this.userId),
+                        token: c
+                    }).then(function(a) {
+                        var c = new b;
+                        return c.version = a.version,
+                        c.notificationBlacklist = a.nb,
+                        c.notificationBlacklistDomains = a.nbd,
+                        c.webpageLangMap = a.wlmap,
+                        c.nextUpdate = a.nextUpdate,
+                        c
+                    })
+                }
+                ,
+                c.TEXT_CONTENT = "text/plain",
+                c.XML_CONTENT = "text/xml",
+                c.HTML_CONTENT = "text/html",
+                c
+            }();
+            a.AjaxWebsiteUpdaterClient = f
+        }
+        )(b = a.JS || (a.JS = {}))
+    }
+    )(Microsoft || (Microsoft = {}));
+    var Microsoft;
+    (function(a) {
+        var b;
+        (function(a) {
+            var b;
+            (function(a) {
+                "use strict",
+                function(a) {
+                    a[a.BackgroundScript = 0] = "BackgroundScript",
+                    a[a.ContentScript = 1] = "ContentScript",
+                    a[a.PagePopup = 2] = "PagePopup",
+                    a[a.OptionsPage = 3] = "OptionsPage",
+                    a[a.InlineNotification = 4] = "InlineNotification"
+                }(a.ErrorLocation || (a.ErrorLocation = {}));
+                var b = a.ErrorLocation;
+                (function(a) {
+                    a[a.NullReference = 0] = "NullReference",
+                    a[a.Throttled = 1] = "Throttled",
+                    a[a.ThrottledAfterCaptcha = 2] = "ThrottledAfterCaptcha",
+                    a[a.CouldNotSendRequest = 3] = "CouldNotSendRequest",
+                    a[a.ServiceUnavailable = 4] = "ServiceUnavailable",
+                    a[a.ServiceError = 5] = "ServiceError",
+                    a[a.BadRequest = 6] = "BadRequest",
+                    a[a.TimedOut = 7] = "TimedOut",
+                    a[a.Stuck = 8] = "Stuck",
+                    a[a.FailedToSaveToStorage = 9] = "FailedToSaveToStorage",
+                    a[a.FailedToGetFromStorage = 10] = "FailedToGetFromStorage",
+                    a[a.LanguageDetectionFailed = 11] = "LanguageDetectionFailed",
+                    a[a.FailedToInjectContentScripts = 12] = "FailedToInjectContentScripts",
+                    a[a.ExtensionAsyncCommandFailed = 13] = "ExtensionAsyncCommandFailed",
+                    a[a.ContextMenuItemsError = 14] = "ContextMenuItemsError",
+                    a[a.CookieError = 15] = "CookieError",
+                    a[a.Unknown = Number.MAX_VALUE] = "Unknown"
+                }
+                )(a.ErrorType || (a.ErrorType = {}));
+                var c = a.ErrorType;
+                (function(a) {
+                    a[a.Auto = 0] = "Auto",
+                    a[a.Scrolled = 1] = "Scrolled",
+                    a[a.Mutation = 2] = "Mutation",
+                    a[a.VisibilityChange = 3] = "VisibilityChange"
+                }
+                )(a.TranslationTrigger || (a.TranslationTrigger = {}));
+                var d = a.TranslationTrigger;
+                (function(a) {
+                    a[a.Untranslated = 0] = "Untranslated",
+                    a[a.TabClosed = 1] = "TabClosed",
+                    a[a.BrowserClosed = 2] = "BrowserClosed",
+                    a[a.DifferentLangDetected = 3] = "DifferentLangDetected",
+                    a[a.LangDetectionFailed = 4] = "LangDetectionFailed",
+                    a[a.UserLangDetected = 5] = "UserLangDetected"
+                }
+                )(a.SessionEndReason || (a.SessionEndReason = {}));
+                var e = a.SessionEndReason;
+                (function(a) {
+                    a[a.Manual = 0] = "Manual",
+                    a[a.Auto = 1] = "Auto",
+                    a[a.Continuation = 2] = "Continuation"
+                }
+                )(a.PageTranslationReason || (a.PageTranslationReason = {}));
+                var f = a.PageTranslationReason;
+                (function(a) {
+                    a[a.AutoTranslate = 0] = "AutoTranslate",
+                    a[a.TranslateTo = 1] = "TranslateTo",
+                    a[a.NoTranslateLangs = 2] = "NoTranslateLangs",
+                    a[a.AlwaysShowPageAction = 3] = "AlwaysShowPageAction"
+                }
+                )(a.ChangedOption || (a.ChangedOption = {}));
+                var g = a.ChangedOption
+                  , h = function() {
+                    function a(a, b, c, d, e, f) {
+                        this.name = a,
+                        this.groupId = b,
+                        this.sessionId = c,
+                        this.detectedLang = d,
+                        this.toLang = e,
+                        this.uri = f
+                    }
+                    return a
+                }();
+                a.NotificationTelemetry = h
+            }
+            )(b = a.Telemetry || (a.Telemetry = {}))
+        }
+        )(b = a.JS || (a.JS = {}))
+    }
+    )(Microsoft || (Microsoft = {}));
+    var TranslatorConstants;
+    (function(a) {
+        a.UntranslatableElements = Object.freeze({
+            head: 1,
+            script: 1,
+            style: 1,
+            code: 1,
+            samp: 1,
+            "var": 1,
+            kbd: 1,
+            pre: 1,
+            object: 1,
+            address: 1,
+            textarea: 1,
+            noscript: 1,
+            embed: 1,
+            map: 1
+        }),
+        a.TranslateMode = Object.freeze({
+            Inherit: 0,
+            On: 1,
+            Off: 2,
+            Skip: 3
+        }),
+        a.TerminalElements = Object.freeze(Object.assign({
+            hr: 1,
+            option: 1,
+            input: 1,
+            title: 1,
+            br: 1,
+            frame: 1,
+            iframe: 1
+        }, a.UntranslatableElements)),
+        a.MsNoTranslateClass = "msnotranslate",
+        a.TranslatableAttributes = Object.freeze({
+            INPUT: [{
+                predicate: function(a) {
+                    return a && (a.type === "button" || a.type === "submit")
+                },
+                attributes: ["value"]
+            }, {
+                predicate: function(a) {
+                    if (!a || !a.type)
+                        return !1;
+                    switch (a.type) {
+                    case "text":
+                    case "password":
+                    case "date":
+                    case "color":
+                    case "month":
+                    case "week":
+                    case "time":
+                    case "datetime":
+                    case "datetime-local":
+                    case "email":
+                    case "search":
+                    case "tel":
+                    case "url":
+                        return !0;
+                    default:
+                        return !1
+                    }
+                },
+                attributes: ["placeholder", "value"]
+            }]
+        }),
+        a.TranslationAttributes = Object.freeze({
+            translate: {
+                "true": a.TranslateMode.On,
+                yes: a.TranslateMode.On,
+                "false": a.TranslateMode.Off,
+                no: a.TranslateMode.Off,
+                skip: a.TranslateMode.Skip
+            }
+        }),
+        a.TranslationClassNames = Object.freeze((b = {
+            notranslate: a.TranslateMode.Off,
+            skiptranslate: a.TranslateMode.Skip
+        },
+        b[a.MsNoTranslateClass] = a.TranslateMode.Off,
+        b)),
+        a.HiddenElementMarker = "_mstHidden",
+        a.HiddenAttributeMarker = "_mstHiddenAttr",
+        a.VisibleElementMarker = "_mstVisible",
+        a.MstAttributes = Object.freeze(["_mstTextHash", "_msthash", a.HiddenElementMarker, a.HiddenAttributeMarker, a.VisibleElementMarker]),
+        a.VisibilityAttributes = Object.freeze(["style", "class"]),
+        a.MaxDepthToCheck = 9;
+        var b
+    }
+    )(TranslatorConstants || (TranslatorConstants = {}));
+    var Microsoft;
+    (function(a) {
+        var b;
+        (function(b) {
+            "use strict";
+            var c = null;
+            b.config = {
+                logLevel: b.LogLevel.Error,
+                debug: !1,
+                languageCacheDurationMs: 864e5,
+                websiteListCacheDurationMs: 216e5,
+                translatorClient: new a.JS.AjaxEdgeTranslatorClientV3("https://edge.microsoft.com/translate/auth","https://api.cognitive.microsofttranslator.com/translate"),
+                websiteUpdateClient: new a.JS.AjaxWebsiteUpdaterClient("https://translatorforedge.azureedge.net/updatelist.json"),
+                telemetryCreator: function() {
+                    return c || (c = new a.JS.Telemetry.AriaTelemetry("7bb8cf3b69144514a096964e60825caa-903cb4f6-52a5-427b-a479-21a9edccb4fa-7291")),
+                    c
+                },
+                captchaUrl: "https://www.bing.com/translator/edge/hip",
+                overQuotaUrl: "https://www.bing.com/translator/edge/overquota?type=",
+                promotionUrl: "https://aka.ms/TranslatorEdgeAd",
+                uninstallUrl: "https://translatorforedge.azurewebsites.net/Uninstall?u=",
+                stalledTranslationTimeMs: 6e4,
+                maxScriptInjectionRetries: 1,
+                minNotificationDismiss: {
+                    _: 1,
+                    en: 1
+                },
+                minNotificationIgnore: {
+                    _: 4
+                },
+                minDomainNotificationIgnore: 2,
+                notificationWaitTimeMs: 36e5,
+                minTranslationsToStartAutoTranslate: 2,
+                minUntranslationsToStopAutoTranslate: 2,
+                scriptsToInject: ["injectedscript.min.js"],
+                notificationScripts: ["inlinenotification.min.js"]
+            };
+            if (document && document.documentElement && chrome && chrome.i18n) {
+                var d = b.TextLanguage.isRtl(chrome.i18n.getUILanguage());
+                document.documentElement.classList.add(d ? "rtl" : "ltr")
+            }
+        }
+        )(b = a.JS || (a.JS = {}))
+    }
+    )(Microsoft || (Microsoft = {})),
+    function() {
+        var a;
+        (function(a) {
+            a[a.BingAPIV2 = 1] = "BingAPIV2",
+            a[a.AzureAPIV3 = 2] = "AzureAPIV3",
+            a[a.EdgeTranslateAPI = 3] = "EdgeTranslateAPI",
+            a[a.TranslateTestAPI = 4] = "TranslateTestAPI"
+        }
+        )(a || (a = {}));
+        var b = Number("2");
+        switch (b) {
+        case a.BingAPIV2:
+            console.log("Using Translate V2 APIs"),
+            Microsoft.JS.config.translatorClient = new Microsoft.JS.AjaxS2STranslatorClientV2("https://www.bing.com/translator/api/","https://api.microsofttranslator-int.com/v2/ajax.svc/TranslateArray","edge_mmx","98b49ac9-8b31-4531-81e4-baff6e4757d7");
+            break;
+        case a.AzureAPIV3:
+            console.log("Using Translate V3 APIs"),
+            Microsoft.JS.config.translatorClient = new Microsoft.JS.AjaxEdgeTranslatorClientV3("https://edge.microsoft.com/translate/auth","https://api.cognitive.microsofttranslator.com/translate");
+            break;
+        case a.EdgeTranslateAPI:
+            console.log("Using Edge Translate APIs"),
+            Microsoft.JS.config.translatorClient = new Microsoft.JS.AjaxEdgeTranslatorAPIClient("https://edge.microsoft.com/translate/");
+            break;
+        case a.TranslateTestAPI:
+            console.log("Using Translate Test Client"),
+            Microsoft.JS.config.translatorClient = new Microsoft.JS.TranslateTestClient;
+            break;
+        default:
+            console.log("Incorrect translate version passed from CPP !")
+        }
+        var c = null;
+        Microsoft.JS.config.telemetryCreator = function() {
+            return c || (c = new Microsoft.JS.Telemetry.AriaTelemetry("")),
+            c
+        }
+    }(),
+    Microsoft.JS.config.version = "0.91.46.0";
+    (function(a) {
+        a.Microsoft = a.Microsoft || {},
+        Microsoft.Translator = {
+            translationStartTime: 0,
+            requests: [],
+            APIRequests: 0,
+            APIResponses: 0
+        };
+        var b = {};
+        Microsoft.DomTranslator = function c(c, d, e, f, g, h, j, k, l, m, n) {
+            function W(a) {
+                y || (y = DomTranslationUtils.getNoTranslateElements());
+                for (var b = 0; b < y.length; b++)
+                    if (y.item(b).contains(a))
+                        return !0;
+                return !1
+            }
+            function X() {
+                b.from = o.detectedLanguage;
+                var d = k === !0;
+                Microsoft.Translator.requests.length > 0 && (LoggingUtils.logTranslationTelemetry(b.domTranslatorSessionId, b.from, b.to, d),
+                Microsoft.Translator.translationStartTime = performance.now(),
+                Microsoft.Translator.requests = [],
+                Microsoft.Translator.APIRequests = 0,
+                Microsoft.Translator.APIResponses = 0);
+                if (!U)
+                    U = !0;
+                else
+                    return;
+                bQ(1);
+                if (a.translatorOnComplete || document.translatorOnComplete)
+                    try {
+                        (a.translatorOnComplete || document.translatorOnComplete)()
+                    } catch (e) {}
+                if (k && R.length) {
+                    Microsoft.JS.orderByDomOrder(r, R);
+                    var f = r.ownerDocument.createRange();
+                    f.setStartBefore(R[0]),
+                    f.setEndAfter(R[R.length - 1]);
+                    var h = r.ownerDocument.defaultView.getSelection();
+                    h.removeAllRanges(),
+                    h.addRange(f)
+                }
+                !V && !B && typeof m == "function" && (B = !0,
+                m(!0)),
+                !V && typeof g == "function" && g(c)
+            }
+            function bz() {
+                return {
+                    domStack: bb,
+                    properties: bc,
+                    offsetFromStart: bd,
+                    hidden: be,
+                    elements: bf,
+                    created: 0
+                }
+            }
+            function bA() {
+                var a = {
+                    domStack: [],
+                    properties: [],
+                    offsetFromStart: [],
+                    hidden: [],
+                    elements: [],
+                    created: performance.now()
+                };
+                return a.domStack.top = a.properties.top = a.offsetFromStart.top = a.hidden.top = a.elements.top = function() {
+                    return this[this.length - 1]
+                }
+                ,
+                a
+            }
+            function bB() {
+                try {
+                    bs || (bs = !0,
+                    Microsoft.JS.MessageClient && Microsoft.JS.MessageClient.translationStarted());
+                    var a = Microsoft.JS.Notifications && Microsoft.JS.Notifications.getNotificationManager ? Microsoft.JS.Notifications.getNotificationManager() : null;
+                    a && a.completeNotification("translate_prompt")
+                } catch (b) {
+                    Microsoft.JS.MessageClient && Microsoft.JS.MessageClient.error(Microsoft.JS.Telemetry.ErrorLocation.ContentScript, Microsoft.JS.Telemetry.ErrorType.Unknown, "Error in sendTranslationStarted. " + b)
+                }
+            }
+            function bF(a) {
+                return VisibilityUtils.processHiddenNodes(a, function(a, b, c) {
+                    ba += DomUtils.getStringByteCount(c),
+                    bl.push({
+                        "x-mst-element": a,
+                        "x-mst-attribute": b
+                    }),
+                    bm.push(c)
+                }, function(a, b) {
+                    ba += DomUtils.getStringByteCount(b),
+                    bl.push(a),
+                    bm.push(b)
+                }, bn, bo)
+            }
+            function bG(a) {
+                return VisibilityUtils.processHiddenNodes(a, function(a, b, c) {
+                    bg.push({
+                        "x-mst-element": a,
+                        "x-mst-attribute": b
+                    }),
+                    bh.push(c)
+                }, function(a, b) {
+                    bg.push(a),
+                    bh.push(b)
+                }, bn, bo)
+            }
+            function bH(a, b, c) {
+                a.domStack.push(b),
+                a.properties.push({
+                    isRoot: !0,
+                    traverseTerminalOnly: c
+                }),
+                a.offsetFromStart.push(0),
+                a.hidden.push(0),
+                a.elements.push(0),
+                bR([b], "", !0)
+            }
+            function bI(a) {
+                if (IframeUtils.getIframeNodeDepth(a) > P)
+                    return;
+                a.contentWindow.document.body ? bJ(a) : a.contentWindow.onload = function() {
+                    bJ(a)
+                }
+            }
+            function bJ(a) {
+                a.contentWindow.document.readyState == "completed" ? bK(a) : a.contentWindow.document.body.onload = function() {
+                    bK(a)
+                }
+            }
+            function bK(a) {
+                var b = bA();
+                bH(b, a, !1),
+                T || (T = !0,
+                Microsoft.Translator.translationStartTime = performance.now()),
+                setTimeout(bP, E, b, Microsoft.JS.Telemetry.TranslationTrigger.Mutation),
+                bM(a.contentWindow)
+            }
+            function bL(a) {
+                var b = new Map
+                  , c = new Map;
+                M.push(new MutationObserver(function(a) {
+                    var d = !1;
+                    b.clear(),
+                    c.clear(),
+                    a.forEach(function(a) {
+                        switch (a.type) {
+                        case "characterData":
+                            if (bx.has(a.target)) {
+                                var e = bx.get(a.target);
+                                e === 1 ? bx.delete(a.target) : bx.set(a.target, e - 1);
+                                break
+                            }
+                            if (W(a.target))
+                                break;
+                            var f = !0
+                              , g = a.target;
+                            while (DomTranslationUtils.isTerminal(g)) {
+                                if (g.parentNode === null || g.parentNode === undefined) {
+                                    f = !1;
+                                    break
+                                }
+                                g = g.parentNode
+                            }
+                            if (!f) {
+                                d = !0;
+                                var h = a.target.nodeType === 3 ? a.target.nodeValue : a.target.textContent;
+                                bR([a.target], h);
+                                break
+                            }
+                            if (g.nodeType === 1 && g.hasAttribute("_mstHash")) {
+                                if (!g.hasAttribute("_mstTextHash") || g.getAttribute("_mstTextHash") != DomTranslationUtils.hash(g.textContent)) {
+                                    d = !0;
+                                    var h = a.target.nodeType === 3 ? a.target.nodeValue : a.target.textContent;
+                                    bR([a.target], h)
+                                }
+                                break
+                            }
+                            !b.has(g) && !c.has(g) && (d = !0,
+                            b.set(g, 1));
+                            break;
+                        case "attributes":
+                            if (TranslatorConstants.VisibilityAttributes.some(function(b) {
+                                return b === a.attributeName
+                            })) {
+                                if (a.target.getAttribute && a.target.getAttribute(TranslatorConstants.HiddenElementMarker)) {
+                                    var i = VisibilityUtils.isInViewport(a.target)
+                                      , j = 0;
+                                    i & VisibilityUtils.ElementVisibility.insideView ? (j = bF(a.target),
+                                    j === 0 ? console.error("A previously marked hidden chunk became visible but could not be located.") : N = DomUtils.deferTask(function() {
+                                        bY(bA(), Microsoft.JS.Telemetry.TranslationTrigger.VisibilityChange)
+                                    }, O, N)) : i & VisibilityUtils.ElementVisibility.outsideView && (j = bG(a.target),
+                                    j === 0 && console.error("A previously marked hidden chunk became un-hidden but could not be located."))
+                                }
+                                break
+                            }
+                            if (by.has(a.target)) {
+                                var k = by.get(a.target)
+                                  , l = a.attributeName;
+                                if (k.hasOwnProperty(l)) {
+                                    k[l] === 1 ? delete k[l] : k[l] -= 1;
+                                    break
+                                }
+                            }
+                            if (W(a.target))
+                                break;
+                            d = !0,
+                            bR([a.target], "", !0);
+                            break;
+                        case "childList":
+                            for (var m = 0; m < a.addedNodes.length; m++) {
+                                var n = a.addedNodes[m];
+                                if (n.nodeType === 1 && (n.hasAttribute("_isTranslated") || n.hasAttribute("_mstMutation")))
+                                    continue;
+                                if (bw.has(n)) {
+                                    bw.delete(n);
+                                    continue
+                                }
+                                if (bx.has(n)) {
+                                    var e = bx.get(n);
+                                    e === 1 ? bx.delete(n) : bx.set(n, e - 1);
+                                    continue
+                                }
+                                if (W(n))
+                                    continue;
+                                if (!DomTranslationUtils.isTerminal(n)) {
+                                    c.has(n) || n.nodeType === 1 && (!n.hasAttribute("_mstHash") || !n.hasAttribute("_mstTextHash") || n.getAttribute("_mstTextHash") != DomTranslationUtils.hash(n.textContent)) && (d = !0,
+                                    c.set(n, 1),
+                                    b.has(n) && b.delete(n));
+                                    continue
+                                }
+                                if (IframeUtils.isIframeElement(n)) {
+                                    (!n.hasAttribute("_mstHash") || !n.hasAttribute("_mstTextHash") || n.getAttribute("_mstTextHash") != DomTranslationUtils.hash(n.textContent)) && bI(n);
+                                    continue
+                                }
+                                var f = !0
+                                  , g = n;
+                                while (DomTranslationUtils.isTerminal(g)) {
+                                    if (g.parentNode === null || g.parentNode === undefined) {
+                                        f = !1;
+                                        break
+                                    }
+                                    g = g.parentNode
+                                }
+                                if (!f) {
+                                    d = !0;
+                                    var h = n.nodeType === 3 ? n.nodeValue : n.textContent;
+                                    bR([n], h);
+                                    continue
+                                }
+                                if (g.nodeType === 1 && g.hasAttribute("_mstHash")) {
+                                    if (g.nodeName.toLowerCase() === "select")
+                                        continue;
+                                    if (!g.hasAttribute("_mstTextHash") || g.getAttribute("_mstTextHash") != DomTranslationUtils.hash(g.textContent)) {
+                                        d = !0;
+                                        var h = n.nodeType === 3 ? n.nodeValue : n.textContent;
+                                        bR([n], h)
+                                    }
+                                    continue
+                                }
+                                !b.has(g) && !c.has(g) && (d = !0,
+                                b.set(g, 1))
+                            }
+                            break;
+                        default:
+                        }
+                    });
+                    var e = bA();
+                    Array.from(b.keys()).forEach(function(a) {
+                        bH(e, a, !0)
+                    }),
+                    Array.from(c.keys()).forEach(function(a) {
+                        bH(e, a, !1)
+                    }),
+                    d && J.size < D && (d = !1,
+                    T || (T = !0,
+                    Microsoft.Translator.translationStartTime = performance.now()),
+                    setTimeout(bP, E, e, Microsoft.JS.Telemetry.TranslationTrigger.Mutation))
+                }
+                ));
+                var d = ["value", "placeholder", "aria-label"];
+                d = d.concat(TranslatorConstants.VisibilityAttributes),
+                M[M.length - 1].observe(a.body, {
+                    childList: !0,
+                    subtree: !0,
+                    attributes: !0,
+                    characterData: !0,
+                    attributeOldValue: !0,
+                    characterDataOldValue: !0,
+                    attributeFilter: d
+                })
+            }
+            function bM(a) {
+                if ("MutationObserver"in a && !k && !l) {
+                    var b = a.document;
+                    bL(b);
+                    var c = b.querySelectorAll("iframe");
+                    for (var d = 0; d < c.length; d++)
+                        c[d] && IframeUtils.isFrame(c[d]) && bM(c[d].contentWindow)
+                }
+            }
+            function bO(a, b, c, d) {
+                var e = a.domStack
+                  , f = a.properties
+                  , g = a.offsetFromStart
+                  , h = a.hidden
+                  , i = a.elements
+                  , j = function() {
+                    return DomTranslationUtils.getDomPos(e, g)
+                }
+                  , k = 0;
+                while (k < Q && e.length > 0 && (ba < Z || c.length)) {
+                    if (IframeUtils.isFrame(e.top()))
+                        e.push(e.top().contentWindow.document.body),
+                        f.push({
+                            isRoot: !1,
+                            traverseTerminalOnly: f.top().traverseTerminalOnly
+                        }),
+                        g.push(0),
+                        bS(c, d, h, i),
+                        d = null,
+                        h.push(0),
+                        i.push(0);
+                    else if (e.top().firstChild && (f.top().isRoot || !f.top().traverseTerminalOnly) && !DomTranslationUtils.isTerminal(e.top()) && DomTranslationUtils.isTranslatable(e.top())) {
+                        e.push(e.top().firstChild),
+                        f.push({
+                            isRoot: !1,
+                            traverseTerminalOnly: f.top().traverseTerminalOnly
+                        }),
+                        g.push(0),
+                        bS(c, d, h, i),
+                        d = null,
+                        h.push(0),
+                        i.push(0);
+                        if (!DomTranslationUtils.isTerminal(e.top())) {
+                            var l = bR([e.top()], j, !0);
+                            VisibilityUtils.updateHiddenElementCount(l, h, i)
+                        }
+                    } else {
+                        while (e.length && f.top().isRoot !== !0 && !e.top().nextSibling && !e.top().nextElementSibling)
+                            e.pop(),
+                            f.pop(),
+                            g.pop(),
+                            bS(c, d, h, i),
+                            d = null,
+                            VisibilityUtils.updateParentHiddenAttribute(e, h, i);
+                        if (f.top().isRoot === !1) {
+                            e.push(e.pop().nextSibling);
+                            if (!DomTranslationUtils.isTerminal(e.top())) {
+                                var m = bR([e.top()], j, !0);
+                                VisibilityUtils.updateHiddenElementCount(m, h, i)
+                            }
+                        } else
+                            e.pop(),
+                            f.pop(),
+                            g.pop(),
+                            bS(c, d, h, i),
+                            d = null,
+                            VisibilityUtils.updateParentHiddenAttribute(e, h, i)
+                    }
+                    if (e.length) {
+                        var n = (e.top().nodeName || "").toLowerCase();
+                        DomTranslationUtils.isTerminal(e.top()) && !TranslatorConstants.UntranslatableElements[n] && n != "iframe" && n != "frame" && (d || (d = j()),
+                        ++g[g.length - 1],
+                        c.push(e.top()))
+                    }
+                    if (c.length === 0 && IframeUtils.isIframeElement(e.top())) {
+                        setTimeout(bO, 4, a, b, c, d);
+                        if (!bu)
+                            return;
+                        break
+                    }
+                    e = a.domStack,
+                    f = a.properties,
+                    g = a.offsetFromStart,
+                    h = a.hidden,
+                    i = a.elements,
+                    k++
+                }
+                if (k == Q) {
+                    bO(a, b, c, d);
+                    return
+                }
+                var o = 0;
+                while ((ba < Z || bu) && o < bg.length && o < bh.length) {
+                    var p = bg[o].hasOwnProperty("x-mst-attribute") ? bg[o]["x-mst-element"] : bg[o];
+                    VisibilityUtils.isInViewport(p) === VisibilityUtils.ElementVisibility.insideView ? (ba += DomUtils.getStringByteCount(bh[o]),
+                    bl = bl.concat(bg.splice(o, 1)),
+                    bm = bm.concat(bh.splice(o, 1))) : o++
+                }
+                if (bm.length > 0 || bv || bu || K.length > 0)
+                    bv = !1,
+                    bu = !1,
+                    bY(a, b);
+                else {
+                    C = C || b === Microsoft.JS.Telemetry.TranslationTrigger.Auto && e.length === 0;
+                    if (J.size > 0 || K.length > 0)
+                        return;
+                    T = !1,
+                    C && X()
+                }
+            }
+            function bP(a, b) {
+                try {
+                    var c = []
+                      , d = null;
+                    DomTranslationUtils.isTerminal(r) && !S && (S = !0,
+                    bR([r], "start.terminal.node")),
+                    setTimeout(bO, 2, a, b, c, d)
+                } catch (e) {
+                    Microsoft.JS.MessageClient && Microsoft.JS.MessageClient.error(Microsoft.JS.Telemetry.ErrorLocation.ContentScript, Microsoft.JS.Telemetry.ErrorType.Unknown, "Error in traverseDOM. " + e)
+                }
+            }
+            function bQ(a) {
+                L || (r.getElementsByTagName ? L = r.getElementsByTagName("img") : r.documentElement.getElementsByTagName ? L = r.documentElement.getElementsByTagName("img") : r.ownerDocument.documentElement.getElementsByTagName && (L = r.ownerDocument.documentElement.getElementsByTagName("img")));
+                var b;
+                if (L && L.length > 0)
+                    var c = 0;
+                for (var d = 0; d < L.length && c < Math.max(1, L.length * a); d++)
+                    b = L[d],
+                    b.getAttribute("_mssrc") && (b.src = b.getAttribute("_mssrc"),
+                    b.removeAttribute("_mssrc"),
+                    c++)
+            }
+            function bR(a, b, c) {
+                var d = VisibilityUtils.ElementVisibility.unknown
+                  , e = typeof b == "string" ? b : null;
+                for (var f = 0; f < a.length; f++) {
+                    var g = DomTranslationUtils.checkForTranslatableAttributes(a[f])
+                      , h = null;
+                    if (g.length > 0) {
+                        d = VisibilityUtils.isInViewport(a[f]);
+                        if (d & VisibilityUtils.ElementVisibility.hidden) {
+                            var i = null
+                              , j = null;
+                            if (typeof b == "function") {
+                                var m = b();
+                                m && (i = "a" + f + m)
+                            } else
+                                typeof b == "string" && b && (i = "a" + f + b);
+                            h = {
+                                element: a[f],
+                                attributes: []
+                            },
+                            i && (j = DomTranslationUtils.generateUniqueHash(i, bo, h)),
+                            a[f].setAttribute(TranslatorConstants.HiddenElementMarker, "A"),
+                            a[f].setAttribute(TranslatorConstants.HiddenAttributeMarker, j)
+                        }
+                    }
+                    for (var n = 0; n < g.length; n++) {
+                        var p = DomTranslationUtils.normalizeText(a[f].getAttribute(g[n]))
+                          , q = DomTranslationUtils.hash(p)
+                          , r = "_mst" + g[n];
+                        if (a[f].hasAttribute(r) && a[f].getAttribute(r) == q)
+                            continue;
+                        a[f].setAttribute(r, q);
+                        var s = DomUtils.getStringByteCount(p);
+                        h ? h.attributes.push({
+                            attribute: g[n],
+                            text: p
+                        }) : d & VisibilityUtils.ElementVisibility.outsideView || d & VisibilityUtils.ElementVisibility.unknown ? (bg.push({
+                            "x-mst-element": a[f],
+                            "x-mst-attribute": g[n]
+                        }),
+                        bh.push(p)) : (ba += s,
+                        bl.push({
+                            "x-mst-element": a[f],
+                            "x-mst-attribute": g[n]
+                        }),
+                        bm.push(p)),
+                        bv = !0
+                    }
+                }
+                if (c)
+                    return d;
+                if (a[0] && a[0].parentNode && a[0].parentNode.nodeType === 1 && a[0].parentNode.hasAttribute("_mstTextHash") && a[0].parentNode.getAttribute("_mstTextHash") == DomTranslationUtils.hash(a[0].parentNode.textContent)) {
+                    while (a.length > 0)
+                        a.pop();
+                    return d
+                }
+                bU(a);
+                if (a.length === 0)
+                    return d;
+                var t = bT(a)
+                  , u = t.textContent
+                  , v = DomTranslationUtils.hash(u);
+                if (t.hasAttribute("_mstTextHash") && t.getAttribute("_mstTextHash") == v)
+                    return d;
+                var w = null;
+                if (t && DomTranslationUtils.isTranslatable(t)) {
+                    t.hasAttribute("_mstHash") ? w = t.getAttribute("_mstHash") : (w = DomTranslationUtils.generateUniqueHash(e, o, t),
+                    t.setAttribute("_mstHash", w));
+                    var x = DomTranslationUtils.normalizeElement(t, "b");
+                    if (DomTranslationUtils.isTranslatableText(x)) {
+                        var y = DomUtils.getStringByteCount(x);
+                        String.isNullOrWhiteSpace(u) || t.setAttribute("_mstTextHash", v),
+                        d = VisibilityUtils.isInViewport(t),
+                        k || l || d & VisibilityUtils.ElementVisibility.insideView ? (ba += y,
+                        bl.push(t),
+                        bm.push(x)) : d & VisibilityUtils.ElementVisibility.hidden ? (t.setAttribute(TranslatorConstants.HiddenElementMarker, "1"),
+                        bn[w] = {
+                            element: t,
+                            stringValue: x
+                        }) : (bg.push(t),
+                        bh.push(x)),
+                        bv = !0,
+                        k && R.push(t)
+                    }
+                }
+                return d
+            }
+            function bS(a, b, c, d) {
+                if (a.length)
+                    try {
+                        var e = bR(a, b);
+                        VisibilityUtils.updateHiddenElementCount(e, c, d)
+                    } catch (f) {}
+            }
+            function bT(a) {
+                var b = null;
+                if (a.length > 0)
+                    if (a.length == 1 && a[0].nodeType == 1)
+                        b = a.pop();
+                    else if (a[0].parentNode && a.length == a[0].parentNode.childNodes.length) {
+                        b = a.pop().parentNode;
+                        while (a.length > 0)
+                            a.pop()
+                    } else {
+                        b = a[0].ownerDocument.createElement("font"),
+                        b.setAttribute("_mstMutation", 1),
+                        b._mstChunk = !0,
+                        a[0].parentNode && a[0].parentNode.insertBefore(b, a[0]);
+                        while (a.length > 0)
+                            a[0].nodeType === 1 && a[0].setAttribute("_mstMutation", 1),
+                            a[0].nodeType === 3 && bw.set(a[0], 1),
+                            b.appendChild(a.shift())
+                    }
+                return b
+            }
+            function bU(a) {
+                if (a[0] && a[0].parentNode && a[0].parentNode.nodeName && a[0].parentNode.nodeName.toLowerCase() === "select") {
+                    var b = a[0].parentNode;
+                    while (a.length)
+                        a.shift();
+                    a.push(b);
+                    return
+                }
+                var c = !0;
+                while (c) {
+                    c = !1;
+                    if (a.length == 1 && !DomTranslationUtils.isTranslatable(a[0]))
+                        return;
+                    if (a.length == 1 && a[0].nodeType == 1 && a[0].childNodes.length > 0) {
+                        var d = a.pop();
+                        for (var e = 0; e < d.childNodes.length; e++)
+                            a.push(d.childNodes[e]);
+                        c = !0
+                    }
+                    a.length > 0 && (bV(a[0]) ? (a.shift(),
+                    c = !0) : bV(a[a.length - 1]) && (a.pop(),
+                    c = !0))
+                }
+                a.length == 1 && bV(a[0]) && a.pop()
+            }
+            function bV(a) {
+                if (k) {
+                    if (a.nodeType === 3 && !r.ownerDocument.defaultView.getSelection().containsNode(a, !1))
+                        return !0;
+                    if (a.nodeType === 1 && !r.ownerDocument.defaultView.getSelection().containsNode(a, !0))
+                        return !0
+                }
+                var b = "";
+                switch (a.nodeType) {
+                case 1:
+                    b = a.textContent || "";
+                    break;
+                case 3:
+                    b = a.nodeValue || "";
+                    break;
+                default:
+                    return !0
+                }
+                return !DomTranslationUtils.isTranslatableText(b)
+            }
+            function bW(a, b, c, d) {
+                if (!a || !b || typeof c != "string" || typeof d != "number")
+                    return;
+                if (d > 9)
+                    throw new Error("Element too deep");
+                var f = 0
+                  , g = []
+                  , h = [];
+                for (var i = 0; i < a.childNodes.length; i++) {
+                    var j = a.childNodes[i];
+                    j.nodeType === 1 ? g.push(j) : j.nodeType === 3 && h.push(j)
+                }
+                for (var l = 0; l < b.childNodes.length; l++) {
+                    var m = b.childNodes[l]
+                      , n = null;
+                    if (m.nodeType === 3) {
+                        if (h.length > 0) {
+                            n = h.shift();
+                            var p = bx.has(n) ? bx.get(n) + 1 : 1;
+                            bx.set(n, p),
+                            n.nodeValue = m.nodeValue
+                        } else
+                            n = document.createTextNode(m.nodeValue);
+                        if (k && o.detectedLanguage && Microsoft.JS.TextLanguage.isRtl(o.detectedanguage) !== Microsoft.JS.TextLanguage.isRtl(e)) {
+                            var q = Microsoft.JS.TextLanguage.isRtl(e) ? String.fromCodePoint(8207) : String.fromCodePoint(8206);
+                            n.nodeValue = q + n.nodeValue + q
+                        }
+                    } else if (m.nodeType === 1) {
+                        var r = m.nodeName;
+                        if (r.length < c.length + 2 || r.substring(0, c.length) !== c)
+                            Logger.error("Encountered an unexpected node in the returned translated HTML. Expected " + c + d + "X but got " + r);
+                        else {
+                            var s = c.length
+                              , t = parseInt(r.substring(s, s + 1))
+                              , u = parseInt(r.substring(s + 1));
+                            t !== d ? Logger.error("Encountered a node at the wrong level. Expected level " + d + " but got " + r) : u >= 0 && u < g.length ? (n = g[u],
+                            n.hasAttribute("_isTranslated") || n.setAttribute("_isTranslated", 1),
+                            bW(n, m, c, d + 1)) : Logger.error("Encountered a node at with an invalid element index. There are " + g.length + " nodes at level " + d + " but got " + r)
+                        }
+                    }
+                    if (n) {
+                        if (a.childNodes[f] !== n) {
+                            if (n.nodeType === 3) {
+                                var p = bx.has(n) ? bx.get(n) + 1 : 1;
+                                bx.set(n, p)
+                            }
+                            a.insertBefore(n, a.childNodes[f])
+                        }
+                        f++
+                    }
+                }
+                while (f < a.childNodes.length)
+                    a.removeChild(a.lastChild)
+            }
+            function bX(a, b, c) {
+                if (!a || !a.childNodes || typeof b != "string" || b.length === 0 || typeof c != "string" || c.length === 0)
+                    return;
+                c = c.toUpperCase();
+                var d = document.createElement("div");
+                d.innerHTML = DomTranslationUtils.sanitizeHtml(b),
+                bW(a, d, c, 1)
+            }
+            function bY(b, c) {
+                var d = []
+                  , e = []
+                  , f = 0;
+                bB();
+                if (K.length > 0 && !bq) {
+                    bq = !0;
+                    if (K.length !== 0) {
+                        var g = K.shift();
+                        bj = g.txt,
+                        f = g.length,
+                        bi = g.dom,
+                        bk = c;
+                        var h = bj[0]
+                          , i = Math.floor(h.length * Z / f);
+                        bj = [h.substr(0, i), h];
+                        while (DomUtils.getStringByteCount(bj[0]) > Z && i > 400)
+                            i = Math.floor(i / 2),
+                            bj = [h.substr(0, i), h];
+                        Y = {
+                            aTxt: [],
+                            aSrcSnt: [],
+                            aTgtSnt: []
+                        },
+                        bE = performance.now(),
+                        Microsoft.JS.config.translatorClient.translateAsync(p, q, [bj[0]], null, s, null, n).then(function(a) {
+                            bZ(b, a)
+                        }, function(a, c) {
+                            cb(b, a, c)
+                        }),
+                        a.Microsoft.Translator.APIRequests++;
+                        return
+                    }
+                }
+                var j = DomUtils.getStringByteCount(bm[0]);
+                do {
+                    if (bm.length === 0)
+                        break;
+                    ba -= j;
+                    if (bt.hasOwnProperty(bm[0])) {
+                        var k = bl.shift()
+                          , l = bm.shift();
+                        cc(k, l, bt[l])
+                    } else
+                        bt.hasOwnProperty(bm[0].replace(/\d+/g, "##")) ? (bl.shift(),
+                        bm.shift()) : (f += j,
+                        d.push(bl.shift()),
+                        e.push(bm.shift()));
+                    j = bm.length > 0 ? DomUtils.getStringByteCount(bm[0]) : 0
+                } while (bl.length > 0 && f < Z && f + j + (e.length + 1) * DomUtils.getStringByteCount('"",') <= $ && e.length < _);
+                f > $ ? (K.push({
+                    dom: d,
+                    txt: e,
+                    length: f
+                }),
+                bP(b, c)) : f > 0 ? (H[w] = function(a) {
+                    return function(c) {
+                        b_(b, c, a)
+                    }
+                }(w),
+                I[w] = function(a) {
+                    return function(c) {
+                        cb(b, c, a)
+                    }
+                }(w),
+                J[w] = {
+                    Dom: d,
+                    Txt: e,
+                    Trigger: c
+                },
+                J.size++,
+                bD[w] = performance.now(),
+                Microsoft.JS.config.translatorClient.translateAsync(p, q, e, null, s, null, n).then(H[w], I[w]),
+                w++,
+                a.Microsoft.Translator.APIRequests++,
+                ca(),
+                J.size < D && setTimeout(bP, E, b, c)) : J.size < D && setTimeout(bP, E, b, c)
+            }
+            function bZ(a, b) {
+                if (bp)
+                    return;
+                if (!bq)
+                    return;
+                bq = !1,
+                bB(),
+                b$(b);
+                var c = b[0].TranslatedText
+                  , d = b[0].OriginalTextSentenceLengths
+                  , e = b[0].TranslatedTextSentenceLengths
+                  , f = 0
+                  , g = 0;
+                if (!(c && d && e)) {
+                    bq = !0,
+                    cb(a, b[0].Error);
+                    return
+                }
+                var h = bk;
+                DomTranslationUtils.trackTranslateCall(h, bE, [bj[0]]);
+                for (var i = 0; i < (bj.length > 1 ? Math.max(d.length - 2, 1) : d.length); ++i)
+                    Y.aTxt.push(c.substr(g, e[i])),
+                    Y.aSrcSnt.push(d[i]),
+                    Y.aTgtSnt.push(e[i]),
+                    f += d[i],
+                    g += e[i];
+                if (bj.length > 1)
+                    if (d.length < 1)
+                        bP(a, h);
+                    else {
+                        var j = bj[1].substr(f)
+                          , l = DomUtils.getStringByteCount(j)
+                          , m = Math.floor(j.length * Z / l);
+                        bj = m > Z ? [j.substr(0, m), j] : [j];
+                        while (DomUtils.getStringByteCount(bj[0]) > Z && m > 400)
+                            m = Math.floor(m / 2),
+                            bj = [j.substr(0, m), j];
+                        if (bq)
+                            return;
+                        bq = !0,
+                        Microsoft.JS.config.translatorClient.translateAsync(p, q, [bj[0]], null, s, null, n).then(function(b) {
+                            bZ(a, b)
+                        }, function(b, c) {
+                            cb(a, b, c)
+                        })
+                    }
+                else {
+                    var o = bi.shift();
+                    DomTranslationUtils.ApplyStyle(o, k, v);
+                    try {
+                        cc(o, DomTranslationUtils.normalizeElement(o, "b"), Y.aTxt.join(""), Y.aSrcSnt, Y.aTgtSnt)
+                    } catch (r) {}
+                    J.size < D && setTimeout(bP, E, a, h)
+                }
+            }
+            function b$(a) {
+                if (typeOf(a) !== "array")
+                    return;
+                for (var b = 0; b < a.length; b++)
+                    if (!String.isNullOrWhiteSpace(a[b].From)) {
+                        var c = a[b].From.toLowerCase();
+                        bC[c] = (bC[c] || 0) + 1;
+                        if (String.isNullOrWhiteSpace(o.detectedLanguage) || bC[c] > bC[o.detectedLanguage])
+                            o.detectedLanguage = c
+                    }
+            }
+            function b_(a, b, d) {
+                if (bp)
+                    return;
+                if (J[d] && b.length !== J[d].Dom.length) {
+                    cb(a, "Inconsistent Data", d);
+                    return
+                }
+                try {
+                    var e = J[d] && J[d].Txt ? J[d].Txt : null
+                      , f = J[d] && typeof J[d].Trigger == "number" ? J[d].Trigger : null;
+                    DomTranslationUtils.trackTranslateCall(f, bD[d], e),
+                    b$(b);
+                    if (v)
+                        for (var g = 0; g < J[d].Dom.length; g++)
+                            DomTranslationUtils.ApplyStyle(J[d].Dom[g], k, v);
+                    var h = "";
+                    for (var i = J[d].Dom.shift(), j = J[d].Txt.shift(), n = b.shift(); i && n; i = J[d].Dom.shift(),
+                    j = J[d].Txt.shift(),
+                    n = b.shift()) {
+                        n.Alignment && (h.length != 0 && (h += "|"),
+                        h += n.Alignment);
+                        try {
+                            cc(i, j, n.TranslatedText, n.OriginalTextSentenceLengths, n.TranslatedTextSentenceLengths)
+                        } catch (o) {}
+                        !B && !l && typeof m == "function" && (VisibilityUtils.isScrolledContent(i) ? z++ : z > 0 && A++,
+                        A > 0 && (B = !0,
+                        m(!1)))
+                    }
+                    h.length != 0 && c.setAttribute("mstAlign", h),
+                    delete J[d],
+                    J.size--,
+                    J.size < D && setTimeout(bP, E, a, f)
+                } catch (p) {
+                    Microsoft.JS.MessageClient && Microsoft.JS.MessageClient.error(Microsoft.JS.Telemetry.ErrorLocation.ContentScript, Microsoft.JS.Telemetry.ErrorType.Unknown, "Error in translateComplete. " + p)
+                }
+            }
+            function ca() {
+                w > G ? D = 2 : D > 3 && w % F == 0 && (D -= parseInt(D / 3),
+                E += 10,
+                bQ(.1))
+            }
+            function cb(a, b, c) {
+                var d, e, f, g = Microsoft.JS.Telemetry.ErrorType.Unknown, h = undefined;
+                !br && b && b.isHttpError && (br = !0,
+                Microsoft.JS.MessageClient && Microsoft.JS.MessageClient.translationError(b.status, b.details.responseText)),
+                typeof c == "number" ? (d = bD[c],
+                e = J[c] && J[c].Txt ? J[c].Txt : null,
+                f = J[c] && J[c].Trigger ? J[c].Trigger : null,
+                delete J[c],
+                J.size--) : (d = bE,
+                e = [bj[0]]),
+                b instanceof Microsoft.JS.HttpError ? (h = b.message,
+                b.status === -1 ? g = Microsoft.JS.Telemetry.ErrorType.TimedOut : b.isBadRequest ? g = Microsoft.JS.Telemetry.ErrorType.BadRequest : b.isServiceUnavailable ? g = Microsoft.JS.Telemetry.ErrorType.ServiceUnavailable : b.isServerError ? g = Microsoft.JS.Telemetry.ErrorType.ServiceError : b.status === 0 && (g = Microsoft.JS.Telemetry.ErrorType.CouldNotSendRequest)) : b && typeof b.toString == "function" && (h = b.toString());
+                try {
+                    DomTranslationUtils.trackTranslateCall(f, d, e, g, h);
+                    if (V)
+                        return;
+                    if (bp)
+                        return;
+                    t && t(b);
+                    var i = Microsoft.JS.Notifications && Microsoft.JS.Notifications.getNotificationManager ? Microsoft.JS.Notifications.getNotificationManager() : null;
+                    i && i.invokeNotificationError("translation_progress"),
+                    V = !0
+                } catch (j) {
+                    Microsoft.JS.MessageClient && Microsoft.JS.MessageClient.error(Microsoft.JS.Telemetry.ErrorLocation.ContentScript, Microsoft.JS.Telemetry.ErrorType.Unknown, "Error in translateError. " + j)
+                }
+                !U && !B && bN()
+            }
+            var o = this, p = d, q = e, r = c, s = j, t = function(a) {
+                if (typeof h == "function")
+                    try {
+                        h(Microsoft.JS.serialize(a))
+                    } catch (b) {
+                        Logger.error("Encountered exception while calling error handler", b)
+                    }
+            }, u = new Microsoft.JS.CancellationTokenSource, v;
+            k = k === !0,
+            l = l === !0;
+            var w = 0, x, y = null, z = 0, A = 0, B = !1, C = !1, D = 4, E = 0, F = 10, G = 33;
+            s *= D;
+            var H = []
+              , I = []
+              , J = {};
+            J.size = 0;
+            var K = [], L, M = [], N = null, O = 5, P = 10, Q = 1e4;
+            b.domTranslatorSessionId = f,
+            b.from = d,
+            b.to = e;
+            var R = []
+              , S = !1
+              , T = !1
+              , U = !1
+              , V = !1;
+            if (r.nodeType !== 1)
+                throw new Error("Invalid input type");
+            if (d === e)
+                return X(),
+                this;
+            if (!r.hasChildNodes())
+                return X(),
+                this;
+            var Y, Z = 3500, $ = 4e3;
+            const _ = 100;
+            var ba = 0
+              , bb = [r]
+              , bc = [{
+                isRoot: !0,
+                traverseTerminalOnly: !1
+            }]
+              , bd = [0]
+              , be = [0]
+              , bf = [0]
+              , bg = []
+              , bh = []
+              , bi = []
+              , bj = []
+              , bk = Microsoft.JS.Telemetry.TranslationTrigger.Auto
+              , bl = []
+              , bm = []
+              , bn = {}
+              , bo = {}
+              , bp = !1
+              , bq = !1
+              , br = !1
+              , bs = !1
+              , bt = {}
+              , bu = !1
+              , bv = !1
+              , bw = new Map
+              , bx = new Map
+              , by = new Map;
+            this.showTooltips = !0,
+            this.showHighlight = !0,
+            this.detectedLanguage,
+            this.transItems = [];
+            var bC = {}
+              , bD = []
+              , bE = 0;
+            !k && !l && (x = DomUtils.scrollStop(function() {
+                J.size < D && (bu = !0,
+                T || (T = !0,
+                Microsoft.Translator.translationStartTime = performance.now()),
+                setTimeout(bP, E, bA(), Microsoft.JS.Telemetry.TranslationTrigger.Scrolled))
+            }) || x),
+            bM(a);
+            var bN = this.cancel = function() {
+                var b = performance.now();
+                for (i = 0; i < M.length; i++)
+                    M[i].disconnect();
+                typeof x == "function" && DomUtils.removeEvent(a, "scroll", x);
+                if (!r)
+                    return;
+                bp = !0,
+                u.cancel(),
+                function() {
+                    var a = document.querySelector("head > title");
+                    a && DomTranslationUtils.untranslate(a)
+                }(),
+                k ? DomTranslationUtils.untranslate(document.body) : DomTranslationUtils.untranslate(r),
+                r = null,
+                console.log("Took " + (performance.now() - b) + " ms to untranslate.")
+            }
+            ;
+            this.exit = function() {
+                bN()
+            }
+            ,
+            bb.top = bc.top = bd.top = be.top = bf.top = function() {
+                return this[this.length - 1]
+            }
+            ,
+            v = DomTranslationUtils.getStylesToApply(p, q);
+            var cc = this.translateElement = function(a, b, c, d, e) {
+                DomUtils.getStringByteCount(b) < 60 && (bt[b] = c,
+                bt[b.replace(/\d+/g, "##")] = c);
+                if (b === c)
+                    return;
+                if (a.hasOwnProperty("x-mst-attribute")) {
+                    var f = a["x-mst-element"]
+                      , g = a["x-mst-attribute"];
+                    f._mstSrcAttribute === undefined && (f._mstSrcAttribute = {}),
+                    f._mstSrcAttribute[g] = f.getAttribute(g)
+                }
+                if (a.hasOwnProperty("x-mst-attribute")) {
+                    var h = a["x-mst-element"]
+                      , i = a["x-mst-attribute"];
+                    if (by.has(h)) {
+                        var j = by.get(h);
+                        j.hasOwnProperty(i) ? j[i] += 1 : j[i] = 1
+                    } else {
+                        var k = {};
+                        k[i] = 1,
+                        by.set(h, k)
+                    }
+                    var l = DomTranslationUtils.hash(c)
+                      , m = "_mst" + i;
+                    String.isNullOrWhiteSpace(c) || a["x-mst-element"].setAttribute(m, l),
+                    a["x-mst-element"].setAttribute(a["x-mst-attribute"], DomTranslationUtils.denormalizeText(c));
+                    return
+                }
+                a._mstSrcHtml = a.cloneNode(!0);
+                if (a.nodeName.toLowerCase() == "option") {
+                    bX(a, c, "b", null, null);
+                    return
+                }
+                var n, o = a.getAttribute("_mstHash");
+                n = a,
+                a = n.cloneNode(!0);
+                var p = d ? d.slice(0) : []
+                  , q = e ? e.slice(0) : []
+                  , r = [[]]
+                  , s = [[]];
+                try {
+                    bX(n, c, "b", q, s);
+                    var t = n.textContent;
+                    String.isNullOrWhiteSpace(t) || n.setAttribute("_mstTextHash", DomTranslationUtils.hash(t))
+                } catch (u) {}
+            }
+            ;
+            return k || function() {
+                var a = document.querySelector("head > title");
+                a && bR([a], "head.title")
+            }(),
+            T = !0,
+            setTimeout(bP, 0, bz(), Microsoft.JS.Telemetry.TranslationTrigger.Auto),
+            this
+        }
+        ,
+        Microsoft.onTranslationComplete = function() {
+            var a = Microsoft.JS.Notifications && Microsoft.JS.Notifications.getNotificationManager ? Microsoft.JS.Notifications.getNotificationManager() : null;
+            a && a.completeNotification("translation_progress")
+        }
+    }
+    )(window);
+} catch (error) {
+    cr.googleTranslate.onTranslateElementError(error);
+}
+;
