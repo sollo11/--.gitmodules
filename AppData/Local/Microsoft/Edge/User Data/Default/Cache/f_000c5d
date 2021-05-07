@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="google-site-verification"
+      content="j-mH2xoHnxrJhQIEUgIH7V8b23Z4TUC1eIYOPx0QTC8"
+    />
+    <title data-preact-helmet>Google I/O &#x27;21</title>
+    <meta data-preact-helmet name="description" content="Google I/O returns virtually May 18-20."><meta data-preact-helmet name="og:title" content="Google I/O &#x27;21"><meta data-preact-helmet name="og:description" content="Google I/O returns virtually May 18-20."><meta data-preact-helmet name="og:url" content="https://events.google.com/io/"><meta data-preact-helmet name="og:site_name" content="Google I/O &#x27;21">
+    <meta property="og:type" content="Event" />
+    <meta
+      property="og:image"
+      content="https://storage.googleapis.com/io-2021.appspot.com/assets/io_social_asset.png"
+    />
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/io/assets/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/io/assets/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/io/assets/icons/favicon-16x16.png"
+    />
+    <link
+      rel="mask-icon"
+      href="/io/assets/icons/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <link
+      rel="shortcut icon"
+      href="/io/assets/icons/favicon.ico"
+    />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/io/assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link
+      crossorigin="anonymous"
+      href="https://fonts.googleapis.com/icon?family=Google+Sans:400,500|Google+Sans+Display:400|Roboto:400,500|Roboto+Mono:400"
+      rel="stylesheet"
+    />
+    <!-- End Favicons -->
+    <link
+      rel="manifest"
+      crossorigin="use-credentials"
+      href="/io/assets/manifest.json"
+    />
+                        
+  <link href="/io/main.c5ec2.css" rel="stylesheet"></head>
+  <body>
+    <div id="app" class="marketingLayout__qGN2c"><div><div class="header__2zieC" id="app-header"><div class="headerContent__2cwGd"><div class="navContent__1cn90 navContentDefault__1U3AK" tabIndex="0"><nav class="navContentLeft__3NsVq"><a class="button__KMwXw buttonFill__8D3XL skipToContent__2O4FX" href="#app-wrapper"><span>Skip To Page Content</span></a><div class="navLogo__5ARf7"><span><a href="/io/?lng=undefined" class="navFocusStyle__31zKl" aria-label="Home" native="false"><span tabIndex="-1" class="innerSpan__3CYI7"><svg width="190" height="44" viewBox="0 0 190 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo__3dyGg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.10352e-05 20.0242C6.10352e-05 11.7865 6.9095 5.07811 15.1621 5.07811C18.9918 5.01523 22.685 6.49931 25.4069 9.19558L22.5126 12.077C20.5415 10.1753 17.9005 9.12752 15.1621 9.16138C9.15184 9.16138 4.45366 14.0019 4.45366 20.0242C4.45366 26.0465 9.14355 30.8843 15.1621 30.8843C19.0609 30.8843 21.2808 29.318 22.7033 27.8943C23.8703 26.7267 24.6327 25.0471 24.926 22.7692H15.1621V18.6749H28.896C29.0514 19.5198 29.1246 20.3779 29.1146 21.2374C29.1146 24.2982 28.2783 28.0881 25.5806 30.7872C22.951 33.5094 19.5987 34.953 15.1621 34.953C6.9095 34.953 6.10352e-05 28.2619 6.10352e-05 20.0242Z" fill="#121215"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M40.2047 15.7219C34.8861 15.7219 30.552 19.7678 30.552 25.3431C30.552 30.9184 34.8861 34.953 40.2047 34.953C45.5233 34.953 49.8577 30.8701 49.8577 25.3317C49.8577 19.7934 45.5233 15.7219 40.2047 15.7219ZM40.2047 31.1744C37.2904 31.1744 34.7779 28.7687 34.7779 25.3431C34.7779 21.918 37.2904 19.5115 40.2047 19.5115C43.1189 19.5115 45.6314 21.8806 45.6314 25.3431C45.6314 28.8053 43.1189 31.1772 40.2047 31.1772V31.1744Z" fill="#121215"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M61.2634 15.7219C55.9448 15.7219 51.6104 19.7678 51.6104 25.3431C51.6104 30.9184 55.9448 34.953 61.2634 34.953C66.5821 34.953 70.9161 30.8701 70.9161 25.3317C70.9161 19.7934 66.5821 15.7219 61.2634 15.7219ZM61.2634 31.1744C58.3492 31.1744 55.8367 28.7687 55.8367 25.3431C55.8367 21.918 58.3492 19.5115 61.2634 19.5115C64.1777 19.5115 66.6902 21.8806 66.6902 25.3431C66.6902 28.8053 64.1777 31.1772 61.2634 31.1772V31.1744Z" fill="#121215"></path><mask id="1619527862063-4281741311" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="190" height="44"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 43.6091H189.919V0H0V43.6091Z" fill="white"></path></mask><g mask="url(#1619527862063-4281741311)"><path fill-rule="evenodd" clip-rule="evenodd" d="M94.032 34.3834H98.258V6.10039H94.032V34.3834Z" fill="#121215"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M94.032 34.3834H98.258V6.10039H94.032V34.3834Z" fill="#121215"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M109.844 31.1773C107.695 31.1773 106.164 30.192 105.182 28.262L118.042 22.9399L117.609 21.8552C116.807 19.7051 114.368 15.733 109.376 15.733C104.385 15.733 100.307 19.6339 100.307 25.3546C100.307 30.7475 104.388 34.9759 109.852 34.9759C113.071 34.9925 116.083 33.3871 117.866 30.7047L114.587 28.518C113.486 30.1126 111.992 31.1773 109.844 31.1773ZM109.516 19.4405C111.192 19.4405 112.612 20.2775 113.085 21.4821L104.488 25.0527C104.377 21.3339 107.365 19.4405 109.513 19.4405H109.516Z" fill="#121215"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M87.1114 16.3055V17.8687H86.9663C86.0184 16.7297 84.1972 15.7189 81.9037 15.7189C77.0943 15.7189 72.6863 19.9473 72.6863 25.3775C72.6863 30.8074 77.0943 34.9528 81.9037 34.9528C84.1972 34.9528 86.0184 33.9334 86.9663 32.7661H87.1114V34.15C87.1114 37.8318 85.1451 39.7992 81.989 39.7992C79.4023 39.7992 77.8 37.94 77.1513 36.3823L73.4718 37.9144C74.8889 41.3783 78.2681 43.6324 82.0087 43.6089C86.9632 43.6089 91.1526 40.6936 91.1526 33.5862V16.3055H87.1114ZM82.2737 31.1773C79.3598 31.1773 76.9178 28.7346 76.9178 25.3827C76.9178 22.0314 79.3598 19.5145 82.2737 19.5145C85.1879 19.5145 87.3957 21.9917 87.3957 25.3827C87.3957 28.774 85.1451 31.1773 82.2678 31.1773H82.2737Z" fill="#121215"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M131.332 34.4653H145.858V5.41362H131.332V34.4653Z" fill="#4285F4"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M174.909 4.92946C166.619 4.92946 159.899 11.6496 159.899 19.9391C159.899 28.229 166.619 34.9491 174.909 34.9491C183.199 34.9491 189.919 28.229 189.919 19.9391C189.919 11.6496 183.199 4.92946 174.909 4.92946Z" fill="#4285F4"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M150.628 40.7653L148.572 40.3186L157.337 -7.62939e-05L159.393 0.446251L150.628 40.7653Z" fill="#121215"></path></g></svg></span></a></span></div><div class="navInnerContent__1dPQu"><ul class="navList__3hlfa"></ul><div class="navList__3hlfa navListButton__30wzJ"><div class="MuiInputBase-root MuiInput-root MuiInput-underline LocalizationClass-select-8"><div tabIndex="0" role="button" aria-haspopup="listbox" class="MuiSelect-root LocalizationClass-input-9 MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input">English</div><input value="en" aria-hidden tabIndex="-1" class="MuiSelect-nativeInput" /><svg focusable="false" viewBox="0 0 24 24" aria-hidden class="MuiSvgIcon-root MuiSelect-icon LocalizationClass-icon-5"><path d="M7 10l5 5 5-5z"></path></svg></div></div></div></nav></div></div></div><div class="loading__26d4F"><div style="width: 60px; height: 60px;" role="progressbar" class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"><svg viewBox="22 22 44 44" class="MuiCircularProgress-svg"><circle cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"></circle></svg></div></div></div><div style="display: none;"></div><main tabIndex="-1" id="app-wrapper" class="appWrapper homepageLayout__1i8pL"><div class="home__108pG page"></div></main><footer class="footerWrapper__1HZ-9"><div class="max-width footer__35eRw"><div class="footerLogo__1-3E_"><a class="focusStyle__aCHnr" href="https://www.google.com/" target="_blank" rel="noopener noreferrer" aria-label="Google homepage"><svg aria-hidden="true" width="158" height="52" viewBox="0 -1 158 52" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60.767 26.69c0-4.56-3.312-7.681-7.152-7.681-3.84 0-7.153 3.12-7.153 7.68 0 4.514 3.313 7.682 7.153 7.682 3.84 0 7.152-3.168 7.152-7.681zm5.569 0c0 7.297-5.713 12.673-12.721 12.673-7.01 0-12.721-5.376-12.721-12.673 0-7.344 5.712-12.673 12.72-12.673 7.009 0 12.722 5.329 12.722 12.673zm22.431 0c0-4.56-3.312-7.681-7.152-7.681-3.84 0-7.153 3.12-7.153 7.68 0 4.514 3.313 7.682 7.153 7.682 3.84 0 7.152-3.168 7.152-7.681m5.569 0c0 7.297-5.713 12.673-12.721 12.673-7.01 0-12.721-5.376-12.721-12.673 0-7.344 5.712-12.673 12.72-12.673 7.009 0 12.722 5.329 12.722 12.673m21.933.048c0-4.464-2.977-7.729-6.77-7.729-3.838 0-7.055 3.265-7.055 7.73 0 4.416 3.216 7.631 7.055 7.631 3.794 0 6.77-3.215 6.77-7.632zm4.895-11.953V37.54c0 9.361-5.52 13.201-12.047 13.201-6.145 0-9.842-4.128-11.234-7.489l4.849-2.016c.864 2.065 2.975 4.513 6.385 4.513 4.175 0 6.767-2.593 6.767-7.44v-1.825h-.19c-1.25 1.536-3.65 2.88-6.674 2.88-6.337 0-12.145-5.52-12.145-12.625 0-7.153 5.808-12.72 12.145-12.72 3.025 0 5.425 1.343 6.674 2.831h.19v-2.064h5.28zm4.451 23.81h5.5v-37h-5.5zm13.926-12.289l11.33-4.705c-.625-1.584-2.497-2.688-4.705-2.688-2.832 0-6.769 2.497-6.625 7.393m13.298 4.561l4.32 2.88c-1.392 2.064-4.753 5.616-10.56 5.616-7.202 0-12.579-5.568-12.579-12.673 0-7.537 5.425-12.673 11.954-12.673 6.577 0 9.793 5.232 10.848 8.064l.576 1.441-16.945 7.01c1.296 2.543 3.313 3.838 6.145 3.838 2.832 0 4.8-1.392 6.241-3.503M38.087 17.836a21.92 21.92 0 0 1 .268 3.43c0 4.032-1.104 9.025-4.657 12.577-3.456 3.6-7.872 5.52-13.729 5.52C9.12 39.364 0 30.532 0 19.683 0 8.832 9.12 0 19.97 0c6 0 10.272 2.352 13.49 5.425l-3.794 3.792c-2.304-2.16-5.424-3.84-9.697-3.84-7.92 0-14.113 6.384-14.113 14.305 0 7.92 6.193 14.305 14.113 14.305 5.136 0 8.065-2.064 9.937-3.936 1.536-1.537 2.574-3.815 2.96-6.84H19.968v-5.375h18.118z" fill-rule="evenodd"></path>
+</svg></a><a class aria-label="Dark Mode Icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3C11.8011 3 11.6103 2.92098 11.4697 2.78033C11.329 2.63968 11.25 2.44891 11.25 2.25V0.75C11.25 0.551088 11.329 0.360322 11.4697 0.21967C11.6103 0.0790176 11.8011 0 12 0C12.1989 0 12.3897 0.0790176 12.5303 0.21967C12.671 0.360322 12.75 0.551088 12.75 0.75V2.25C12.75 2.44891 12.671 2.63968 12.5303 2.78033C12.3897 2.92098 12.1989 3 12 3Z" fill="#80868B"></path>
+<path d="M5.10498 5.85501C4.90625 5.85429 4.71581 5.77524 4.57498 5.63501L3.49998 4.57501C3.4294 4.50443 3.37341 4.42063 3.33521 4.32841C3.29701 4.23618 3.27734 4.13734 3.27734 4.03751C3.27734 3.93769 3.29701 3.83885 3.33521 3.74662C3.37341 3.6544 3.4294 3.5706 3.49998 3.50001C3.57057 3.42943 3.65437 3.37344 3.74659 3.33524C3.83881 3.29704 3.93766 3.27737 4.03748 3.27737C4.13731 3.27737 4.23615 3.29704 4.32838 3.33524C4.4206 3.37344 4.5044 3.42943 4.57498 3.50001L5.63498 4.56001C5.70513 4.62931 5.76082 4.71184 5.79883 4.80282C5.83684 4.89379 5.85641 4.99141 5.85641 5.09001C5.85641 5.18861 5.83684 5.28623 5.79883 5.37721C5.76082 5.46819 5.70513 5.55072 5.63498 5.62001C5.56648 5.69217 5.4844 5.75008 5.39344 5.79041C5.30248 5.83074 5.20445 5.8527 5.10498 5.85501Z" fill="#80868B"></path>
+<path d="M12.0005 19.5C10.5166 19.5007 9.06591 19.0612 7.83192 18.2371C6.59792 17.4131 5.6361 16.2415 5.06817 14.8706C4.50023 13.4997 4.3517 11.9912 4.64137 10.5359C4.93104 9.0806 5.64589 7.74393 6.69547 6.69502C6.7871 6.60415 6.90036 6.5381 7.02458 6.50311C7.1488 6.46812 7.27988 6.46533 7.40547 6.49502C7.53015 6.52525 7.64492 6.58716 7.73864 6.67475C7.83237 6.76235 7.90189 6.87267 7.94047 6.99502C8.75336 9.05476 9.9824 10.9247 11.5508 12.4879C13.1191 14.0511 14.9931 15.2739 17.0555 16.08C17.1703 16.1264 17.2718 16.2005 17.351 16.2957C17.4302 16.3908 17.4846 16.5041 17.5093 16.6254C17.5341 16.7467 17.5284 16.8723 17.4928 16.9908C17.4573 17.1094 17.3929 17.2174 17.3055 17.305C16.6102 18.0034 15.7833 18.5569 14.8727 18.9337C13.9622 19.3104 12.9859 19.5029 12.0005 19.5ZM7.00047 8.67002C6.20411 9.82695 5.83885 11.2266 5.96833 12.6251C6.09781 14.0237 6.71381 15.3325 7.70904 16.3235C8.70427 17.3146 10.0156 17.9251 11.4147 18.0487C12.8138 18.1724 14.2119 17.8012 15.3655 17C11.6994 15.2719 8.74394 12.3288 7.00047 8.67002Z" fill="#80868B"></path>
+<path d="M18.3299 15.08C18.2414 15.0796 18.1535 15.0644 18.0699 15.035C17.8836 14.9652 17.7322 14.8247 17.6489 14.644C17.5656 14.4633 17.557 14.257 17.6249 14.07C17.8722 13.4078 17.9992 12.7068 17.9999 12C17.9999 10.4087 17.3678 8.88253 16.2426 7.75731C15.1174 6.6321 13.5912 5.99995 11.9999 5.99995C11.2931 6.00069 10.5921 6.12769 9.92994 6.37495C9.83737 6.40929 9.73893 6.42501 9.64028 6.42122C9.54162 6.41743 9.44468 6.39419 9.35503 6.35285C9.26537 6.3115 9.18476 6.25286 9.11782 6.18029C9.05088 6.10772 8.99892 6.02265 8.96494 5.92995C8.89831 5.74285 8.90758 5.53711 8.99074 5.35675C9.07391 5.1764 9.22438 5.03576 9.40994 4.96495C10.7534 4.47182 12.21 4.37337 13.6076 4.68123C15.0052 4.98908 16.2856 5.69038 17.2975 6.70235C18.3095 7.71431 19.0108 8.99468 19.3187 10.3923C19.6265 11.7899 19.5281 13.2465 19.0349 14.59C18.9805 14.7332 18.8841 14.8566 18.7583 14.944C18.6324 15.0315 18.4831 15.0789 18.3299 15.08Z" fill="#80868B"></path>
+<path d="M2.25 12.75H0.75C0.551088 12.75 0.360322 12.671 0.21967 12.5303C0.0790176 12.3897 0 12.1989 0 12C0 11.8011 0.0790176 11.6103 0.21967 11.4697C0.360322 11.329 0.551088 11.25 0.75 11.25H2.25C2.44891 11.25 2.63968 11.329 2.78033 11.4697C2.92098 11.6103 3 11.8011 3 12C3 12.1989 2.92098 12.3897 2.78033 12.5303C2.63968 12.671 2.44891 12.75 2.25 12.75Z" fill="#80868B"></path>
+<path d="M4.04475 20.7051C3.94486 20.7087 3.84525 20.6924 3.75169 20.6572C3.65814 20.622 3.5725 20.5686 3.49975 20.5001C3.42961 20.4308 3.37391 20.3482 3.3359 20.2573C3.29789 20.1663 3.27832 20.0687 3.27832 19.9701C3.27832 19.8715 3.29789 19.7738 3.3359 19.6829C3.37391 19.5919 3.42961 19.5094 3.49975 19.4401L4.55975 18.3801C4.62841 18.3064 4.71121 18.2473 4.80321 18.2063C4.89521 18.1653 4.99453 18.1433 5.09523 18.1415C5.19593 18.1397 5.29596 18.1582 5.38935 18.1959C5.48274 18.2337 5.56757 18.2898 5.63879 18.361C5.71001 18.4322 5.76615 18.5171 5.80387 18.6105C5.84159 18.7039 5.86012 18.8039 5.85834 18.9046C5.85657 19.0053 5.83452 19.1046 5.79353 19.1966C5.75254 19.2886 5.69344 19.3714 5.61975 19.4401L4.57475 20.5001C4.43152 20.6348 4.24137 20.7084 4.04475 20.7051Z" fill="#80868B"></path>
+<path d="M12 24C11.8011 24 11.6103 23.921 11.4697 23.7803C11.329 23.6397 11.25 23.4489 11.25 23.25V21.75C11.25 21.5511 11.329 21.3603 11.4697 21.2197C11.6103 21.079 11.8011 21 12 21C12.1989 21 12.3897 21.079 12.5303 21.2197C12.671 21.3603 12.75 21.5511 12.75 21.75V23.25C12.75 23.4489 12.671 23.6397 12.5303 23.7803C12.3897 23.921 12.1989 24 12 24Z" fill="#80868B"></path>
+<path d="M19.9554 20.705C19.7587 20.7083 19.5686 20.6348 19.4254 20.5L18.3654 19.44C18.2329 19.2978 18.1608 19.1098 18.1642 18.9155C18.1676 18.7212 18.2463 18.5358 18.3837 18.3984C18.5211 18.261 18.7065 18.1823 18.9008 18.1788C19.0951 18.1754 19.2832 18.2475 19.4254 18.38L20.5004 19.425C20.5728 19.4945 20.6304 19.578 20.6698 19.6704C20.7092 19.7627 20.7295 19.8621 20.7295 19.9625C20.7295 20.0629 20.7092 20.1623 20.6698 20.2547C20.6304 20.347 20.5728 20.4305 20.5004 20.5C20.4276 20.5685 20.342 20.622 20.2484 20.6572C20.1549 20.6923 20.0552 20.7086 19.9554 20.705Z" fill="#80868B"></path>
+<path d="M23.25 12.75H21.75C21.5511 12.75 21.3603 12.671 21.2197 12.5303C21.079 12.3897 21 12.1989 21 12C21 11.8011 21.079 11.6103 21.2197 11.4697C21.3603 11.329 21.5511 11.25 21.75 11.25H23.25C23.4489 11.25 23.6397 11.329 23.7803 11.4697C23.921 11.6103 24 11.8011 24 12C24 12.1989 23.921 12.3897 23.7803 12.5303C23.6397 12.671 23.4489 12.75 23.25 12.75Z" fill="#80868B"></path>
+<path d="M18.895 5.85501C18.6962 5.85429 18.5058 5.77525 18.365 5.63501C18.2948 5.56572 18.2391 5.48319 18.2011 5.39221C18.1631 5.30123 18.1436 5.20361 18.1436 5.10501C18.1436 5.00641 18.1631 4.90879 18.2011 4.81782C18.2391 4.72684 18.2948 4.64431 18.365 4.57501L19.425 3.50001C19.5675 3.35746 19.7609 3.27737 19.9625 3.27737C20.1641 3.27737 20.3574 3.35746 20.5 3.50001C20.6425 3.64257 20.7226 3.83591 20.7226 4.03751C20.7226 4.23912 20.6425 4.43246 20.5 4.57501L19.44 5.63501C19.3685 5.70626 19.2834 5.76244 19.1898 5.80022C19.0962 5.83801 18.9959 5.85664 18.895 5.85501Z" fill="#80868B"></path>
+</svg></a></div><div class="footerRow__7rz1V"><div class="footerLinks__1KAMJ"><div class="footerLink__1E229"><a class="focusStyle__aCHnr" href="https://policies.google.com/terms">Privacy &amp; terms</a></div><div class="footerLink__1E229"><a class="focusStyle__aCHnr" href="https://developers.google.com/community-guidelines" target="_blank" rel="noopener noreferrer">Community guidelines</a></div><div class="footerLink__1E229"><a class="focusStyle__aCHnr" href="/io/faq">FAQ</a></div></div><div class="footerSocials__COqhF"><div class="footerSocialLink__1VdGs"><a class="focusStyle__aCHnr" href="https://twitter.com/googledevs" target="_blank" rel="noopener noreferrer" aria-label="Google Developers on Twitter"><svg aria-hidden="true" width="17" height="14" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17 1.657a6.9 6.9 0 0 1-2.003.557A3.537 3.537 0 0 0 16.53.258c-.674.406-1.42.7-2.214.858A3.462 3.462 0 0 0 11.77 0C9.844 0 8.282 1.582 8.282 3.534c0 .277.03.547.09.806C5.474 4.192 2.904 2.785 1.184.647a3.56 3.56 0 0 0-.473 1.777c0 1.226.616 2.308 1.552 2.942a3.439 3.439 0 0 1-1.58-.443v.045c0 1.712 1.202 3.14 2.798 3.466a3.452 3.452 0 0 1-1.575.06c.443 1.404 1.731 2.426 3.258 2.455A6.94 6.94 0 0 1 0 12.412 9.778 9.778 0 0 0 5.346 14c6.416 0 9.924-5.385 9.924-10.056 0-.153-.004-.306-.01-.457A7.142 7.142 0 0 0 17 1.657" fill-rule="evenodd"></path>
+</svg></a></div><div class="footerSocialLink__1VdGs"><a class="focusStyle__aCHnr" href="https://www.facebook.com/Google-Developers-967415219957038/" target="_blank" rel="noopener noreferrer" aria-label="Google Developers on Facebook"><svg aria-hidden="true" width="11" height="22" viewBox="0 0 11 22" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2.246 21.76h4.496V10.879h3l.397-3.75H6.742l.005-1.877c0-.977.093-1.502 1.496-1.502h1.874V0h-3C3.514 0 2.246 1.82 2.246 4.878v2.251H0v3.75h2.246V21.76z" fill-rule="evenodd"></path>
+</svg></a></div><div class="footerSocialLink__1VdGs"><a class="focusStyle__aCHnr" href="https://developers.googleblog.com/" target="_blank" rel="noopener noreferrer" aria-label="Google Developers Blog"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49.47 23.94">
+    <path d="M19.81 16.56l-13.88-8A3.95 3.95 0 1 0 2 15.39l13.88 8A3.95 3.95 0 0 0 21.26 22a4 4 0 0 0-1.45-5.44zM47.5 8.55L33.61.53a3.91 3.91 0 0 0-2-.53 4 4 0 0 0-2 7.38l13.88 8a4 4 0 0 0 4-6.84zM35.63 13.05l-6 3.51a4 4 0 0 0 2 7.38 3.91 3.91 0 0 0 2-.53l9.89-5.77zM21.26 2a4 4 0 0 0-5.4-1.47L5.93 6.27l7.91 4.56 6-3.45A4 4 0 0 0 21.26 2z"></path>
+</svg></a></div><div class="footerSocialLink__1VdGs"><a class="focusStyle__aCHnr" href="https://www.youtube.com/user/GoogleDevelopers" target="_blank" rel="noopener noreferrer" aria-label="Google Developers on YouTube"><svg aria-hidden="true" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7.935 9.582V3.989l5.403 2.806-5.403 2.787zM19.8 3.02s-.195-1.371-.795-1.976c-.76-.792-1.613-.796-2.004-.843C14.203 0 10.004 0 10.004 0h-.008S5.798 0 2.999.201c-.391.047-1.243.05-2.004.843C.395 1.65.2 3.02.2 3.02S0 4.631 0 6.242v1.51c0 1.61.2 3.221.2 3.221s.195 1.372.795 1.976c.76.793 1.76.768 2.205.851 1.6.153 6.8.2 6.8.2s4.203-.006 7.001-.208c.391-.046 1.244-.05 2.004-.843.6-.604.795-1.976.795-1.976s.2-1.61.2-3.221v-1.51c0-1.611-.2-3.222-.2-3.222z"></path>
+</svg></a></div><div class="footerSocialLink__1VdGs"><a class="focusStyle__aCHnr" href="https://medium.com/google-developers" target="_blank" rel="noopener noreferrer" aria-label="Google Developers on Medium"><svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#svg-Medium-1-xOBnk5S)">
+<path d="M11.3191 5.87492C11.3191 8.9965 8.80993 11.5272 5.71463 11.5272C2.61933 11.5272 0.110352 8.99729 0.110352 5.87492C0.110352 2.75252 2.61952 0.222778 5.71463 0.222778C8.80974 0.222778 11.3191 2.75328 11.3191 5.87492Z" fill="#9AA0A6"></path>
+<path d="M17.4677 5.87496C17.4677 8.81361 16.2131 11.1956 14.6655 11.1956C13.118 11.1956 11.8633 8.81282 11.8633 5.87496C11.8633 2.93712 13.118 0.554352 14.6655 0.554352C16.2131 0.554352 17.4677 2.93712 17.4677 5.87496Z" fill="#9AA0A6"></path>
+<path d="M19.982 5.87502C19.982 8.50786 19.5406 10.642 18.9964 10.642C18.4521 10.642 18.0107 8.50711 18.0107 5.87502C18.0107 3.2429 18.4521 1.10794 18.9966 1.10794C19.541 1.10794 19.982 3.24233 19.982 5.87502Z" fill="#9AA0A6"></path>
+</g>
+<defs>
+<clipPath id="svg-Medium-1-xOBnk5S">
+<rect width="20" height="11.6279" fill="white"></rect>
+</clipPath>
+</defs>
+</svg></a></div></div></div></div></footer></div>
+
+    <!-- This needs to be included here for masking images -->
+    <!-- See https://github.com/developit/preact-compat/issues/483 -->
+    <svg class="svg-hidden-defs">
+      <clipPath id="stairClip" clipPathUnits="objectBoundingBox">
+        <polygon points="0,0 0,1 1,1 1,0.5 0.7,0.5 0.7,0.2 0.4,0.2 0.4,0 " />
+      </clipPath>
+      <clipPath id="sawtoothClip" clipPathUnits="objectBoundingBox">
+        <polygon points="0,0 0.6,0 1,0.6 0.5,0.6 0.7,1 0,1 " />
+      </clipPath>
+      <clipPath id="triangleClip" clipPathUnits="objectBoundingBox">
+        <polygon points="1 0, 0 1, 1 1" />
+      </clipPath>
+
+    </svg>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-P93PQR7');</script>
+    <!-- End Google Tag Manager -->
+  <script type="text/javascript" src="/io/vendors~main.4d25b0c88c26ca87ad5d.bundle.js"></script><script type="text/javascript" src="/io/main.4d25b0c88c26ca87ad5d.js"></script></body>
+</html>

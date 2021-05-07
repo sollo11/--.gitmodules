@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html class="fuelux" lang="en">
+
+<head>
+	  <script>
+	
+</script>
+
+    <title id="head-title">My Account | Gartner Peer Insights</title>
+    <meta id="head-meta" name="description" content="Choose business IT software and services with confidence. Read verified  from the IT community." />
+    <meta name="author" content="Gartner, Inc." />
+    
+            <link onload="this.rel='stylesheet'" rel="preload" as="style" id="login-css" href="https://reviews.static.gartner.com/css_min/login.min.1619084492936.css" />
+    
+    <link rel="preconnect" href="https://reviews.static.gartner.com" crossorigin>
+	<link rel="preconnect" href="https://reviews.static.gartner.com">
+
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		
+
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkVendorReviewsParentRoute.7ba5e630ffc9b2886f96.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkVendorReviewsIndexRoute.156f74c1e573b72124dc.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkVendorProductOverview.0c68e6d81a99e8e7472d.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkVendorReviewsRatingsRoute.5cea25dfc9e74d3678b5.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkVendorReviewsAlternativesRoute.1ab435d80ac46fb57e1e.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkReviewDisplay.7cd75d8b5ea851170373.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkComparePage.cd154b48c2bec7c53f22.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkBuyingGuidePage.ccaea7f55071b1457b2c.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkMarketSelectPage.052a8671952868b3fc92.js"/>
+		
+				<link rel="prefetch" href="https://reviews.static.gartner.com/react/assets/hash/DynamicChunkHomeV2.b71630186fb7aefe2aac.js"/>
+		
+    <!-- <link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js" />
+    <link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js" /> -->
+
+		<!--/* Load all CSS files */-->
+
+<!-- load minified version of libraries and scripts in PVS/Stage/Production -->
+<link href="https://reviews.static.gartner.com/css_min/bootstrap-3.3.7.min.1619084492936.css" rel="stylesheet" type="text/css" />
+
+	
+<link href="https://reviews.static.gartner.com/css_min/reactTemplate.min.1619084492936.css" rel="stylesheet" type="text/css" />
+<link href="https://reviews.static.gartner.com/css_min/UXDMasterStyleSheet.min.1619084492936.css" rel="stylesheet" type="text/css" />
+<link href="https://reviews.static.gartner.com/css_min/piUserMaster.min.1619084492936.css" rel="stylesheet" type="text/css" />
+
+    <!-- Performance Tweak, first load the individual CSS required for this page only.  Later we will remove these once we have all the page specific CSS loaded from piUserPageSpecific.css -->
+    <!-- 
+            <link rel="stylesheet" id="login-css" href="https://reviews.static.gartner.com/css_min/login.min.1619084492936.css" class="firstPageCSS" />
+     -->
+		
+
+    <link href="https://plus.google.com/+gartner" rel="publisher" />
+    <link rel="icon" type="image/ico" href="https://reviews.static.gartner.com/favicon.ico" />
+    <link id="head-link" rel="canonical" href="https://www.gartner.com/reviews/login" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/glyphicons-halflings-regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/Roboto/roboto-v20-latin-regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/Roboto/roboto-v20-latin-300.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/Roboto/roboto-v20-latin-500.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/Roboto/roboto-v20-latin-700.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/roboto-condensed/roboto-condensed-v18-latin-regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/roboto-condensed/roboto-condensed-v18-latin-300.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/roboto-condensed/roboto-condensed-v18-latin-700.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://reviews.static.gartner.com/fonts/material-ui/material-icons-regular-v27.woff2">
+    
+    
+
+    <meta id="head-og-title" property="og:title" content="My Account | Gartner Peer Insights" />
+    <meta id="head-og-description" property="og:description" content="Choose business IT software and services with confidence. Read verified  from the IT community." />
+    <meta property="og:url" content="https://www.gartner.com/login"/>
+    <meta property="og:image" content="http://www.gartner.com/imagesrv/apps/peerinsights/images/gpi-twitter-img-fa.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_us" />
+    <meta property="og:site_name" content="Gartner" />
+    <meta id="head-twitter-description" name="twitter:description" content="Choose business IT software and services with confidence. Read verified  from the IT community." />
+    <meta name="twitter:image" content="http://www.gartner.com/imagesrv/apps/peerinsights/images/gpi-twitter-img-fa.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@Gartner_Inc" />
+    <meta name="twitter:site" content="@Gartner_Inc" />
+		
+		<script type="text/javascript">/*Copyright and licenses see https://www.dynatrace.com/company/trust-center/customers/reports/*/
+(function(){if(typeof window!=="undefined"&&window.setTimeout){window.setTimeout=window.setTimeout;}var Promise=self.dT_&&dT_.prm&&dT_.prm()||self.Promise;(function(){function fb(){document.cookie="__dTCookie=1;SameSite=Lax";var Na=-1!==document.cookie.indexOf("__dTCookie");document.cookie="__dTCookie=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";return Na}function mb(){return void 0===qb.dialogArguments?navigator.cookieEnabled||fb():fb()}function jb(){var Na;if(mb()&&!window.dT_){var Ta=(Na={},Na.cfg="domain=gartner.com|reportUrl=/rb_bf28149orj|app=c9f1951eb65229e3|dsss=1|rcdec=1209600000|featureHash=A2SVfhjqru|vcv=2|rdnt=1|uxrgce=1|srcss=1|srmcrv=10|cuc=4vwhu0vt|mel=100000|dpvc=1|md=mdcc1=cWCW_Authentication,mdcc2=cwcw_authentication,mdcc3=buserSotCode,mdcc4=bwindow.isLoggedIn,mdcc5=bwindow.nextJS|lastModification=1619516192504|dtVersion=10209210209190405|srmcrl=1|tp=500,50,0,1|uxdcw=1500|vs=2|agentUri=/ruxitagentjs_A2SVfhjqru_10209210209190405.js|auto=1|domain=gartner.com|rid=RID_766079523|rpid=1202547695|app=c9f1951eb65229e3",Na.iCE=mb,Na);window.dT_=Ta}}var qb="undefined"!==typeof window?
+window:self,Va;qb.dT_?(null===(Va=qb.console)||void 0===Va?void 0:Va.log("Duplicate agent injection detected, turning off redundant initConfig."),qb.dT_.di=1):jb()})();}).call(this);
+(function(){if(typeof window!=="undefined"&&window.setTimeout){window.setTimeout=window.setTimeout;}var Promise=self.dT_&&dT_.prm&&dT_.prm()||self.Promise;(function(){function fb(){}function mb(q,D,M){void 0===M&&(M=0);var Aa=-1;D&&(null===q||void 0===q?0:q.indexOf)&&(Aa=q.indexOf(D,M));return Aa}function jb(){var q;return!(null===(q=Xa.console)||void 0===q||!q.log)}function qb(q,D){if(!D)return"";var M=q+"=";q=mb(D,M);if(0>q)return"";for(;0<=q;){if(0===q||" "===D.charAt(q-1)||";"===D.charAt(q-1))return M=q+M.length,q=mb(D,";",q),0<=q?D.substring(M,q):D.substr(M);q=mb(D,M,q+M.length)}return""}function Va(q){return qb(q,document.cookie)}function Na(){var q,
+D=0;if(null===(q=null===Xa||void 0===Xa?void 0:Xa.performance)||void 0===q?0:q.now)try{D=Math.round(Xa.performance.now())}catch(M){}return 0>=D||isNaN(D)||!isFinite(D)?(new Date).getTime()-Ta():D}function Ta(){var q=0;try{q=Math.round(Xa.performance.timeOrigin)}catch(M){}if(0>=q||isNaN(q)||!isFinite(q)){q=Xa.dT_;var D=0;try{D=Xa.performance.timing.navigationStart}catch(M){}q=0>=D||isNaN(D)||!isFinite(D)?q.gAST():D}return q}function wa(){}function X(q,D){return function(){q.apply(D,arguments)}}function V(q){if(!(this instanceof
+V))throw new TypeError("Promises must be constructed via new");if("function"!==typeof q)throw new TypeError("not a function");this.X=0;this.bb=!1;this.aa=void 0;this.ja=[];Ra(q,this)}function ha(q,D){for(;3===q.X;)q=q.aa;0===q.X?q.ja.push(D):(q.bb=!0,V.V(function(){var M=1===q.X?D.Vc:D.Wc;if(null===M)(1===q.X?da:fa)(D.Ha,q.aa);else{try{var Aa=M(q.aa)}catch(rb){fa(D.Ha,rb);return}da(D.Ha,Aa)}}))}function da(q,D){try{if(D===q)throw new TypeError("A promise cannot be resolved with itself.");if(D&&("object"===
+typeof D||"function"===typeof D)){var M=D.then;if(D instanceof V){q.X=3;q.aa=D;ia(q);return}if("function"===typeof M){Ra(X(M,D),q);return}}q.X=1;q.aa=D;ia(q)}catch(Aa){fa(q,Aa)}}function fa(q,D){q.X=2;q.aa=D;ia(q)}function ia(q){2===q.X&&0===q.ja.length&&V.V(function(){q.bb||V.pa(q.aa)});for(var D=0,M=q.ja.length;D<M;D++)ha(q,q.ja[D]);q.ja=null}function ka(q,D,M){this.Vc="function"===typeof q?q:null;this.Wc="function"===typeof D?D:null;this.Ha=M}function Ra(q,D){var M=!1;try{q(function(Aa){M||(M=
+!0,da(D,Aa))},function(Aa){M||(M=!0,fa(D,Aa))})}catch(Aa){M||(M=!0,fa(D,Aa))}}function oa(){V.V=function(q){if("string"===typeof q)throw Error("Promise polyfill called _immediateFn with string");q()};V.pa=function(){};return V}function ca(q,D,M,Aa){"undefined"===typeof Aa&&(Aa=K(D,!0));"boolean"===typeof Aa&&(Aa=K(D,Aa));if(q===Xa)Vc?Vc(D,M,Aa):Fg&&Fg("on"+D,M);else if(Jh&&Xa.dT_.iIO(q,21))gk.call(q,D,M,Aa);else if(q.addEventListener)if(q===Xa.document||q===Xa.document.documentElement)gj.call(q,D,
+M,Aa);else try{Vc.call(q,D,M,Aa)}catch(Ba){q.addEventListener(D,M,Aa)}else q.attachEvent&&q.attachEvent("on"+D,M);Aa=!1;for(var rb=te.length;0<=--rb;){var Jb=te[rb];if(Jb.object===q&&Jb.event===D&&Jb.I===M){Aa=!0;break}}Aa||Xa.dT_.apush(te,{object:q,event:D,I:M})}function U(q,D,M,Aa){for(var rb=te.length;0<=--rb;){var Jb=te[rb];if(Jb.object===q&&Jb.event===D&&Jb.I===M){te.splice(rb,1);break}}"undefined"===typeof Aa&&(Aa=K(D,!0));"boolean"===typeof Aa&&(Aa=K(D,Aa));q===Xa?Kh?Kh(D,M,Aa):Fg&&Fg("on"+
+D,M):q.removeEventListener?q===Xa.document||q===Xa.document.documentElement?ri.call(q,D,M,Aa):Kh.call(q,D,M,Aa):q.detachEvent&&q.detachEvent("on"+D,M)}function K(q,D){var M=!1;try{var Aa=Xa.dT_;if(Vc&&-1<Aa.aIOf(si,q)){var rb=Object.defineProperty({},"passive",{get:function(){M=!0}});Vc("test",fb,rb)}}catch(Jb){}return M?{passive:!0,capture:D}:D}function Ca(){for(var q=te,D=q.length;0<=--D;){var M=q[D];U(M.object,M.event,M.I)}te=[];Xa.dT_.cx()}function ja(){return td?new td:fg?new fg("MSXML2.XMLHTTP.3.0"):
+Xa.XMLHttpRequest?new Xa.XMLHttpRequest:new Xa.ActiveXObject("MSXML2.XMLHTTP.3.0")}function xa(){fg=td=void 0}function ba(){for(var q=0,D=0,M=arguments.length;D<M;D++)q+=arguments[D].length;q=Array(q);var Aa=0;for(D=0;D<M;D++)for(var rb=arguments[D],Jb=0,Ba=rb.length;Jb<Ba;Jb++,Aa++)q[Aa]=rb[Jb];return q}function sa(q){return"function"===typeof q&&/{\s+\[native code]/.test(Function.prototype.toString.call(q))}function W(q,D){for(var M,Aa=[],rb=2;rb<arguments.length;rb++)Aa[rb-2]=arguments[rb];return void 0!==
+Function.prototype.bind&&sa(Function.prototype.bind)?(M=Function.prototype.bind).call.apply(M,ba([q,D],Aa)):function(){for(var Jb=0;Jb<arguments.length;Jb++);return q.apply(D,(Aa||[]).concat(Array.prototype.slice.call(arguments)||[]))}}function Ka(){if(kf){var q=new kf;if(Ae)for(var D=0,M=ud;D<M.length;D++){var Aa=M[D];void 0!==Ae[Aa]&&(q[Aa]=W(Ae[Aa],q))}return q}return fh?new fh("MSXML2.XMLHTTP.3.0"):Xa.XMLHttpRequest?new Xa.XMLHttpRequest:new Xa.ActiveXObject("MSXML2.XMLHTTP.3.0")}function Ea(q){-1<
+Xa.dT_.io(q,"^")&&(q=q.split("^^").join("^"),q=q.split("^dq").join('"'),q=q.split("^rb").join(">"),q=q.split("^lb").join("<"),q=q.split("^p").join("|"),q=q.split("^e").join("="),q=q.split("^s").join(";"),q=q.split("^c").join(","),q=q.split("^bs").join("\\"));return q}function db(){return lf}function ub(q){lf=q}function lb(q){var D=Xa.dT_,M=D.scv("rid");D=D.scv("rpid");M&&(q.rid=M);D&&(q.rpid=D)}function pb(q){if(q=q.xb){q=Ea(q);try{lf=new RegExp(q)}catch(D){}}else lf=void 0}function N(q){var D=q,
+M=Math.pow(2,32);return function(){D=(1664525*D+1013904223)%M;return D/M}}function y(q,D){return isNaN(q)||isNaN(D)?Math.floor(33*Gg()):Math.floor(Gg()*(D-q+1))+q}function x(q,D){return parseInt(q,D||10)}function F(q){return document.getElementsByTagName(q)}function G(q){var D=q.length;if("number"===typeof D)q=D;else{D=0;for(var M=2048;q[M-1];)D=M,M+=M;for(var Aa=7;1<M-D;)Aa=(M+D)/2,q[Aa-1]?D=Aa:M=Aa;q=q[Aa]?M:D}return q}function S(q){q=encodeURIComponent(q);var D=[];if(q)for(var M=0;M<q.length;M++){var Aa=
+q.charAt(M);yb(D,gg[Aa]||Aa)}return D.join("")}function O(q){if(!q)return"";var D=Xa.crypto||Xa.msCrypto;if(D&&-1===mb(navigator.userAgent,"Googlebot"))D=D.getRandomValues(new Uint8Array(q));else{D=[];for(var M=0;M<q;M++)D.push(y(0,32))}q=[];for(M=0;M<D.length;M++){var Aa=Math.abs(D[M]%32);q.push(String.fromCharCode(Aa+(9>=Aa?48:55)))}return q.join("")}function J(){return 0<=Xa.dT_.io(navigator.userAgent,"RuxitSynthetic")}function eb(q){var D={};q=q.split("|");for(var M=0;M<q.length;M++){var Aa=q[M].split("=");
+2===Aa.length&&(D[Aa[0]]=decodeURIComponent(Aa[1].replace(/\+/g," ")))}return D}function ta(){var q=Ga("csu");return(q.indexOf("dbg")===q.length-3?q.substr(0,q.length-3):q)+"_"+Ga("app")+"_Store"}function Wa(q,D,M){D=D||{};var Aa=0;for(q=q.split("|");Aa<q.length;Aa++){var rb=q[Aa],Jb=rb,Ba=mb(rb,"=");-1===Ba?D[Jb]="1":(Jb=rb.substring(0,Ba),D[Jb]=rb.substring(Ba+1,rb.length))}!M&&(M=D,Aa=M.spc)&&(q=document.createElement("textarea"),q.innerHTML=Aa,M.spc=q.value);return D}function qa(q){var D;return null!==
+(D=yc[q])&&void 0!==D?D:vd[q]}function Ya(q){q=qa(q);return"false"===q||"0"===q?!1:!!q}function P(q){var D=qa(q);D=x(D);isNaN(D)&&(D=vd[q]);return D}function Ga(q){return String(qa(q)||"")}function Sa(q,D){yc[q]=String(D)}function Q(q){yc=q;q=Hg;for(var D in q)q.hasOwnProperty(D)&&q[D]&&(yc[D]=q[D]);return yc}function pa(q){yc[q]=0>mb(yc[q],"#"+q.toUpperCase())?yc[q]:""}function Fa(q){var D=q.agentUri;D&&-1<mb(D,"_")&&(D=/([a-zA-Z]*)[0-9]{0,4}_([a-zA-Z_0-9]*)_[0-9]+/g.exec(D))&&D.length&&2<D.length&&
+(q.csu=D[1],q.featureHash=D[2])}function hb(q){var D=q.domain||"";var M=(M=location.hostname)&&D?M===D||-1!==M.indexOf("."+D,M.length-("."+D).length):!0;if(!D||!M){q.domainOverride||(q.domainOverride=location.hostname+","+D,delete q.domain);var Aa=Ua();Aa&&(q.domain=Aa);M||yb(jd,{type:"dpi",severity:"Warning",text:'Configured domain "'+D+'" is invalid for current location "'+location.hostname+'". Agent will use "'+q.domain+'" instead.'})}}function vb(q,D){hb(q);yc.pVO&&(q.pVO=yc.pVO);D||(D=q.bp||
+vd.bp,q.bp2&&(D=2),q.bp=String(D))}function $b(){return yc}function Kb(q){return vd[q]===qa(q)}function dc(){var q=Xa.dT_;return!q.bcv("coo")||q.bcv("cooO")||q.iSM()}function Rb(q,D){if(dc()&&(!Gb().overloadPrevention||J()))return q.apply(this,D||[])}function ec(q,D){try{var M=mf;M&&M.setItem(q,D)}catch(Aa){}}function Ia(q,D){Rb(ec,[q,D])}function Oa(q){try{var D=mf;if(D)return D.getItem(q)}catch(M){}return null}function L(q){try{var D=mf;D&&D.removeItem(q)}catch(M){}}function va(q){document.cookie=
+q+'="";path=/'+(Ga("domain")?";domain="+Ga("domain"):"")+"; expires=Thu, 01 Jan 1970 00:00:01 GMT;"}function na(q,D,M){var Aa=1,rb=0;do document.cookie=q+'=""'+(D?";domain="+D:"")+";path="+M.substr(0,Aa)+"; expires=Thu, 01 Jan 1970 00:00:01 GMT;",Aa=M.indexOf("/",Aa),rb++;while(-1!==Aa&&5>rb)}function Ua(){var q=document.domain||"";if(!q)return"";q=q.split(".").reverse();var D=q.length;if(1>=D)return"";for(var M=q[0],Aa="",rb=1;rb<=D;rb++)if(Va("dTValidationCookie")){Aa=M;break}else{q[rb]&&(M=q[rb]+
+"."+M);var Jb="dTValidationCookie=dTValidationCookieValue;path=/;domain="+M;Jb+=ab();document.cookie=Jb}na("dTValidationCookie",Aa,"/");return Aa}function La(q,D,M,Aa){Ig=!0;D||0===D?(D=String(D).replace(/[;\n\r]/g,"_"),q=q+"="+D+";path=/"+(Ga("domain")?";domain="+Ga("domain"):""),M&&(q+=";expires="+M.toUTCString()),q+=ab(),Aa&&"https:"===location.protocol&&(q+=";Secure"),document.cookie=q):va(q);Ig=!1}function ab(){var q=Ga("cssm");return"n"===q||"s"===q||"l"===q?";SameSite="+Jg[q]:""}function Bb(q,
+D,M,Aa){Rb(La,[q,D,M,Aa])}function Za(q){return 2<(null===q||void 0===q?void 0:q.split("$").length)?!1:/^[0-9A-Za-z_=:\$\+\/\.\-\*%\|]*$/.test(q)}function Eb(){var q=Va("dtCookie");q||((q=Oa("dtCookie"))&&Za(q)?ua(q):q="");return Za(q)?q:""}function ua(q){Bb("dtCookie",q,void 0,Ya("ssc"))}function Ha(q){return 32===q.length||12>=q.length?q:""}function ib(q){q=q.replace("-2D","-");if(!isNaN(Number(q))){var D=x(q);if(-99<=D&&99>=D)return q}return""}function sb(q){var D={sessionId:"",rb:"",Ga:0},M=mb(q,
+"|"),Aa=q;-1!==M&&(Aa=q.substring(0,M));M=mb(Aa,"$");-1!==M?(D.sessionId=Ha(Aa.substring(M+1)),D.rb=ib(Aa.substring(0,M))):D.sessionId=Ha(Aa);return D}function Cb(q){var D={sessionId:"",rb:"",Ga:0};q=q.split("v"===q.charAt(0)?"_":"=");if(2<q.length&&0===q.length%2){var M=Number(q[1]);if(isNaN(M)||3>M)return D;M={};for(var Aa=2;Aa<q.length;Aa++)M[q[Aa]]=q[Aa+1],Aa++;M.sn?D.sessionId=Ha(M.sn):D.sessionId="hybrid";M.srv&&(D.rb=ib(M.srv));q=Number(M.ol);1===q&&(M=J(),Aa=Gb(),M||(Ia("dtDisabled","true"),
+Aa.disabled=!0,Aa.overloadPrevention=!0));0<=q&&2>=q&&(D.Ga=q)}return D}function Fb(){try{Be.apply(Xa.parent,arguments)}catch(q){}}function Ub(){try{nf.apply(Xa.top,arguments)}catch(q){}}function mc(q){var D=Array.prototype.slice.call(arguments,1);try{Of.apply(q,D)}catch(M){}}function hc(q){var D=Array.prototype.slice.call(arguments,1);try{gh.apply(q,D)}catch(M){}}function Sb(){var q=Xa.dT_;Promise=oa();td=Xa.XMLHttpRequest;fg=Xa.ActiveXObject;var D;kf=Xa.XMLHttpRequest;fh=Xa.ActiveXObject;var M=
+null===(D=Xa.XMLHttpRequest)||void 0===D?void 0:D.prototype;if(M){Ae={};D=0;for(var Aa=ud;D<Aa.length;D++){var rb=Aa[D];void 0!==M[rb]&&(Ae[rb]=M[rb])}}Vc=Xa.addEventListener;Kh=Xa.removeEventListener;gj=Xa.document.addEventListener;ri=Xa.document.removeEventListener;hh=Xa.setTimeout;ih=Xa.setInterval;hg||(Pf=Xa.clearTimeout,Lh=Xa.clearInterval);q=q.iCE?q.iCE():navigator.cookieEnabled;M=1===Cb(Va("dtAdkSettings")).Ga;jb();if(q){if(M||!("complete"!==document.readyState||Xa.performance&&Xa.performance.timing))return!1}else return!1;
+return!0}function Rc(){return wd()}function Dc(q,D){function M(){delete xd[Jb];q.apply(this,arguments)}for(var Aa=[],rb=2;rb<arguments.length;rb++)Aa[rb-2]=arguments[rb];if("apply"in hh){Aa.unshift(M,D);var Jb=hh.apply(Xa,Aa)}else Jb=hh(M,D);xd[Jb]=!0;return Jb}function rc(q){delete xd[q];"apply"in Pf?Pf.call(Xa,q):Pf(q)}function yb(q){for(var D=[],M=1;M<arguments.length;M++)D[M-1]=arguments[M];q.push.apply(q,D)}function Gc(q){yb(ig,q)}function Bc(q){for(var D=ig.length;D--;)if(ig[D]===q){ig.splice(D,
+1);break}}function sc(){return ig}function Yc(q,D){return ih(q,D)}function Fd(q){Lh(q)}function uc(q,D){if(!jg||!of)return"";q=new jg([q],{type:D});return of(q)}function tc(q,D){return hj?new hj(q,D):void 0}function bd(q){"function"===typeof q&&yb(Mh,q)}function bc(){return Mh}function Mc(){return Kg}function cd(q){return function(){for(var D=[],M=0;M<arguments.length;M++)D[M]=arguments[M];if("number"!==typeof D[0]||!xd[D[0]])try{return q.apply(this,D)}catch(Aa){return q(D[0])}}}function fd(){return jd}
+function kd(){Xa.performance&&(wd=function(){return Math.round(Ta()+Na())});if(!wd||isNaN(wd())||0>=wd()||!isFinite(wd()))wd=function(){return(new Date).getTime()}}function dd(){hg&&(Xa.clearTimeout=Pf,Xa.clearInterval=Lh,hg=!1)}function yd(q){if(q=q||Eb()){var D=q.charAt(0);return"v"===D||"="===D?Cb(q):sb(q)}return{sessionId:"",rb:"",Ga:0}}function kc(q){return yd(q).rb}function ic(q){return yd(q).sessionId}function Sc(){return pf}function ie(){ee(function(){ic()||ua(-1*y(2,21)+"$"+O(32));pf=kc()||
+""})}function Vd(){return kg}function Pc(q,D){void 0===D&&(D=document.cookie);return qb(q,D)}function ue(){var q=document.cookie,D=P("vs"),M=Wd(q);2<=D&&-1===M?M=0:1===D&&-1<M&&(M=-1);Gd(Tc(!0,q),void 0,M,q)}function zd(q,D){var M=document.cookie;D=Tc(D,M);for(var Aa=!1,rb=0;rb<D.length;rb++)D[rb].frameId===kg&&(D[rb].H=q,Aa=!0);Aa||yb(D,{frameId:kg,H:q,Kb:-1,visitId:""});Gd(D,void 0,void 0,M)}function Gd(q,D,M,Aa){if(q){var rb=[];for(var Jb=0;Jb<q.length;Jb++)if("-"!==q[Jb].H){0<Jb&&0<rb.length&&
+yb(rb,"p");var Ba=pf;Ba&&(yb(rb,Ba),yb(rb,"$"));yb(rb,q[Jb].frameId);yb(rb,"h");yb(rb,String(q[Jb].H))}rb.length||(je&&(ld(!0,"a",!1,Aa),Ce(!1)),pf=kc()||"",yb(rb,pf),yb(rb,"$"),yb(rb,kg),yb(rb,"h-"));q=D||Nd(Aa);yb(rb,"v");yb(rb,q);q=null!==M&&void 0!==M?M:Wd(Aa);0<=q&&(yb(rb,"e"),yb(rb,String(q)));rb=rb.join("")}else rb="";rb||(je&&(ld(!0,"a",!1,Aa),Ce(!1)),pf=kc()||"",M=null!==M&&void 0!==M?M:Wd(Aa),rb=pf+"$"+kg+"h-v"+(D||Nd(Aa)+(0<=M?"e"+M:"")));Bb("dtPC",rb||"-",void 0,Ya("ssc"))}function Tc(q,
+D){void 0===D&&(D=document.cookie);var M=Pc("dtPC",D);D=[];if(M&&"-"!==M){var Aa=M.split("p");var rb="";var Jb=null;for(M=0;M<Aa.length;M++){var Ba=Aa[M],Hc=q;var Ic=mb(Ba,"$");var md=mb(Ba,"h"),Hd=mb(Ba,"v"),Xd=mb(Ba,"e");Ic=Ba.substring(Ic+1,md);md=-1!==Hd?Ba.substring(md+1,Hd):Ba.substring(md+1);rb=rb||-1!==Hd?-1!==Xd?Ba.substring(Hd+1,Xd):Ba.substring(Hd+1):"";Jb=Jb||-1!==Xd?Ba.substring(Xd+1):null;Ba=null;Hc||(Hc=x(Ic.split("_")[0]),Hd=wd()%Nh,Hd<Hc&&(Hd+=Nh),Hc=Hc+9E5>Hd);Hc&&(Ba={frameId:Ic,
+H:"-"===md?"-":x(md),Kb:-1,visitId:""});(Ic=Ba)&&D.push(Ic)}for(M=0;M<D.length;M++){D[M].visitId=rb;q=D[M];Aa=x(Jb||"");isNaN(Aa)&&(Aa=x(Oa(lg)||""));if(isNaN(Aa)||-1>Aa||Aa>P("mel"))Aa=2<=P("vs")?0:-1;q.Kb=Aa}}return D}function ve(q,D){try{Xa.localStorage&&Xa.localStorage.setItem(q,D)}catch(M){}}function Od(q){try{if(Xa.localStorage)return Xa.localStorage.getItem(q)}catch(D){}return null}function ke(q){try{Xa.localStorage&&Xa.localStorage.removeItem(q)}catch(D){}}function Nd(q){return zb(q)||ld(!0,
+"c",!1,q)}function zb(q){if(Id(q)<=wd())return ld(!0,"t",!1,q);var D=Jd(q);if(!D)return ld(!0,"c",!1,q);var M=qf.exec(D);if(!M||3!==M.length||32!==M[1].length||isNaN(x(M[2])))return ld(!0,"i",!1,q);Ia(Qf,D);return D}function Kd(q,D){var M=wd();D=Zc(D).Gc;q&&(D=M);id(M+Te+"|"+D);nd()}function Jd(q){var D,M;return null!==(M=null===(D=Tc(!0,q)[0])||void 0===D?void 0:D.visitId)&&void 0!==M?M:Oa(Qf)}function we(q,D){if(q&&(q=Jd(D))&&(q=qf.exec(q))&&3===q.length&&isFinite(Number(q[2])))return q[1]+"-"+
+(Number(q[2])+1);q=O(32);q=q.replace(/[0-9]/g,function(M){M=.1*x(M);return String.fromCharCode(Math.floor(25*M+65))});return q+"-0"}function od(q,D){var M=Tc(!1,D),Aa=2<=P("vs")?0:-1;Gd(M,q,Aa,D);Ia(Qf,q);Ia(lg,String(Aa));Kd(!0)}function Nc(q,D,M,Aa){return ld(D,M,Aa)}function De(q,D,M,Aa){return ld(q,D,M,Aa)}function ld(q,D,M,Aa){q&&(xe=!0);q=Jd(Aa);M=we(M);od(M);for(Aa=0;Aa<mg.length;Aa++)mg[Aa](M,xe,D,q);return M}function Ee(q){mg.push(q)}function nd(q){Fe&&rc(Fe);Fe=Dc(le,Id(q)-wd())}function le(){var q=
+document.cookie;if(Id(q)<=wd()&&dc()){var D="t"+(wd()-Id(q)),M=Jd(q),Aa=we(!1,q);od(Aa,q);for(q=0;q<mg.length;q++)mg[q](Aa,xe,D,M);return!0}ee(nd);return!1}function id(q){Bb("rxvt",q,void 0,Ya("ssc"));Ia("rxvt",q)}function rf(q,D){(D=Pc(q,D))||(D=Oa(q)||"");return D}function Ge(){var q=zb()||"";Ia(Qf,q);q=rf("rxvt");id(q);me()}function Zc(q){var D={Nd:0,Gc:0};if(q=rf("rxvt",q))try{var M=q.split("|");2===M.length&&(D.Nd=parseInt(M[0],10),D.Gc=parseInt(M[1],10))}catch(Aa){}return D}function Id(q){q=
+Zc(q);return Math.min(q.Nd,q.Gc+ng)}function Ue(q){Te=q}function Ce(q){void 0===q&&(q=!0);je=q}function Yd(){var q=xe;xe=!1;return q}function Pd(){le()||Kd(!1)}function gd(){var q,D;if(-1!==Wd(void 0)&&2<=P("vs")){var M=Wd();M>=P("mel")?ld(!1,"e"+M,!0):(M++,Gd(Tc(!1),"",M),Ia(lg,String(M)),null===(D=null===(q=Xa.MobileAgent)||void 0===q?void 0:q.incrementActionCount)||void 0===D?void 0:D.call(q))}}function Wd(q){q=Tc(!0,q);if(1<=q.length&&!isNaN(q[0].Kb))return q[0].Kb;q=Oa(lg)||"";q=x(q);return isNaN(q)?
+2<=P("vs")?0:-1:q}function me(){ke(lg);ke(Qf);ke("rxvt")}function ee(q){dc()?q():(sf||(sf=[]),yb(sf,q))}function w(q){return Rb(q)}function u(){if(Ya("coo")&&!dc()){for(var q=0;q<sf.length;q++)Dc(sf[q],0);sf=[];Sa("cooO",!0)}}function v(){if(Ya("coo")&&dc()){Sa("cooO",!1);va("dtCookie");va("dtPC");va("dtLatC");va("dtSa");va("dtAdk");va("rxVisitor");va("rxvt");try{L(lg);L(Qf);L("rxvt");me();var q=mf;q&&(q.removeItem("rxVisitor"),q.removeItem("dtCookie"));(q=jh)&&q.removeItem(ta())}catch(D){}}}function H(q){return document.cookie?
+document.cookie.split(q+"=").length-1:0}function R(q){var D=H(q);if(1<D){var M=Ga("domain")||Xa.location.hostname,Aa=Xa.location.hostname,rb=Xa.location.pathname,Jb=0,Ba=0;Vb.push(q);do{var Hc=Aa.substr(Jb);if(Hc!==M||"/"!==rb){na(q,Hc===M?"":Hc,rb);var Ic=H(q);Ic<D&&(Vb.push(Hc),D=Ic)}Jb=Aa.indexOf(".",Jb)+1;Ba++}while(0!==Jb&&10>Ba&&1<D);Ga("domain")&&1<D&&na(q,"",rb)}}function ya(){R("dtPC");R("dtCookie");R("dtLatC");R("rxvt");0<Vb.length&&yb(jd,{severity:"Error",type:"dcn",text:"Duplicate cookie name"+
+(1!==Vb.length?"s":"")+" detected: "+Vb.join(", ")});Gc(function(q,D,M,Aa){0<Vb.length&&!D&&(q.av(Aa,"dCN",Vb.join(",")),Vb=[]);0<kh.length&&!D&&(q.av(Aa,"eCC",kh.join(",")),kh=[])})}function cb(q,D){if(!q||!q.length)return-1;if(q.indexOf)return q.indexOf(D);for(var M=q.length;M--;)if(q[M]===D)return M;return-1}function r(q){q&&(null===q||void 0===q?0:q.configurable)&&q.set&&q.get&&Object.defineProperty(document,"cookie",{get:function(){return q.get.call(document)},set:function(D){var M=D.split("=")[0];
+q.set.call(document,D);Ig?1<H(M)&&Vb.push(M):-1<cb(Rf,M)&&(kh.push(M),-1===cb(ti,M)&&(yb(ti,M),yb(jd,{severity:"Error",type:"ecm",text:"Invalid modification of agent cookie "+M+" detected. Modifying Dynatrace cookies may result in missing or invalid data."})))}})}function B(){var q=Va("rxVisitor");q&&45===(null===q||void 0===q?void 0:q.length)||(q=Od("rxVisitor")||Oa("rxVisitor"),45!==(null===q||void 0===q?void 0:q.length)&&(Ad=!0,q=String(wd()),q+=O(45-q.length)));E(q);return q}function E(q){if(Ya("dpvc")||
+Ya("pVO"))Ia("rxVisitor",q);else{var D=new Date;D.setFullYear(D.getFullYear()+2);Rb(ve,["rxVisitor",q])}Bb("rxVisitor",q,D,Ya("ssc"))}function T(){return Ad}function za(q){var D=Va("rxVisitor");va("rxVisitor");L("rxVisitor");ke("rxVisitor");Sa("pVO",!0);E(D);q&&Rb(ve,["dt-pVO","1"]);Ge()}function Pa(){ke("dt-pVO");Ya("pVO")&&(Sa("pVO",!1),B());L("rxVisitor");Ge()}function Qa(q,D,M,Aa,rb){var Jb=document.createElement("script");Jb.setAttribute("src",q);D&&Jb.setAttribute("defer","defer");M&&(Jb.onload=
+M);Aa&&(Jb.onerror=Aa);rb&&Jb.setAttribute("id",rb);Jb.setAttribute("crossorigin","anonymous");q=document.getElementsByTagName("script")[0];q.parentElement.insertBefore(Jb,q)}function nb(q,D){return Sf+"/"+(D||og)+"_"+q+"_"+(P("buildNumber")||Gb().version)+".js"}function $a(q,D){void 0===D&&(D=[]);if(!q||"object"!==typeof q&&"function"!==typeof q)return!1;var M="number"!==typeof D?D:[],Aa=null,rb=[];switch("number"===typeof D?D:5){case 0:Aa="Array";rb=["push"];break;case 1:Aa="Boolean";break;case 2:Aa=
+"Number";break;case 3:Aa="String";break;case 4:Aa="Function";break;case 5:Aa="Object";break;case 6:Aa="Date";rb=["getTime"];break;case 7:Aa="Error";rb=["name","message"];break;case 8:Aa="Element";break;case 9:Aa="HTMLElement";break;case 10:Aa="HTMLImageElement";rb=["complete"];break;case 11:Aa="PerformanceEntry";break;case 12:Aa="PerformanceTiming";break;case 13:Aa="PerformanceResourceTiming";break;case 14:Aa="PerformanceNavigationTiming";break;case 15:Aa="CSSRule";rb=["cssText","parentStyleSheet"];
+break;case 16:Aa="CSSStyleSheet";rb=["cssRules","insertRule"];break;case 17:Aa="Request";rb=["url"];break;case 18:Aa="Response";rb=["ok","status","statusText"];break;case 19:Aa="Set";rb=["add","entries","forEach"];break;case 20:Aa="Map";rb=["set","entries","forEach"];break;case 21:Aa="Worker";rb=["addEventListener","postMessage","terminate"];break;case 22:Aa="XMLHttpRequest",rb=["open","send","setRequestHeader"]}D=Aa;if(!D)return!1;rb=rb.length?rb:M;try{var Jb=!!Xa[D]&&q instanceof Xa[D],Ba=Object.prototype.toString.call(q);
+if(!M.length&&(Jb||Ba==="[object "+D+"]"))return!0}catch(Hc){}for(M=0;M<rb.length;M++)if(Jb=rb[M],"string"!==typeof Jb&&"number"!==typeof Jb&&"symbol"!==typeof Jb||!(Jb in q))return!1;return!!rb.length}function wb(){var q,D=Xa.dT_;Xa.dT_=(q={},q.di=0,q.version="10209210209190405",q.cfg=D?D.cfg:"",q.iCE=D?D.iCE:function(){return navigator.cookieEnabled},q.ica=1,q.disabled=!1,q.overloadPrevention=!1,q.gx=ja,q.cx=xa,q.mp=Fb,q.mtp=Ub,q.mi=mc,q.mw=hc,q.gAST=Mc,q.ww=tc,q.stu=uc,q.nw=Rc,q.apush=yb,q.st=Dc,q.si=
+Yc,q.aBPSL=Gc,q.rBPSL=Bc,q.gBPSL=sc,q.aBPSCC=bd,q.gBPSCC=bc,q.buildType="dynatrace",q.gSSV=Oa,q.sSSV=Ia,q.rSSV=L,q.rvl=ke,q.pn=x,q.iVSC=Za,q.p3SC=Cb,q.pLSC=sb,q.io=mb,q.dC=va,q.sC=Bb,q.esc=S,q.gSId=kc,q.gDtc=ic,q.gSC=Eb,q.sSC=ua,q.gC=Va,q.cRN=y,q.cRS=O,q.gEL=G,q.gEBTN=F,q.cfgO=$b,q.pCfg=eb,q.pCSAA=Wa,q.cFHFAU=Fa,q.sCD=vb,q.bcv=Ya,q.ncv=P,q.scv=Ga,q.stcv=Sa,q.rplC=Q,q.cLSCK=ta,q.gFId=Vd,q.gBAU=nb,q.iS=Qa,q.eWE=ee,q.oEIE=w,q.oEIEWA=Rb,q.eA=u,q.dA=v,q.gcSId=Sc,q.iNV=T,q.gVID=B,q.dPV=za,q.ePV=Pa,q.sVIdUP=
+Ce,q.sVTT=Ue,q.sVID=od,q.rVID=zb,q.gVI=Nd,q.gNVIdN=De,q.gNVId=Nc,q.gARnVF=Yd,q.cAUV=Pd,q.uVT=Kd,q.aNVL=Ee,q.gPC=Tc,q.cPC=zd,q.sPC=Gd,q.clB=dd,q.ct=rc,q.aRI=lb,q.iXB=pb,q.gXBR=db,q.sXBR=ub,q.de=Ea,q.cCL=jb,q.gEC=Wd,q.iEC=gd,q.rnw=Na,q.gto=Ta,q.ael=ca,q.rel=U,q.sup=K,q.cuel=Ca,q.iAEPOO=dc,q.iSM=J,q.aIOf=cb,q.gxwp=Ka,q.iIO=$a,q.prm=oa,q.cI=Fd,q.gidi=fd,q.iDCV=Kb,q.gCF=Pc,q)}function Ab(){try{if(!Sb())return!1;wb();try{jh=Xa.localStorage,mf=Xa.sessionStorage}catch(pg){}kd();Kg=wd();ig=[];jd=[];xd={};
+hg||(Xa.clearTimeout=cd(Pf),Xa.clearInterval=cd(Lh),hg=!0);var q=Math.random(),D=Math.random();ui=0!==q&&0!==D&&q!==D;if(-1!==mb(navigator.userAgent,"Googlebot")){var M=performance.getEntriesByType("navigation")[0];q=1;if(M){for(var Aa in M)if("number"===typeof M[Aa]&&M[Aa]){var rb=M[Aa];q=1===q?rb:q+rb}var Jb=Math.floor(1E4*q)}else Jb=q;Gg=N(Jb)}else ui?Gg=Math.random:Gg=N(wd());kg=Kg%Nh+"_"+x(y(0,1E3)+"");var Ba;vd=(Ba={},Ba.ade="",Ba.aew=!0,Ba.agentLocation="",Ba.agentname="",Ba.agentUri="",Ba.uana=
+"data-dtname,data-dtName",Ba.app="",Ba.async=!1,Ba.ase=!1,Ba.auto=!1,Ba.bp1=!1,Ba.bp2=!1,Ba.bp=1,Ba.bs=!1,Ba.buildNumber=0,Ba.csprv=!0,Ba.cepl=16E3,Ba.cls=!0,Ba.ccNcss=!1,Ba.cg=!1,Ba.coo=!1,Ba.cooO=!1,Ba.cssm="0",Ba.cors=!1,Ba.csu="",Ba.cuc="",Ba.cux=!1,Ba.dataDtConfig="",Ba.debugName="",Ba.dvl=500,Ba.dASXH=!1,Ba.disableCookieManager=!1,Ba.disableLogging=!1,Ba.dmo=!1,Ba.doel=!1,Ba.dpch=!1,Ba.dpvc=!1,Ba.disableXhrFailures=!1,Ba.domain="",Ba.domainOverride="",Ba.doNotDetect="",Ba.ds=!0,Ba.dsndb=!1,
+Ba.dsss=!1,Ba.dssv=!0,Ba.eni=!0,Ba.euf=!1,Ba.evl="",Ba.extblacklist="",Ba.exteventsoff=!1,Ba.fau=!0,Ba.fa=!1,Ba.featureHash="",Ba.ffi=!1,Ba.hvt=216E5,Ba.lastModification=0,Ba.lupr=!0,Ba.imm=!1,Ba.iqvn=!1,Ba.initializedModules="",Ba.ign="",Ba.instr="",Ba.iub="",Ba.lab=!1,Ba.legacy=!1,Ba.lmut=!0,Ba.lt=!0,Ba.lzwd=!1,Ba.lzwe=!1,Ba.mb="",Ba.md="",Ba.mdp="",Ba.mdl="",Ba.mdn=5E3,Ba.bismepl=2E3,Ba.mel=200,Ba.mepp=10,Ba.moa=30,Ba.mrt=3,Ba.mpl=1024,Ba.mmds=2E4,Ba.msl=3E4,Ba.mhl=4E3,Ba.name="",Ba.ncw=!1,Ba.ntd=
+!1,Ba.oat=180,Ba.ote=!1,Ba.owasp=!1,Ba.perfbv=1,Ba.prfSmpl=0,Ba.pt=!0,Ba.pui=!1,Ba.pVO=!1,Ba.raxeh=!0,Ba.rdnt=0,Ba.reportUrl="dynaTraceMonitor",Ba.restoreTimeline=!1,Ba.rid="",Ba.ridPath="",Ba.rpid="",Ba.rcdec=12096E5,Ba.rt=1E4,Ba.rtl=0,Ba.rtp=2,Ba.rtt=1E3,Ba.rtu=200,Ba.rx_visitID="",Ba.sl=100,Ba.spc="",Ba.srbbv=1,Ba.srbw=!0,Ba.srad=!0,Ba.srmr=100,Ba.srms="1,1,,,",Ba.srsr=1E5,Ba.srtbv=3,Ba.srtd=1,Ba.srtr=500,Ba.srvr="",Ba.srvi=0,Ba.srwo=!1,Ba.srre="",Ba.ssc=!1,Ba.st=3E3,Ba.svNB=!1,Ba.syntheticConfig=
+!1,Ba.tal=0,Ba.tp="500,50,3",Ba.tt=100,Ba.tvc=3E3,Ba.uam=!1,Ba.uxdce=!1,Ba.uxdcw=1500,Ba.uxrgce=!0,Ba.uxrgcm="100,25,300,3;100,25,300,3",Ba.usrvd=!0,Ba.vcfi=!0,Ba.vcit=1E3,Ba.vct=50,Ba.vcv=1,Ba.vcx=50,Ba.vs=1,Ba.xb="",Ba.chw="",Ba.xmut=!0,Ba.xt=0,Ba.srcss=!1,Ba.srmcrl=1,Ba.srmcrv=10,Ba.nosr=!1,Ba.bisaoi=!1,Ba.bisCmE="",Ba.mcepsl=100,Ba.erjdw=!0,Ba.fvdi=!1,Ba.srif=!1,Ba.srmt=!1,Ba.dsa=!1,Ba.exp=!1,Ba.peti=!1,Ba);a:{var Hc=Gb().cfg;yc={reportUrl:"dynaTraceMonitor",initializedModules:"",csu:"dtagent",
+dataDtConfig:"string"===typeof Hc?Hc:""};Gb().cfg=yc;yc.csu="ruxitagentjs";var Ic=yc.dataDtConfig;Ic&&-1===mb(Ic,"#CONFIGSTRING")&&(Wa(Ic,yc),pa("domain"),pa("auto"),pa("app"),Fa(yc));var md=F("script"),Hd=G(md),Xd=-1===mb(yc.dataDtConfig||"","#CONFIGSTRING")?yc:null;if(0<Hd)for(Jb=0;Jb<Hd;Jb++)b:{M=void 0;var vi=md[Jb];Aa=Xd;if(vi.attributes){var ij=yc.csu+"_bootstrap.js";rb=/.*\/jstag\/.*\/.*\/(.*)_bs(_dbg)?.js$/;Ba=Aa;var ye=vi.src,Tb=null===ye||void 0===ye?void 0:ye.indexOf(ij),tf=vi.attributes.getNamedItem("data-dtconfig");
+if(tf){Hc=ye;var jj=tf.value;Ic={};yc.legacy="1";if(Hc){var Zd=/([a-zA-Z]*)[0-9]{0,4}_([a-zA-Z_0-9]*)_([0-9]+)/g.exec(Hc);if(null===Zd||void 0===Zd?0:Zd.length)Ic.csu=Zd[1],Ic.featureHash=Zd[2],Ic.agentLocation=Hc.substr(0,mb(Hc,Zd[1])-1),Ic.buildNumber=Zd[3]}jj&&Wa(jj,Ic,!0);hb(Ic);M=Ic;if(!Aa)Ba=M;else if(!M.syntheticConfig){Xd=M;break b}}M||(M=yc);if(0<Tb){var uf=Tb+ij.length+5;M.app=ye.length>uf?ye.substr(uf):"Default%20Application"}else if(ye){var Ve=rb.exec(ye);Ve&&(M.app=Ve[1])}Xd=Ba}else Xd=
+Aa}if(Xd)for(var Tf in Xd)Xd.hasOwnProperty(Tf)&&(md=Tf,yc[md]=Xd[md]);if(yc.rx_visitID){var Uf=yc.rx_visitID;Uf&&(Gb().rx_visitID=Uf)}var $d=ta();try{var wi=(Xd=jh)&&Xd.getItem($d);if(wi){var He=eb(wi),Bd=Wa(He.config||""),We=yc.lastModification||"0",qg=x((Bd.lastModification||He.lastModification||"0").substr(0,13)),hd="string"===typeof We?x(We.substr(0,13)):We;if(!We||qg>=hd)if(Bd.agentname=He.name,Bd.agentUri?Fa(Bd):(Bd.csu=He.name,Bd.featureHash=He.featureHash),vb(Bd,!0),pb(Bd),lb(Bd),qg>(yc.lastModification||
+0)){var Ie=yc.auto,lh=yc.legacy;yc=Q(Bd);yc.auto=Ie;yc.legacy=lh}}}catch(pg){}vb(yc);try{var Je=yc.ign;if(Je&&(new RegExp(Je)).test(Xa.location.href)){document.dT_=Xa.dT_=void 0;var Qd=!1;break a}}catch(pg){}if(J()){var Lg=navigator.userAgent,xi=mb(Lg,"RuxitSynthetic")+14+5,Vf=Lg.substring(xi);if(-1!==mb(Vf," c")){var Oh=Vf.split(" ");for($d=0;$d<Oh.length;$d++){var mh=Oh[$d];if("c"===mh.charAt(0)){var pd=mh.substr(1),vf=pd.indexOf("="),Mg=pd.substring(0,vf),Ng=pd.substring(vf+1);Mg&&Ng&&(Hg[Mg]=
+Ng)}}}Q(yc)}Qd=!0}if(!Qd)return!1;ya();try{rg=Gb().disabled||!!Oa("dtDisabled")}catch(pg){}var qd;if(!(qd=Ga("agentLocation")))a:{var sg=Ga("agentUri");if(sg||document.currentScript){var Wf=sg||document.currentScript.src;if(Wf){Qd=Wf;var kj=-1===mb(Qd,"_bs")&&-1===mb(Qd,"_bootstrap")&&-1===mb(Qd,"_complete")?1:2,$c=Wf.lastIndexOf("/");for(Qd=0;Qd<kj&&-1!==$c;Qd++)Wf=Wf.substr(0,$c),$c=Wf.lastIndexOf("/");qd=Wf;break a}}var yi=location.pathname;qd=yi.substr(0,yi.lastIndexOf("/"))}Sf=qd;og=Ga("agentname")||
+Ga("csu")||"ruxitagentjs";"true"===Va("dtUseDebugAgent")?0>og.indexOf("dbg")&&(og=Ga("debugName")||og+"dbg"):og=Ga("name")||og;if(!Ya("auto")&&!Ya("legacy")&&!rg){var nh=Ga("agentUri")||nb(Ga("featureHash")),Xe;if(!(Xe=Ya("async")||"complete"===document.readyState)){var Ld=Xa.navigator.userAgent,Ye=Ld.indexOf("MSIE ");Xe=0<Ye?9>=parseInt(Ld.substring(Ye+5,Ld.indexOf(".",Ye)),10):!1}Xe?Qa(nh,Ya("async"),void 0,void 0,"dtjsagent"):(document.write('<script id="dtjsagentdw" type="text/javascript" src="'+
+nh+'">\x3c/script>'),document.getElementById("dtjsagentdw")||Qa(nh,Ya("async"),void 0,void 0,"dtjsagent"))}-1!==mb(Xa.location.href,"_DT_RENDERING_")&&(Gb().RMOD={conf:ae,ignore:cc,ID:"_DT_RENDERING_"},Sf&&Qa(nb("R"),!0,void 0,void 0,"dtjsagent"));Va("dtCookie")&&Sa("cooO",!0);ie();Sa("pVO",!!Od("dt-pVO"));ee(B);Te=18E5;ng=P("hvt")||216E5;Rb(ue);Rb(zd,[1]);ti=[];Rf="dtCookie dtLatC rxvt dtAdk dtAdkSettings dtPC".split(" ");if(Ya("cg"))try{r(Object.getOwnPropertyDescriptor(Document.prototype,"cookie")||
+Object.getOwnPropertyDescriptor(HTMLDocument.prototype,"cookie"))}catch(pg){}}catch(pg){return!1}return!0}function Gb(){return Xa.dT_}var Xa="undefined"!==typeof window?window:self,lc=setTimeout;V.prototype["catch"]=function(q){return this.then(null,q)};V.prototype.then=function(q,D){var M=new this.constructor(wa);ha(this,new ka(q,D,M));return M};V.prototype["finally"]=function(q){var D=this.constructor;return this.then(function(M){return D.resolve(q()).then(function(){return M})},function(M){return D.resolve(q()).then(function(){return D.reject(M)})})};
+V.all=function(q){return new V(function(D,M){function Aa(Hc,Ic){try{if(Ic&&("object"===typeof Ic||"function"===typeof Ic)){var md=Ic.then;if("function"===typeof md){md.call(Ic,function(Hd){Aa(Hc,Hd)},M);return}}rb[Hc]=Ic;0===--Jb&&D(rb)}catch(Hd){M(Hd)}}if(!q||"undefined"===typeof q.length)throw new TypeError("Promise.all accepts an array");var rb=Array.prototype.slice.call(q);if(0===rb.length)return D([]);for(var Jb=rb.length,Ba=0;Ba<rb.length;Ba++)Aa(Ba,rb[Ba])})};V.resolve=function(q){return q&&
+"object"===typeof q&&q.constructor===V?q:new V(function(D){D(q)})};V.reject=function(q){return new V(function(D,M){M(q)})};V.race=function(q){return new V(function(D,M){for(var Aa=0,rb=q.length;Aa<rb;Aa++)q[Aa].then(D,M)})};V.V="function"===typeof setImmediate&&function(q){setImmediate(q)}||function(q){lc(q,0)};V.pa=function(q){"undefined"!==typeof console&&console&&console.warn("Possible Unhandled Promise Rejection:",q)};var Vc,Kh,gj,ri,Fg=Xa.attachEvent,Jh=Xa.Worker,gk=Jh&&Jh.prototype.addEventListener,
+te=[],si=["touchstart","touchend","scroll"],td,fg,kf,fh,ud="abort getAllResponseHeaders getResponseHeader open overrideMimeType send setRequestHeader".split(" "),Ae,lf,Gg,ui,gg=new (function(){return function(){this["!"]="%21";this["~"]="%7E";this["*"]="%2A";this["("]="%28";this[")"]="%29";this["'"]="%27";this.$="%24";this[";"]="%3B";this[","]="%2C"}}()),Hg={},vd,yc={},wf,Jg=(wf={},wf.l="Lax",wf.s="Strict",wf.n="None",wf),Ig=!1,Of=Xa.postMessage,gh=Xa.Worker&&Xa.Worker.prototype.postMessage,Be=Xa.parent.postMessage,
+nf=Xa.top.postMessage,hj=Xa.Worker,jg=Xa.Blob,of=Xa.URL&&Xa.URL.createObjectURL,Pf,Lh,hh,ih,hg=!1,ig,Mh=[],jd=[],Kg,jh,mf,xd={},wd,pf,kg,Nh=6E8,lg="rxec",Qf="rxvisitid",qf=/([A-Z]+)-([0-9]+)/,mg=[],Te,ng,xe=!1,Fe,je=!1,sf=[],Vb=[],kh=[],Rf=[],ti=[],Ad=!1,rg,Sf,og,ae={childList:!0,subtree:!0,attributes:!0,attributeOldValue:!0},cc=["_DT_RENDERING_"];(function(q){var D,M;q=q||0>(null===(D=navigator.userAgent)||void 0===D?void 0:D.indexOf("RuxitSynthetic"));if(!Xa.dT_||!Xa.dT_.cfg||"string"!==typeof Xa.dT_.cfg||
+"initialized"in Xa.dT_&&Xa.dT_.initialized)null===(M=Xa.console)||void 0===M?void 0:M.log("InitConfig not found or agent already initialized! This is an injection issue."),Xa.dT_&&(Xa.dT_.di=3);else if(q&&!Ab()){try{delete Xa.dT_}catch(Aa){Xa.dT_=void 0}jb()&&Xa.console.log("JsAgent initCode initialization failed!")}})(!1)})();}).call(this);
+</script><script type="text/javascript" src="/ruxitagentjs_A2SVfhjqru_10209210209190405.js" defer="defer"></script><script src="https://www.recaptcha.net/recaptcha/api.js?render=6Lc8z9YUAAAAAPs8cWSmTBHNs7N2n8ruye0fJiL4" async defer></script>
+		<script>
+			window.recaptchaV3SiteKey = '6Lc8z9YUAAAAAPs8cWSmTBHNs7N2n8ruye0fJiL4';
+			window.wholePageFlag = true;
+      window.botRequest = false;
+      window.enableDelayedScripts = false
+		</script>
+		
+		<script type="text/javascript">
+	window.BASE_URL = '/reviews/api-proxy';
+	window.ACCESS_TOKEN_DOMAIN = '/reviews/auth-proxy';
+	window.REVIEWS_API_HOST = '/reviews/api2-proxy';
+	window.CDN_URL = 'https://reviews.static.gartner.com';
+
+	// send the refval up for any page.  Do this as soon as possible so that other end points will see this latest value.
+	if ('') {
+		var url = '/reviews/api-proxy/reviews/identify/reference?refval=';
+		window.sessionStorage.setItem("client-side-refval", '');
+		var campaignExpiryKey = "campaign-expiry-date";
+
+		if ('') {
+			// If there is a new date, set it to session or replace existing date.
+			window.sessionStorage.setItem(campaignExpiryKey, '');
+		} else {
+			// If there is no new date, remove existing date.
+			window.sessionStorage.removeItem(campaignExpiryKey);
+		}
+
+		if('') {
+			url = url + '&refuser=';
+			window.sessionStorage.setItem("client-side-refuser", '');
+		}
+		if('') {
+			url = url + '&channel=';
+		}
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', url);
+		xhr.withCredentials = true;
+		xhr.send();
+	}
+
+	if (typeof initTime === 'undefined') {
+		var initTime = Date.now();
+	}
+</script>
+        <script>
+	var precalledEndPoints = {"featureFlags":"{\"es-vp-search\":true,\"ReferTabSocialInviteShowFlag\":true,\"vendor-pledge\":true,\"use-elastic-for-tpt\":true,\"resource-center-doc-preview-server-side\":true,\"disable-paste-in-survey\":true,\"ReferTabResendInviteShowFlag\":true,\"MC-Incentives-On\":false,\"content-tagging-feature-flag\":true,\"vp-fold-products\":true,\"vendor-compare-feature-flag\":true,\"vp-search-delay\":false,\"pi-readership-analytics\":true,\"cc-winners-page\":false,\"rating-decay\":true,\"next-js\":true,\"es-mvp-search\":true,\"Promo-Incentives-On\":true,\"vendor-profile-project\":true,\"ReferTabEmailInviteShowFlag\":true,\"listing-guidelines\":true,\"pi-plus-resource-center\":true,\"new-vendor-product-landing-page\":true}","/reviews/dci?path=%2Freviews%2Flogin":"{\"injection\":\"\"}"};
+</script>
+        <script>
+			window.flagsAndPermissions = {"es-vp-search":true,"ReferTabSocialInviteShowFlag":true,"vendor-pledge":true,"use-elastic-for-tpt":true,"resource-center-doc-preview-server-side":true,"disable-paste-in-survey":true,"ReferTabResendInviteShowFlag":true,"MC-Incentives-On":false,"content-tagging-feature-flag":true,"vp-fold-products":true,"vendor-compare-feature-flag":true,"vp-search-delay":false,"pi-readership-analytics":true,"cc-winners-page":false,"rating-decay":true,"next-js":true,"es-mvp-search":true,"Promo-Incentives-On":true,"vendor-profile-project":true,"ReferTabEmailInviteShowFlag":true,"listing-guidelines":true,"pi-plus-resource-center":true,"new-vendor-product-landing-page":true,"ProductCompare":"Y","ShowAllContentTags":"N","MyReviewInteraction":"Y","Referral":"N","VendorCompare":"N","ResourceCenter":"N"}
+		</script>
+</head>
+
+<body id="root">
+		<div id="hcaptcha-container"></div>
+		<div id="app"></div>
+		
+		<!-- partials login -->
+
+	<script type="text/javascript">
+		var isLoggedIn = false;
+	</script>
+
+
+        <script type="text/javascript">
+  function handleCrossTabLogout(event) {
+    if (typeof localStorage != "undefined" && event && event.key === "logout-action" && event.newValue === "true") {
+      window.isLoggedIn = false;
+      console.log("StorageEvent :: handleCrossTabLogout :: values received ====> ", event.key, event.oldValue, event.newValue);
+      console.log("Setting window.isLoggedIn flag as false...");
+      localStorage.removeItem("logout-action");
+    }
+  }
+  console.log("Adding logout-action event handler...");
+  window.addEventListener("storage", handleCrossTabLogout);
+</script>
+
+		<script type="text/javascript">
+				window.isDev = false;
+				window.hash ='.1619084492936';
+        window.showPDFLink = true; // Update this with exposed variable from the controller
+        window.adminUrl = "https://reviews.admin.gartner.com/pi/admin"
+
+		// for customer choice awards
+        window.awardType = '';
+
+        // from vendor.html
+        window.showThumbsUp = true;
+        window.redirectToLogin = true;
+        window.googleExperiments = {
+            MarketsPageExperiment: { showNewUserModal: false },
+            ComparePageExperiment: { showNewUserModal: false },
+            VendorPageExperiment: { showNewUserModal: false },
+            EmailVerificationModalExperiment: { showEmailVerificationModal: false },
+            vendorPage: {
+                defaultSortTest: '-helpfulness',
+                inContentTests: [{
+                    type: 'compareVendorPromo',
+                    limit: 3,
+                    index: 2
+                }]
+            },
+        };
+        window.showLinkedinLogin = true;
+        window.model = {showLinkedinLogin : true};
+    </script>
+    
+    <script type="text/javascript"> window.isProd = true; </script>
+
+    <!-- <script src="https://reviews.static.gartner.com/js/lib/jquery.min.js"></script> -->
+    
+        <script type="text/javascript" src="https://reviews.static.gartner.com/js/lib/jquery.0bdc04968d2fe6799360150868a8b8b6.js"></script>
+    
+    <!--link href="https://reviews.static.gartner.com/css_lib/fuelux.min.css" rel="stylesheet" type="text/css" / -->
+        <!-- <script src="https://reviews.static.gartner.com/js/lib/bootstrap.min.js"></script> -->
+        
+			<script type="text/javascript" src="https://reviews.static.gartner.com/js/lib/bootstrap.046ba2b5f4cff7d2eaaa1af55caa9fd8.js"></script>
+		
+				
+    
+        <script src="https://reviews.static.gartner.com/react/assets/hash/libraries.b23716a52cd415622acfc94ff87a5efd.js" type="text/javascript"></script>
+    
+        <script src="https://reviews.static.gartner.com/react/assets/hash/spaReactRouter.aaa97f8a24bd1d518f4f9219d04bfc3f.js" type="text/javascript"></script>
+    
+
+
+    <!-- Hotjar Tracking Code for www.gartner.com/reviews -->
+
+        <script>
+        if (window.botRequest === false) {
+                if (window.enableDelayedScripts === true) {
+                    window.addEventListener('load', function () {
+                        console.log("HotJar Scripts started on Window Load ...");
+                        executeHotJar();
+                    });
+                    console.log("Enabled Delayed Scripts for HotJar...");
+                }
+                else {
+                    console.log("Disabled Delayed Scripts for HotJar...");
+                    executeHotJar(); 
+                }
+        } else {
+                console.log("This is a bot request, skipping hotjar script setup...");
+            }
+            function executeHotJar() {
+                (function (h, o, t, j, a, r) {
+                    h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+                    h._hjSettings = { hjid: 400897, hjsv: 6 };
+                    a = o.getElementsByTagName('head')[0];
+                    r = o.createElement('script'); r.defer = 1;
+                    r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+                    a.appendChild(r);
+                })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+            }
+        </script>
+    
+
+	<script type="text/javascript">
+</script>
+</body>
+<footer>
+	<script>
+	// Inline for maximum performance from https://github.com/filamentgroup/loadCSS
+	(function( w ){
+		"use strict";
+		// rel=preload support test
+		if( !w.loadCSS ){
+			w.loadCSS = function(){};
+		}
+		// define on the loadCSS obj
+		var rp = loadCSS.relpreload = {};
+		// rel=preload feature support test
+		// runs once and returns a function for compat purposes
+		rp.support = (function(){
+			var ret;
+			try {
+				ret = w.document.createElement( "link" ).relList.supports( "preload" );
+			} catch (e) {
+				ret = false;
+			}
+			return function(){
+				return ret;
+			};
+		})();
+
+		// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+		// then change that media back to its intended value on load
+		rp.bindMediaToggle = function( link ){
+			// remember existing media attr for ultimate state, or default to 'all'
+			var finalMedia = link.media || "all";
+
+			function enableStylesheet(){
+				// unbind listeners
+				if( link.addEventListener ){
+					link.removeEventListener( "load", enableStylesheet );
+				} else if( link.attachEvent ){
+					link.detachEvent( "onload", enableStylesheet );
+				}
+				link.setAttribute( "onload", null ); 
+				link.media = finalMedia;
+			}
+
+			// bind load handlers to enable media
+			if( link.addEventListener ){
+				link.addEventListener( "load", enableStylesheet );
+			} else if( link.attachEvent ){
+				link.attachEvent( "onload", enableStylesheet );
+			}
+
+			// Set rel and non-applicable media type to start an async request
+			// note: timeout allows this to happen async to let rendering continue in IE
+			setTimeout(function(){
+				link.rel = "stylesheet";
+				link.media = "only x";
+			});
+			// also enable media after 3 seconds,
+			// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+			setTimeout( enableStylesheet, 3000 );
+		};
+
+		// loop through link elements in DOM
+		rp.poly = function(){
+			// double check this to prevent external calls from running
+			if( rp.support() ){
+				return;
+			}
+			var links = w.document.getElementsByTagName( "link" );
+			for( var i = 0; i < links.length; i++ ){
+				var link = links[ i ];
+				// qualify links to those with rel=preload and as=style attrs
+				if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+					// prevent rerunning on link
+					link.setAttribute( "data-loadcss", true );
+					// bind listeners to toggle media back
+					rp.bindMediaToggle( link );
+				}
+			}
+		};
+
+		// if unsupported, run the polyfill
+		if( !rp.support() ){
+			// run once at least
+			rp.poly();
+
+			// rerun poly on an interval until onload
+			var run = w.setInterval( rp.poly, 500 );
+			if( w.addEventListener ){
+				w.addEventListener( "load", function(){
+					rp.poly();
+					w.clearInterval( run );
+				} );
+			} else if( w.attachEvent ){
+				w.attachEvent( "onload", function(){
+					rp.poly();
+					w.clearInterval( run );
+				} );
+			}
+		}
+
+
+		// commonjs
+		if( typeof exports !== "undefined" ){
+			exports.loadCSS = loadCSS;
+		}
+		else {
+			w.loadCSS = loadCSS;
+		}
+	}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+	<!-- <script>
+		// load it using vanilla JS so that we dont hold up the page
+		var link=document.createElement('link');
+		link.href='https://reviews.static.gartner.com/css_min/piUserPageSpecific.min.1619084492936.css';
+		link.rel='stylesheet';
+		link.type='text/css';
+		link.id='pageSpecificCSS';
+		link.onload=function() {
+			// remove the single page specific CSS, so that we dont have two sets of the same CSS definitions
+			var elements = document.getElementsByClassName('firstPageCSS');
+			while(elements && elements.length > 0){
+				elements[0].parentNode.removeChild(elements[0]);
+			}
+		};
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script> -->
+	<noscript>
+		<link id="pageSpecificCSS" href="https://reviews.static.gartner.com/css_min/piUserPageSpecific.min.1619084492936.css"  rel="stylesheet" type="text/css" />
+	</noscript>
+</footer>
+</html> 

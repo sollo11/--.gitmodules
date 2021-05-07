@@ -1,0 +1,474 @@
+<!doctype html>
+
+<!--[if lt IE 7]><html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html lang="en-US" class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html lang="en-US" class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-US" class="no-js"><!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Member Login | Gartner</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <link rel="apple-touch-icon" href="https://www.l2inc.com/wp-content/themes/L22017/library/assets/apple-touch-icon.png">
+  <link rel="icon" href="/G-favicon.png">
+
+  <!--[if IE]>
+  <link rel="shortcut icon" href="/G-favicon.png">
+  <![endif]-->
+  <meta name="msapplication-TileColor" content="#f01d4f">
+  <meta name="msapplication-TileImage" content="https://www.l2inc.com/wp-content/themes/L22017/library/assets/win8-tile-icon.png">
+
+
+  <link rel="stylesheet" type="text/css" href="https://www.l2inc.com/wp-content/themes/L22017/library/ie/stylesheets/styles.css?v=1.2" media="all" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NT7VS2N');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@L2_Digital">
+<meta name="twitter:url" content="https://www.l2inc.com/member-login">
+<meta name="twitter:creator" content="@L2_Digital">
+<meta name="twitter:title" content="Member Login">
+<meta name="twitter:description" content="Gartner L2 business intelligence firm benchmarks digital performance of consumer brands, and provides digital research insights to help marketers grow business.">
+<meta name="twitter:image" content="">
+<meta itemprop="thumbnailUrl" content="" name="thumbnail" />
+<meta itemprop="image" content="" />
+<meta property="og:title" content="Member Login" />
+<meta property="og:type" content="activity" />
+<meta property="og:url" content="https://www.l2inc.com/member-login" />
+<meta property="og:image" content="" />
+<meta property="og:site_name" content="Gartner L2: Benchmarking Digital Performance" />
+<meta property="og:description" content="Gartner L2 business intelligence firm benchmarks digital performance of consumer brands, and provides digital research insights to help marketers grow business." />
+<meta name="robots" content="noodp,noydir" />
+<!-- All in One SEO Pack 2.8 by Michael Torbert of Semper Fi Web Design[-1,-1] -->
+<link rel="canonical" href="https://www.l2inc.com/member-login" />
+<!-- /all in one seo pack -->
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Gartner: Digital Performance Benchmarks &raquo; Feed" href="https://www.l2inc.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="Gartner: Digital Performance Benchmarks &raquo; Comments Feed" href="https://www.l2inc.com/comments/feed" />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://www.l2inc.com/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='bones-stylesheet-css'  href='https://www.l2inc.com/wp-content/themes/L22017/library/css/styles.css?v=1.5' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='bones-ie-only-css'  href='https://www.l2inc.com/wp-content/themes/L22017/library/css/ie.css' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='https://www.l2inc.com/wp-includes/js/jquery/jquery.js'></script>
+<link rel='https://api.w.org/' href='https://www.l2inc.com/wp-json/' />
+<link rel='shortlink' href='https://www.l2inc.com/?p=165749' />
+<link rel="alternate" type="application/json+oembed" href="https://www.l2inc.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.l2inc.com%2Fmember-login" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.l2inc.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.l2inc.com%2Fmember-login&#038;format=xml" />
+<style>.post-thumbnail img[src$='.svg'] { width: 100%; height: auto; }</style><link rel="icon" href="https://www.l2inc.com/wp-content/uploads/2020/01/G-favicon.png" sizes="32x32" />
+<link rel="icon" href="https://www.l2inc.com/wp-content/uploads/2020/01/G-favicon.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://www.l2inc.com/wp-content/uploads/2020/01/G-favicon.png" />
+<meta name="msapplication-TileImage" content="https://www.l2inc.com/wp-content/uploads/2020/01/G-favicon.png" />
+
+      <!-- Google Tag Manager -->
+    <script>
+      /* replaces the custom variable from GA for GTM */
+      dataLayer = [{
+        'member_co': 'none',
+        'section': '',
+        'page': 'Member Login'
+      }];
+    </script>
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KLJDKL');</script>
+    <!-- End Google Tag Manager -->
+  
+
+    <script type="text/javascript">
+          window.user_message ='';
+    
+    window.current_url='/member-login';
+  </script>
+
+  <style>
+    /* hide or show elements based on login status */
+    .l2-staff-only { display: none; }.member-only { display: none; }.nonmember-only { display: block; }
+    .js-sticky-nav.clone {
+      position: fixed;
+      top: -10rem;
+      left: 0;
+      right: 0;
+      z-index:999;
+      transition: 0.4s top cubic-bezier(.3, .73, .3, .74);
+    }
+
+    body.down .js-sticky-nav.clone { top: 0; }
+  </style>
+
+  <meta property="fb:pages" content="290889684314" />
+
+  <script type="text/javascript">
+    var _elqQ = _elqQ || [];
+
+    _elqQ.push(['elqSetSiteId', '1849907385']);
+    _elqQ.push(['elqTrackPageView']);
+
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '//img03.en25.com/i/elqCfg.min.js';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load);
+    })();
+  </script>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage">
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLJDKL"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div id="modal-overlay" class="overlay-main hide ovr--hidden" style="background: rgba(26,26,26,0.3); align-items: center;">
+    <div class="max-width-wrapper / w100">
+      <div id="modal-container" class="bg-white mlauto mrauto w90 w70-m ba b-grey10 pa3 pa5-m">
+      <!-- Forms go here -->
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="desktop-nav / relative / hide block-l / w100">
+   <!--  <nav class="wrapper / helvetica / bg-white bb b-grey20 / zmax" style="padding-bottom: 0; padding-top: 0;">
+      <div class="max-width-wrapper flex / w100 h2">
+        <h6 class="h2 / mr2 sc">
+          <a href="/whats-new" class="center-v--rel / h100 / grey90 / helvetica / pointer link / hover-rose">What's New</a>
+        </h6>
+
+        <div class="w1 h1 / ba br100 b-grey90 mt2">
+          <h6 class="center-a--abs / h1 / grey90">3</h6>
+        </div>
+
+        <ul class="top-nav / absolute right1 / flex / h2">
+                      <li class="h100">
+              <h6 class="sc h100 mr3">
+                <a href="/become-a-client" class="center-v--rel / grey90 / hover-rose">Become a Client</a>
+              </h6>
+            </li>
+          
+          <li class="h100">
+            <h6 class="sc h100 mr3">
+              <a href="/email-signup" class="center-v--rel / grey90 / hover-rose">Email Signup</a>
+            </h6>
+          </li>
+
+          <li class="h100">
+            <h6 class="sc h100 mr3">
+              <a href="/faq" class="center-v--rel / grey90 / hover-rose">FAQ</a>
+            </h6>
+          </li>
+
+        <li class="h100">
+          <h6 class="sc h100 mr3">
+            <a href="https://jobs.gartner.com/careers" class="center-v--rel / grey90 / hover-rose">Gartner Careers</a>
+          </h6>
+        </li>
+
+        <li class="h100">
+          <h6 class="sc h100">
+            <a href="/press" class="center-v--rel / grey90 / hover-rose">Press</a>
+          </h6>
+        </li>
+      </ul>
+    </div>
+    </nav> -->
+
+    <nav class="bg-white / zmax" style="padding-top: 0; padding-bottom: 0;">
+      <div class="w100 / wrapper max-width-wrapper / pt3 pb2">
+        <a href="/" class="">
+          <img src="/wp-content/themes/L22017/library/assets/Digital-Performance-Benchmarks-lockup-desktop.png" class="" alt="Gartner: Digital Performance Benchmarks" style="width: 400px;">
+        </a>
+      </div>
+      
+      <div class="w100 / bb b-grey10 bg-grey05">
+        <div class="wrapper max-width-wrapper / pv0 / flex justify-between">
+          <ul class="h100" style="">
+                        <li class="menu / ml2 / ghost">
+              <h5 class="h100 / inline-block">
+                <a href="/member-login?redirect_to=%2Fmember-login" class="grey90 / pointer / hover-rose">Login</a>
+              </h5>
+              
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <nav class="mobile-nav / block hide-l / w100 h4 / ph3 / bg-white / zmax" style="height: 80px;">
+    <a href="/" class="h100">
+      <img src='/wp-content/themes/L22017/library/assets/Digital-Performance-Benchmarks-lockup-mobile.png' class="center-v--rel" alt="Gartner: Digital Performance Benchmarks" style="width: 230px;">
+    </a>
+
+    <div class="js-hamburger hamburger--spin / center-v--rel fr / inline-block / pointer" type="button">
+      <span class="hamburger-box / relative / inline-block / mt1 / w4">
+        <span class="hamburger-inner / top50 / block"></span>
+      </span>
+    </div>
+  </nav>
+
+  <nav class="mobile-nav js-offside-nav / fixed block hide-l / top5 right0 bottom0 / w75 / ovr-y--scroll / pa3 / bg-white / zmax">
+    <ul class="w100 h100">
+
+      
+      <li class="menu / pt4 pb6">
+        <ul>
+
+                      <li class="mv2">
+              <a href="/member-login?redirect_to=%2Fmember-login" class="pointer link / black">
+                <h5>Login</h5>
+              </a>
+            </li>
+                    
+          <!-- <li class="mv2">
+            <a href="/whats-new" class="pointer link / black">
+              <h5>What's New</h5>
+            </a>
+          </li>
+
+                      <li class="mv2">
+              <a href="/become-a-client" class="pointer link / black">
+                <h5>Become a Client</h5>
+              </a>
+            </li>
+          
+          <li class="mv2">
+            <a href="/email-signup" class="pointer link / black">
+              <h5>Email Signup</h5>
+            </a>
+          </li>
+
+          <li class="mv2">
+            <a href="/faq" class="pointer link / black">
+              <h5>FAQ</h5>
+            </a>
+          </li>
+
+          <li class="mv2">
+            <a href="https://jobs.gartner.com/careers" class="pointer link / black">
+              <h5>Gartner Careers</h5>
+            </a>
+          </li>
+
+          <li class="mv2">
+            <a href="/press" class="pointer link / black">
+              <h5>Press</h5>
+            </a>
+          </li> -->
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+<div id="content" >
+			<header class="article-header wrapper">
+			<h1 class="page-title tac">Member Login</h1>
+		</header>
+	
+	<div id="template-page" class="">
+    
+<style type="text/css">
+	header, .desktop-nav, .mobile-nav {
+		display: none;
+	}
+
+	.login-bg {
+		background: url('/wp-content/themes/L22017/library/assets/site-gate-bg-000.jpg');
+		background-repeat: no-repeat; 
+		background-size: cover;
+		background-position: center top;
+	}
+
+	input#wp-submit {
+		margin-top: 20px;
+		width: 140px;
+		background: #002865;
+		border-color: #002865;
+	}
+
+	.title { font-size: 55px; }
+	
+	.login-box { width: 100%; }
+
+	.gm-cta-btn { width: 240px; }
+
+	/*.logo-img { width: 100px; }*/
+	/*.logo-img { width: 300px; }*/
+
+	@media (min-width: 1030px) {
+		input#wp-submit {
+			margin-top: 30px;
+		}
+		.title { font-size: 65px; }
+
+		.login-box { width: 100%; max-width: 650px; }
+
+		.gm-cta-btn { width: 270px; }
+
+		/*.logo-img { width: 400px; }*/
+	}
+
+	@media (min-width: 1380px) {
+		input#user_login { font-size: 14px; }
+
+		input#user_pass { font-size: 14px; }
+
+		.login-bg { background-position: right top; }
+	}
+</style>
+
+<div class="wrapper login-bg pt4 pt6-l pb7-l pb5" style="min-height: 80vh;">
+	<div class="max-width-wrapper">
+		<img class="logo-img / hide block-l" src="/wp-content/themes/L22017/library/assets/Digital-Performance-Benchmarks-lockup-desktop.png" style="width: 430px;">
+		<img class="logo-img / block hide-l" src="/wp-content/themes/L22017/library/assets/Digital-Performance-Benchmarks-lockup-mobile.png" style="width: 300px;">
+		<h4 class="white bold pt2">Formerly Gartner L2</h4>
+		
+		<div class="flex-l mt5 mt6-l">
+		    <div class="form-container / w50-l pr3" style="">   
+		    	<div class="login-box bg-white / pa4">
+		    		<h3 class="pb3 pb4-l lh-title">Client Login</h3>
+				    
+		<form name="loginform" id="loginform" action="https://www.l2inc.com/wp-login.php" method="post">
+			
+			<p class="login-username">
+				<label for="user_login"></label>
+				<input type="text" name="log" id="user_login" placeholder="Email Address" class="input" value="" size="20" />
+			</p>
+			<p class="login-password">
+				<label for="user_pass"></label>
+				<input type="password" name="pwd" id="user_pass" placeholder="Password" class="input" value="" size="20" />
+			</p>
+			
+			<p class="login-remember"><label><input name="rememberme" type="checkbox" id="rememberme" value="forever" checked="checked" /> Remember Me</label></p>
+			<p class="login-submit">
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary" value="Login" />
+				<input type="hidden" name="redirect_to" value="/my-l2" />
+			</p>
+			
+		</form><h5 class="mb1"><a href="/wp-login.php?action=lostpassword" class="rose link pointer">Forgot your password?</a></h5>		    	</div>
+		    </div>
+
+		    <div class="ml6-l" style="align-self: flex-end;">
+		    	<!-- <h1 class="title / white pt4 pt5-l">Gartner L2 is now Gartner.</h1>
+		    	<h4 class="white pt2" style="max-width: 670px;">Gartner has brought together its world-class advisory and research with L2's unparalleled digital benchmarking to help marketing executives prioritize their strategic investments and measure brand health.</h4> -->
+		    	<h3 class="white pt5 pt0-l pb3">Gartner For Marketers Clients</h3>
+		    	<div class="gm-cta-btn bg-gartner-blue pv2 ph0 ph2-l tac / white / mb4 mb5-l"><a href="https://www.gartner.com/account/signin">Login to the Gartner Client Portal</a></div>
+
+		    	<h3 class="white pb3">Not a client?</h3>
+		    	<div class="gm-cta-btn bg-rose pv2 ph0 ph2-l tac / white"><a href="https://www.gartner.com/marketing">Learn more at Gartner for Marketers</a></div>
+		    </div>
+
+
+	    </div>
+
+    </div>
+</div>
+	</div><!--main-container-->
+
+	<footer role="complementary" class="flex-container">
+	</footer>
+</div><!--content div-->
+
+
+    <footer class="wrapper / flex-wrap-l / helvetica / bg-white max-width-wrapper">
+      <img src="/wp-content/themes/L22017/library/assets/gartner-logo.svg" alt="L2 Inc." class="block inline-block-l / mrauto mlauto ml0-l mr0-l / va-middle / h2">
+
+      <div class="hide block-l / va-middle / mt4 mt0-l / fr-l / tac tar-l">
+         <!-- If NOT member -->
+        <li class="inline-block">
+          <a href="https://www.gartner.com/en/contact/general-contacts" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Contact</h6>
+          </a>
+        </li>
+
+        <li class="inline-block / mh3 / grey60">|</li>
+        
+        <li class="inline-block">
+          <a href="/privacy-policy" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Privacy Policy</h6>
+          </a>
+        </li>
+
+        <li class="inline-block / mh3 / grey60">|</li>
+        
+        <li class="inline-block">
+          <a href="/cookie-policy" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Cookie Policy</h6>
+          </a>
+        </li>
+
+        <li class="inline-block / mh3 / grey60">|</li>
+        
+        <li class="inline-block">
+          <a href="https://www.gartner.com/en/about/policies/terms-of-use" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Terms and Conditions</h6>
+          </a>
+        </li>
+              </div>
+
+      <!-- Footer on mobile -->
+      <div class="hide-l block / va-middle / mt4 / tac">
+         <!-- IF NOT member -->
+        <li class="inline-block">
+          <a href="https://www.gartner.com/en/contact/general-contacts" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Contact</h6>
+          </a>
+        </li>
+
+        <li class="inline-block / mh3 / grey60">|</li>
+        
+        <li class="inline-block">
+          <a href="/privacy-policy" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Privacy Policy</h6>
+          </a>
+        </li>
+
+        <li class="inline-block / mh3 / grey60">|</li>
+        
+        <li class="inline-block">
+          <a href="/cookie-policy" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Cookie Policy</h6>
+          </a>
+        </li>
+
+        <li class="inline-block / mh3 / grey60">|</li>
+        
+        <li class="inline-block">
+          <a href="https://www.gartner.com/en/about/policies/terms-of-use" class="link / pointer">
+            <h6 class="grey60 / hover-rose">Terms and Conditions</h6>
+          </a>
+        </li>
+              </div>
+
+      <div class="tac tar-l / grey60 / mt4">
+        <h6>&#169; 2019 Gartner, Inc. and/or its Affiliates. All Rights Reserved.</h6>
+      </div>
+    </footer>
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.l2inc.com/wp-content/plugins/bwp-minify/min/?f=wp-includes/js/jquery/ui/core.min.js,wp-includes/js/jquery/ui/widget.min.js,wp-includes/js/jquery/ui/position.min.js,wp-includes/js/jquery/ui/menu.min.js,wp-includes/js/wp-a11y.min.js,wp-includes/js/jquery/ui/autocomplete.min.js,scripts/js/jquery.cookie.min.js,scripts/js/handlebars.runtime-v4.0.5.js,wp-content/themes/L22017/library/js/templates/templates.js,scripts/js/l2-custom-2017.js&#038;ver=1.3'></script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+2021/04/27-12:04:51.351 2258 Creating DB C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_excel.officeapps.live.com_0.indexeddb.leveldb since it was missing.
+2021/04/27-12:04:52.294 2258 Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_excel.officeapps.live.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/27-12:21:50.971 900 Level-0 table #5: started
+2021/04/27-12:21:50.975 900 Level-0 table #5: 1516 bytes OK
+2021/04/27-12:21:50.979 900 Delete type=0 #3
+2021/04/27-12:21:50.979 900 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

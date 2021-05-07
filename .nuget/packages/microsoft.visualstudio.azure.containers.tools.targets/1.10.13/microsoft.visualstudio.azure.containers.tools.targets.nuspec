@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.VisualStudio.Azure.Containers.Tools.Targets</id>
+    <version>1.10.13</version>
+    <title>Visual Studio Tools for Containers Targets</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">EULA.md</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <projectUrl>https://aka.ms/vscontainertools</projectUrl>
+    <description>Targets files to enable the Visual Studio Tools for Containers.</description>
+    <releaseNotes>See https://aka.ms/vs-containertools-releasenotes for release notes</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>container containers Docker microservices Azure</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1" />
+    </dependencies>
+  </metadata>
+</package>

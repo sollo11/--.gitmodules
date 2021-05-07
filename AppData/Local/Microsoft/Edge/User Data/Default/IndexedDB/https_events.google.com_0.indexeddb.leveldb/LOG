@@ -1,0 +1,6 @@
+2021/04/27-14:51:03.211 39bc Creating DB C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_events.google.com_0.indexeddb.leveldb since it was missing.
+2021/04/27-14:51:03.229 39bc Reusing MANIFEST C:\Users\Neuro\AppData\Local\Microsoft\Edge\User Data\Default\IndexedDB\https_events.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/27-15:20:28.916 3188 Level-0 table #5: started
+2021/04/27-15:20:28.921 3188 Level-0 table #5: 4273 bytes OK
+2021/04/27-15:20:28.927 3188 Delete type=0 #3
+2021/04/27-15:20:28.928 3188 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
