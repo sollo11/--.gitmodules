@@ -1,0 +1,38 @@
+Log file created at: 2021/05/13 00:20:35
+Running on machine: 32PHS5302
+Binary: Built with gc go1.16 for windows/amd64
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0513 00:20:35.553002    3300 out.go:278] Setting OutFile to fd 1808 ...
+I0513 00:20:35.561277    3300 out.go:325] TERM=,COLORTERM=, which probably does not support color
+I0513 00:20:35.561277    3300 out.go:291] Setting ErrFile to fd 1508...
+I0513 00:20:35.561277    3300 out.go:325] TERM=,COLORTERM=, which probably does not support color
+W0513 00:20:35.600970    3300 root.go:292] Error reading config file at C:\Users\Neuro\.minikube\config\config.json: open C:\Users\Neuro\.minikube\config\config.json: The system cannot find the file specified.
+I0513 00:20:35.633428    3300 out.go:285] Setting JSON to false
+I0513 00:20:35.645226    3300 start.go:108] hostinfo: {"hostname":"32PHS5302","uptime":3122,"bootTime":1620854913,"procs":256,"os":"windows","platform":"Microsoft Windows 10 Pro","platformFamily":"Standalone Workstation","platformVersion":"10.0.19042 Build 19042","kernelVersion":"10.0.19042 Build 19042","kernelArch":"x86_64","virtualizationSystem":"","virtualizationRole":"","hostId":"95605ba1-303e-4fed-b353-5f8c3a6f1815"}
+W0513 00:20:35.645858    3300 start.go:116] gopshost.Virtualization returned error: not implemented yet
+I0513 00:20:35.677741    3300 out.go:157] * minikube v1.19.0 on Microsoft Windows 10 Pro 10.0.19042 Build 19042
+I0513 00:20:35.691913    3300 out.go:157]   - MINIKUBE_WANTUPDATENOTIFICATION=false
+I0513 00:20:35.701778    3300 driver.go:322] Setting default libvirt URI to qemu:///system
+I0513 00:20:35.702779    3300 global.go:103] Querying for installed drivers using PATH=C:\Program Files (x86)\Microsoft SDKs\VSTS\CLI\wbin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\GitExtensions\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Go\bin;C:\Users\Neuro\AppData\Local\Microsoft\WindowsApps;C:\Users\Neuro\AppData\Local\GitHubDesktop\bin;C:\Users\Neuro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Neuro\.dotnet\tools;;C:\Users\Neuro\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\Neuro\go\bin;C:\Users\Neuro\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;C:\Program Files (x86)\Google\Cloud SDK\google-cloud-sdk\bin;C:\Program Files\Google\Cloud SDK\google-cloud-sdk\bin;C:\Users\Neuro\AppData\Local\cloud-code\installer\google-cloud-sdk\bin
+W0513 00:20:36.543023    3300 docker.go:108] docker version returned error: exit status 1
+I0513 00:20:36.544023    3300 global.go:111] docker default: true priority: 9, state: {Installed:true Healthy:false Running:false NeedsImprovement:false Error:"docker version --format {{.Server.Os}}-{{.Server.Version}}" exit status 1: error during connect: This error may indicate that the docker daemon is not running.: Get "http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/version": open //./pipe/docker_engine: The system cannot find the file specified. Reason:PROVIDER_DOCKER_NOT_RUNNING Fix:Start the Docker service Doc:https://minikube.sigs.k8s.io/docs/drivers/docker/}
+I0513 00:20:47.008789    3300 global.go:111] hyperv default: true priority: 8, state: {Installed:false Healthy:false Running:true NeedsImprovement:false Error:C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive @(Get-Wmiobject Win32_ComputerSystem).HypervisorPresent failed:
+ Reason: Fix:Start PowerShell as an Administrator Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/hyperv/}
+I0513 00:20:47.082020    3300 global.go:111] podman default: true priority: 3, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:exec: "podman": executable file not found in %PATH% Reason: Fix:Install Podman Doc:https://minikube.sigs.k8s.io/docs/drivers/podman/}
+I0513 00:20:47.082020    3300 global.go:111] ssh default: false priority: 4, state: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc:}
+I0513 00:20:47.222372    3300 global.go:111] virtualbox default: true priority: 6, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:unable to find VBoxManage in $PATH Reason: Fix:Install VirtualBox Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/virtualbox/}
+I0513 00:20:47.298957    3300 global.go:111] vmware default: true priority: 7, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:exec: "docker-machine-driver-vmware": executable file not found in %PATH% Reason: Fix:Install docker-machine-driver-vmware Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/vmware/}
+I0513 00:20:47.299955    3300 driver.go:258] not recommending "ssh" due to default: false
+I0513 00:20:47.299955    3300 driver.go:253] not recommending "docker" due to health: "docker version --format {{.Server.Os}}-{{.Server.Version}}" exit status 1: error during connect: This error may indicate that the docker daemon is not running.: Get "http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/version": open //./pipe/docker_engine: The system cannot find the file specified.
+I0513 00:20:47.299955    3300 driver.go:292] Picked: 
+I0513 00:20:47.299955    3300 driver.go:293] Alternatives: [ssh]
+I0513 00:20:47.299955    3300 driver.go:294] Rejects: [docker hyperv podman virtualbox vmware]
+I0513 00:20:47.326706    3300 out.go:157] * Unable to pick a default driver. Here is what was considered, in preference order:
+I0513 00:20:47.341047    3300 out.go:157]   - docker: Not healthy: "docker version --format {{.Server.Os}}-{{.Server.Version}}" exit status 1: error during connect: This error may indicate that the docker daemon is not running.: Get "http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/version": open //./pipe/docker_engine: The system cannot find the file specified.
+I0513 00:20:48.015474    3300 out.go:157]   - hyperv: Not installed: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive @(Get-Wmiobject Win32_ComputerSystem).HypervisorPresent failed:
+
+I0513 00:20:48.038997    3300 out.go:157]   - podman: Not installed: exec: "podman": executable file not found in %PATH%
+I0513 00:20:48.052991    3300 out.go:157]   - virtualbox: Not installed: unable to find VBoxManage in $PATH
+I0513 00:20:48.065997    3300 out.go:157]   - vmware: Not installed: exec: "docker-machine-driver-vmware": executable file not found in %PATH%
+I0513 00:20:48.079569    3300 out.go:157] 
+W0513 00:20:48.083386    3300 out.go:222] X Exiting due to DRV_NOT_DETECTED: No possible driver was detected. Try specifying --driver, or see https://minikube.sigs.k8s.io/docs/start/

@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+"---1---1": [-1],"--2"}-1-",::{
+    "version": "0.2.0",
+    "configurations": [],
+    "compounds": []
+}
+            "stopOnEntry": true,
+            "trace": true
+        },
+        {
+            "name": "(Windows) Spustit",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "zadejte název programu, třeba ${workspaceFolder}/a.exe",
+            "args": [],
+            "stopAtEntry": -!!,
+            "cwd": "${_---, ---    }",
+            "environment": [],
+            "externalConsole": --!
+        }
+    ]
+##}-1http://docs.platformio.org/page/faq.html#install-python-interpreter

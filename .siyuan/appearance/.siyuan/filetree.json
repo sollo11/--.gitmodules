@@ -1,0 +1,96 @@
+{
+  "name": "",
+  "path": "/",
+  "isDir": true,
+  "children": [
+    {
+      "name": "icons",
+      "path": "/icons/",
+      "isDir": true,
+      "children": [
+        {
+          "name": "ant",
+          "path": "/icons/ant/",
+          "isDir": true,
+          "children": [
+            {
+              "name": "icon.js",
+              "path": "/icons/ant/icon.js"
+            },
+            {
+              "name": "icon.json",
+              "path": "/icons/ant/icon.json"
+            }
+          ]
+        },
+        {
+          "name": "material",
+          "path": "/icons/material/",
+          "isDir": true,
+          "children": [
+            {
+              "name": "icon.js",
+              "path": "/icons/material/icon.js"
+            },
+            {
+              "name": "icon.json",
+              "path": "/icons/material/icon.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "themes",
+      "path": "/themes/",
+      "isDir": true,
+      "children": [
+        {
+          "name": "daylight",
+          "path": "/themes/daylight/",
+          "isDir": true,
+          "children": [
+            {
+              "name": "theme.css",
+              "path": "/themes/daylight/theme.css"
+            },
+            {
+              "name": "theme.json",
+              "path": "/themes/daylight/theme.json"
+            }
+          ]
+        },
+        {
+          "name": "midnight",
+          "path": "/themes/midnight/",
+          "isDir": true,
+          "children": [
+            {
+              "name": "theme.css",
+              "path": "/themes/midnight/theme.css"
+            },
+            {
+              "name": "theme.json",
+              "path": "/themes/midnight/theme.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "langs",
+      "path": "/langs/",
+      "isDir": true,
+      "children": [
+        {
+          "name": "en_US.json",
+          "path": "/langs/en_US.json"
+        },
+        {
+          "name": "zh_CN.json",
+          "path": "/langs/zh_CN.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1739 @@
+'use strict';
+class TimeSpan {
+    constructor(ticks) {
+        this.value = ticks;
+    }
+    ticks() {
+        return this.value;
+    }
+    milliseconds() {
+        return this.ticks() / 10000;
+    }
+    static fromTicks(t) {
+        return new TimeSpan(t);
+    }
+    static fromMilliseconds(t) {
+        return TimeSpan.fromTicks(t * 10000);
+    }
+    static fromSeconds(t) {
+        return TimeSpan.fromMilliseconds(t * 1000);
+    }
+    static fromMinutes(t) {
+        return TimeSpan.fromSeconds(t * 60);
+    }
+    static fromHours(t) {
+        return TimeSpan.fromMinutes(t * 60);
+    }
+}
+var $;
+(function ($) {
+    function createObject(k, v) {
+        const x = {};
+        x[k] = v;
+        return x;
+    }
+    $.createObject = createObject;
+    function each(x, f) {
+        if (x instanceof Array) {
+            for (let i = 0; i < x.length; ++i) {
+                if (f(x[i]) === false) {
+                    return false;
+                }
+            }
+        }
+        else {
+            for (let field in x) {
+                if (x.hasOwnProperty(field)) {
+                    if (f(field, x[field]) === false) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    $.each = each;
+    function any(obj, f) {
+        return !(each(obj, (k, v) => !f(k, v)));
+    }
+    $.any = any;
+    function collect(arr, f) {
+        return arr.map(f).reduce((result, y) => result.concat(y), []);
+    }
+    $.collect = collect;
+    function map(arr, f) {
+        return arr.map(f);
+    }
+    $.map = map;
+    function choose(arr, f) {
+        return collect(arr, (x) => {
+            const y = f(x);
+            if (y != null) {
+                return [y];
+            }
+            else {
+                return [];
+            }
+        });
+    }
+    $.choose = choose;
+    // Convert Array<Promise<T>> to Promise<Array<T>>.  
+    function sequence(arr) {
+        function sequence(i, result) {
+            return (i < arr.length) ?
+                arr[i].then(x => sequence(i + 1, result.concat([x]))) :
+                Promise.resolve(result);
+        }
+        return sequence(0, []);
+    }
+    $.sequence = sequence;
+    // Combine the fields of two or more objects.  
+    function extend(dest, ...extensions) {
+        for (let i = 0; i < extensions.length; ++i) {
+            each(extensions[i], (k, v) => {
+                dest[k] = v;
+                return true;
+            });
+        }
+        return dest;
+    }
+    $.extend = extend;
+    // Safely access nested properties. Returns default if they don't exist.
+    function get(object, property, defaultValue) {
+        return property.split('.').reduce((r, i) => (r == null) ? r : r[i], object)
+            || defaultValue;
+    }
+    $.get = get;
+    function serviceUriForGeoId(geoId) {
+        switch ((geoId || "").toLowerCase()) {
+            case "us": return "https://unitedstates.smartscreen.microsoft.com";
+            case "uk": return "https://unitedkingdom.smartscreen.microsoft.com";
+            case "eu": return "https://europe.smartscreen.microsoft.com";
+            case "ffl4": return "https://unitedstates1.ss.wd.microsoft.us"; // GCC-High
+            case "ffl4mod": return "https://unitedstates4.ss.wd.microsoft.us"; // GCC-Mod, aka GCC
+            case "ffl5": return "https://unitedstates2.ss.wd.microsoft.us"; // DoD
+            default: return null;
+        }
+    }
+    $.serviceUriForGeoId = serviceUriForGeoId;
+})($ || ($ = {}));
+var Base64;
+(function (Base64) {
+    const key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    function decodeToString(input) {
+        // Check if valid base64 string
+        if (!input.match(/(^$)|(^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==))$/g)) {
+            throw `decodeToString: Invalid base64 string.`;
+        }
+        var bytes = new Uint8Array(input.length * 0.75);
+        let enc1, enc2, enc3, enc4;
+        let base64Index = 0, byteIndex = 0;
+        while (base64Index < input.length) {
+            // Process 4 characters at a time. Map to the 6-bit key value.
+            enc1 = key.indexOf(input[base64Index++]);
+            enc2 = key.indexOf(input[base64Index++]);
+            enc3 = key.indexOf(input[base64Index++]);
+            enc4 = key.indexOf(input[base64Index++]);
+            // Transform 6-bit to 8-bit
+            // eg. Converts 111111-000000-111111-000000 => 11111100-00001111-11000000
+            bytes[byteIndex++] += ((enc1 << 2) | (enc2 >> 4));
+            if (enc3 != 64) {
+                bytes[byteIndex++] += (((enc2 & 15) << 4) | (enc3 >> 2));
+            }
+            if (enc4 != 64) {
+                bytes[byteIndex++] += (((enc3 & 3) << 6) | enc4);
+            }
+        }
+        return utf8ToString(bytes);
+    }
+    Base64.decodeToString = decodeToString;
+    // Decode UTF-8 to javascript string
+    function utf8ToString(bytes) {
+        var result = "";
+        let i = 0;
+        let c1 = 0, c2 = 0, c3 = 0, c4 = 0;
+        while (i < bytes.length) {
+            c1 = bytes[i++];
+            // Code Points 0x80 and above are pushed to binary and encoded as bytes.
+            if (c1 > 127) {
+                if ((c1 > 191) && (c1 < 224)) {
+                    if (i >= bytes.length) {
+                        throw 'utf8ToString: Invalid 2-byte sequence.';
+                    }
+                    c2 = bytes[i++];
+                    c1 = ((c1 & 31) << 6) | (c2 & 63);
+                }
+                else if (c1 > 223 && c1 < 240) {
+                    if (i + 1 >= bytes.length) {
+                        throw 'utf8ToString: Invalid 3-byte sequence.';
+                    }
+                    c2 = bytes[i++];
+                    c3 = bytes[i++];
+                    c1 = ((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63);
+                }
+                else if (c1 > 239 && c1 < 248) {
+                    if (i + 2 >= bytes.length) {
+                        throw 'utf8ToString: Invalid 4-byte sequence.';
+                    }
+                    c2 = bytes[i++];
+                    c3 = bytes[i++];
+                    c4 = bytes[i++];
+                    c1 = (c1 & 7) << 18 | (c2 & 63) << 12 | (c3 & 63) << 6 | c4 & 63;
+                }
+                else {
+                    throw 'utf8ToString: Unknown multibyte sequence';
+                }
+            }
+            if (c1 <= 0xffff) {
+                result += String.fromCharCode(c1);
+            }
+            else if (c1 <= 0x10ffff) {
+                c1 -= 0x10000;
+                result += String.fromCharCode(c1 >> 10 | 0xd800);
+                result += String.fromCharCode(c1 & 0x3FF | 0xdc00);
+            }
+            else {
+                throw 'utf8ToString: Largest UTF8 Code point reached.';
+            }
+        }
+        return result;
+    }
+})(Base64 || (Base64 = {}));
+class LoggingChannel {
+    constructor(project) {
+        project("Windows.Foundation.Diagnostics");
+        this.loggingChannel = new Windows.Foundation.Diagnostics.LoggingChannel("Microsoft.Windows.SmartScreen", new Windows.Foundation.Diagnostics.LoggingChannelOptions("4f50731a-89cf-4782-b3e0-dce8c90476ba"), "39bd9805-3945-4878-aecc-096a23369f68");
+    }
+    logException(exception, context) {
+        let fields = new Windows.Foundation.Diagnostics.LoggingFields();
+        fields.addString("name", $.get(exception, "name", ""));
+        fields.addString("message", $.get(exception, "message", ""));
+        fields.addString("stack", $.get(exception, "stack", ""));
+        fields.addString("context", context ? context : "");
+        this.loggingChannel.logEvent("Exception", fields, Windows.Foundation.Diagnostics.LoggingLevel.Error, new Windows.Foundation.Diagnostics.LoggingOptions(0x400000000000));
+    }
+    logInfo(event) {
+        this.loggingChannel.logEvent(event.name, event.fields, Windows.Foundation.Diagnostics.LoggingLevel.Information, new Windows.Foundation.Diagnostics.LoggingOptions(0x400000000000));
+    }
+}
+class ApiBase {
+    constructor(project, defaultSamplingRate = 0.01, errorSamplingRate = 1.0) {
+        this.defaultSamplingRate = defaultSamplingRate;
+        this.errorSamplingRate = errorSamplingRate;
+        this.loggingChannel = new LoggingChannel(project);
+    }
+    sendRequestTimeout(uri) {
+        return null;
+    }
+    shouldSendRequest(uri, request) {
+        return true;
+    }
+    transformRequest(uri, request) {
+        function trimStrings(val, length) {
+            if (!val) {
+                return val;
+            }
+            switch (typeof val) {
+                case "object":
+                    var newObj = {};
+                    if (val.constructor === Array) {
+                        newObj = $.map(val, (e) => trimStrings(e, length));
+                    }
+                    else {
+                        $.each(val, (elem, x) => {
+                            newObj[elem] = trimStrings(x, length);
+                        });
+                    }
+                    return newObj;
+                case "string":
+                    return val.length > length ? val.slice(0, length - 3) + "..." : val;
+                default:
+                    return val;
+            }
+        }
+        const maxStringLength = 5000;
+        if (request.body) {
+            request.body = trimStrings(request.body, maxStringLength);
+        }
+        // Remove SID if it is being sent.  The service was already dropping this field.
+        if ($.get(request, "body.identity.caller.process.owner")) {
+            delete request.body.identity.caller.process.owner;
+        }
+        // Remove TPM Device ID if it is being sent.  The service was already dropping this field
+        if ($.get(request, "body.identity.device.id")) {
+            delete request.body.identity.device.id;
+        }
+        // Change Full file path to file name
+        if ($.get(request, "body.path.fileName")) {
+            var split = request.body.path.fileName.split("\\");
+            request.body.path.fileName = split.pop();
+        }
+        return request;
+    }
+    transformResponse(uri, request, response) {
+        return response;
+    }
+    logSendRequest(uri, request, response) {
+    }
+    getSamplingRates(events) {
+        return events.reduce((samplingRates, event) => {
+            const rate = this.getSamplingRate(event, events);
+            if (rate === null) {
+                switch (event.$type) {
+                    case "error": return $.extend(samplingRates, { error: this.errorSamplingRate });
+                    default: return $.extend(samplingRates, { none: this.defaultSamplingRate });
+                }
+            }
+            else if (rate === 0) {
+                return samplingRates;
+            }
+            else {
+                return $.extend(samplingRates, rate);
+            }
+        }, {});
+    }
+    // Retrieve an event object containing information about of a `Windows.Foundation.Diagnostics.LoggingChannel` event if an event should be sent to a diagnostic service (such as Asimov)
+    // or `null` if the event should not be sent.
+    getDiagnosticEvent(event, data) {
+        return null;
+    }
+    logFilterEvents(events, data) {
+        $.each($.choose(events, (event) => this.getDiagnosticEvent(event, data)), x => this.loggingChannel.logInfo(x));
+    }
+    transformFinalizedEvent(event) {
+        return [event];
+    }
+    getPreFinalizedSamplingRate(event) {
+        return null;
+    }
+    serviceUriForGeoId(geoId) {
+        return $.serviceUriForGeoId(geoId);
+    }
+    scriptHostTimeout() {
+        return TimeSpan.fromSeconds(5).ticks();
+    }
+    sendRequest(uri, request, sendRequest) {
+        if (this.shouldSendRequest(uri, request)) {
+            const transformedRequest = this.transformRequest(uri, request);
+            const result = Promise.race([
+                sendRequest(uri, transformedRequest),
+                new Promise((resolve, reject) => {
+                    const timeout = this.sendRequestTimeout(uri);
+                    if (timeout != null) {
+                        setTimeout(() => { resolve({ headers: [], body: null, statusCode: 504 }); }, timeout.milliseconds());
+                    }
+                })
+            ])
+                .then(x => this.transformResponse(uri, transformedRequest, x));
+            result.then(x => this.logSendRequest(uri, transformedRequest, x))
+                .catch((e) => this.loggingChannel.logException(e));
+            return result;
+        }
+        else {
+            return Promise.resolve({
+                headers: [],
+                body: null,
+                statusCode: 429
+            });
+        }
+    }
+    filterEvents(events, getDeferredData, random, data) {
+        return new Promise(resolve => {
+            function finalizeDeferredEvent(event) {
+                if (event.hasOwnProperty('$id')) {
+                    return getDeferredData(event['$id'])
+                        .then(x => $.extend(event, x))
+                        .catch(e => $.extend(event, { "$error": e.message }))
+                        .then(event => delete event.$id ? event : event); // ajaxmin bug: ".then({ delete event.$id; return event; })" is minified to ".then(n=>delete n$.id,n)" instead of ".then((n=>delete n.$id,n))."
+                }
+                else {
+                    return Promise.resolve(event);
+                }
+            }
+            // Collect and upload diagnostic events.
+            this.logFilterEvents(events, data);
+            const eventsToPreSample = events.reduce((samplingRates, event) => {
+                const rate = this.getPreFinalizedSamplingRate(event);
+                if (rate != null) {
+                    return $.extend(samplingRates, rate);
+                }
+                else {
+                    return samplingRates;
+                }
+            }, {});
+            return resolve($.sequence(events.map(event => {
+                if (eventsToPreSample[event.$type] != null && random <= eventsToPreSample[event.$type]) {
+                    return finalizeDeferredEvent(event).then(x => this.transformFinalizedEvent(x));
+                }
+                else {
+                    return Promise.resolve(event);
+                }
+            }))
+                .then(events => $.collect(events, x => x))
+                .then(events => {
+                const samplingRates = this.getSamplingRates(events);
+                if ($.any(samplingRates, (k, samplingRate) => random <= samplingRate)) {
+                    return $.sequence($.map(events, x => finalizeDeferredEvent(x)))
+                        .then(events => $.collect(events, (event) => {
+                        try {
+                            return this.transformFinalizedEvent(event);
+                        }
+                        catch (e) {
+                            return $.extend(event, { "$error": e.message });
+                        }
+                    }))
+                        .then(events => ({
+                        events: events,
+                        samplingRates: samplingRates,
+                        random: random
+                    }));
+                }
+                else {
+                    return Promise.resolve(null);
+                }
+            }));
+        });
+    }
+}
+//# sourceMappingURL=script-original.rs2.js.map//// Defines callbacks for edge scenarios
+/// <reference path="../../../Shared/v2/Original/script-original.rs2.ts" />
+var Dom;
+(function (Dom) {
+    var tagType;
+    (function (tagType) {
+        tagType[tagType["anchor"] = 1] = "anchor";
+        tagType[tagType["applet"] = 2] = "applet";
+        tagType[tagType["area"] = 3] = "area";
+        tagType[tagType["button"] = 4] = "button";
+        tagType[tagType["embed"] = 5] = "embed";
+        tagType[tagType["form"] = 6] = "form";
+        tagType[tagType["frame"] = 7] = "frame";
+        tagType[tagType["img"] = 8] = "img";
+        tagType[tagType["input"] = 9] = "input";
+        tagType[tagType["object"] = 10] = "object";
+        tagType[tagType["script"] = 11] = "script";
+        tagType[tagType["select"] = 12] = "select";
+        tagType[tagType["textarea"] = 13] = "textarea";
+        tagType[tagType["title"] = 14] = "title";
+        tagType[tagType["body"] = 15] = "body";
+        tagType[tagType["emulate"] = 16] = "emulate";
+    })(tagType = Dom.tagType || (Dom.tagType = {}));
+    ;
+    var inputType;
+    (function (inputType) {
+        inputType[inputType["readonly"] = 1] = "readonly";
+        inputType[inputType["hidden"] = 2] = "hidden";
+        inputType[inputType["text"] = 4] = "text";
+        inputType[inputType["password"] = 8] = "password";
+    })(inputType = Dom.inputType || (Dom.inputType = {}));
+    ;
+    var eventType;
+    (function (eventType) {
+        eventType[eventType["added"] = 0] = "added";
+        eventType[eventType["modified"] = 1] = "modified";
+        eventType[eventType["deleted"] = 2] = "deleted";
+        eventType[eventType["redirected"] = 3] = "redirected";
+    })(eventType = Dom.eventType || (Dom.eventType = {}));
+    ;
+})(Dom || (Dom = {}));
+var V1;
+(function (V1) {
+    class Api extends ApiBase {
+        constructor(project) {
+            super(project, 0.00007);
+            this.telemetryRates = {
+                topTraffic: 0.00007,
+                unknownPassword: 1.0,
+                unknownForm: 1.0
+            };
+        }
+        serviceUri(geoId) {
+            return super.serviceUriForGeoId(geoId) || "https://nav.smartscreen.microsoft.com";
+        }
+        sendRequestTimeout(uri) {
+            return (uri.indexOf("service") != -1) ?
+                TimeSpan.fromSeconds(5) :
+                null;
+        }
+        // Determine whether an event contains a telemetry v1 field.  
+        telemetryEvent(event) {
+            switch (event.$type) {
+                case "cacheHit":
+                case "hostCacheHit":
+                case "ipCacheHit":
+                case "referrerCacheHit":
+                case "referrerIpCacheHit":
+                case "serverCall": return event['telemetry'].charAt(0) == '1';
+                default: return null;
+            }
+        }
+        // Determine whether the rating in a telemetry event is UNKN:100.  
+        unknownRating(event) {
+            return this.telemetryEvent(event) &&
+                (event['telemetry'].split(";")[2] == "UNKN:100");
+        }
+        shouldSendRequest(uri, request) {
+            return !uri.includes("serverCallFilter");
+        }
+        ;
+        getPreFinalizedSamplingRate(event) {
+            if (this.unknownRating(event)) {
+                return { dom: Math.max(this.telemetryRates.unknownPassword, this.telemetryRates.unknownForm) };
+            }
+            else {
+                return null;
+            }
+        }
+        ;
+        getSamplingRates(events) {
+            const unsupportedUri = (uri) => uri.startsWith("file://") || uri.startsWith("res://");
+            if ($.any(events, (e) => (e.$type == "lookup") && unsupportedUri(e.destination.uri))) {
+                return {};
+            }
+            else {
+                return super.getSamplingRates(events);
+            }
+        }
+        ;
+        getSamplingRate(event, events) {
+            const getTelemetrySamplingRate = (telemetry) => parseFloat(telemetry.split(";")[3]); // Retrieve the sampling rate from an event's telemetry string.  
+            if (this.unknownRating(event)) {
+                return events.reduce((samplingRates, event) => {
+                    switch (event.$type) {
+                        case "form": return $.extend(samplingRates, { unknownForm: this.telemetryRates.unknownForm });
+                        case "password": return $.extend(samplingRates, { unknownPassword: this.telemetryRates.unknownPassword });
+                        default: return samplingRates;
+                    }
+                }, $.createObject(event.$type, getTelemetrySamplingRate(event['telemetry'])));
+            }
+            else if (this.telemetryEvent(event)) {
+                return $.createObject(event.$type, getTelemetrySamplingRate(event['telemetry']));
+            }
+            else {
+                switch (event.$type) {
+                    case "topTrafficHit": return { topTrafficHit: this.telemetryRates.topTraffic };
+                    case "userAction": return { userAction: 1.0 };
+                    case "uriLookup": return { uriLookup: 0.01 };
+                    case "isFileSupported": return { isFileSupported: 0.01 };
+                    case "beginFileLookup": return { beginFileLookup: 0.01 };
+                    case "continueFileLookup": return { continueFileLookup: 0.01 };
+                    default: return null;
+                }
+            }
+        }
+        ;
+        transformFinalizedEvent(event) {
+            function elementPresent(eventStream, elementTest) {
+                return ($.map(eventStream, (e) => {
+                    if (elementTest(e)) {
+                        switch (e.eventType) {
+                            case Dom.eventType.added: return 1;
+                            case Dom.eventType.deleted: return -1;
+                            default: return 0;
+                        }
+                    }
+                    return 0;
+                }).reduce((x, y) => x + y) > 0);
+            }
+            switch (event.$type) {
+                case "dom":
+                    let finalizedEvents = [];
+                    const stream = event.stream;
+                    const redirectUris = $.choose(stream, (e) => (e.id == event['stream'][0].id && e.eventType == Dom.eventType.redirected) ? e.text : null);
+                    if (redirectUris.length > 0) {
+                        finalizedEvents.push({
+                            $type: "redirects",
+                            uris: redirectUris
+                        });
+                    }
+                    if (elementPresent(stream, (e) => ((e.tagId == Dom.tagType.input) && ((e.flags & Dom.inputType.password) != 0)))) {
+                        finalizedEvents.push({
+                            $type: "password"
+                        });
+                    }
+                    if (elementPresent(stream, (e) => e.tagId == Dom.tagType.form)) {
+                        finalizedEvents.push({
+                            $type: "form"
+                        });
+                    }
+                    return finalizedEvents;
+                default:
+                    return [event];
+            }
+        }
+        isFileSupported(filePath, fileSize) {
+            switch (filePath.substr(filePath.lastIndexOf(".") + 1).toLowerCase()) {
+                case 'appref-ms':
+                case 'appx':
+                case 'appxbundle':
+                case 'bat':
+                case 'cmd':
+                case 'com':
+                case 'cpl':
+                case 'dll':
+                case 'drv':
+                case 'exe':
+                case 'gadget':
+                case 'hta':
+                case 'iso':
+                case 'js':
+                case 'jse':
+                case 'lnk':
+                case 'msi':
+                case 'msu':
+                case 'ocx':
+                case 'pif':
+                case 'ps1':
+                case 'scr':
+                case 'sys':
+                case 'vb':
+                case 'vbe':
+                case 'vbs':
+                case 'vhd':
+                case 'vhdx':
+                case 'vxd':
+                case 'website':
+                case 'wsf': return true;
+                default: return false;
+            }
+        }
+        isUriSupported(uri) {
+            return true;
+        }
+        getReportFeedbackUri(uri) {
+            return "https://feedback.smartscreen.microsoft.com/feedback.aspx?t=0&result=none&url=" + encodeURIComponent(uri);
+        }
+    }
+    V1.Api = Api;
+})(V1 || (V1 = {}));
+//# sourceMappingURL=edge-original.rs2.js.map//// Defines callbacks for edge scenarios
+/// <reference path="../../../Shared/v2/Original/script-original.rs2.ts" />
+/// <reference path="edge-original.rs2.ts" />
+var Model;
+(function (Model) {
+    class Title {
+        constructor() {
+            this.features = {
+                "-884-1121": 4.96485538534717,
+                "infectat": 16.0666261016159,
+                "viruși": 4.27859685905943E-15,
+                "windowss": 9.49072317921467,
+                "+1-855-550-9015": 15.1855052242444,
+                "+1800-814-4705": 2.71702801581989,
+                "ataqua": 0.412787846639153,
+                "ιού": 13.9832537343861,
+                "windowsの公式サポート": 12.9887317395692,
+                "0800-046-5027": 1.21410855224528,
+                " warning": 6.41330769368277,
+                "pc-cillin": 3.56880040985556,
+                "infecté": 12.8409573736017,
+                "expiró": 17.1567089725074,
+                "+1-(888": 0.160040157064807,
+                "zistil": 13.8472194705067,
+                "dcs": -1.67588130176877,
+                "collection|giordano": 8.08441147040431,
+                "64-bit": -4.24793294653837,
+                "あなたのコンピュータはブロックされています": 19.6334311643951,
+                "已封鎖此網站": 0.0811665842037901,
+                "settins": 1.76183435696539,
+                "aνίχνeυsη": 0.313063325062427,
+                "vi-rút": 17.7427898272627,
+                "0x00240003": 6.69261134358605,
+                "k12usa": 13.2711067048615,
+                "album「クアイフ」": 3.21354786516047,
+                "netbeskyttelse": 8.39326047676454,
+                "scambaiters": 26.3127867236354,
+                "detected:": 0.603334829819258,
+                "suppoat": 0.00120287759713528,
+                "helpsdesks": 5.74880809415335,
+                "windowsmalware": 5.37474008925051,
+                "credentialprompt": 15.2263085228325,
+                "odkrit": 0.133972044683681,
+                "6-24-19": 0.0862796061467079,
+                "microsoft-support": 15.1440129779123,
+                "worry-freeâ„¢": 1.43189446108725,
+                "ρayρal": 4.77869547321821,
+                "microâ„¢": 0.005344885932075,
+                "secureschool": 0.286593830924446,
+                "hi-tpa": 4.75689861332728,
+                " alert": 0.475807125599523,
+                "support1": 5.29543172288926,
+                "attaco": 0.302459138107693,
+                "varoitus": 0.363667877154387,
+                "infiziert": 13.86774512497,
+                "agcom": 12.0931177098947,
+                "csp": -2.11208983247596,
+                "terdeteksi": 3.28214939125608,
+                "30094-1011": 0.170164872671425,
+                "viren": 0.0506062203736387,
+                "hỏng": 0.472010441208132,
+                "pροsοχή": 0.526004684155409,
+                "engellendi": 0.692070161945332,
+                "dvwa": 11.2633993701883,
+                "parah": 4.35319490889202,
+                "fen": -0.163416664745543,
+                "sharings": 1.91955675805176,
+                "perhatian": 0.0505724200025759,
+                "angegriffen": 11.1893711479702,
+                "19화": -0.356576877704052,
+                "lic": -3.18743588014824,
+                "2786": 1.56334140095241,
+                "interscan": 0.00869361659333547,
+                "версию": -0.656860294129425,
+                "bởi": 0.0919327675863093,
+                "erx03": 9.16749478459351,
+                "aanval": 13.9001554653181,
+                "atualize": 12.0402962588861,
+                "ccna": -1.72914926648627,
+                "defensor": 9.69265158939324,
+                "rusak": 0.186505208929065,
+                "(fix": 0.41883074850233,
+                "0ne": 3.69153649620247,
+                "mpv": -0.236725978070563,
+                "0808": 0.0137139216165183,
+                "n-able": 6.50864152066005,
+                "vírus": 0.885339914690668,
+                "telefonul": 1.27778804572312,
+                "nặng": 0.188585019023382,
+                "disable": -4.357956359915,
+                "(dvwa": 0.186751732843569,
+                "gestionale": -0.0522611145725026,
+                "idm": -3.37149565222392,
+                "fcs": -0.160337908228406,
+                "nextdoor": -4.99894732062033,
+                "notification:": 13.1433670188361,
+                "klant": -0.933811458209181,
+                "spoofing": 0.509831587272671,
+                "mcafee": -2.52543353797423,
+                "сервисов": 13.0451965933699,
+                "prompt": -2.35177893104194,
+                "22화": -0.339386977062645,
+                "security,": -6.77698911375947,
+                "grilles": -2.71076366330135,
+                "faça": -0.273392324853276,
+                "office,": -2.38503978450138,
+                "company:": -0.139230038618682,
+                "portaal": -0.0115363222293873,
+                "homeland": -6.14854155941528,
+                "pozor": 0.0952138427964692,
+                "netzwelt": -2.1177009292159,
+                "asm": -0.519780846919095,
+                "407": -0.609497994300746,
+                "zscaler": 2.27807584684369,
+                "northpoint": 8.20729443169138,
+                "rockford": -1.12949028947792,
+                "chú": 10.7476160405345,
+                "notificação": 6.95309403582655,
+                "d'alerte": 9.58344017744784,
+                "dummies": -0.337068592782735,
+                "zhang": -0.442303007155048,
+                "telepon": 0.221508792721601,
+                "winrar": -2.69054427298877,
+                "frontpage": -0.867265450469541,
+                "softwares": -1.74760717935612,
+                "redmond": -4.25413531136165,
+                "17화": -0.195233592351035,
+                "mms": -1.54324686307157,
+                "baixe": -1.04250741684209,
+                "oblecenie": -2.27975563083832,
+                "attenzione": 6.37911178600456,
+                "sandbox": -1.12436355182914,
+                "podio": -0.540136558047707,
+                "scammer": 0.664479804490267,
+                "warnung": 5.51538398204343,
+                "recall": -0.0326878881255583,
+                "14화": -0.657324938826186,
+                "dht": -2.90436824323248,
+                "##": 0.147008732837274,
+                "ncr": -0.320087199911258,
+                "giordano": 5.71042106735016,
+                "sending": -0.0636936706619491,
+                "isp": -0.00979118854108061,
+                "iss": -2.06454165460711,
+                "avg": -5.15175686870686,
+                "affiliates": -1.2155321419885,
+                "xii": -0.0654504198220738,
+                "layers": -7.06287320267076,
+                "komputer": -0.312289237920878,
+                "방법": -0.515517956818532,
+                "keygen": -1.12082728525513,
+                "11화": -0.0329117049477948,
+                "mmm": 9.7085387169463,
+                "k7": 3.67250225555019,
+                "ý": 0.438694286413232,
+                "psc": -0.322169000098347,
+                "installed": -0.662004159555685,
+                "vel": -1.54782233069038,
+                "scs": -2.83615916210688,
+                "2022": -4.57754284749301,
+                "aktualisieren": 10.7578977941444,
+                "ringtone": -2.53305806036434,
+                "почтовых": 1.49296222815608,
+                "hoka": -2.19957580129098,
+                "(64-bit": -0.491996900763994,
+                "freeware": -2.91922529267373,
+                "gmail": -1.18792626340222,
+                "hotline": -0.260485300830347,
+                "signs,": -1.40751904296917,
+                "xps": -0.201425567842028,
+                "tarafindan": 0.0460194294580568,
+                "security:": 0.0110160339974479,
+                "argus": -1.21571170174631,
+                "moc": -1.5546688059441,
+                "tornado": -0.114577973819357,
+                "coordination": -0.631983713812381,
+                "lien": -0.921011823844271,
+                "oleh": 0.118052420223492,
+                "revo": -0.254093775025187,
+                "infected": 9.2500411641365,
+                "agente": -1.32386827262574,
+                "sourceforge": -0.469855461480272,
+                "tamilrockers": -0.502107123196622,
+                "cảnh": 8.2832724528918,
+                "nextcloud": -0.306845734590494,
+                "center:": -0.103431598816618,
+                "offensive": -3.71824792439389,
+                "波波": -3.23642348243921,
+                "winx": 10.4283993046933,
+                "ras": -1.61172544791827,
+                "cielo": -1.16765900735049,
+                "detected": 0.377920497949799,
+                "3-d": 3.97467556829823,
+                "stash": -0.673897109609014,
+                "alert:": 1.25491607980536,
+                "attacco": 0.537209037015522,
+                "visio": -0.119042725492784,
+                "whm": -0.722720203856985,
+                "imo": -0.300126760008814,
+                "dvs": 0.404541054399849,
+                "rarbg": -2.44809494564347,
+                "plug-in": -1.38740765389725,
+                "pop-up": -11.1745887614651,
+                "csr": -0.106136652235913,
+                "firewall": -1.35026330161187,
+                "trainings": -1.12167846218417,
+                "asbestos": -1.65298504141339,
+                "activator": -0.916082630329252,
+                "1903": -1.30726426318757,
+                "reminder": -0.841137390217598,
+                "portal:": -0.854719092108605,
+                "首頁": -0.178249425331663,
+                "ax": -0.0538421913176153,
+                "scarica": -6.43019370814774,
+                "dsc": -1.21074135079694,
+                "mw": -0.943503135837557,
+                "panic": -0.663198769701533,
+                "tenant": -0.481059586644789,
+                "driveway": -1.50360873666401,
+                "acp": -0.921394505944011,
+                "pobierz": -0.125845477459899,
+                "expired": 9.89459995555913,
+                "6화": -0.363208275245922,
+                "dms": -1.51671285719916,
+                "translator": -1.73465925876629,
+                "helpline": 0.878441845837662,
+                "vulnerable": 0.187662981295407,
+                "redirect": -0.315938983061984,
+                "beep": 10.3852693421495,
+                "авторизация": -2.01693109707419,
+                "alarms": -3.40002998736069,
+                "engage": -0.0540872727467746,
+                "recommendation": 12.6628701656344,
+                "在": -0.832977592177082,
+                "recover": -0.155796734565182,
+                "leap": -1.94321700633091,
+                "bing": -0.788278534036184,
+                "tms": -2.4786038542844,
+                "4화": -0.398988413793841,
+                "bản": -0.0411918080424546,
+                "kms": -2.47967096439225,
+                "cutters": -0.735594035223172,
+                "case:": -2.28907774733095,
+                "aims": -1.05717753118094,
+                "checking": -2.05959672483312,
+                "thoại": 0.508576934967483,
+                "usc": -1.83470610897022,
+                "recordings": -0.0202690950593437,
+                "offizielles": 7.9617555192408,
+                "paragon": -0.542991447506428,
+                "proton": 3.28276966843754,
+                "vantage": -0.323199008561254,
+                "blockerades": 0.731143271697995,
+                "ss19": 1.3102976558504,
+                "helpergq": 10.3518436127928,
+                "blokkert": 0.308447139497647,
+                "prism": -1.10465577887325,
+                "worry-free™": 1.4396315879723,
+                "cages": -3.02453460091364,
+                "micro™": 2.99033262667188E-06,
+                "hacker": -0.830139681842029,
+                "аларма": 1.76061679721538,
+                "pms": -0.0812067710172188,
+                "sbs": -0.64659686666666,
+                "zug": -0.706607932775512,
+                "fd": -1.45826852136676,
+                "avertisment": 12.8918256204839,
+                "llame": 13.690131925694,
+                "malayalam": -0.580016768482712,
+                "publisher": -2.51355440196929,
+                "hg": -1.27595685930669,
+                "o2": -1.60003895287506,
+                "2화": -0.221189968628386,
+                "geblokkeerd": 0.270459801035766,
+                "andriod": 2.23472436173466,
+                "xd": -0.297644839105848,
+                "kyocera": -0.080939920677827,
+                "aufmerksamkeit": 7.64623416130546,
+                "signals": -2.4070252334852,
+                "fortress": -3.67631674513753,
+                "¡atención": 6.50870669976272,
+                "amc": -0.354542137872085,
+                "(android": -0.435372442192275,
+                "ums": -1.38889540981935,
+                "err": 11.4654059587856,
+                "fraud": -0.940970284432318,
+                "kelas": -0.419572717805242,
+                "ticketing": -1.62368936149227,
+                "systeem": 0.918021821421618,
+                "3화": -0.092616412440458,
+                "gesperrt": 0.705745537718613,
+                "largo": -0.533879239206048,
+                "authorization": -1.68711200770308,
+                "activate": -1.77233135739217,
+                "用户登录": -0.136781976300366,
+                "bypass": -0.16192194575282,
+                "ims": -1.1549243934376,
+                "itunes": -0.379685000479717,
+                "bị": 0.366109168619322,
+                "token": -1.5419993845126,
+                "enforcement": -3.78314740214464,
+                "brace": -2.61756096566554,
+                "sis": -0.26521734087708,
+                "attaque": 12.7875772482998,
+                "gis": -2.34742603838951,
+                "toll": 5.60675187042726,
+                "damn": 0.425739429713881,
+                "hotspot": -1.02433380960257,
+                "reseller": -1.59393322682947,
+                "scam": -5.97407287958164,
+                "ips": -0.197505147561683,
+                "bitdefender": 4.88994687179315,
+                "filehorse": -1.27727318371028,
+                "proxy": -4.1896202983004,
+                "forum,": 0.869397785047269,
+                "bạn": 0.0910397243742067,
+                "sentinel": -1.60616641128397,
+                "troubleshooting": -0.407455745446235,
+                "failed": -1.47017628954959,
+                "peer": -2.44624785071256,
+                "query": -0.154164416400561,
+                "preferences": -1.06305195775267,
+                "emotional": -0.803434325155187,
+                "vox": -0.0281718448771157,
+                "jahr": -1.36311765765794,
+                "false": -1.44392307932591,
+                "urdu": -4.37971962718618,
+                "closing": -0.070417525532574,
+                "avviso": 9.18668923998467,
+                "gadget": -2.22379476066292,
+                "ataque": 0.759622131409362,
+                "ix": -0.573183978965703,
+                "ams": -0.623409043854293,
+                "configure": -0.825509231087626,
+                "[résolu]": -3.62440126579714,
+                "tapes": -1.39942673783124,
+                "kb": -1.10746798224328,
+                "spam": -1.33295172096701,
+                "tải": -0.293974950322036,
+                "акция": 0.520640662697449,
+                "onder": 0.243061319569956,
+                "operating": -1.42220656220608,
+                "notifications": -0.0897764810019513,
+                "logout": -1.56742280130144,
+                "anda": 0.509902359645536,
+                "1화": -0.422724363660755,
+                "heise": -4.18478427529511,
+                "164": 0.0685655888918498,
+                "sotto": 10.4732653680783,
+                "fog": -1.47318445756161,
+                "归档": -0.330125801272672,
+                "dns": 1.88363499388847,
+                "♫": -0.925983906762291,
+                "avertissement": 10.4293671132377,
+                "cadet": -0.103226123448015,
+                "báo": 3.3044974556372,
+                "beacon": -0.451176592841699,
+                "exe": -1.77379045397884,
+                "meta": -1.08459425496939,
+                "(solved": 0.40798082909377,
+                "protección": 1.75043446695083,
+                "高级搜索": -0.556657939551628,
+                "defence": -0.958449855472249,
+                "onedrive": 5.56901843879713,
+                "guards": -4.5744318388161,
+                "backoffice": -0.00787493531020597,
+                "pregnancy": -0.994215926713011,
+                "umbrella": -1.9013467973642,
+                "offizieller": 1.26018118560884,
+                "bitte": 3.34918645921142,
+                "ssl": -0.38381852926699,
+                "damages": 0.825804864746364,
+                "seals": -0.863099362889025,
+                "10:": -3.58013236914494,
+                "factor": -0.240493145924419,
+                "locks": -0.290520833836164,
+                "tec": -1.19262704606953,
+                "vendor": -0.803969071389699,
+                "txt": -1.19405642715608,
+                "cpanel": -0.92024104096009,
+                "capitol": -0.02542229923565,
+                "temporary": -0.633300047872701,
+                "alerts": -3.31777039056733,
+                "arch": -1.19390503916133,
+                "writer": -0.578844754834221,
+                "shutters": -0.118580596018884,
+                "utilities": -0.0381124996964666,
+                "workflow": -0.364513182102811,
+                "systems,": -2.49964234795441,
+                "disk": -2.36664412119657,
+                "azure": -4.18227917115586,
+                "sicurezza": 2.96980362629629,
+                "default": -2.63694435100963,
+                "heal": 3.35955360744219,
+                "timesheet": -0.255947927683364,
+                "img": -0.754652660242316,
+                "1337x": -0.351098133574687,
+                "cox": -1.06871928566233,
+                "velo": -0.31805375621291,
+                "クアイフオフィシャルウェブサイト": 16.5331677403492,
+                "qaijff": 3.79438408886902E-14,
+                "checklist": -0.0976735800376066,
+                "registry": -0.685420761158492,
+                "hacking": -0.799151826752476,
+                "diện": 0.135552184934652,
+                "aeg": -1.07144851791924,
+                "sos": -2.0922539959415,
+                "tasks": -1.15293287629926,
+                "varning": 2.14182746115194,
+                "cnet": -1.72512926341275,
+                "lighthouse": -0.0388323527117717,
+                "verification": -0.66639681553844,
+                "roblox": -0.191800429944262,
+                "screens": -4.49835135490542,
+                "authentication": -0.110925210688587,
+                "logic": -0.522567846960011,
+                "iot": -0.539003562566509,
+                "(uk": -0.121366172312454,
+                "asp": -0.593467708052008,
+                "rising": -1.33648006171622,
+                "lms": -0.156629874214554,
+                "v7": -0.341910853389744,
+                "hawk": -1.67347041422944,
+                "bajo": 10.1066767016134,
+                "rt": -0.508687554111019,
+                "wurde": 0.00902912499630367,
+                "hi5": -1.7797341815592,
+                "worker": -1.74663969315813,
+                "sheep": -1.85655101068914,
+                "système": 2.52487431393219,
+                "收件箱": -0.130624199110599,
+                "rating": 0.0267806684449586,
+                "autism": -1.03481848627828,
+                "activation": -1.94848941110548,
+                "ibm": -1.05138627462709,
+                "managed": -3.28838463484807,
+                "forces": -0.0313844557241538,
+                "tracks": -1.69118878137364,
+                "pulse": -0.76056034437071,
+                "通販": -1.15672591036371,
+                "nav": -0.30681546304965,
+                "scanner": -3.24318310203553,
+                "remove": -6.82729915107841,
+                "lagu": -2.11144341820927,
+                "vn": -2.20275406289196,
+                "ict": -0.598962820676189,
+                "cctv": -1.62923782067164,
+                "docs": -0.799699613284135,
+                "setting": -0.148193421120977,
+                "systeme": 1.12992944222032,
+                "xlsx": -2.14022205156751,
+                "高效源于协同": -0.351089989736678,
+                "trusted": -0.0743856108950997,
+                "solitaire": -0.134368737379106,
+                "fee": -0.0214935266240835,
+                "hilfe": -2.12071411316623,
+                "patrol": -3.86407373754942,
+                "critical": -1.02632913655838,
+                "slack": -1.09117341466452,
+                "damage": 1.22148403155438,
+                "viewer": -1.30634282456135,
+                "sonic": -0.29262514358928,
+                "của": 0.00117403586500614,
+                "shaw": -1.70754575726226,
+                "browser": -2.6672606657468,
+                "iris": -0.757499703780413,
+                "fonts": -0.136282421591527,
+                "unread": -7.32826137613627E-05,
+                "pirate": -0.217056226263947,
+                "pos": -1.83344342691368,
+                "cara": -1.02746717941585,
+                "brochure": -1.79421249331826,
+                "disability": -0.119981538606629,
+                "malware": 5.46470373989296,
+                "gates": -3.23359432886295,
+                "framework": -1.40310039455181,
+                "este": 0.814466940491366,
+                "ui": -0.527255300022924,
+                "xp": -3.34677347639516,
+                "mus": -0.450762999447609,
+                "sitesi": 0.00932586669894056,
+                "signal": -0.469110739802287,
+                "tc": -0.216428713108188,
+                "wp": -0.447306517830421,
+                "script": -0.148853840220276,
+                "awareness": -2.88375626983425,
+                "firmware": -1.1220663513333,
+                "vpn": -2.85482045341872,
+                "(windows": -3.50905432446535,
+                "font": -1.51818100106683,
+                "vault": -1.09167255510081,
+                "rewards": -0.847328745628357,
+                "paypal": 5.85986439346576,
+                "notice": 3.95699535364003,
+                "services,": -0.891665426147098,
+                "decals": -2.9252308543107,
+                "anti": -4.63957460216769,
+                "fx": -0.562481522604278,
+                "mis": -0.570066473701642,
+                "policies": -0.217665898506501,
+                "serial": -2.36658960491811,
+                "extranet": -0.140646066339903,
+                "8,": -0.0436853143076721,
+                "ios": -0.635189474513748,
+                "cyber": -6.02976859904081,
+                "engineer": -0.12850726791973,
+                "configuration": -0.352308889830509,
+                "dynamic": -0.341244713522851,
+                "powerpoint": -2.34833723953588,
+                "10,": -2.99272971916597,
+                "sql": -0.026104600724018,
+                "billing": -1.08294127417828,
+                "compass": -0.60160749813722,
+                "sécurité": 5.83172121030355,
+                "下载": -0.161983733876481,
+                "parent": -0.854347376248393,
+                "required": 2.56139512348303,
+                "wird": 1.04801912551345,
+                "4shared": -5.69405707063318,
+                "preview": -0.0523199136964179,
+                "sms": -1.40073660541345,
+                "damaged": 1.3519510456681,
+                "networks": -1.81068892185873,
+                "beta": -0.276164561894607,
+                "notification": 6.90953683089801,
+                "fleet": -0.337833385251034,
+                "downloading": -0.13512528536039,
+                "linux": -0.0500199257955543,
+                "guru": -0.630179855981912,
+                "officer": -2.46033373326489,
+                "scan": 0.22688720317257,
+                "sap": -0.514873013886496,
+                "compliance": -1.62146200486503,
+                "important": 2.70557878237391,
+                "cameras": -2.43173721876384,
+                "juice": -0.00842864461792348,
+                "keys": -1.45730026988316,
+                "devices": -0.126419969499833,
+                "adobe": -0.156806892735742,
+                "attack": 6.29518060472096,
+                "native": -0.135442905064143,
+                "reporting": -0.964688691370192,
+                "chip": -0.659364480932554,
+                "requirements": -0.562024635709243,
+                "sharing": 1.94573003019757,
+                "statement": -0.0433584080564835,
+                "首页": -0.310687664225621,
+                "attention": 11.4835382264145,
+                "removal": -5.20767940973213,
+                "duo": -0.334128668808221,
+                "fencing": -0.702326105375142,
+                "radar": -0.912012968505859,
+                "fake": -0.0472977962683793,
+                "corp": -0.374970023816818,
+                "loans": -0.658357558976673,
+                "czech": -1.71896019106563,
+                "bit": -0.819559345112318,
+                "(주": -0.774194265643578,
+                "trial": -0.0390481974764398,
+                "dynamics": -1.89718118130523,
+                "zimbra:": -1.17758676399438,
+                "crack": -2.4591814620164,
+                "登录": -1.22614351158503,
+                "guard": -3.30849987493877,
+                "essentials": -3.73424768806278,
+                "cómo": -1.18158542510756,
+                "provider": -0.0990592280211878,
+                "surface": -2.15830160815947,
+                "device": -0.209781842950518,
+                "hosting": -0.235339730167802,
+                "setup": -2.89335903744732,
+                "erp": -1.54031061298788,
+                "aviation": -0.339103655807641,
+                "teams": -3.21301229319031,
+                "license": -1.58936599193171,
+                "lock": -0.883639132577702,
+                "e-mail": -1.55115063411309,
+                "session": -2.77520773027217,
+                "helpdesk": -0.370736778885048,
+                "endpoint": 2.62994396075974,
+                "install": -3.22125707718212,
+                "explorer": -3.27524279698675,
+                "survey": -0.507304833323369,
+                "please": -1.33371715382524,
+                "defender": 7.63658374438365,
+                "privacy": -2.75522321136582,
+                "numbers": 0.27572413173182,
+                "rar": -4.36800591685076,
+                "404": -3.16228049014262,
+                "kaspersky": 3.67309653893256,
+                "visual": -2.14503355878784,
+                "900": 0.297627923236325,
+                "past": 0.242415657213913,
+                "quotes": -0.668272637945408,
+                "fix": -4.7485860765407,
+                "apps": -1.60009558169003,
+                "tracking": -0.241080708207927,
+                "companies": -0.319384243448221,
+                "desktop": -0.922716228503745,
+                "groups": -2.16960746573415,
+                "faqs": -1.00547379155523,
+                "liberty": -0.500973979150678,
+                "chrome": -0.373254071193744,
+                "guardian": 2.87315414474631,
+                "magnet": -1.87853039395717,
+                "offer": 2.65348128409635,
+                "iso": -1.8084413613161,
+                "wifi": -0.204736592039461,
+                "搜索": -0.080925219597378,
+                "enterprise": -1.98902814582173,
+                "maximum": 4.22089442210669,
+                "drivers": -6.1582067144229,
+                "com:": -0.294865727391008,
+                "iptv": -0.155915201532343,
+                "risk": 2.78833864350464,
+                "generator": -1.08814140839148,
+                "song": -0.48691173470435,
+                "let": 7.50665524262551,
+                "xbox": -1.74922517642794,
+                "365": -3.31027571668453,
+                "operations": -0.00743956684355733,
+                "console": -1.07203177389079,
+                "apk": -3.29651249753808,
+                "advice": -1.62829960849961,
+                "secure": -1.94418870413432,
+                "letter": -0.482082411736305,
+                "mijn": -1.25770741753877,
+                "64": -0.383079909913983,
+                "summary": -0.423079301282546,
+                "forms": -0.735026853255906,
+                "yahoo": 10.8521377914387,
+                "monitor": -0.43240081595472,
+                "mac": -1.76649618131399,
+                "title": 9.46653075419992,
+                "users": -0.952940137746893,
+                "updates": -1.2391877257697,
+                "agent": -1.84165617519929,
+                "eset": 6.30791230730764,
+                "gateway": -0.380359980942503,
+                "contacts": -0.170658365461882,
+                "signs": -3.83959798077085,
+                "document": 3.62187514607753,
+                "cms": -0.393371632566493,
+                "pay": -0.0257847948729473,
+                "ip": -0.226379562500129,
+                "early": -0.530290929531172,
+                "360": -0.204544651231471,
+                "maintenance": 4.6578764439389,
+                "corporation": -0.0700234066317795,
+                "issues": -2.63493257968392,
+                "exchange": -2.01878168076685,
+                "safe": -0.453099205669417,
+                "est": 0.119044025323084,
+                "force": -0.392217818223785,
+                "2007": -3.49488656015213,
+                "posts": -0.143127553277241,
+                "screen": -1.02026592915958,
+                "suite": -1.17698772130604,
+                "srl": -1.22379238098522,
+                "搜索结果": -0.0671542604840249,
+                "wireless": -1.66994571441833,
+                "songs": -2.51537189624854,
+                "retail": -0.207372658910755,
+                "challenge": 3.63950379271528,
+                "io": -0.33831826176544,
+                "block": 0.650971403964652,
+                "select": -0.223353319287495,
+                "child": -1.42541142806161,
+                "lights": -1.78817031394342,
+                "remote": -3.6512078458102,
+                "win": 2.68376170075936,
+                "grátis": -3.32096086483462,
+                "does": -2.37755922781004E-05,
+                "virus": 12.7500698028451,
+                "crm": -2.00760798898045,
+                "category": -0.893152457537483,
+                "er": 0.246531246520432,
+                "warning": 10.4815103612956,
+                "options": -1.14632751255587,
+                "error": 7.58942563064375,
+                "policy": -0.589452355896565,
+                "v2": -0.820706889413451,
+                "expert": -0.0534180398723625,
+                "using": -0.295947498663771,
+                "4k": -0.937748122605994,
+                "content": -2.65789587080389,
+                "active": -0.363825568889044,
+                "hr": -0.704275606331498,
+                "window": 4.04940940932507,
+                "platform": -1.26786899291616,
+                "connect": -0.886626975804822,
+                "if": 0.714579646667067,
+                "cu": 0.125399012654505,
+                "settings": 1.67192168227049,
+                "link": -1.18531229421848,
+                "check": -1.4582017781007,
+                "corporate": -0.206553077431022,
+                "zip": -3.54167502937599,
+                "driver": -3.86363656891861,
+                "vision": -0.307084895029275,
+                "af": 0.397528361779951,
+                "word": -3.32587367790044,
+                "campus": -0.358351684174842,
+                "protection": 1.75254143767972,
+                "2010": -5.96567428619054,
+                "excel": 4.40410360450109,
+                "files": -1.00387156983827,
+                "facebook": 1.21909985846269,
+                "ist": 0.808795922897004,
+                "basic": -0.162533548370589,
+                "doors": -3.37432691488838,
+                "total": 2.16231792006654,
+                "register": -0.90048973830555,
+                "lab": -1.37144783338868,
+                "hub": -3.14803396880494,
+                "ladies": 4.7990709591067,
+                "file": -4.74171429284739,
+                "sistema": 4.46358805701379,
+                "faq": -1.76413788646175,
+                "overview": -0.0423301342177347,
+                "agency": -1.29762009720215,
+                "edge": 3.73620587993919,
+                "partners": -0.34744882532554,
+                "client": -3.15438615098939,
+                "booking": -0.290817789149373,
+                "jira": -0.562981195943253,
+                "members": -0.756669804225965,
+                "jpg": -0.06724769924171,
+                "intranet": -1.41264305169412,
+                "here": -0.00384787906260829,
+                "descargar": -0.856194241296818,
+                "os": -0.544782354051103,
+                "database": -0.655638120167169,
+                "re:": -0.814046093387977,
+                "under": 4.63093643138793,
+                "outlook": 5.00955691501721,
+                "index": -1.30622236543908,
+                "alert": 9.09814615628717,
+                "pages": -0.171392027817616,
+                "quiz": -2.94285247212289,
+                "password": -2.44213707003123,
+                "credit": -0.349138935226785,
+                "build": -0.976140792915373,
+                "--": -1.11787586045094,
+                "email": -3.89899774448347,
+                "virtual": -0.958981574183784,
+                "cam": -0.0547397456109595,
+                "id": -0.658208033329849,
+                "server": -2.90579346795985,
+                "homepage": -0.4578218910318,
+                "camera": -2.4077799119167,
+                "financial": -0.162304501571477,
+                "computer": 2.14182409040525,
+                "express": -0.649571561905637,
+                "insurance": -0.132223149900641,
+                "update": -3.9674252804737,
+                "version": -3.46513676020169,
+                "(3": 0.477966222242273,
+                "key": -1.65778225692534,
+                "japan": -1.12922631732636,
+                "cloud": 1.68889559021019,
+                "repair": -0.296122427766082,
+                "2013": -5.47787511065595,
+                "downloads": -0.0109242604128953,
+                "phone": 0.431070394681342,
+                "apple": 6.00733448829043,
+                "trend": 8.24567845780278,
+                "member": -1.95059393623233,
+                "main": -0.0743125987111007,
+                "micro": 0.188179844260553,
+                "tool": -1.46530717723306,
+                "sign": -1.65204201482509,
+                "hp": -1.18311884195596,
+                "tech": 3.83208587459401E-05,
+                "call": 1.46696888983899,
+                "create": -0.823917419829273,
+                "tickets": -0.473953362748342,
+                "number": 0.0929817401700078,
+                "torrents": -0.995674928377727,
+                "partner": -0.586407657958043,
+                "staff": -1.36528202801063,
+                "request": -1.4382486842206,
+                "user": -3.18947637522455,
+                "ticket": -2.58425912107168,
+                "android": 1.53081596474569,
+                "application": -2.63849728436851,
+                "bank": -2.003515995369,
+                "panel": -1.60852582639069,
+                "mp4": -1.37190118049146,
+                "access": -2.93111915315876,
+                "tips": 1.53016072391209,
+                "br": 5.78794794513182,
+                "back": -0.682725526463828,
+                "small": 2.4772057100344,
+                "fire": -2.01739326095212,
+                "careers": -1.38499336412325,
+                "student": -1.34421802339148,
+                "event": 0.0219893371716659,
+                "audio": -0.573038127615895,
+                "card": -0.962936730170927,
+                "message": 4.99194701328038,
+                "report": -1.93724451968482,
+                "form": -2.32199295767159,
+                "manager": 3.86436332172754,
+                "›": -0.289424243067741,
+                "line": -0.270171636179887,
+                "latest": -1.51119962823782,
+                "llc": -2.5777712711257,
+                "trade": -0.393569300194266,
+                "program": -0.174060266960441,
+                "technology": -1.47620512378044,
+                "professional": -2.16931194874033,
+                "go": -0.394604660271342,
+                "social": -2.83609652021098,
+                "pack": -0.663860268098609,
+                "drive": 6.38812985490723,
+                "vs": -0.898482531138847,
+                "smart": 0.919378129827674,
+                "post": -0.0505422614245586,
+                "admin": -2.88373549742816,
+                "review": -0.625862401618324,
+                "area": -1.05340574183199,
+                "data": -3.45172819463766,
+                "direct": -0.683460160612688,
+                "forums": -1.76632861373177,
+                "ag": -1.16771434250698,
+                "control": -0.917573285023275,
+                "old": -0.911308288130557,
+                "network": -2.63989529559598,
+                "job": -0.514996068769807,
+                "«": -0.126625065028405,
+                "public": -0.462279444093725,
+                "@": -1.17594436673046,
+                "work": -0.687812932552638,
+                "media": -0.776951198298752,
+                "details": -0.967388845659159,
+                "mobile": -2.16777348751422,
+                "systems": -4.51935782840668,
+                "dashboard": -1.7173503912744,
+                "mp3": 0.401656650911641,
+                "national": -0.543261214873718,
+                "log": -1.47117398852417,
+                "mail": -5.41284210039943,
+                "help": 4.35903913900863,
+                "(1": 6.88604457168264,
+                "project": -1.652781256268,
+                "2016": -3.02937431415541,
+                "premium": 1.26404793627394,
+                "product": -2.24468589664451,
+                "board": -0.39547814517941,
+                "24": -0.524925201027192,
+                "not": -0.687508824152833,
+                "light": -0.10794214051444,
+                "internet": 4.09518464797892,
+                "safety": 0.596650809465465,
+                "p": -0.26212515490123,
+                "time": -0.0456035033094423,
+                "view": -0.903987774865716,
+                "op": 4.15065419490845,
+                "software": -2.82245603500561,
+                "we": -0.476712869419726,
+                "test": -0.542141750846217,
+                "ch": -0.0154478920396349,
+                "list": -0.457549177861243,
+                "first": -0.457632215472689,
+                "get": -0.82650144287867,
+                "microsoft": 8.69274224644092,
+                "edit": -1.03319556701177,
+                "more": 0.160984328985924,
+                "solutions": -2.86343855999432,
+                "music": -0.486304209350989,
+                "red": -0.956733483489403,
+                "org": -1.16726054040972,
+                "care": -0.0987294705308332,
+                "sales": -0.192900700637415,
+                "account": 3.71075408154389,
+                "movie": -0.250849864465098,
+                "b": -0.269015686158981,
+                "office": 0.66982149222508,
+                "order": -0.289803917674685,
+                "game": -1.27621001248276,
+                "plus": -0.0308567301145549,
+                "jobs": -0.877176096133111,
+                "training": -1.65621060577259,
+                "or": -0.766592191482519,
+                "centre": 0.791206806279161,
+                "d": -0.0659524723591389,
+                "up": 1.94303693425369,
+                "welcome": -0.358078470242815,
+                "health": -0.143858915467903,
+                "guide": -0.258260656198176,
+                "info": 0.510914240079845,
+                "windows": 4.57597838745397,
+                "portal": -3.2528173477756,
+                "me": -1.28912353756087,
+                "games": -2.62486400387063,
+                "webmail": -1.98641832762415,
+                "life": -1.04801792361576,
+                "community": -1.15556295155812,
+                "r": -1.05253566197233,
+                "team": -1.951395301499,
+                "company": -4.44965688420182,
+                "management": -1.87313326131459,
+                "pdf": -8.55815144700545,
+                "torrent": -1.25999077089931,
+                "one": 4.11999405997306,
+                "system": 3.55160703098706,
+                "gratis": -1.23543457903439,
+                "c": -0.0991832083010631,
+                "login": 6.69479750184431,
+                "m": 2.88770815116132,
+                "live": 0.00714728200012278,
+                "our": -0.421311152450301,
+                "inc": -1.85188861402999,
+                "wiki": -2.20970158336627,
+                "st": 2.04164678764465,
+                "information": -1.69569924977117,
+                "web": 0.819523615469982,
+                "car": -0.242604525553071,
+                "ltd": -2.16511397287475,
+                "2018": -0.515895573772469,
+                "group": -2.0453640752852,
+                "gmbh": -0.68980517752044,
+                "blog": -1.604612606212,
+                "tv": -1.02037120372962,
+                "service": 0.816161306287541,
+                "it": -3.32550849001772,
+                "pro": -2.1499512925432,
+                "video": -1.40712578177531,
+                "services": 3.07154185427745,
+                "security": 9.90123281787162,
+                "nl": -0.237930661097446,
+                "official": 6.69355244060581,
+                "9": -0.489017565730659,
+                "about": -1.28882796460692,
+                "store": -1.89713185370046,
+                "how": -0.509892129474111,
+                "support": 7.81339034284984,
+                "net": -2.04930427371177,
+                "all": -0.469055263781105,
+                "forum": -2.10852697080072,
+                "news": -0.925801252620744,
+                "pl": -0.0297803864794254,
+                "no": -0.172043543666822,
+                "products": -1.06582385071709,
+                "co": -0.401164299273472,
+                "is": 0.807420421632344,
+                "my": -3.3304117429858,
+                "club": -1.31783142595184,
+                "8": -1.2724032358499,
+                "hd": -0.0615636324424033,
+                ">": -1.23137157892545,
+                "do": -1.69481872110543,
+                "from": -12.1870728084516,
+                "·": -0.152793917399175,
+                "10": -0.33000927785427,
+                "us": -0.180688495783015,
+                "s": 0.764019683140848,
+                "6": -1.1122990577468,
+                "•": -1.09236300129147,
+                "download": 8.30996940620143,
+                "you": -0.823287957183101,
+                "your": 0.58483129414665,
+                "shop": -0.88145286071634,
+                "search": -0.979996151963494,
+                "‹": -0.450160759737376,
+                "contact": 1.36616690748895,
+                "with": -0.537115104791129,
+                "on": -2.19450128813358,
+                "i": -0.356687662060374,
+                "at": -0.4698096644543,
+                "4": -0.742524972727398,
+                "::": -0.859953584665282,
+                "free": -2.72099288587697,
+                "home": -4.37692943118846,
+                "3": -1.34082216804023,
+                "1": -2.10725305373454,
+                ":": -6.81598642817895,
+                "2019": -2.39344591655943,
+                "to": -3.65800650078345,
+                "online": 0.684097452527487,
+                "ebay": -2.09471929484155,
+                "page": 1.15886374098831,
+                "2": -1.91368190376594,
+                "com": -3.23560081637991,
+                "of": -1.51832726102323,
+                "the": -2.09582023978897,
+                "in": -1.36949613061145,
+                "–": -1.96092937860375
+            };
+            this.bias = -2.03588432962421;
+            this.factor = -0.235096784475425;
+        }
+        evaluate(data, domEvents) {
+            let title = domEvents.stream.find(event => ((event.tagId == Dom.tagType.title) && (event.text.length > 0)));
+            let text = title && title.text; // fetching title.text may be expensive, cache the value if needed
+            if (text) {
+                let tokens = text.toLowerCase().split(/[\|;\.\\\/\?\*!\") ]+/);
+                let features = Array.from(new Set(tokens));
+                let score = features.reduce((acc, feature) => acc + (this.features[feature] || 0.0), this.bias + this.factor * text.length);
+                return { 'name': 'techScamTitleModel:2019-10-07', 'score': score, 'title': text };
+            }
+            else {
+                return { 'name': 'techScamTitleModel:2019-10-07' };
+            }
+        }
+    }
+    Model.Title = Title;
+})(Model || (Model = {}));
+var V2;
+(function (V2) {
+    class Api extends V1.Api {
+        constructor(project) {
+            super(project);
+        }
+        logFilterEvents(events, data) {
+            super.logFilterEvents(events, data);
+            $.each(events, x => {
+                if (x.$type == "userAction") {
+                    windows.smartScreen.events.logDecision(x['action'], ""); // remove correlationId for ISO compliance
+                }
+            });
+        }
+        logSendRequest(uri, request, response) {
+            if ((uri.toLowerCase().indexOf("lookup") != 0) && response && response.body) {
+                let responseBody = this.parseResponseBody(response);
+                let experience = $.get(responseBody, "experience", false) ? responseBody.experience :
+                    ($.get(responseBody, "result.$type", false) && (responseBody.result.$type == "experience")) ? responseBody.result : null;
+                if (experience) {
+                    windows.smartScreen.events.logUriLookup($.get(request, "body.destination.uri", ""), $.get(request, "body.destination.ip", ""), $.get(request, "body.referrer.uri", ""), $.get(request, "body.referrer.ip", ""), "block", "navigate", $.get(request, "body.type", ""), "edge", $.get(request, "body.identity.caller.process.id", 0), $.get(request, "body.identity.caller.process.creationTime", 0), $.get(request, "body.identity.caller.process.owner", ""), "", // remove correlationId for ISO compliance
+                    ($.get(request, "body.config.user.uriReputation.level", "") + ($.get(request, "body.config.user.uriReputation.enforcedByPolicy", false) ? "ByPolicy" : "")), $.get(responseBody, "responseCategory", ""));
+                }
+            }
+        }
+        parseResponseBody(response) {
+            return JSON.parse(Base64.decodeToString(response.body));
+        }
+        evaluateModel(data, getDomData) {
+            return new Promise(resolve => {
+                return resolve(getDomData()
+                    .then(domData => {
+                    ;
+                    let result = new Model.Title().evaluate(data, domData);
+                    if (result.score && (result.score > 0.0)) {
+                        return { callServerPath: 'NavigationComplete', data: result };
+                    }
+                    else {
+                        return { callServerPath: null, data: result };
+                    }
+                }));
+            });
+        }
+    }
+    V2.Api = Api;
+})(V2 || (V2 = {}));
+var V3;
+(function (V3) {
+    class Api extends V2.Api {
+        constructor(project) {
+            super(project);
+        }
+        sendRequest(uri, request, sendRequest) {
+            const navigateRequest = uri.toLowerCase().indexOf("navigate") != -1;
+            if (navigateRequest && request.body.synchronous) {
+                uri += "/sync";
+            }
+            const response = super.sendRequest(uri, request, sendRequest);
+            if (navigateRequest) {
+                const syncResponse = (() => {
+                    if (request.body.synchronous && windows.crypto) {
+                        const osVersion = request.body.identity.device.osVersion;
+                        const enterprise = request.body.identity.device.enterprise;
+                        const body = "<Rep v=\"3\">" +
+                            "<G>{379BDC39-D58D-44AA-986B-FD2CBFFA75A6}</G>" +
+                            (enterprise ? [
+                                enterprise.organizationId && "<ORG>" + enterprise.organizationId + "</ORG>",
+                                enterprise.senseId && "<SEN>" + enterprise.senseId + "</SEN>"
+                            ].join("") : "") +
+                            "<ID>{3577E9B1-CCA1-4CA3-8C69-B6C27D3B289C}</ID>" +
+                            "<C>" + request.body.identity.device.browser.edge + "</C>" +
+                            "<OS>" + osVersion.slice(0, osVersion.lastIndexOf(".")) + "</OS>" +
+                            "<L>" + request.body.identity.caller.locales[0] + "</L>" +
+                            "<W>0</W>" +
+                            "<I>{" + request.body.correlationId + "}</I>" +
+                            "<R>" +
+                            "<Rq>" +
+                            "<U>" + btoa(request.body.destination.uri) + "</U>" +
+                            (request.body.destination.ip ? ("<IP>" + btoa(request.body.destination.ip) + "</IP>") : "") +
+                            "<T>" + (request.body.type == "top" ? "T" : "F") + "</T>" +
+                            "</Rq>" +
+                            "</R>" +
+                            "</Rep>";
+                        const hash = windows.crypto.patentHash(body);
+                        return windows.http.sendRawRequest((enterprise ? $.serviceUriForGeoId(enterprise.geoId) : "https://x.urs.microsoft.com") +
+                            "/ssrs.asmx?MSURS-Client-Key=" + encodeURIComponent(hash.key) +
+                            "&MSURS-MAC=" + encodeURIComponent(hash.hash), {
+                            headers: [],
+                            body: body,
+                            method: "POST"
+                        });
+                    }
+                    else {
+                        return Promise.resolve({ headers: [], body: "", statusCode: 200 });
+                    }
+                })();
+                return Promise.all([response, syncResponse])
+                    .then((values) => {
+                    if (values[1].body.indexOf("XPLT:100") != -1) {
+                        return {
+                            headers: [],
+                            body: { result: { $type: "experience", content: { markup: "" }, notification: { type: "error", title: "", body: { title: "", elements: [], buttons: [], autoDisplay: false } } } },
+                            statusCode: 200
+                        };
+                    }
+                    else {
+                        return values[0];
+                    }
+                })
+                    .catch(x => response);
+            }
+            else {
+                return response;
+            }
+        }
+        parseResponseBody(response) {
+            return response.body;
+        }
+    }
+    V3.Api = Api;
+})(V3 || (V3 = {}));
+//# sourceMappingURL=edge-original.rs3.js.map

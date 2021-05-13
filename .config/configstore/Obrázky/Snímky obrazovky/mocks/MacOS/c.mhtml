@@ -1,0 +1,892 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index
+Subject: Option Index (The C Preprocessor)
+Date: Tue, 14 Apr 2020 18:23:20 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--jDx9NcwSM0kStfnAwZfcn3f87eEebAgYSWOfytkNrB----"
+
+
+------MultipartBoundary--jDx9NcwSM0kStfnAwZfcn3f87eEebAgYSWOfytkNrB----
+Content-Type: text/html
+Content-ID: <frame-AD8DFC688EA015312314139F201DE764@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
+w3.org/TR/html4/loose.dtd"><html><!-- Copyright (C) 1987-2020 Free Software=
+ Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation.  A copy of
+the license is included in the
+section entitled "GNU Free Documentation License".
+
+This manual contains no Invariant Sections.  The Front-Cover Texts are
+(a) (see below), and the Back-Cover Texts are (b) (see below).
+
+(a) The FSF's Front-Cover Text is:
+
+A GNU Manual
+
+(b) The FSF's Back-Cover Text is:
+
+You have freedom to copy and modify this GNU Manual, like GNU
+     software.  Copies published by the Free Software Foundation raise
+     funds for GNU development. --><!-- Created by GNU Texinfo 6.5, http://=
+www.gnu.org/software/texinfo/ --><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-b82eb52a-8cc9-4d81-90e9-6485f7100e78@mhtml.blink" />
+
+<title _msthash=3D"149916" _msttexthash=3D"780507" _msthidden=3D"1">Option =
+Index (The C Preprocessor)</title>
+
+<meta name=3D"description" content=3D"Option Index (The C Preprocessor)">
+<meta name=3D"keywords" content=3D"Option Index (The C Preprocessor)">
+<meta name=3D"resource-type" content=3D"document">
+<meta name=3D"distribution" content=3D"global">
+<meta name=3D"Generator" content=3D"makeinfo">
+<link href=3D"https://gcc.gnu.org/onlinedocs/cpp/index.html#Top" rel=3D"sta=
+rt" title=3D"Top">
+<link href=3D"https://gcc.gnu.org/onlinedocs/cpp/Index-of-Directives.html#I=
+ndex-of-Directives" rel=3D"index" title=3D"Index of Directives">
+<link href=3D"https://gcc.gnu.org/onlinedocs/cpp/index.html#SEC_Contents" r=
+el=3D"contents" title=3D"Table of Contents">
+<link href=3D"https://gcc.gnu.org/onlinedocs/cpp/index.html#Top" rel=3D"up"=
+ title=3D"Top">
+<link href=3D"https://gcc.gnu.org/onlinedocs/cpp/Concept-Index.html#Concept=
+-Index" rel=3D"next" title=3D"Concept Index">
+<link href=3D"https://gcc.gnu.org/onlinedocs/cpp/Index-of-Directives.html#I=
+ndex-of-Directives" rel=3D"prev" title=3D"Index of Directives">
+
+<link rel=3D"stylesheet" type=3D"text/css" href=3D"https://gcc.gnu.org/gcc.=
+css">
+
+
+</head>
+
+<body lang=3D"en">
+<a name=3D"Option-Index"></a>
+<div class=3D"header">
+<p><font _mstmutation=3D"1" _msthash=3D"241852" _msttexthash=3D"3830242"> D=
+al=C5=A1=C3=AD: <a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Concept-Index=
+.html#Concept-Index" accesskey=3D"n" rel=3D"next" _mstmutation=3D"1" _istra=
+nslated=3D"1">Concept Index</a>, P=C5=99edchoz=C3=AD: Index <a href=3D"http=
+s://gcc.gnu.org/onlinedocs/cpp/Index-of-Directives.html#Index-of-Directives=
+" accesskey=3D"p" rel=3D"prev" _mstmutation=3D"1" _istranslated=3D"1">sm=C4=
+=9Brnic</a>, Nahoru: <a href=3D"https://gcc.gnu.org/onlinedocs/cpp/index.ht=
+ml#Top" accesskey=3D"u" rel=3D"up" _mstmutation=3D"1" _istranslated=3D"1">N=
+ahoru</a> [<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/index.html#SEC_Con=
+tents" title=3D"Table of contents" rel=3D"contents" _mstmutation=3D"1" _ist=
+ranslated=3D"1">Obsah</a>][<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/In=
+dex-of-Directives.html#Index-of-Directives" title=3D"Index" rel=3D"index" _=
+mstmutation=3D"1" _istranslated=3D"1">Index</a></font>]</p>
+</div>
+<hr>
+<a name=3D"Option-Index-1"></a>
+<h2 class=3D"unnumbered" _msthash=3D"128284" _msttexthash=3D"320996">Index =
+mo=C5=BEnost=C3=AD</h2>
+<p><font _mstmutation=3D"1" _msthash=3D"118885" _msttexthash=3D"6811857">Mo=
+=C5=BEnosti p=C5=99=C3=ADkazov=C3=A9ho =C5=99=C3=A1dku cpp a prom=C4=9Bnn=
+=C3=A9 prost=C5=99ed=C3=AD jsou zde indexov=C3=A1ny bez po=C4=8D=C3=A1te=C4=
+=8Dn=C3=ADch "' nebo ''. </font><samp>-</samp><samp>--</samp></p><table><tb=
+ody><tr><th valign=3D"top" _msthash=3D"796536" _msttexthash=3D"168298">P=C5=
+=99ej=C3=ADt na: </th><td><font _mstmutation=3D"1" _msthash=3D"794664" _mst=
+texthash=3D"215020"><a class=3D"summary-letter" href=3D"https://gcc.gnu.org=
+/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-A" _mstmutation=3D=
+"1" _istranslated=3D"1"> <b _istranslated=3D"1">A</b> </a> <a class=3D"summ=
+ary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Op=
+tion-Index_op_letter-C" _mstmutation=3D"1" _istranslated=3D"1"> <b _istrans=
+lated=3D"1">C</b> </a> <a class=3D"summary-letter" href=3D"https://gcc.gnu.=
+org/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-D" _mstmutation=
+=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">D</b> </a> <a class=3D"s=
+ummary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Option-Index.html=
+#Option-Index_op_letter-F" _mstmutation=3D"1" _istranslated=3D"1"> <b _istr=
+anslated=3D"1">F</b> </a> <a class=3D"summary-letter" href=3D"https://gcc.g=
+nu.org/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-H" _mstmutat=
+ion=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">H</b> </a> <a class=
+=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Option-Index=
+.html#Option-Index_op_letter-I" _mstmutation=3D"1" _istranslated=3D"1"> <b =
+_istranslated=3D"1">I</b> </a> <a class=3D"summary-letter" href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-M" _mst=
+mutation=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">M</b> </a> <a cl=
+ass=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Option-In=
+dex.html#Option-Index_op_letter-N" _mstmutation=3D"1" _istranslated=3D"1"> =
+<b _istranslated=3D"1">N</b> </a> <a class=3D"summary-letter" href=3D"https=
+://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-O" _=
+mstmutation=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">O</b> </a> <a=
+ class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Option=
+-Index.html#Option-Index_op_letter-P" _mstmutation=3D"1" _istranslated=3D"1=
+"> <b _istranslated=3D"1">P</b> </a> <a class=3D"summary-letter" href=3D"ht=
+tps://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-R=
+" _mstmutation=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">R</b> </a>=
+ <a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opt=
+ion-Index.html#Option-Index_op_letter-S" _mstmutation=3D"1" _istranslated=
+=3D"1"> <b _istranslated=3D"1">S</b> </a> <a class=3D"summary-letter" href=
+=3D"https://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index_op_le=
+tter-T" _mstmutation=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">T</b=
+> </a> <a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/c=
+pp/Option-Index.html#Option-Index_op_letter-U" _mstmutation=3D"1" _istransl=
+ated=3D"1"> <b _istranslated=3D"1">U</b> </a> <a class=3D"summary-letter" h=
+ref=3D"https://gcc.gnu.org/onlinedocs/cpp/Option-Index.html#Option-Index_op=
+_letter-W" _mstmutation=3D"1" _istranslated=3D"1"> <b _istranslated=3D"1">W=
+</b> </a></font>
+ &nbsp;=20
+</td></tr></tbody></table>
+<table class=3D"index-op" border=3D"0">
+<tbody><tr><td></td><th align=3D"left" _msthash=3D"828217" _msttexthash=3D"=
+458159">Polo=C5=BEka rejst=C5=99=C3=ADku</th><td>&nbsp;</td><th align=3D"le=
+ft" _msthash=3D"828218" _msttexthash=3D"75543"> Odd=C3=ADl</th></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-A" _msthash=3D"829101" _msttextha=
+sh=3D"5915">A</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"827619" _msttexthash=3D"11947">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-A" _ist=
+ranslated=3D"1"> <code _istranslated=3D"1">A</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"827620" _msttexthash=3D"160914">Vyvol=C3=A1n=
+=C3=AD</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-C" _msthash=3D"830427" _msttextha=
+sh=3D"6097">C</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"828945" _msttexthash=3D"12129">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-C" _ist=
+ranslated=3D"1"> <code _istranslated=3D"1">C</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"828946" _msttexthash=3D"160914">Vyvol=C3=A1n=
+=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"829387" _msttexthash=3D"23179">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-CC" _is=
+translated=3D"1"> <code _istranslated=3D"1">Cc</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"829388" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"829829" _msttexthash=3D"52286">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#in=
+dex-CPATH" _istranslated=3D"1"> <code _istranslated=3D"1">CPATH</code></a>:=
+</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlin=
+edocs/cpp/Environment-Variables.html#Environment-Variables" _msthash=3D"829=
+830" _msttexthash=3D"507299">Prom=C4=9Bnn=C3=A9 prost=C5=99ed=C3=AD</a></td=
+></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"830271" _msttexthash=3D"299754"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#i=
+ndex-CPLUS_005fINCLUDE_005fPATH" _istranslated=3D"1"> <code _istranslated=
+=3D"1">CPLUS_INCLUDE_PATH</code></a>:</td><td>&nbsp;</td><td valign=3D"top"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#E=
+nvironment-Variables" _msthash=3D"830272" _msttexthash=3D"507299">Prom=C4=
+=9Bnn=C3=A9 prost=C5=99ed=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"853827" _msttexthash=3D"204243"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#i=
+ndex-C_005fINCLUDE_005fPATH" _istranslated=3D"1"> <code _istranslated=3D"1"=
+>C_INCLUDE_PATH</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=
+=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#Environme=
+nt-Variables" _msthash=3D"853828" _msttexthash=3D"507299">Prom=C4=9Bnn=C3=
+=A9 prost=C5=99ed=C3=AD</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-D" _msthash=3D"856713" _msttextha=
+sh=3D"6188">D</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855192" _msttexthash=3D"12220">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-D" _ist=
+ranslated=3D"1"> <code _istranslated=3D"1">D</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"855193" _msttexthash=3D"160914">Vyvol=C3=A1n=
+=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855647" _msttexthash=3D"15132">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-d" _ist=
+ranslated=3D"1"> <code _istranslated=3D"1">d</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"855648" _msttexthash=3D"160914">Vyvol=C3=A1n=
+=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856102" _msttexthash=3D"22958">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-dD" _is=
+translated=3D"1"> <code _istranslated=3D"1">dD</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"856103" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856557" _msttexthash=3D"330811"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#i=
+ndex-DEPENDENCIES_005fOUTPUT" _istranslated=3D"1"> <code _istranslated=3D"1=
+">DEPENDENCIES_OUTPUT</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a =
+href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#Envir=
+onment-Variables" _msthash=3D"856558" _msttexthash=3D"507299">Prom=C4=9Bnn=
+=C3=A9 prost=C5=99ed=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857012" _msttexthash=3D"23478">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-dI" _is=
+translated=3D"1"> <code _istranslated=3D"1">dI</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"857013" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857467" _msttexthash=3D"23894">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-dM" _is=
+translated=3D"1"> <code _istranslated=3D"1">dM</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"857468" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857922" _msttexthash=3D"23998">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-dN" _is=
+translated=3D"1"> <code _istranslated=3D"1">dN</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"857923" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"854269" _msttexthash=3D"24726">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-dU" _is=
+translated=3D"1"> <code _istranslated=3D"1">dU</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"854270" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-F" _msthash=3D"857155" _msttextha=
+sh=3D"6370">F</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855634" _msttexthash=3D"160615"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fdebug=
+-cpp" _istranslated=3D"1"> <code _istranslated=3D"1">fdebug-cpp</code></a>:=
+</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlin=
+edocs/cpp/Invocation.html#Invocation" _msthash=3D"855635" _msttexthash=3D"1=
+60914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856089" _msttexthash=3D"344331"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fdirec=
+tives-only" _istranslated=3D"1"> <code _istranslated=3D"1">pouze fdirective=
+s</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.=
+gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"856090" _mst=
+texthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856544" _msttexthash=3D"754520"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fdolla=
+rs-in-identifiers" _istranslated=3D"1"> <code _istranslated=3D"1">fdolar=C5=
+=AF-in-identifik=C3=A1tory</code></a>:</td><td>&nbsp;</td><td valign=3D"top=
+"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation"=
+ _msthash=3D"856545" _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></t=
+r>
+<tr><td></td><td valign=3D"top" _msthash=3D"856999" _msttexthash=3D"239200"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fexec-=
+charset" _istranslated=3D"1"> <code _istranslated=3D"1">fexec-charset</code=
+></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org=
+/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857000" _msttexthas=
+h=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857454" _msttexthash=3D"675246"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fexten=
+ded-identifiers" _istranslated=3D"1"> <code _istranslated=3D"1">fextended-i=
+dentifik=C3=A1tory</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a hre=
+f=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthas=
+h=3D"857455" _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857909" _msttexthash=3D"271583"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-finput=
+-charset" _istranslated=3D"1"> <code _istranslated=3D"1">finput-charset</co=
+de></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.o=
+rg/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857910" _msttexth=
+ash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858364" _msttexthash=3D"379275"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fmacro=
+-prefix-map" _istranslated=3D"1"> <code _istranslated=3D"1">fmakro-prefix-m=
+apa</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gc=
+c.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"858365" _m=
+sttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"854711" _msttexthash=3D"450983"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fmax-i=
+nclude-depth" _istranslated=3D"1"> <code _istranslated=3D"1">fmax-include-h=
+loubka</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https:/=
+/gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"854712"=
+ _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855166" _msttexthash=3D"1167933=
+"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fno-c=
+anonical-system-headers" _istranslated=3D"1"> <code _istranslated=3D"1">fno=
+-kanonick=C3=A9-syst=C3=A9mov=C3=A9 hlavi=C4=8Dky</code></a>:</td><td>&nbsp=
+;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invo=
+cation.html#Invocation" _msthash=3D"855167" _msttexthash=3D"160914">Vyvol=
+=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855621" _msttexthash=3D"505271"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fno-wo=
+rking-directory" _istranslated=3D"1"> <code _istranslated=3D"1">fno-working=
+-directory</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"htt=
+ps://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"855=
+622" _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856076" _msttexthash=3D"618020"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fprepr=
+ocessed" _istranslated=3D"1"> <code _istranslated=3D"1">p=C5=99edb=C4=9B=C5=
+=BEn=C4=9B zpracovan=C3=A9</code></a>:</td><td>&nbsp;</td><td valign=3D"top=
+"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation"=
+ _msthash=3D"856077" _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></t=
+r>
+<tr><td></td><td valign=3D"top" _msthash=3D"856531" _msttexthash=3D"130429"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-ftabst=
+op" _istranslated=3D"1"> <code _istranslated=3D"1">ftabstop</code></a>:</td=
+><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedoc=
+s/cpp/Invocation.html#Invocation" _msthash=3D"856532" _msttexthash=3D"16091=
+4">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856986" _msttexthash=3D"457561"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-ftrack=
+-macro-expansion" _istranslated=3D"1"> <code _istranslated=3D"1">ftrack-mak=
+ro-expanze</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"htt=
+ps://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"856=
+987" _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857441" _msttexthash=3D"380874"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fwide-=
+exec-charset" _istranslated=3D"1"> <code _istranslated=3D"1">fwide-exec-cha=
+rset</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://g=
+cc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857442" _=
+msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857896" _msttexthash=3D"428493"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-fworki=
+ng-directory" _istranslated=3D"1"> <code _istranslated=3D"1">fworking-adres=
+=C3=A1=C5=99</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"h=
+ttps://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"8=
+57897" _msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-H" _msthash=3D"860782" _msttextha=
+sh=3D"6552">H</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855153" _msttexthash=3D"12584">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-H" _ist=
+ranslated=3D"1"> <code _istranslated=3D"1">H</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"855154" _msttexthash=3D"160914">Vyvol=C3=A1n=
+=C3=AD</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-I" _msthash=3D"858039" _msttextha=
+sh=3D"6643">I</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856518" _msttexthash=3D"12675">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-I" _ist=
+ranslated=3D"1"> <code _istranslated=3D"1">I</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"856519" _msttexthash=3D"160914">Vyvol=C3=A1n=
+=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856973" _msttexthash=3D"18109">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-I-" _is=
+translated=3D"1"> <code _istranslated=3D"1">I-</code></a>:</td><td>&nbsp;</=
+td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocat=
+ion.html#Invocation" _msthash=3D"856974" _msttexthash=3D"160914">Vyvol=C3=
+=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857428" _msttexthash=3D"149123"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-idiraf=
+ter" _istranslated=3D"1"> <code _istranslated=3D"1">idirafter</code></a>:</=
+td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlined=
+ocs/cpp/Invocation.html#Invocation" _msthash=3D"857429" _msttexthash=3D"160=
+914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857883" _msttexthash=3D"108719"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-imacro=
+s" _istranslated=3D"1"> <code _istranslated=3D"1">imacros</code></a>:</td><=
+td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/=
+cpp/Invocation.html#Invocation" _msthash=3D"857884" _msttexthash=3D"160914"=
+>Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858338" _msttexthash=3D"150124"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-imulti=
+lib" _istranslated=3D"1"> <code _istranslated=3D"1">imultilib</code></a>:</=
+td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlined=
+ocs/cpp/Invocation.html#Invocation" _msthash=3D"858339" _msttexthash=3D"160=
+914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858793" _msttexthash=3D"121641"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-includ=
+e" _istranslated=3D"1"> <code _istranslated=3D"1">pat=C5=99=C3=AD:</code></=
+a></td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onl=
+inedocs/cpp/Invocation.html#Invocation" _msthash=3D"858794" _msttexthash=3D=
+"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859248" _msttexthash=3D"109473"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-iprefi=
+x" _istranslated=3D"1"> <code _istranslated=3D"1">iprefix</code></a>:</td><=
+td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/=
+cpp/Invocation.html#Invocation" _msthash=3D"859249" _msttexthash=3D"160914"=
+>Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"855595" _msttexthash=3D"88660">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-iquote"=
+ _istranslated=3D"1"> <code _istranslated=3D"1">Iquote</code></a>:</td><td>=
+&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp=
+/Invocation.html#Invocation" _msthash=3D"855596" _msttexthash=3D"160914">Vy=
+vol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856050" _msttexthash=3D"135421"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-isysro=
+ot" _istranslated=3D"1"> <code _istranslated=3D"1">isysroot</code></a>:</td=
+><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedoc=
+s/cpp/Invocation.html#Invocation" _msthash=3D"856051" _msttexthash=3D"16091=
+4">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856505" _msttexthash=3D"132535"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-isyste=
+m" _istranslated=3D"1"> <code _istranslated=3D"1">isyst=C3=A9m</code></a>:<=
+/td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/online=
+docs/cpp/Invocation.html#Invocation" _msthash=3D"856506" _msttexthash=3D"16=
+0914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856960" _msttexthash=3D"201110"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-iwithp=
+refix" _istranslated=3D"1"> <code _istranslated=3D"1">iwithprefix</code></a=
+>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onl=
+inedocs/cpp/Invocation.html#Invocation" _msthash=3D"856961" _msttexthash=3D=
+"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857415" _msttexthash=3D"369109"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-iwithp=
+refixbefore" _istranslated=3D"1"> <code _istranslated=3D"1">iwithprefixp=C5=
+=99ed</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857416" =
+_msttexthash=3D"160914">Vyvol=C3=A1n=C3=AD</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-M" _msthash=3D"860301" _msttextha=
+sh=3D"7007">M</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858780" _msttexthash=3D"13039">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-M"><cod=
+e>M</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gc=
+c.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"858781" _m=
+sttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859235" _msttexthash=3D"20865">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MD"><co=
+de>MD</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"859236" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859690" _msttexthash=3D"21073">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MF"><co=
+de>MF</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"859691" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856037" _msttexthash=3D"21177">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MG"><co=
+de>MG</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"856038" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856492" _msttexthash=3D"21801">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MM"><co=
+de>MM</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"856493" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"856947" _msttexthash=3D"30511">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MMD"><c=
+ode>MMD</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https:=
+//gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"856948=
+" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857402" _msttexthash=3D"22113">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MP"><co=
+de>MP</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857403" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857857" _msttexthash=3D"22217">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MQ"><co=
+de>MQ</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857858" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858312" _msttexthash=3D"22529">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-MT"><co=
+de>MT</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://=
+gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"858313" =
+_msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-N" _msthash=3D"861198" _msttextha=
+sh=3D"7098">N</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859677" _msttexthash=3D"128687"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-nostdi=
+nc"><code>nostdinc</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a hre=
+f=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthas=
+h=3D"859678" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"860132" _msttexthash=3D"147524"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-nostdi=
+nc_002b_002b"><code>nostdinc++</code></a>:</td><td>&nbsp;</td><td valign=3D=
+"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocat=
+ion" _msthash=3D"860133" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-O" _msthash=3D"858910" _msttextha=
+sh=3D"7189">O</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857389" _msttexthash=3D"271102"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#i=
+ndex-OBJC_005fINCLUDE_005fPATH"><code>OBJC_INCLUDE_PATH</code></a>:</td><td=
+>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cp=
+p/Environment-Variables.html#Environment-Variables" _msthash=3D"857390" _ms=
+ttexthash=3D"450255">Environment Variables</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-P" _msthash=3D"860275" _msttextha=
+sh=3D"7280">P</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858754" _msttexthash=3D"13312">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-P"><cod=
+e>P</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gc=
+c.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"858755" _m=
+sttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859209" _msttexthash=3D"106275"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-pthrea=
+d"><code>pthread</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=
+=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=
+=3D"859210" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-R" _msthash=3D"862095" _msttextha=
+sh=3D"7462">R</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"860574" _msttexthash=3D"71305">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-remap">=
+<code>remap</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"ht=
+tps://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"86=
+0575" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-S" _msthash=3D"859352" _msttextha=
+sh=3D"7553">S</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857831" _msttexthash=3D"270972"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#i=
+ndex-SOURCE_005fDATE_005fEPOCH"><code>SOURCE_DATE_EPOCH</code></a>:</td><td=
+>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cp=
+p/Environment-Variables.html#Environment-Variables" _msthash=3D"857832" _ms=
+ttexthash=3D"450255">Environment Variables</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858286" _msttexthash=3D"317122"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Environment-Variables.html#i=
+ndex-SUNPRO_005fDEPENDENCIES"><code>SUNPRO_DEPENDENCIES</code></a>:</td><td=
+>&nbsp;</td><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cp=
+p/Environment-Variables.html#Environment-Variables" _msthash=3D"858287" _ms=
+ttexthash=3D"450255">Environment Variables</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-T" _msthash=3D"861172" _msttextha=
+sh=3D"7644">T</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859651" _msttexthash=3D"196885"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-tradit=
+ional"><code>traditional</code></a>:</td><td>&nbsp;</td><td valign=3D"top">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _=
+msthash=3D"859652" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"860106" _msttexthash=3D"294580"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-tradit=
+ional-cpp"><code>traditional-cpp</code></a>:</td><td>&nbsp;</td><td valign=
+=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invo=
+cation" _msthash=3D"860107" _msttexthash=3D"158847">Invocation</a></td></tr=
+>
+<tr><td></td><td valign=3D"top" _msthash=3D"860561" _msttexthash=3D"151866"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-trigra=
+phs-1"><code>trigraphs</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a=
+ href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _ms=
+thash=3D"860562" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-U" _msthash=3D"859339" _msttextha=
+sh=3D"7735">U</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"857818" _msttexthash=3D"13767">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-U"><cod=
+e>U</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"https://gc=
+c.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"857819" _m=
+sttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"858273" _msttexthash=3D"70551">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-undef">=
+<code>undef</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"ht=
+tps://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"85=
+8274" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+<tr><th><a name=3D"Option-Index_op_letter-W" _msthash=3D"861159" _msttextha=
+sh=3D"7917">W</a></th><td></td><td></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"859638" _msttexthash=3D"127725"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wcomme=
+nt"><code>Wcomment</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a hre=
+f=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthas=
+h=3D"859639" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"860093" _msttexthash=3D"150904"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wcomme=
+nts"><code>Wcomments</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a h=
+ref=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msth=
+ash=3D"860094" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"860548" _msttexthash=3D"232856"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wendif=
+-labels"><code>Wendif-labels</code></a>:</td><td>&nbsp;</td><td valign=3D"t=
+op"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocatio=
+n" _msthash=3D"860549" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"861003" _msttexthash=3D"482872"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wexpan=
+sion-to-defined"><code>Wexpansion-to-defined</code></a>:</td><td>&nbsp;</td=
+><td valign=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocatio=
+n.html#Invocation" _msthash=3D"861004" _msttexthash=3D"158847">Invocation</=
+a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"861458" _msttexthash=3D"311805"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wno-en=
+dif-labels"><code>Wno-endif-labels</code></a>:</td><td>&nbsp;</td><td valig=
+n=3D"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Inv=
+ocation" _msthash=3D"861459" _msttexthash=3D"158847">Invocation</a></td></t=
+r>
+<tr><td></td><td valign=3D"top" _msthash=3D"881543" _msttexthash=3D"139321"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wno-un=
+def"><code>Wno-undef</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a h=
+ref=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msth=
+ash=3D"881544" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"882011" _msttexthash=3D"173277"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wtrigr=
+aphs"><code>Wtrigraphs</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a=
+ href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _ms=
+thash=3D"882012" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"882479" _msttexthash=3D"86112">=
+<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wundef"=
+><code>Wundef</code></a>:</td><td>&nbsp;</td><td valign=3D"top"><a href=3D"=
+https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocation" _msthash=3D"=
+882480" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td></td><td valign=3D"top" _msthash=3D"882947" _msttexthash=3D"268593"=
+><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#index-Wunuse=
+d-macros"><code>Wunused-macros</code></a>:</td><td>&nbsp;</td><td valign=3D=
+"top"><a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Invocation.html#Invocat=
+ion" _msthash=3D"882948" _msttexthash=3D"158847">Invocation</a></td></tr>
+<tr><td colspan=3D"4"> <hr></td></tr>
+</tbody></table>
+<table><tbody><tr><th valign=3D"top" _msthash=3D"828113" _msttexthash=3D"89=
+921">Jump to: &nbsp; </th><td><font _mstmutation=3D"1" _msthash=3D"826189" =
+_msttexthash=3D"215020"><a class=3D"summary-letter" href=3D"https://gcc.gnu=
+.org/onlinedocs/cpp/Option-Index.html#Option-Index_op_letter-A" _mstmutatio=
+n=3D"1"><b>A</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-C" _mstmutation=3D"1"><b>C</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-D" _mstmutation=3D"1"><b>D</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-F" _mstmutation=3D"1"><b>F</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-H" _mstmutation=3D"1"><b>H</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-I" _mstmutation=3D"1"><b>I</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-M" _mstmutation=3D"1"><b>M</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-N" _mstmutation=3D"1"><b>N</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-O" _mstmutation=3D"1"><b>O</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-P" _mstmutation=3D"1"><b>P</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-R" _mstmutation=3D"1"><b>R</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-S" _mstmutation=3D"1"><b>S</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-T" _mstmutation=3D"1"><b>T</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-U" _mstmutation=3D"1"><b>U</b></a>
+ &nbsp;=20
+<a class=3D"summary-letter" href=3D"https://gcc.gnu.org/onlinedocs/cpp/Opti=
+on-Index.html#Option-Index_op_letter-W" _mstmutation=3D"1"><b>W</b></a></fo=
+nt>
+ &nbsp;=20
+</td></tr></tbody></table>
+
+<hr>
+<div class=3D"header">
+<p><font _mstmutation=3D"1" _msthash=3D"258141" _msttexthash=3D"3474445">
+Next: <a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Concept-Index.html#Conc=
+ept-Index" accesskey=3D"n" rel=3D"next" _mstmutation=3D"1">Concept Index</a=
+>, Previous: <a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Index-of-Directi=
+ves.html#Index-of-Directives" accesskey=3D"p" rel=3D"prev" _mstmutation=3D"=
+1">Index of Directives</a>, Up: <a href=3D"https://gcc.gnu.org/onlinedocs/c=
+pp/index.html#Top" accesskey=3D"u" rel=3D"up" _mstmutation=3D"1">Top</a> &n=
+bsp; [<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/index.html#SEC_Contents=
+" title=3D"Table of contents" rel=3D"contents" _mstmutation=3D"1">Contents<=
+/a>][<a href=3D"https://gcc.gnu.org/onlinedocs/cpp/Index-of-Directives.html=
+#Index-of-Directives" title=3D"Index" rel=3D"index" _mstmutation=3D"1">Inde=
+x</a></font>]</p>
+</div>
+
+
+
+
+
+</body></html>
+------MultipartBoundary--jDx9NcwSM0kStfnAwZfcn3f87eEebAgYSWOfytkNrB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-b82eb52a-8cc9-4d81-90e9-6485f7100e78@mhtml.blink
+
+@charset "utf-8";
+
+a.summary-letter { text-decoration: none; }
+
+blockquote.indentedblock { margin-right: 0em; }
+
+blockquote.smallindentedblock { margin-right: 0em; font-size: smaller; }
+
+blockquote.smallquotation { font-size: smaller; }
+
+div.display { margin-left: 3.2em; }
+
+div.example { margin-left: 3.2em; }
+
+div.lisp { margin-left: 3.2em; }
+
+div.smalldisplay { margin-left: 3.2em; }
+
+div.smallexample { margin-left: 3.2em; }
+
+div.smalllisp { margin-left: 3.2em; }
+
+kbd { font-style: oblique; }
+
+pre.display { font-family: inherit; }
+
+pre.format { font-family: inherit; }
+
+pre.menu-comment { font-family: serif; }
+
+pre.menu-preformatted { font-family: serif; }
+
+pre.smalldisplay { font-family: inherit; font-size: smaller; }
+
+pre.smallexample { font-size: smaller; }
+
+pre.smallformat { font-family: inherit; font-size: smaller; }
+
+pre.smalllisp { font-size: smaller; }
+
+span.nolinebreak { white-space: nowrap; }
+
+span.roman { font-family: initial; font-weight: normal; }
+
+span.sansserif { font-family: sans-serif; font-weight: normal; }
+
+ul.no-bullet { list-style: none; }
+------MultipartBoundary--jDx9NcwSM0kStfnAwZfcn3f87eEebAgYSWOfytkNrB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://gcc.gnu.org/gcc.css
+
+@charset "utf-8";
+
+body { background-color: white; color: black; }
+
+a:link { color: rgb(0, 102, 187); text-decoration: none; }
+
+a:visited { color: rgb(0, 51, 153); text-decoration: none; }
+
+a:hover { color: darkorange; text-decoration: none; }
+
+h1 { color: darkslategray; text-align: center; }
+
+h2 { color: darkslategray; }
+
+.highlight { color: darkslategray; font-weight: bold; }
+
+.smaller { font-size: 80%; }
+
+.left { text-align: left; }
+
+.right { text-align: right; }
+
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+.top { vertical-align: top; }
+
+.middle { vertical-align: middle; }
+
+.width33 { width: 33%; }
+
+.border0 { border-width: 0px; }
+
+.no-margin-top { margin-top: 0px; }
+
+.twocolumns { column-count: 2; }
+
+.imgleft { margin: 5px 20px; float: left; }
+
+img.right { float: right; }
+
+td.news { width: 50%; padding-right: 8px; vertical-align: top; }
+
+td.news h2 { font-size: 1.2em; margin-top: 0px; margin-bottom: 2%; }
+
+td.news dl { margin-top: 0px; }
+
+td.news dt { color: darkslategrey; font-weight: bold; margin-top: 0.3em; }
+
+td.news dd { margin-left: 3ex; margin-top: 0.1em; margin-bottom: 0.1em; }
+
+td.news .date { color: darkslategrey; font-size: 90%; margin-left: 0.1ex; }
+
+td.status { width: 50%; padding-left: 12px; vertical-align: top; border-lef=
+t: thin solid rgb(51, 102, 204); }
+
+td.status h2 { font-size: 1.2em; margin-top: 0px; margin-bottom: 1%; }
+
+td.status dl { margin-top: 0px; }
+
+td.status .version { font-weight: bold; }
+
+td.status .regress { font-size: 80%; }
+
+td.status dd { margin-left: 3ex; }
+
+table.nav { padding-left: 32px; border-spacing: 0pt; }
+
+table.nav td { border-width: 0px; }
+
+table.navitem { width: 100%; border-spacing: 0pt; }
+
+table.navitem tr:nth-child(1) { border-color: rgb(51, 102, 204); border-sty=
+le: solid; border-width: thin; color: rgb(242, 242, 249); background-color:=
+ rgb(0, 102, 221); font-weight: bold; }
+
+table.navitem tr:nth-child(2) { padding-top: 3px; padding-left: 8px; paddin=
+g-bottom: 3px; background-color: rgb(242, 242, 249); font-size: smaller; }
+
+div.copyright { clear: both; font-size: smaller; background: rgb(242, 242, =
+249); border: thin solid rgb(51, 102, 204); padding: 4px; }
+
+div.copyright p:nth-child(3) { margin-bottom: 0px; }
+
+.bold { font-weight: bold; }
+
+.boldcyan { font-weight: bold; color: cyan; }
+
+.boldlime { font-weight: bold; color: lime; }
+
+.boldmagenta { font-weight: bold; color: magenta; }
+
+.boldred { font-weight: bold; color: red; }
+
+.boldgreen { font-weight: bold; color: green; }
+
+.boldblue { font-weight: bold; color: blue; }
+
+.red { color: red; }
+
+.green { color: green; }
+
+.blue { color: blue; }
+
+.blackbg { color: white; background-color: rgb(0, 0, 0); }
+
+blockquote.mail div:nth-child(2) { border-left: solid blue; padding-left: 4=
+pt; }
+
+table.border th { border: 2px solid; }
+
+table.cxxstatus th, table.cxxstatus td { border: 1px solid gray; }
+
+table.cxxstatus td:nth-child(3) { text-align: center; }
+
+table.cxxstatus tr.separator { background: rgb(242, 242, 249); }
+
+table.cxxdrstatus th, table.cxxdrstatus td { border: 1px solid gray; }
+
+table.cxxdrstatus td:nth-child(4) { text-align: center; }
+
+table.cxxdrstatus tr.separator { background: rgb(242, 242, 249); }
+
+table.cxxdrstatus { width: 65%; }
+
+table.padding5 th, td { border: 1px solid gray; padding: 5px; }
+
+.supported { background-color: lightgreen; }
+
+.unsupported { background-color: lightsalmon; }
+
+.other { background-color: lightgray; }
+
+.partial { background-color: lightyellow; }
+
+.open { color: rgb(170, 170, 170); }
+
+pre.smallexample { font-size: medium; background: rgb(242, 242, 249); paddi=
+ng: 4px; display: inline-block; }
+
+.classpath-only { background-color: rgb(255, 255, 170); }
+
+.libgcj-only { background-color: rgb(255, 255, 170); }
+
+.VM-specific { background-color: rgb(204, 204, 255); }
+
+.GCJ-specific { background-color: rgb(204, 204, 255); }
+
+.needsmerge { background-color: rgb(255, 144, 144); }
+
+.merged { background-color: rgb(34, 255, 34); }
+
+.merged-expected-diff { background-color: rgb(34, 255, 34); }
+
+.merged-unexpected-diff { background-color: rgb(255, 68, 68); }
+------MultipartBoundary--jDx9NcwSM0kStfnAwZfcn3f87eEebAgYSWOfytkNrB------

@@ -1,0 +1,152 @@
+I 2021/04/30 07:20:25 working.go:118: 
+  ____    _  __   __
+ / ___|  (_) \ \ / /  _   _    __ _   _ __
+ \___ \  | |  \ V /  | | | |  / _` | | '_ \
+  ___) | | |   | |   | |_| | | (_| | | | | |
+ |____/  |_|   |_|    \__,_|  \__,_| |_| |_|
+
+I 2021/04/30 07:20:25 working.go:119: kernel is booting: 
+    * ver [1.1.83]
+    * runtime mode [prod]
+    * working directory [C:\Users\Neuro\AppData\Local\Programs\SiYuan\resources]
+    * temp directory [C:\Users\Neuro\AppData\Local\Temp\siyuan]
+    * system temp directory [C:\WINDOWS\Temp\siyuan] 
+    * rsync directory [C:\Users\Neuro\AppData\Local\Programs\SiYuan\resources\rsync]
+    * read only [false]
+    * container [electron]
+    * resident [true]
+    * arch [amd64]
+D 2021/04/30 07:20:25 conf.go:97: initialized language [en_US] based on device locale
+I 2021/04/30 07:20:26 conf.go:203: local serve path [http://192.168.0.185:6806]
+I 2021/04/30 07:20:26 serve.go:60: kernel HTTP server is booting [http://0.0.0.0:6806]
+I 2021/04/30 07:20:33 working.go:143: kernel booted
+E 2021/04/30 07:21:06 crypt.go:48: decrypt failed: encoding/hex: odd length hex string
+E 2021/04/30 07:21:07 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:21:08 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:21:22 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:22:19 crypt.go:48: decrypt failed: encoding/hex: odd length hex string
+E 2021/04/30 07:22:23 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:22:26 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:24:07 crypt.go:48: decrypt failed: encoding/hex: invalid byte: U+004B 'K'
+E 2021/04/30 07:24:09 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 07:24:11 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 07:24:17 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 07:24:18 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:24:47 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:26:01 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:26:22 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:26:25 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:26:27 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 07:26:31 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:26:32 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:26:33 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 07:26:34 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:26:55 box.go:363: mkdir all [path=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: MkdirAll /: 200
+E 2021/04/30 07:27:20 box.go:363: mkdir all [path=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: MkdirAll /: 200
+I 2021/04/30 07:27:40 conf.go:242: exited kernel
+I 2021/04/30 07:34:42 working.go:118: 
+  ____    _  __   __
+ / ___|  (_) \ \ / /  _   _    __ _   _ __
+ \___ \  | |  \ V /  | | | |  / _` | | '_ \
+  ___) | | |   | |   | |_| | | (_| | | | | |
+ |____/  |_|   |_|    \__,_|  \__,_| |_| |_|
+
+I 2021/04/30 07:34:42 working.go:119: kernel is booting: 
+    * ver [1.1.83]
+    * runtime mode [prod]
+    * working directory [C:\Users\Neuro\AppData\Local\Programs\SiYuan\resources]
+    * temp directory [C:\Users\Neuro\AppData\Local\Temp\siyuan]
+    * system temp directory [C:\WINDOWS\Temp\siyuan] 
+    * rsync directory [C:\Users\Neuro\AppData\Local\Programs\SiYuan\resources\rsync]
+    * read only [false]
+    * container [electron]
+    * resident [true]
+    * arch [amd64]
+I 2021/04/30 07:34:43 conf.go:203: local serve path [http://192.168.0.185:6806]
+I 2021/04/30 07:34:44 serve.go:60: kernel HTTP server is booting [http://0.0.0.0:6806]
+E 2021/04/30 07:34:48 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:34:52 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:34:54 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+I 2021/04/30 07:35:01 working.go:143: kernel booted
+E 2021/04/30 07:35:11 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:35:13 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 07:35:14 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 07:35:20 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:36:39 crypt.go:48: decrypt failed: encoding/hex: invalid byte: U+0068 'h'
+E 2021/04/30 07:36:39 box.go:184: read dir [p=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:36:40 box.go:184: read dir [p=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:37:02 box.go:184: read dir [p=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:37:34 box.go:184: read dir [p=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 07:37:59 box.go:363: mkdir all [path=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: MkdirAll /: 200
+I 2021/04/30 07:38:05 conf.go:242: exited kernel
+I 2021/04/30 19:57:33 working.go:118: 
+  ____    _  __   __
+ / ___|  (_) \ \ / /  _   _    __ _   _ __
+ \___ \  | |  \ V /  | | | |  / _` | | '_ \
+  ___) | | |   | |   | |_| | | (_| | | | | |
+ |____/  |_|   |_|    \__,_|  \__,_| |_| |_|
+
+I 2021/04/30 19:57:33 working.go:119: kernel is booting: 
+    * ver [1.1.83]
+    * runtime mode [prod]
+    * working directory [C:\Users\Neuro\AppData\Local\Programs\SiYuan\resources]
+    * temp directory [C:\Users\Neuro\AppData\Local\Temp\siyuan]
+    * system temp directory [C:\WINDOWS\Temp\siyuan] 
+    * rsync directory [C:\Users\Neuro\AppData\Local\Programs\SiYuan\resources\rsync]
+    * read only [false]
+    * container [electron]
+    * resident [true]
+    * arch [amd64]
+I 2021/04/30 19:57:33 conf.go:203: local serve path [http://192.168.0.185:6806]
+I 2021/04/30 19:57:33 serve.go:60: kernel HTTP server is booting [http://0.0.0.0:6806]
+E 2021/04/30 19:57:37 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 19:57:40 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 19:57:43 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 19:57:43 box.go:184: read dir [p=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: ReadDir /: 200 OK - PROPFIND /
+I 2021/04/30 19:57:48 working.go:143: kernel booted
+E 2021/04/30 19:57:50 box.go:184: read dir [p=/] in box [url=https://chromium-review.googlesource.com/admin/repos/chromiumos,access/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 19:57:50 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 19:57:52 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 19:57:53 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+E 2021/04/30 19:58:03 log.go:48: PANIC RECOVERED: runtime error: index out of range [-1]
+	D:/go1.16/src/runtime/panic.go:965 (0x75d046)
+D:/go1.16/src/runtime/panic.go:88 (0x75a929)
+D:/88250/siyuan-src/kernel/util/crypt.go:63 (0xdc6bf2)
+D:/88250/siyuan-src/kernel/util/crypt.go:59 (0xdc6b9a)
+D:/88250/siyuan-src/kernel/model/box.go:900 (0x123a404)
+D:/88250/siyuan-src/kernel/model/webdav.go:94 (0x127f9d8)
+D:/88250/siyuan-src/kernel/cmd/mountremote.go:39 (0x12e99ef)
+D:/88250/siyuan-src/kernel/cmd/cmd.go:261 (0x12f4f99)
+D:/go1.16/src/runtime/asm_amd64.s:1371 (0x796500)
+
+E 2021/04/30 20:03:22 crypt.go:48: decrypt failed: encoding/hex: invalid byte: U+004B 'K'
+E 2021/04/30 20:03:23 box.go:184: read dir [p=/] in box [url=https://github.com/sollo11/siyuan.git/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:03:23 box.go:184: read dir [p=/] in box [url=https://github.com/sollo11/siyuan.git/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:03:41 box.go:184: read dir [p=/] in box [url=https://github.com/sollo11/siyuan.git/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:03:56 box.go:184: read dir [p=/] in box [url=https://github.com/sollo11/siyuan.git/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:07:11 box.go:184: read dir [p=/] in box [url=https://github.com/sollo11/siyuan.git/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:10:00 crypt.go:48: decrypt failed: encoding/hex: invalid byte: U+004B 'K'
+E 2021/04/30 20:10:00 box.go:184: read dir [p=/] in box [url=https://www.facebook.com/simon.baballa.94/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:10:00 box.go:184: read dir [p=/] in box [url=https://www.facebook.com/simon.baballa.94/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:10:18 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:11:19 box.go:184: read dir [p=/] in box [url=https://www.facebook.com/simon.baballa.94/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:11:26 box.go:184: read dir [p=/] in box [url=https://www.facebook.com/simon.baballa.94/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:13:06 log.go:48: PANIC RECOVERED: runtime error: invalid memory address or nil pointer dereference
+	D:/go1.16/src/runtime/panic.go:965 (0x75d046)
+D:/go1.16/src/runtime/panic.go:212 (0x773744)
+D:/go1.16/src/runtime/signal_windows.go:239 (0x7735fe)
+D:/gogogo/pkg/mod/github.com/88250/gowebdav@v1.1.2/requests.go:21 (0xdeae3d)
+D:/gogogo/pkg/mod/github.com/88250/gowebdav@v1.1.2/requests.go:100 (0xdec304)
+D:/gogogo/pkg/mod/github.com/88250/gowebdav@v1.1.2/client.go:219 (0xde6ff9)
+D:/88250/siyuan-src/kernel/model/box.go:292 (0x1234071)
+D:/88250/siyuan-src/kernel/model/box.go:75 (0x123190a)
+D:/88250/siyuan-src/kernel/model/graph.go:582 (0x125a274)
+D:/88250/siyuan-src/kernel/model/graph.go:101 (0x12552f0)
+D:/88250/siyuan-src/kernel/cmd/graph.go:42 (0x12e53ec)
+D:/88250/siyuan-src/kernel/cmd/cmd.go:261 (0x12f4f99)
+D:/go1.16/src/runtime/asm_amd64.s:1371 (0x796500)
+
+E 2021/04/30 20:15:04 box.go:184: read dir [p=/] in box [url=https://nic_000/?#$$$.txt/] failed: ReadDir /: Propfind "https://nic_000/%3F%23$$$.txt/": dial tcp: lookup nic_000: no such host
+E 2021/04/30 20:15:06 box.go:184: read dir [p=/] in box [url=http://www.emoi.com/themes/pc-en/default/images/logo.png/] failed: ReadDir /: 200 OK - PROPFIND /
+E 2021/04/30 20:15:07 box.go:184: read dir [p=/] in box [url=https://emoi.com/tree/000/] failed: ReadDir /: Propfind "https://emoi.com/tree/000/": dial tcp 47.52.34.141:443: connectex: Nemohlo být vytvořeno žádné připojení, protože cílový počítač je aktivně odmítl.
+I 2021/04/30 20:15:25 conf.go:242: exited kernel

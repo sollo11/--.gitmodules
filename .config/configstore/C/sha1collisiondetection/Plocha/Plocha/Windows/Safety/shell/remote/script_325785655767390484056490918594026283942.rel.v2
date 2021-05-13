@@ -1,0 +1,625 @@
+'use strict';
+class TimeSpan {
+    constructor(ticks) {
+        this.value = ticks;
+    }
+    ticks() {
+        return this.value;
+    }
+    milliseconds() {
+        return this.ticks() / 10000;
+    }
+    static fromTicks(t) {
+        return new TimeSpan(t);
+    }
+    static fromMilliseconds(t) {
+        return TimeSpan.fromTicks(t * 10000);
+    }
+    static fromSeconds(t) {
+        return TimeSpan.fromMilliseconds(t * 1000);
+    }
+    static fromMinutes(t) {
+        return TimeSpan.fromSeconds(t * 60);
+    }
+    static fromHours(t) {
+        return TimeSpan.fromMinutes(t * 60);
+    }
+}
+var $;
+(function ($) {
+    function createObject(k, v) {
+        const x = {};
+        x[k] = v;
+        return x;
+    }
+    $.createObject = createObject;
+    function each(x, f) {
+        if (x instanceof Array) {
+            for (let i = 0; i < x.length; ++i) {
+                if (f(x[i]) === false) {
+                    return false;
+                }
+            }
+        }
+        else {
+            for (let field in x) {
+                if (x.hasOwnProperty(field)) {
+                    if (f(field, x[field]) === false) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    $.each = each;
+    function any(obj, f) {
+        return !(each(obj, (k, v) => !f(k, v)));
+    }
+    $.any = any;
+    function collect(arr, f) {
+        return arr.map(f).reduce((result, y) => result.concat(y), []);
+    }
+    $.collect = collect;
+    function map(arr, f) {
+        return arr.map(f);
+    }
+    $.map = map;
+    function choose(arr, f) {
+        return collect(arr, (x) => {
+            const y = f(x);
+            if (y != null) {
+                return [y];
+            }
+            else {
+                return [];
+            }
+        });
+    }
+    $.choose = choose;
+    // Convert Array<Promise<T>> to Promise<Array<T>>.  
+    function sequence(arr) {
+        function sequence(i, result) {
+            return (i < arr.length) ?
+                arr[i].then(x => sequence(i + 1, result.concat([x]))) :
+                Promise.resolve(result);
+        }
+        return sequence(0, []);
+    }
+    $.sequence = sequence;
+    // Combine the fields of two or more objects.  
+    function extend(dest, ...extensions) {
+        for (let i = 0; i < extensions.length; ++i) {
+            each(extensions[i], (k, v) => {
+                dest[k] = v;
+                return true;
+            });
+        }
+        return dest;
+    }
+    $.extend = extend;
+    // Safely access nested properties. Returns default if they don't exist.
+    function get(object, property, defaultValue) {
+        return property.split('.').reduce((r, i) => (r == null) ? r : r[i], object)
+            || defaultValue;
+    }
+    $.get = get;
+    function serviceUriForGeoId(geoId) {
+        switch ((geoId || "").toLowerCase()) {
+            case "us": return "https://unitedstates.smartscreen.microsoft.com";
+            case "uk": return "https://unitedkingdom.smartscreen.microsoft.com";
+            case "eu": return "https://europe.smartscreen.microsoft.com";
+            case "ffl4": return "https://unitedstates1.ss.wd.microsoft.us"; // GCC-High
+            case "ffl4mod": return "https://unitedstates4.ss.wd.microsoft.us"; // GCC-Mod, aka GCC
+            case "ffl5": return "https://unitedstates2.ss.wd.microsoft.us"; // DoD
+            default: return null;
+        }
+    }
+    $.serviceUriForGeoId = serviceUriForGeoId;
+})($ || ($ = {}));
+var Base64;
+(function (Base64) {
+    const key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    function decodeToString(input) {
+        // Check if valid base64 string
+        if (!input.match(/(^$)|(^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==))$/g)) {
+            throw `decodeToString: Invalid base64 string.`;
+        }
+        var bytes = new Uint8Array(input.length * 0.75);
+        let enc1, enc2, enc3, enc4;
+        let base64Index = 0, byteIndex = 0;
+        while (base64Index < input.length) {
+            // Process 4 characters at a time. Map to the 6-bit key value.
+            enc1 = key.indexOf(input[base64Index++]);
+            enc2 = key.indexOf(input[base64Index++]);
+            enc3 = key.indexOf(input[base64Index++]);
+            enc4 = key.indexOf(input[base64Index++]);
+            // Transform 6-bit to 8-bit
+            // eg. Converts 111111-000000-111111-000000 => 11111100-00001111-11000000
+            bytes[byteIndex++] += ((enc1 << 2) | (enc2 >> 4));
+            if (enc3 != 64) {
+                bytes[byteIndex++] += (((enc2 & 15) << 4) | (enc3 >> 2));
+            }
+            if (enc4 != 64) {
+                bytes[byteIndex++] += (((enc3 & 3) << 6) | enc4);
+            }
+        }
+        return utf8ToString(bytes);
+    }
+    Base64.decodeToString = decodeToString;
+    // Decode UTF-8 to javascript string
+    function utf8ToString(bytes) {
+        var result = "";
+        let i = 0;
+        let c1 = 0, c2 = 0, c3 = 0, c4 = 0;
+        while (i < bytes.length) {
+            c1 = bytes[i++];
+            // Code Points 0x80 and above are pushed to binary and encoded as bytes.
+            if (c1 > 127) {
+                if ((c1 > 191) && (c1 < 224)) {
+                    if (i >= bytes.length) {
+                        throw 'utf8ToString: Invalid 2-byte sequence.';
+                    }
+                    c2 = bytes[i++];
+                    c1 = ((c1 & 31) << 6) | (c2 & 63);
+                }
+                else if (c1 > 223 && c1 < 240) {
+                    if (i + 1 >= bytes.length) {
+                        throw 'utf8ToString: Invalid 3-byte sequence.';
+                    }
+                    c2 = bytes[i++];
+                    c3 = bytes[i++];
+                    c1 = ((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63);
+                }
+                else if (c1 > 239 && c1 < 248) {
+                    if (i + 2 >= bytes.length) {
+                        throw 'utf8ToString: Invalid 4-byte sequence.';
+                    }
+                    c2 = bytes[i++];
+                    c3 = bytes[i++];
+                    c4 = bytes[i++];
+                    c1 = (c1 & 7) << 18 | (c2 & 63) << 12 | (c3 & 63) << 6 | c4 & 63;
+                }
+                else {
+                    throw 'utf8ToString: Unknown multibyte sequence';
+                }
+            }
+            if (c1 <= 0xffff) {
+                result += String.fromCharCode(c1);
+            }
+            else if (c1 <= 0x10ffff) {
+                c1 -= 0x10000;
+                result += String.fromCharCode(c1 >> 10 | 0xd800);
+                result += String.fromCharCode(c1 & 0x3FF | 0xdc00);
+            }
+            else {
+                throw 'utf8ToString: Largest UTF8 Code point reached.';
+            }
+        }
+        return result;
+    }
+})(Base64 || (Base64 = {}));
+class LoggingChannel {
+    constructor(project) {
+        project("Windows.Foundation.Diagnostics");
+        this.loggingChannel = new Windows.Foundation.Diagnostics.LoggingChannel("Microsoft.Windows.SmartScreen", new Windows.Foundation.Diagnostics.LoggingChannelOptions("4f50731a-89cf-4782-b3e0-dce8c90476ba"), "39bd9805-3945-4878-aecc-096a23369f68");
+    }
+    logException(exception, context) {
+        let fields = new Windows.Foundation.Diagnostics.LoggingFields();
+        fields.addString("name", $.get(exception, "name", ""));
+        fields.addString("message", $.get(exception, "message", ""));
+        fields.addString("stack", $.get(exception, "stack", ""));
+        fields.addString("context", context ? context : "");
+        this.loggingChannel.logEvent("Exception", fields, Windows.Foundation.Diagnostics.LoggingLevel.Error, new Windows.Foundation.Diagnostics.LoggingOptions(0x400000000000));
+    }
+    logInfo(event) {
+        this.loggingChannel.logEvent(event.name, event.fields, Windows.Foundation.Diagnostics.LoggingLevel.Information, new Windows.Foundation.Diagnostics.LoggingOptions(0x400000000000));
+    }
+}
+class ApiBase {
+    constructor(project, defaultSamplingRate = 0.01, errorSamplingRate = 1.0) {
+        this.defaultSamplingRate = defaultSamplingRate;
+        this.errorSamplingRate = errorSamplingRate;
+        this.loggingChannel = new LoggingChannel(project);
+    }
+    sendRequestTimeout(uri) {
+        return null;
+    }
+    shouldSendRequest(uri, request) {
+        return true;
+    }
+    transformRequest(uri, request) {
+        function trimStrings(val, length) {
+            if (!val) {
+                return val;
+            }
+            switch (typeof val) {
+                case "object":
+                    var newObj = {};
+                    if (val.constructor === Array) {
+                        newObj = $.map(val, (e) => trimStrings(e, length));
+                    }
+                    else {
+                        $.each(val, (elem, x) => {
+                            newObj[elem] = trimStrings(x, length);
+                        });
+                    }
+                    return newObj;
+                case "string":
+                    return val.length > length ? val.slice(0, length - 3) + "..." : val;
+                default:
+                    return val;
+            }
+        }
+        const maxStringLength = 5000;
+        if (request.body) {
+            request.body = trimStrings(request.body, maxStringLength);
+        }
+        // Remove SID if it is being sent.  The service was already dropping this field.
+        if ($.get(request, "body.identity.caller.process.owner")) {
+            delete request.body.identity.caller.process.owner;
+        }
+        // Remove TPM Device ID if it is being sent.  The service was already dropping this field
+        if ($.get(request, "body.identity.device.id")) {
+            delete request.body.identity.device.id;
+        }
+        // Change Full file path to file name
+        if ($.get(request, "body.path.fileName")) {
+            var split = request.body.path.fileName.split("\\");
+            request.body.path.fileName = split.pop();
+        }
+        return request;
+    }
+    transformResponse(uri, request, response) {
+        return response;
+    }
+    logSendRequest(uri, request, response) {
+    }
+    getSamplingRates(events) {
+        return events.reduce((samplingRates, event) => {
+            const rate = this.getSamplingRate(event, events);
+            if (rate === null) {
+                switch (event.$type) {
+                    case "error": return $.extend(samplingRates, { error: this.errorSamplingRate });
+                    default: return $.extend(samplingRates, { none: this.defaultSamplingRate });
+                }
+            }
+            else if (rate === 0) {
+                return samplingRates;
+            }
+            else {
+                return $.extend(samplingRates, rate);
+            }
+        }, {});
+    }
+    // Retrieve an event object containing information about of a `Windows.Foundation.Diagnostics.LoggingChannel` event if an event should be sent to a diagnostic service (such as Asimov)
+    // or `null` if the event should not be sent.
+    getDiagnosticEvent(event, data) {
+        return null;
+    }
+    logFilterEvents(events, data) {
+        $.each($.choose(events, (event) => this.getDiagnosticEvent(event, data)), x => this.loggingChannel.logInfo(x));
+    }
+    transformFinalizedEvent(event) {
+        return [event];
+    }
+    getPreFinalizedSamplingRate(event) {
+        return null;
+    }
+    serviceUriForGeoId(geoId) {
+        return $.serviceUriForGeoId(geoId);
+    }
+    scriptHostTimeout() {
+        return TimeSpan.fromSeconds(5).ticks();
+    }
+    sendRequest(uri, request, sendRequest) {
+        if (this.shouldSendRequest(uri, request)) {
+            const transformedRequest = this.transformRequest(uri, request);
+            const result = Promise.race([
+                sendRequest(uri, transformedRequest),
+                new Promise((resolve, reject) => {
+                    const timeout = this.sendRequestTimeout(uri);
+                    if (timeout != null) {
+                        setTimeout(() => { resolve({ headers: [], body: null, statusCode: 504 }); }, timeout.milliseconds());
+                    }
+                })
+            ])
+                .then(x => this.transformResponse(uri, transformedRequest, x));
+            result.then(x => this.logSendRequest(uri, transformedRequest, x))
+                .catch((e) => this.loggingChannel.logException(e));
+            return result;
+        }
+        else {
+            return Promise.resolve({
+                headers: [],
+                body: null,
+                statusCode: 429
+            });
+        }
+    }
+    filterEvents(events, getDeferredData, random, data) {
+        return new Promise(resolve => {
+            function finalizeDeferredEvent(event) {
+                if (event.hasOwnProperty('$id')) {
+                    return getDeferredData(event['$id'])
+                        .then(x => $.extend(event, x))
+                        .catch(e => $.extend(event, { "$error": e.message }))
+                        .then(event => delete event.$id ? event : event); // ajaxmin bug: ".then({ delete event.$id; return event; })" is minified to ".then(n=>delete n$.id,n)" instead of ".then((n=>delete n.$id,n))."
+                }
+                else {
+                    return Promise.resolve(event);
+                }
+            }
+            // Collect and upload diagnostic events.
+            this.logFilterEvents(events, data);
+            const eventsToPreSample = events.reduce((samplingRates, event) => {
+                const rate = this.getPreFinalizedSamplingRate(event);
+                if (rate != null) {
+                    return $.extend(samplingRates, rate);
+                }
+                else {
+                    return samplingRates;
+                }
+            }, {});
+            return resolve($.sequence(events.map(event => {
+                if (eventsToPreSample[event.$type] != null && random <= eventsToPreSample[event.$type]) {
+                    return finalizeDeferredEvent(event).then(x => this.transformFinalizedEvent(x));
+                }
+                else {
+                    return Promise.resolve(event);
+                }
+            }))
+                .then(events => $.collect(events, x => x))
+                .then(events => {
+                const samplingRates = this.getSamplingRates(events);
+                if ($.any(samplingRates, (k, samplingRate) => random <= samplingRate)) {
+                    return $.sequence($.map(events, x => finalizeDeferredEvent(x)))
+                        .then(events => $.collect(events, (event) => {
+                        try {
+                            return this.transformFinalizedEvent(event);
+                        }
+                        catch (e) {
+                            return $.extend(event, { "$error": e.message });
+                        }
+                    }))
+                        .then(events => ({
+                        events: events,
+                        samplingRates: samplingRates,
+                        random: random
+                    }));
+                }
+                else {
+                    return Promise.resolve(null);
+                }
+            }));
+        });
+    }
+}
+//# sourceMappingURL=script-original.rs2.js.map//// Defines callbacks for shell scenarios
+/// <reference path="../../../Shared/v2/Original/script-original.rs2.ts" />
+var V1;
+(function (V1) {
+    class Api extends ApiBase {
+        constructor(project) {
+            super(project, 0.001);
+        }
+        serviceUri(geoId) {
+            return super.serviceUriForGeoId(geoId) || "https://checkappexec.microsoft.com";
+        }
+        sendRequestTimeout(uri) {
+            return (uri.indexOf("service") != -1) ?
+                TimeSpan.fromSeconds(5) :
+                null;
+        }
+        getSamplingRate(event) {
+            switch (event.$type) {
+                case "block": return { block: 1.0 };
+                case "userAction": return { userAction: 1.0 };
+                case "offline": return { offline: 1.0 };
+                case "unsupported": return { unsupported: 0.01 };
+                case "onAllowedZoneCheck":
+                    if (this.isFileSupported(event['name'])) {
+                        return { onAllowedZoneCheck: 0.0005 };
+                    }
+                    else {
+                        return 0;
+                    }
+                default: return null;
+            }
+        }
+        getDiagnosticEvent(event, data) {
+            let fields = new Windows.Foundation.Diagnostics.LoggingFields();
+            fields.addString("CorrelationId", $.get(data, "correlationId", "")); // CorrelationId will only be available for RS3.
+            switch (event.$type) {
+                case "userAction":
+                    fields.addString("Action", event['action']);
+                    return { name: "AppRepUserAction", fields: fields };
+                case "offline": return { name: "AppRepOfflineExperience", fields: fields };
+                default: return null;
+            }
+        }
+        logFilterEvents(events, data) { }
+        isFileSupported(filePath, fileSize) {
+            switch (filePath.substr(filePath.lastIndexOf(".") + 1).toLowerCase()) {
+                case 'appref-ms':
+                case 'appx':
+                case 'appxbundle':
+                case 'bat':
+                case 'chm':
+                case 'cmd':
+                case 'com':
+                case 'cpl':
+                case 'dll':
+                case 'drv':
+                case 'exe':
+                case 'gadget':
+                case 'hta':
+                case 'iso':
+                case 'js':
+                case 'jse':
+                case 'lnk':
+                case 'msc':
+                case 'msi':
+                case 'msp':
+                case 'msu':
+                case 'ocx':
+                case 'pif':
+                case 'ppkg':
+                case 'printerexport':
+                case 'ps1':
+                case 'scf':
+                case 'scr':
+                case 'settingcontent-ms':
+                case 'sys':
+                case 'url':
+                case 'vb':
+                case 'vbe':
+                case 'vbs':
+                case 'vhd':
+                case 'vhdx':
+                case 'vxd':
+                case 'website':
+                case 'wsf':
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    }
+    V1.Api = Api;
+})(V1 || (V1 = {}));
+//# sourceMappingURL=shell-original.rs2.js.map//// Defines callbacks for shell scenarios
+/// <reference path="../../../Shared/v2/Original/script-original.rs2.ts" />
+/// <reference path="shell-original.rs2.ts" />
+var V2;
+(function (V2) {
+    class Api extends V1.Api {
+        constructor(project) {
+            super(project);
+        }
+        logFilterEvents(events, data) {
+            $.each(events, x => {
+                if (x.$type == "userAction") {
+                    windows.smartScreen.events.logDecision(x['action'], ""); // remove correlationId for ISO compliance
+                }
+            });
+        }
+        logSendRequest(uri, request, response) {
+            if ((uri.toLowerCase().indexOf("beforeexecute") != -1) && response && response.body) {
+                var responseBody = this.parseResponseBody(response);
+                if (responseBody.$type === "block") {
+                    windows.smartScreen.events.logAppLookup(request.body.path.fileName, $.get(request, "body.hash", ""), $.get(request, "body.authenticode.hash", ""), $.get(request, "body.authenticode.hashAlgo", ""), request.body.motw ? JSON.stringify(request.body.motw) : "", $.get(request, "body.identity.caller.process.id", 0), $.get(request, "body.identity.caller.process.creationTime", 0), $.get(request, "body.identity.caller.process.owner", ""), "", // remove correlationId for ISO compliance
+                    $.get(request, "body.config.device.appReputation.level", "") + ($.get(request, "body.config.device.appReputation.enforcedByPolicy", false) ? "ByPolicy" : ""), $.get(responseBody, "responseCategory", ""));
+                }
+            }
+        }
+        isFileSupported(filePath, fileSize) {
+            switch (filePath.substr(filePath.lastIndexOf(".") + 1).toLowerCase()) {
+                case 'appx':
+                case 'appxbundle':
+                    return false;
+                default:
+                    return super.isFileSupported(filePath, fileSize);
+            }
+        }
+        sendRequest(uri, request, sendRequest) {
+            return super.sendRequest(uri, request, sendRequest);
+        }
+        parseResponseBody(response) {
+            return JSON.parse(Base64.decodeToString(response.body));
+        }
+    }
+    V2.Api = Api;
+})(V2 || (V2 = {}));
+var V3;
+(function (V3) {
+    class Api extends V2.Api {
+        constructor(project) {
+            super(project);
+            project("Windows.Services.Store");
+        }
+        sendRequest(uri, request, sendRequest) {
+            if (uri.toLowerCase().indexOf("beforeexecute") != -1) {
+                return super.sendRequest(uri, request, (uri, request) => {
+                    const allowResponse = {
+                        headers: [],
+                        body: { $type: "unsupported" },
+                        statusCode: 200
+                    };
+                    let wait;
+                    const cancelationToken = new Promise((resolve, reject) => {
+                        wait = setTimeout(() => resolve(allowResponse), 3000); // cancel after 3 sec
+                    });
+                    const recommendationRequest = (() => {
+                        try {
+                            return ($.get(request, "body.config.device.appControl.level", "") != "anywhere") ?
+                                (Windows.Services.Store.StoreRequestHelper.sendRequestAsync(Windows.Services.Store.StoreContext.getDefault(), 23, // Lookup recommendation.
+                                JSON.stringify({ data: JSON.stringify(request.body) }))
+                                    .then((result) => {
+                                    return ((result.httpStatusCode == Windows.Web.Http.HttpStatusCode.ok) && result.response) ? {
+                                        headers: [],
+                                        body: { $type: "recommend", arguments: result.response },
+                                        statusCode: 200
+                                    } :
+                                        allowResponse;
+                                })) :
+                                Promise.resolve(allowResponse);
+                        }
+                        catch (e) {
+                            return Promise.reject(e);
+                        }
+                    })();
+                    const timedRecommendationRequest = Promise
+                        .race([cancelationToken, recommendationRequest])
+                        .then((result) => {
+                        clearTimeout(wait);
+                        return result;
+                    }, (error) => {
+                        clearTimeout(wait);
+                        return error;
+                    }); // finally not supported
+                    const reputationRequest = ($.get(request, "body.config.device.appReputation.level", "") != "off") ?
+                        sendRequest(uri, request) :
+                        Promise.resolve(allowResponse);
+                    return reputationRequest
+                        .then((reputationResponse) => {
+                        if ((reputationResponse.statusCode != 200) || (reputationResponse.body.$type == "block")) {
+                            return reputationRequest;
+                        }
+                        else {
+                            return timedRecommendationRequest
+                                .then((recommendationResponse) => {
+                                if (recommendationResponse.body.$type == "recommend") {
+                                    return timedRecommendationRequest;
+                                }
+                                else {
+                                    return reputationRequest;
+                                }
+                            });
+                        }
+                    })
+                        .then(null, _ => reputationRequest);
+                });
+            }
+            else {
+                return super.sendRequest(uri, request, sendRequest);
+            }
+        }
+        //! Display the recommendation UX.
+        displayRecommendation(recommendation, storeContext) {
+            return Windows.Services.Store.StoreRequestHelper.sendRequestAsync(storeContext, 24, // Display UX.
+            recommendation)
+                .then((result) => {
+                const status = result.response ? JSON.parse(result.response).status : null;
+                return (status && (status != "success")) ?
+                    "cancel" :
+                    "runonce";
+            });
+        }
+        parseResponseBody(response) {
+            return response.body;
+        }
+    }
+    V3.Api = Api;
+})(V3 || (V3 = {}));
+//# sourceMappingURL=shell-original.rs3.js.map
